@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="2048" height="1324" viewBox="0 0 2048 1324" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bgGlow" cx="50%" cy="42%" r="70%">
+      <stop offset="0%" stop-color="#151515"/>
+      <stop offset="58%" stop-color="#080808"/>
+      <stop offset="100%" stop-color="#000000"/>
+    </radialGradient>
+    <linearGradient id="slot" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3c3c3c"/>
+      <stop offset="100%" stop-color="#171717"/>
+    </linearGradient>
+    <linearGradient id="slot2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#343434"/>
+      <stop offset="100%" stop-color="#1a1a1a"/>
+    </linearGradient>
+    <filter id="screenGlow" x="-22%" y="-22%" width="144%" height="144%">
+      <feDropShadow dx="0" dy="0" stdDeviation="7" flood-color="#ffffff" flood-opacity="0.1"/>
+    </filter>
+    <filter id="softGlow" x="-26%" y="-26%" width="152%" height="152%">
+      <feDropShadow dx="0" dy="0" stdDeviation="5" flood-color="#ffffff" flood-opacity="0.12"/>
+    </filter>
+    <filter id="textGlow" x="-12%" y="-30%" width="124%" height="160%">
+      <feDropShadow dx="0" dy="0" stdDeviation="2.2" flood-color="#ffffff" flood-opacity="0.2"/>
+    </filter>
+    <marker id="arrow" markerWidth="14" markerHeight="14" refX="11" refY="7" orient="auto" markerUnits="strokeWidth">
+      <path d="M2 2 L12 7 L2 12" fill="#d7d7d4"/>
+    </marker>
+    <marker id="arrow-soft" markerWidth="14" markerHeight="14" refX="11" refY="7" orient="auto" markerUnits="strokeWidth">
+      <path d="M2 2 L12 7 L2 12" fill="#8c8c88"/>
+    </marker>
+  </defs>
+  <rect width="2048" height="1324" fill="#050505"/>
+  <rect width="2048" height="1324" fill="url(#bgGlow)" opacity="0.86"/>
+  <path d="M0 85 C 430 28, 940 28, 2048 92" stroke="#222" stroke-width="2" opacity="0.24"/>
+  
+  <text x="75" y="86" fill="#f4f4f1" opacity="1" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial Unicode MS, Arial, sans-serif" font-size="48" font-weight="780" text-anchor="start" filter="url(#textGlow)">
+    <tspan x="75" dy="0">活动承接与卡片玩法交互框架</tspan>
+  </text>
+  <text x="76" y="130" fill="#b8b8b5" opacity="1" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial Unicode MS, Arial, sans-serif" font-size="22" font-weight="460" text-anchor="start">
+    <tspan x="76" dy="0">聚焦活动承接页与卡片玩法模块，拆解页面流转、核心动作与回流路径</tspan>
+  </text>
+  <rect x="76" y="154" width="72" height="6" rx="3" fill="#ff2d6f"/>
+  
+  <text x="290" y="184" fill="#f4f4f1" opacity="1" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial Unicode MS, Arial, sans-serif" font-size="31" font-weight="800" text-anchor="end">
+    <tspan x="290" dy="0">1</tspan>
+  </text>
+  <text x="314" y="184" fill="#ff2d6f" opacity="1" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial Unicode MS, Arial, sans-serif" font-size="27" font-weight="760" text-anchor="start">
+    <tspan x="314" dy="0">活动承接</tspan>
+  </text>
+  <text x="314" y="218" fill="#b8b8b5" opacity="1" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial Unicode MS, Arial, sans-serif" font-size="18" font-weight="500" text-anchor="start">
+    <tspan x="314" dy="0">主会场、分会场与活动页分流</tspan>
+  </text>
+  
+  <text x="742" y="184" fill="#f4f4f1" opacity="1" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial Unicode MS, Arial, sans-serif" font-size="31" font-weight="800" text-anchor="end">
+    <tspan x="742" dy="0">2</tspan>
+  </text>
+  <text x="766" y="184" fill="#ff2d6f" opacity="1" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial Unicode MS, Arial, sans-serif" font-size="27" font-weight="760" text-anchor="start">
+    <tspan x="766" dy="0">卡片玩法</tspan>
+  </text>
+  <text x="766" y="218" fill="#b8b8b5" opacity="1" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial Unicode MS, Arial, sans-serif" font-size="18" font-weight="500" text-anchor="start">
+    <tspan x="766" dy="0">普通卡、万能卡、神马卡、碰碰卡</tspan>
+  </text>
+  
+  <text x="1245" y="184" fill="#f4f4f1" opacity="1" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial Unicode MS, Arial, sans-serif" font-size="31" font-weight="800" text-anchor="end">
+    <tspan x="1245" dy="0">3</tspan>
+  </text>
+  <text x="1269" y="184" fill="#ff2d6f" opacity="1" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial Unicode MS, Arial, sans-serif" font-size="27" font-weight="760" text-anchor="start">
+    <tspan x="1269" dy="0">社交与沉淀</tspan>
+  </text>
+  <text x="1269" y="218" fill="#b8b8b5" opacity="1" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial Unicode MS, Arial, sans-serif" font-size="18" font-weight="500" text-anchor="start">
+    <tspan x="1269" dy="0">主题互动、卡包奖励与回流</tspan>
+  </text>
+
+  <rect x="136" y="246" width="168" height="322" rx="28" fill="rgba(10,10,10,0.42)" stroke="#8c8c88" stroke-width="2.1" filter="url(#screenGlow)"/>
+  <rect x="155" y="283" width="130" height="244" rx="22" fill="rgba(7,7,7,0.78)" stroke="#8c8c88" stroke-width="1.8"/>
+  <rect x="190" y="262" width="60" height="7" rx="3.5" fill="#8c8c88" opacity="0.72"/>
+  <rect x="171" y="309" width="98" height="48" rx="10" fill="url(#slot)" opacity="0.55"/><rect x="179" y="381" width="82" height="22" rx="8" fill="url(#slot)" opacity="0.46"/><rect x="186" y="423" width="68" height="22" rx="8" fill="url(#slot)" opacity="0.46"/><rect x="186" y="465" width="68" height="22" rx="8" fill="url(#slot)" opacity="0.46"/>
+  <rect x="182" y="542" width="76" height="6" rx="3" fill="#8c8c88" opacity="0.72"/><path d="M324 408 L396 408" stroke="#d7d7d4" stroke-width="2.2" stroke-linecap="round" marker-end="url(#arrow)"/><text x="220" y="598" fill="#f4f4f1" opacity="1" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial Unicode MS, Arial, sans-serif" font-size="28" font-weight="720" text-anchor="middle">
+    <tspan x="220" dy="0">主会场</tspan>
+  </text><text x="220" y="630" fill="#b8b8b5" opacity="1" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial Unicode MS, Arial, sans-serif" font-size="18" font-weight="480" text-anchor="middle">
+    <tspan x="220" dy="0">集卡主场承接</tspan>
+  </text><path d="M220 652 L220 710" stroke="#d7d7d4" stroke-width="2.1" stroke-linecap="round" marker-end="url(#arrow)"/>
+  <rect x="85" y="728" width="270" height="152" rx="14" fill="rgba(12,12,12,0.74)" stroke="#8c8c88" stroke-width="2" filter="url(#screenGlow)"/>
+  <rect x="111" y="756" width="218" height="42" rx="9" fill="url(#slot)" opacity="0.58"/>
+  <text x="220" y="844" fill="#f4f4f1" opacity="1" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial Unicode MS, Arial, sans-serif" font-size="31" font-weight="760" text-anchor="middle">
+    <tspan x="220" dy="0">普通马卡</tspan>
+  </text>
+  
+  <rect x="102" y="904" width="236" height="42" rx="21" fill="rgba(9,9,9,0.64)" stroke="#8c8c88" stroke-width="1.8" filter="url(#softGlow)"/>
+  <text x="220" y="933" fill="#f4f4f1" opacity="0.98" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial Unicode MS, Arial, sans-serif" font-size="22" font-weight="650" text-anchor="middle">
+    <tspan x="220" dy="0">做任务得卡</tspan>
+  </text>
+  
+  <rect x="102" y="960" width="236" height="42" rx="21" fill="rgba(9,9,9,0.64)" stroke="#8c8c88" stroke-width="1.8" filter="url(#softGlow)"/>
+  <text x="220" y="989" fill="#f4f4f1" opacity="0.98" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial Unicode MS, Arial, sans-serif" font-size="22" font-weight="650" text-anchor="middle">
+    <tspan x="220" dy="0">集齐合成</tspan>
+  </text>
+  
+  <rect x="102" y="1016" width="236" height="42" rx="21" fill="rgba(9,9,9,0.64)" stroke="#8c8c88" stroke-width="1.8" filter="url(#softGlow)"/>
+  <text x="220" y="1045" fill="#f4f4f1" opacity="0.9" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial Unicode MS, Arial, sans-serif" font-size="22" font-weight="650" text-anchor="middle">
+    <tspan x="220" dy="0">除夕开奖</tspan>
+  </text>
+  <rect x="416" y="246" width="168" height="322" rx="28" fill="rgba(10,10,10,0.42)" stroke="#8c8c88" stroke-width="2.1" filter="url(#screenGlow)"/>
+  <rect x="435" y="283" width="130" height="244" rx="22" fill="rgba(7,7,7,0.78)" stroke="#8c8c88" stroke-width="1.8"/>
+  <rect x="470" y="262" width="60" height="7" rx="3.5" fill="#8c8c88" opacity="0.72"/>
+  <rect x="451" y="308" width="98" height="46" rx="10" fill="url(#slot)" opacity="0.52"/><rect x="459" y="381" width="38" height="46" rx="8" fill="url(#slot2)" opacity="0.5"/><rect x="509" y="381" width="38" height="46" rx="8" fill="url(#slot2)" opacity="0.5"/><rect x="459" y="441" width="38" height="46" rx="8" fill="url(#slot2)" opacity="0.5"/><rect x="509" y="441" width="38" height="46" rx="8" fill="url(#slot2)" opacity="0.5"/>
+  <rect x="462" y="542" width="76" height="6" rx="3" fill="#8c8c88" opacity="0.72"/><path d="M604 408 L676 408" stroke="#d7d7d4" stroke-width="2.2" stroke-linecap="round" marker-end="url(#arrow)"/><text x="500" y="598" fill="#f4f4f1" opacity="1" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial Unicode MS, Arial, sans-serif" font-size="28" font-weight="720" text-anchor="middle">
+    <tspan x="500" dy="0">分会场</tspan>
+  </text><text x="500" y="630" fill="#b8b8b5" opacity="1" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial Unicode MS, Arial, sans-serif" font-size="18" font-weight="480" text-anchor="middle">
+    <tspan x="500" dy="0">明星/主题专场</tspan>
+  </text><path d="M500 652 L500 710" stroke="#d7d7d4" stroke-width="2.1" stroke-linecap="round" marker-end="url(#arrow)"/>
+  <rect x="365" y="728" width="270" height="152" rx="14" fill="rgba(12,12,12,0.74)" stroke="#8c8c88" stroke-width="2" filter="url(#screenGlow)"/>
+  <rect x="391" y="756" width="218" height="42" rx="9" fill="url(#slot)" opacity="0.58"/>
+  <text x="500" y="844" fill="#f4f4f1" opacity="1" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial Unicode MS, Arial, sans-serif" font-size="31" font-weight="760" text-anchor="middle">
+    <tspan x="500" dy="0">万能卡</tspan>
+  </text>
+  
+  <rect x="382" y="904" width="236" height="42" rx="21" fill="rgba(9,9,9,0.64)" stroke="#8c8c88" stroke-width="1.8" filter="url(#softGlow)"/>
+  <text x="500" y="933" fill="#f4f4f1" opacity="0.98" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial Unicode MS, Arial, sans-serif" font-size="22" font-weight="650" text-anchor="middle">
+    <tspan x="500" dy="0">重复卡兑换</tspan>
+  </text>
+  
+  <rect x="382" y="960" width="236" height="42" rx="21" fill="rgba(9,9,9,0.64)" stroke="#8c8c88" stroke-width="1.8" filter="url(#softGlow)"/>
+  <text x="500" y="989" fill="#f4f4f1" opacity="0.98" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial Unicode MS, Arial, sans-serif" font-size="22" font-weight="650" text-anchor="middle">
+    <tspan x="500" dy="0">补齐缺卡</tspan>
+  </text>
+  
+  <rect x="382" y="1016" width="236" height="42" rx="21" fill="rgba(9,9,9,0.64)" stroke="#8c8c88" stroke-width="1.8" filter="url(#softGlow)"/>
+  <text x="500" y="1045" fill="#f4f4f1" opacity="0.9" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial Unicode MS, Arial, sans-serif" font-size="22" font-weight="650" text-anchor="middle">
+    <tspan x="500" dy="0">替代任意卡</tspan>
+  </text>
+  <rect x="696" y="246" width="168" height="322" rx="28" fill="rgba(10,10,10,0.42)" stroke="#8c8c88" stroke-width="2.1" filter="url(#screenGlow)"/>
+  <rect x="715" y="283" width="130" height="244" rx="22" fill="rgba(7,7,7,0.78)" stroke="#8c8c88" stroke-width="1.8"/>
+  <rect x="750" y="262" width="60" height="7" rx="3.5" fill="#8c8c88" opacity="0.72"/>
+  <rect x="730" y="305" width="100" height="44" rx="10" fill="url(#slot)" opacity="0.52"/><rect x="742" y="375" width="76" height="20" rx="7" fill="url(#slot)" opacity="0.46"/><rect x="744" y="415" width="70" height="20" rx="7" fill="url(#slot)" opacity="0.46"/><rect x="735" y="457" width="34" height="34" rx="8" fill="url(#slot2)" opacity="0.5"/><rect x="777" y="457" width="34" height="34" rx="8" fill="url(#slot2)" opacity="0.5"/><rect x="819" y="457" width="20" height="34" rx="8" fill="url(#slot2)" opacity="0.5"/>
+  <rect x="742" y="542" width="76" height="6" rx="3" fill="#8c8c88" opacity="0.72"/><path d="M884 408 L956 408" stroke="#d7d7d4" stroke-width="2.2" stroke-linecap="round" marker-end="url(#arrow)"/><text x="780" y="598" fill="#f4f4f1" opacity="1" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial Unicode MS, Arial, sans-serif" font-size="28" font-weight="720" text-anchor="middle">
+    <tspan x="780" dy="0">集卡活动页</tspan>
+  </text><text x="780" y="630" fill="#b8b8b5" opacity="1" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial Unicode MS, Arial, sans-serif" font-size="18" font-weight="480" text-anchor="middle">
+    <tspan x="780" dy="0">查看进度与入口</tspan>
+  </text><path d="M780 652 L780 710" stroke="#d7d7d4" stroke-width="2.1" stroke-linecap="round" marker-end="url(#arrow)"/>
+  <rect x="645" y="728" width="270" height="152" rx="14" fill="rgba(12,12,12,0.74)" stroke="#8c8c88" stroke-width="2" filter="url(#screenGlow)"/>
+  <rect x="671" y="756" width="218" height="42" rx="9" fill="url(#slot)" opacity="0.58"/>
+  <text x="780" y="844" fill="#f4f4f1" opacity="1" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial Unicode MS, Arial, sans-serif" font-size="31" font-weight="760" text-anchor="middle">
+    <tspan x="780" dy="0">神马卡</tspan>
+  </text>
+  
+  <rect x="662" y="904" width="236" height="42" rx="21" fill="rgba(9,9,9,0.64)" stroke="#8c8c88" stroke-width="1.8" filter="url(#softGlow)"/>
+  <text x="780" y="933" fill="#f4f4f1" opacity="0.98" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial Unicode MS, Arial, sans-serif" font-size="22" font-weight="650" text-anchor="middle">
+    <tspan x="780" dy="0">猜题闯关</tspan>
+  </text>
+  
+  <rect x="662" y="960" width="236" height="42" rx="21" fill="rgba(9,9,9,0.64)" stroke="#8c8c88" stroke-width="1.8" filter="url(#softGlow)"/>
+  <text x="780" y="989" fill="#f4f4f1" opacity="0.98" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial Unicode MS, Arial, sans-serif" font-size="22" font-weight="650" text-anchor="middle">
+    <tspan x="780" dy="0">答对领奖</tspan>
+  </text>
+  
+  <rect x="662" y="1016" width="236" height="42" rx="21" fill="rgba(9,9,9,0.64)" stroke="#8c8c88" stroke-width="1.8" filter="url(#softGlow)"/>
+  <text x="780" y="1045" fill="#f4f4f1" opacity="0.9" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial Unicode MS, Arial, sans-serif" font-size="22" font-weight="650" text-anchor="middle">
+    <tspan x="780" dy="0">好友求助</tspan>
+  </text>
+  <rect x="976" y="246" width="168" height="322" rx="28" fill="rgba(10,10,10,0.42)" stroke="#8c8c88" stroke-width="2.1" filter="url(#screenGlow)"/>
+  <rect x="995" y="283" width="130" height="244" rx="22" fill="rgba(7,7,7,0.78)" stroke="#8c8c88" stroke-width="1.8"/>
+  <rect x="1030" y="262" width="60" height="7" rx="3.5" fill="#8c8c88" opacity="0.72"/>
+  <rect x="1011" y="307" width="98" height="38" rx="9" fill="url(#slot)" opacity="0.52"/><rect x="1015" y="367" width="92" height="20" rx="7" fill="url(#slot)" opacity="0.46"/><rect x="1015" y="403" width="92" height="20" rx="7" fill="url(#slot)" opacity="0.46"/><rect x="1015" y="439" width="92" height="20" rx="7" fill="url(#slot)" opacity="0.46"/><rect x="1015" y="475" width="92" height="20" rx="7" fill="url(#slot)" opacity="0.46"/>
+  <rect x="1022" y="542" width="76" height="6" rx="3" fill="#8c8c88" opacity="0.72"/><path d="M1164 408 L1236 408" stroke="#d7d7d4" stroke-width="2.2" stroke-linecap="round" marker-end="url(#arrow)"/><text x="1060" y="598" fill="#f4f4f1" opacity="1" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial Unicode MS, Arial, sans-serif" font-size="28" font-weight="720" text-anchor="middle">
+    <tspan x="1060" dy="0">任务入口</tspan>
+  </text><text x="1060" y="630" fill="#b8b8b5" opacity="1" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial Unicode MS, Arial, sans-serif" font-size="18" font-weight="480" text-anchor="middle">
+    <tspan x="1060" dy="0">浏览任务列表</tspan>
+  </text><path d="M1060 652 L1060 710" stroke="#d7d7d4" stroke-width="2.1" stroke-linecap="round" marker-end="url(#arrow)"/>
+  <rect x="925" y="728" width="270" height="152" rx="14" fill="rgba(12,12,12,0.74)" stroke="#8c8c88" stroke-width="2" filter="url(#screenGlow)"/>
+  <rect x="951" y="756" width="218" height="42" rx="9" fill="url(#slot)" opacity="0.58"/>
+  <text x="1060" y="844" fill="#f4f4f1" opacity="1" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial Unicode MS, Arial, sans-serif" font-size="31" font-weight="760" text-anchor="middle">
+    <tspan x="1060" dy="0">碰碰卡</tspan>
+  </text>
+  
+  <rect x="942" y="904" width="236" height="42" rx="21" fill="rgba(9,9,9,0.64)" stroke="#8c8c88" stroke-width="1.8" filter="url(#softGlow)"/>
+  <text x="1060" y="933" fill="#f4f4f1" opacity="0.98" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial Unicode MS, Arial, sans-serif" font-size="22" font-weight="650" text-anchor="middle">
+    <tspan x="1060" dy="0">碰卡匹配</tspan>
+  </text>
+  
+  <rect x="942" y="960" width="236" height="42" rx="21" fill="rgba(9,9,9,0.64)" stroke="#8c8c88" stroke-width="1.8" filter="url(#softGlow)"/>
+  <text x="1060" y="989" fill="#f4f4f1" opacity="0.98" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial Unicode MS, Arial, sans-serif" font-size="22" font-weight="650" text-anchor="middle">
+    <tspan x="1060" dy="0">好友助力</tspan>
+  </text>
+  
+  <rect x="942" y="1016" width="236" height="42" rx="21" fill="rgba(9,9,9,0.64)" stroke="#8c8c88" stroke-width="1.8" filter="url(#softGlow)"/>
+  <text x="1060" y="1045" fill="#f4f4f1" opacity="0.9" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial Unicode MS, Arial, sans-serif" font-size="22" font-weight="650" text-anchor="middle">
+    <tspan x="1060" dy="0">双人组队</tspan>
+  </text>
+  <rect x="1256" y="246" width="168" height="322" rx="28" fill="rgba(10,10,10,0.42)" stroke="#8c8c88" stroke-width="2.1" filter="url(#screenGlow)"/>
+  <rect x="1275" y="283" width="130" height="244" rx="22" fill="rgba(7,7,7,0.78)" stroke="#8c8c88" stroke-width="1.8"/>
+  <rect x="1310" y="262" width="60" height="7" rx="3.5" fill="#8c8c88" opacity="0.72"/>
+  <rect x="1293" y="308" width="94" height="58" rx="12" fill="url(#slot2)" opacity="0.52"/><rect x="1299" y="393" width="82" height="20" rx="7" fill="url(#slot)" opacity="0.46"/><rect x="1299" y="435" width="36" height="36" rx="18" fill="url(#slot2)" opacity="0.5"/><rect x="1347" y="435" width="36" height="36" rx="18" fill="url(#slot2)" opacity="0.5"/>
+  <rect x="1302" y="542" width="76" height="6" rx="3" fill="#8c8c88" opacity="0.72"/><path d="M1444 408 L1516 408" stroke="#d7d7d4" stroke-width="2.2" stroke-linecap="round" marker-end="url(#arrow)"/><text x="1340" y="598" fill="#f4f4f1" opacity="1" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial Unicode MS, Arial, sans-serif" font-size="28" font-weight="720" text-anchor="middle">
+    <tspan x="1340" dy="0">社交入口</tspan>
+  </text><text x="1340" y="630" fill="#b8b8b5" opacity="1" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial Unicode MS, Arial, sans-serif" font-size="18" font-weight="480" text-anchor="middle">
+    <tspan x="1340" dy="0">分享与话题参与</tspan>
+  </text><path d="M1340 652 L1340 710" stroke="#d7d7d4" stroke-width="2.1" stroke-linecap="round" marker-end="url(#arrow)"/>
+  <rect x="1205" y="728" width="270" height="152" rx="14" fill="rgba(12,12,12,0.74)" stroke="#8c8c88" stroke-width="2" filter="url(#screenGlow)"/>
+  <rect x="1231" y="756" width="218" height="42" rx="9" fill="url(#slot)" opacity="0.58"/>
+  <text x="1340" y="844" fill="#f4f4f1" opacity="1" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial Unicode MS, Arial, sans-serif" font-size="27" font-weight="760" text-anchor="middle">
+    <tspan x="1340" dy="0">主题 / 明星马卡</tspan>
+  </text>
+  
+  <rect x="1222" y="904" width="236" height="42" rx="21" fill="rgba(9,9,9,0.64)" stroke="#8c8c88" stroke-width="1.8" filter="url(#softGlow)"/>
+  <text x="1340" y="933" fill="#f4f4f1" opacity="0.98" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial Unicode MS, Arial, sans-serif" font-size="22" font-weight="650" text-anchor="middle">
+    <tspan x="1340" dy="0">明星合成</tspan>
+  </text>
+  
+  <rect x="1222" y="960" width="236" height="42" rx="21" fill="rgba(9,9,9,0.64)" stroke="#8c8c88" stroke-width="1.8" filter="url(#softGlow)"/>
+  <text x="1340" y="989" fill="#f4f4f1" opacity="0.98" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial Unicode MS, Arial, sans-serif" font-size="22" font-weight="650" text-anchor="middle">
+    <tspan x="1340" dy="0">主题互动</tspan>
+  </text>
+  
+  <rect x="1222" y="1016" width="236" height="42" rx="21" fill="rgba(9,9,9,0.64)" stroke="#8c8c88" stroke-width="1.8" filter="url(#softGlow)"/>
+  <text x="1340" y="1045" fill="#f4f4f1" opacity="0.9" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial Unicode MS, Arial, sans-serif" font-size="22" font-weight="650" text-anchor="middle">
+    <tspan x="1340" dy="0">话题传播</tspan>
+  </text>
+  <rect x="1536" y="246" width="168" height="322" rx="28" fill="rgba(10,10,10,0.42)" stroke="#8c8c88" stroke-width="2.1" filter="url(#screenGlow)"/>
+  <rect x="1555" y="283" width="130" height="244" rx="22" fill="rgba(7,7,7,0.78)" stroke="#8c8c88" stroke-width="1.8"/>
+  <rect x="1590" y="262" width="60" height="7" rx="3.5" fill="#8c8c88" opacity="0.72"/>
+  <rect x="1571" y="307" width="98" height="44" rx="10" fill="url(#slot)" opacity="0.52"/><rect x="1578" y="375" width="84" height="84" rx="12" fill="url(#slot2)" opacity="0.5"/><rect x="1580" y="477" width="80" height="18" rx="7" fill="url(#slot)" opacity="0.46"/>
+  <rect x="1582" y="542" width="76" height="6" rx="3" fill="#8c8c88" opacity="0.72"/><text x="1620" y="598" fill="#f4f4f1" opacity="1" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial Unicode MS, Arial, sans-serif" font-size="28" font-weight="720" text-anchor="middle">
+    <tspan x="1620" dy="0">卡包 / 奖励</tspan>
+  </text><text x="1620" y="630" fill="#b8b8b5" opacity="1" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial Unicode MS, Arial, sans-serif" font-size="18" font-weight="480" text-anchor="middle">
+    <tspan x="1620" dy="0">我的卡片与领取</tspan>
+  </text><path d="M1620 652 L1620 710" stroke="#d7d7d4" stroke-width="2.1" stroke-linecap="round" marker-end="url(#arrow)"/>
+  <rect x="1485" y="728" width="270" height="152" rx="14" fill="rgba(12,12,12,0.74)" stroke="#8c8c88" stroke-width="2" filter="url(#screenGlow)"/>
+  <rect x="1511" y="756" width="218" height="42" rx="9" fill="url(#slot)" opacity="0.58"/>
+  <text x="1620" y="844" fill="#f4f4f1" opacity="1" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial Unicode MS, Arial, sans-serif" font-size="31" font-weight="760" text-anchor="middle">
+    <tspan x="1620" dy="0">压岁线</tspan>
+  </text>
+  
+  <rect x="1502" y="904" width="236" height="42" rx="21" fill="rgba(9,9,9,0.64)" stroke="#8c8c88" stroke-width="1.8" filter="url(#softGlow)"/>
+  <text x="1620" y="933" fill="#f4f4f1" opacity="0.98" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial Unicode MS, Arial, sans-serif" font-size="22" font-weight="650" text-anchor="middle">
+    <tspan x="1620" dy="0">拉新助力</tspan>
+  </text>
+  
+  <rect x="1502" y="960" width="236" height="42" rx="21" fill="rgba(9,9,9,0.64)" stroke="#8c8c88" stroke-width="1.8" filter="url(#softGlow)"/>
+  <text x="1620" y="989" fill="#f4f4f1" opacity="0.98" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial Unicode MS, Arial, sans-serif" font-size="22" font-weight="650" text-anchor="middle">
+    <tspan x="1620" dy="0">回流签到</tspan>
+  </text>
+  
+  <rect x="1502" y="1016" width="236" height="42" rx="21" fill="rgba(9,9,9,0.64)" stroke="#8c8c88" stroke-width="1.8" filter="url(#softGlow)"/>
+  <text x="1620" y="1045" fill="#f4f4f1" opacity="0.9" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial Unicode MS, Arial, sans-serif" font-size="22" font-weight="650" text-anchor="middle">
+    <tspan x="1620" dy="0">现金红包</tspan>
+  </text>
+  <path d="M 220 1072 C 400 1218, 1040 1260, 1618 1074" fill="none" stroke="#8c8c88" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="9 12" marker-end="url(#arrow-soft)"/>
+  <path d="M 1340 1072 C 1405 1152, 1530 1160, 1618 1074" fill="none" stroke="#8c8c88" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="9 12" marker-end="url(#arrow-soft)"/>
+  <rect x="678" y="1190" width="690" height="58" rx="10" fill="rgba(12,12,12,0.82)" stroke="#8c8c88" stroke-width="1.8"/>
+  <text x="1023" y="1228" fill="#f4f4f1" opacity="1" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial Unicode MS, Arial, sans-serif" font-size="22" font-weight="580" text-anchor="middle">
+    <tspan x="1023" dy="0">分享晒卡 / 好友加入后，回到集卡活动页与任务入口持续带来新流量</tspan>
+  </text>
+  <rect x="1818" y="462" width="168" height="232" rx="18" fill="rgba(6,6,6,0.44)" stroke="#8c8c88" stroke-width="1.5" stroke-dasharray="6 7"/>
+  <text x="1842" y="512" fill="#f4f4f1" opacity="1" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial Unicode MS, Arial, sans-serif" font-size="22" font-weight="760" text-anchor="start">
+    <tspan x="1842" dy="0">承接重点</tspan>
+  </text>
+  <text x="1842" y="552" fill="#b8b8b5" opacity="1" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial Unicode MS, Arial, sans-serif" font-size="18" font-weight="480" text-anchor="start">
+    <tspan x="1842" dy="0">1. 入口统一收拢</tspan>
+    <tspan x="1842" dy="34">2. 活动页展示进度</tspan>
+    <tspan x="1842" dy="34">3. 任务与社交分流</tspan>
+    <tspan x="1842" dy="34">4. 卡包承接回访</tspan>
+  </text>
+  <rect x="1818" y="734" width="168" height="196" rx="18" fill="rgba(6,6,6,0.44)" stroke="#8c8c88" stroke-width="1.5" stroke-dasharray="6 7"/>
+  <text x="1842" y="784" fill="#f4f4f1" opacity="1" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial Unicode MS, Arial, sans-serif" font-size="22" font-weight="760" text-anchor="start">
+    <tspan x="1842" dy="0">玩法重点</tspan>
+  </text>
+  <text x="1842" y="824" fill="#b8b8b5" opacity="1" font-family="PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial Unicode MS, Arial, sans-serif" font-size="18" font-weight="480" text-anchor="start">
+    <tspan x="1842" dy="0">任务得卡</tspan>
+    <tspan x="1842" dy="32">兑换补卡</tspan>
+    <tspan x="1842" dy="32">猜题闯关</tspan>
+    <tspan x="1842" dy="32">匹配助力</tspan>
+    <tspan x="1842" dy="32">奖励沉淀</tspan>
+  </text>
+
+</svg>

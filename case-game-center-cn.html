@@ -1,0 +1,1555 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>微博游戏中心体验升级 — Sheryl Gao</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <script src="portfolio-case-i18n.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', '"PingFang SC"', '"Noto Sans SC"', '"Microsoft YaHei"', 'system-ui', 'sans-serif'],
+          },
+          letterSpacing: {
+            tight: '0em',
+            tighter: '0em',
+          },
+          lineHeight: {
+            body: '1.8',
+            heading: '1.15',
+          },
+        },
+      },
+    };
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: #fff;
+      color: #171717;
+      letter-spacing: 0;
+      text-rendering: geometricPrecision;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    ::selection { background: #FF573A; color: #fff; }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition:
+        opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .delay-1 { transition-delay: 0.08s; }
+    .delay-2 { transition-delay: 0.16s; }
+    .delay-3 { transition-delay: 0.24s; }
+    .delay-4 { transition-delay: 0.32s; }
+
+    .hero-line {
+      opacity: 0;
+      transform: translateY(40px);
+      animation: heroSlide 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .hero-line:nth-child(1) { animation-delay: 0.08s; }
+    .hero-line:nth-child(2) { animation-delay: 0.18s; }
+    .hero-line:nth-child(3) { animation-delay: 0.28s; }
+    .hero-line:nth-child(4) { animation-delay: 0.38s; }
+    .hero-line:nth-child(5) { animation-delay: 0.48s; }
+    @keyframes heroSlide {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .case-detail-hero { background: #fff; }
+    .case-hero-cover { position: relative; width: 100%; overflow: visible; background: transparent; }
+    .case-hero-cover > img { display: block; width: 100%; height: auto; }
+    .case-hero-cover .media-label { max-width: 82%; }
+    .case-hero-info { padding: 3.75rem 0 3.25rem; }
+    .case-hero-summary { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, 0.4fr); gap: clamp(2rem, 5vw, 5.5rem); align-items: start; }
+    .case-hero-title { max-width: 760px; }
+    .case-hero-meta { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1.25rem, 3vw, 2.5rem); padding-top: 0.35rem; }
+    .case-hero-meta-label { margin-bottom: 0.75rem; color: #171717; font-size: 13px; font-weight: 700; line-height: 1; letter-spacing: 0; }
+    .case-hero-meta-value { color: #8a8a8a; font-size: 18px; font-weight: 500; line-height: 1.35; }
+    .case-hero-divider { width: 100%; height: 1px; background: #e5e5e5; }
+    @media (max-width: 767px) {
+      .case-hero-cover { overflow: visible; }
+      .case-hero-info { padding: 2.5rem 0 2.5rem; }
+      .case-hero-summary { grid-template-columns: 1fr; }
+      .case-hero-meta { grid-template-columns: 1fr; }
+    }
+
+    .nav-link { position: relative; }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: #171717;
+      transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .nav-link:hover::after { width: 100%; }
+
+    .case-section,
+    .module-block {
+      scroll-margin-top: 9rem;
+    }
+    @media (min-width: 1024px) {
+      .case-section,
+      .module-block {
+        scroll-margin-top: 7.5rem;
+      }
+    }
+
+    .divider { height: 1px; background: #e0e0e0; }
+    .section-num {
+      color: #FF573A;
+      font-variant-numeric: tabular-nums;
+    }
+    .highlight-card {
+      border-left: 2px solid #FF573A;
+      padding-left: 1.25rem;
+    }
+    #overview > .reveal > h2 {
+      max-width: none;
+    }
+    .side-nav-link {
+      position: relative;
+      display: block;
+      padding: 0.45rem 0 0.45rem 1rem;
+      color: #a3a3a3;
+      font-size: 0.75rem;
+      line-height: 1.45;
+      font-weight: 500;
+      transition: color 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .side-nav-link::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 2px;
+      height: 0;
+      background: #FF573A;
+      transform: translateY(-50%);
+      opacity: 0;
+      transition:
+        height 0.24s cubic-bezier(0.16, 1, 0.3, 1),
+        opacity 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .side-nav-link:hover { color: #171717; }
+    .side-nav-link.active {
+      color: #FF573A;
+      font-weight: 600;
+    }
+    .side-nav-link.active::before {
+      height: 18px;
+      opacity: 1;
+    }
+
+    .mobile-anchor {
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      border-bottom: 2px solid transparent;
+      color: #a3a3a3;
+      font-size: 0.75rem;
+      font-weight: 600;
+      transition:
+        color 0.24s cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .mobile-anchor.active {
+      color: #FF573A;
+      border-bottom-color: #FF573A;
+    }
+
+    .img-frame,
+    .img-frame-warm {
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 2px;
+      text-align: center;
+      color: #a3a3a3;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.6;
+    }
+    .img-frame {
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.72), rgba(255,255,255,0) 45%),
+        #f0f0f0;
+      border: 1px solid #e5e5e5;
+    }
+    .img-frame-warm {
+      background:
+        linear-gradient(135deg, #FFF8F6 0%, #FFF3EE 100%);
+      border: 1px solid rgba(255, 87, 58, 0.14);
+      color: #c88c7f;
+    }
+    .media-label {
+      position: relative;
+      z-index: 1;
+      max-width: 78%;
+    }
+    .media-grid::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(23, 23, 23, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(23, 23, 23, 0.035) 1px, transparent 1px);
+      background-size: 24px 24px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.9), rgba(0,0,0,0.2));
+    }
+
+    .case-phone-mockup {
+      position: relative;
+      width: 100%;
+      max-width: 224px;
+      margin: 0 auto;
+      border: 1px solid #d8d8d8;
+      border-radius: 28px;
+      background: #fff;
+      padding: 5px;
+      overflow: hidden;
+    }
+    .case-phone-mockup.is-after {
+      border-color: #d8d8d8;
+      background: #fff;
+    }
+    .case-phone-top {
+      display: none;
+    }
+    .case-phone-top::before {
+      content: '';
+      width: 34px;
+      height: 4px;
+      border-radius: 999px;
+      background: #e5e5e5;
+    }
+    .case-phone-screen {
+      aspect-ratio: 375 / 816;
+      overflow-y: auto;
+      overflow-x: hidden;
+      border-radius: 20px;
+      background: #f5f5f5;
+      overscroll-behavior: contain;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255, 87, 58, 0.55) rgba(23, 23, 23, 0.06);
+    }
+    .case-phone-screen::-webkit-scrollbar {
+      width: 4px;
+    }
+    .case-phone-screen::-webkit-scrollbar-track {
+      background: rgba(23, 23, 23, 0.06);
+      border-radius: 999px;
+    }
+    .case-phone-screen::-webkit-scrollbar-thumb {
+      background: rgba(255, 87, 58, 0.55);
+      border-radius: 999px;
+    }
+    .case-phone-screen img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .online-effect-showcase {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      padding: clamp(1.5rem, 4vw, 3rem) 0;
+      background: #f7f7f7;
+    }
+    .case-phone-caption {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      margin-top: 0;
+      min-height: 40px;
+      text-align: center;
+    }
+    .case-phone-caption span {
+      color: #a3a3a3;
+      font-size: 11px;
+      font-weight: 600;
+      line-height: 1.4;
+      display: block;
+    }
+    .case-phone-caption strong {
+      color: #171717;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.4;
+      display: block;
+    }
+    .case-phone-caption .is-accent {
+      color: #FF573A;
+    }
+    .case-compare-grid {
+      position: relative;
+    }
+    .case-compare-pair-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 2.5rem minmax(0, 1fr);
+      gap: clamp(1rem, 2.4vw, 2rem);
+      align-items: center;
+    }
+    .case-compare-group {
+      min-width: 0;
+    }
+    .case-compare-group-phones {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: clamp(0.75rem, 1.6vw, 1.2rem);
+      align-items: start;
+      justify-items: center;
+    }
+    .case-phone-item-title {
+      min-height: 18px;
+      margin: 0 0 0.875rem;
+      color: #737373;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.35;
+      text-align: center;
+    }
+    .case-phone-item-title.is-accent {
+      color: #737373;
+    }
+    .case-compare-pair-grid .case-phone-mockup {
+      width: 100%;
+      max-width: 190px;
+    }
+    .case-compare-arrow {
+      position: static;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      justify-self: center;
+      width: 2.5rem;
+      height: 2.5rem;
+      margin-top: 3.25rem;
+      color: #FF573A;
+      font-size: 1.4rem;
+      font-weight: 800;
+      line-height: 1;
+      pointer-events: none;
+    }
+    .case-compare-arrow::before {
+      content: '→';
+    }
+    @media (max-width: 639px) {
+      .case-compare-pair-grid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+      }
+      .case-compare-group-phones {
+        grid-template-columns: repeat(2, minmax(150px, 1fr));
+        overflow-x: auto;
+        padding-bottom: 8px;
+      }
+      .case-compare-arrow {
+        display: none;
+      }
+    }
+
+    .problem-card,
+    .value-card,
+    .comp-card,
+    .metric-card {
+      border: 1px solid #e5e5e5;
+      border-radius: 2px;
+      background: #fff;
+    }
+    .comp-card {
+      transition:
+        border-color 0.24s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .comp-card:hover {
+      border-color: rgba(255, 87, 58, 0.42);
+      transform: translateY(-2px);
+    }
+    .game-comp-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(20px, 2.5vw, 32px);
+      align-items: start;
+    }
+    .game-comp-card {
+      min-width: 0;
+      text-align: center;
+    }
+    .game-comp-device {
+      position: relative;
+      display: flex;
+      width: 100%;
+      max-width: 224px;
+      aspect-ratio: 375 / 816;
+      margin: 0 auto 1.25rem;
+      padding: 5px;
+      border: 1px solid #d8d8d8;
+      border-radius: 28px;
+      background: #fff;
+      overflow: hidden;
+    }
+    .game-comp-device-screen {
+      display: block;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      border-radius: 20px;
+      background: #fff;
+    }
+    .game-comp-device-screen img {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      object-position: top center;
+    }
+    .game-comp-body {
+      width: 100%;
+      max-width: 224px;
+      margin: 0 auto;
+      text-align: left;
+    }
+    @media (max-width: 900px) {
+      .game-comp-grid {
+        grid-template-columns: repeat(3, minmax(180px, 1fr));
+        overflow-x: auto;
+        padding-bottom: 10px;
+      }
+    }
+    @media (max-width: 640px) {
+      .game-comp-grid {
+        margin-right: -1.5rem;
+        padding-right: 1.5rem;
+      }
+    }
+
+    .strategy-selected {
+      position: relative;
+      border: 2px solid #FF573A;
+      border-radius: 2px;
+      background: #FFF8F6;
+    }
+    .strategy-muted {
+      position: relative;
+      border: 1px solid #d4d4d4;
+      border-radius: 2px;
+      background: #fff;
+      opacity: 0.64;
+    }
+    .strategy-compare-table-wrap {
+      overflow-x: auto;
+      border: 1px solid #e5e2df;
+      border-radius: 14px;
+      background: #fff;
+    }
+    .strategy-compare-table {
+      width: 100%;
+      min-width: 860px;
+      border-collapse: separate;
+      border-spacing: 0;
+      color: #404040;
+      font-size: 14px;
+      line-height: 1.75;
+    }
+    .strategy-compare-table th,
+    .strategy-compare-table td {
+      padding: 18px 22px;
+      border-right: 1px solid #ece8e5;
+      border-bottom: 1px solid #ece8e5;
+      text-align: left;
+      vertical-align: middle;
+    }
+    .strategy-compare-table th {
+      background: #fff;
+      color: #262626;
+      font-size: 13px;
+      font-weight: 800;
+    }
+    .strategy-compare-table th:first-child,
+    .strategy-compare-table td:first-child {
+      width: 18%;
+      color: #262626;
+      font-weight: 800;
+    }
+    .strategy-compare-table th:nth-child(2),
+    .strategy-compare-table td:nth-child(2),
+    .strategy-compare-table th:nth-child(3),
+    .strategy-compare-table td:nth-child(3) {
+      width: 41%;
+    }
+    .strategy-compare-table tr:last-child td {
+      border-bottom: 0;
+    }
+    .strategy-compare-table th:last-child,
+    .strategy-compare-table td:last-child {
+      border-right: 0;
+    }
+    .strategy-choice-badge {
+      display: inline-flex;
+      align-items: center;
+      height: 22px;
+      margin-left: 10px;
+      padding: 0 8px;
+      border-radius: 999px;
+      background: #FF573A;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 800;
+      line-height: 1;
+      vertical-align: middle;
+      white-space: nowrap;
+    }
+    .status-label {
+      display: inline-flex;
+      align-items: center;
+      height: 22px;
+      padding: 0 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1;
+    }
+    .value-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.75rem;
+    }
+    .flow-phone-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
+      gap: clamp(0.75rem, 2vw, 1.25rem);
+      align-items: center;
+    }
+    .flow-phone-item {
+      min-width: 0;
+    }
+    .welfare-phone-mockup {
+      width: 100%;
+      max-width: 224px;
+      margin: 0 auto;
+      padding: 5px;
+      border: 1px solid #d8d8d8;
+      border-radius: 28px;
+      background: #fff;
+      overflow: hidden;
+    }
+    .welfare-phone-screen {
+      aspect-ratio: 375 / 816;
+      overflow-y: auto;
+      overflow-x: hidden;
+      border-radius: 20px;
+      background: #f5f5f5;
+      overscroll-behavior: contain;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255, 87, 58, 0.55) rgba(23, 23, 23, 0.06);
+    }
+    .welfare-phone-screen::-webkit-scrollbar {
+      width: 4px;
+    }
+    .welfare-phone-screen::-webkit-scrollbar-track {
+      background: rgba(23, 23, 23, 0.06);
+      border-radius: 999px;
+    }
+    .welfare-phone-screen::-webkit-scrollbar-thumb {
+      background: rgba(255, 87, 58, 0.55);
+      border-radius: 999px;
+    }
+    .welfare-phone-screen img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .topic-benefit-layout {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(220px, 0.42fr) 2.5rem minmax(0, 1fr);
+      gap: clamp(1rem, 2.4vw, 2.5rem);
+      align-items: center;
+    }
+    .topic-benefit-source,
+    .topic-state-panel {
+      position: relative;
+      z-index: 1;
+    }
+    .topic-benefit-phone {
+      width: 100%;
+      max-width: 300px;
+      margin: 0 auto;
+      padding: 6px;
+      border: 1px solid #d8d8d8;
+      border-radius: 30px;
+      background: #fff;
+      overflow: hidden;
+    }
+    .topic-benefit-phone img,
+    .topic-state-card img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .topic-benefit-phone img {
+      border-radius: 24px;
+    }
+    .topic-state-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.25rem 1rem;
+    }
+    .topic-state-item {
+      min-width: 0;
+    }
+    .topic-state-card {
+      overflow: hidden;
+      border: 1px solid #e5e5e5;
+      border-radius: 8px;
+      background: #fff;
+      aspect-ratio: 1242 / 633;
+    }
+    .topic-state-card img {
+      height: 100%;
+      object-fit: contain;
+    }
+    .topic-state-title {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: #171717;
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1.4;
+    }
+    .topic-benefit-arrow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      justify-self: center;
+      width: 2.5rem;
+      height: 2.5rem;
+      color: #FF573A;
+      font-size: 1.4rem;
+      font-weight: 800;
+      line-height: 1;
+      pointer-events: none;
+    }
+    .topic-benefit-arrow::before {
+      content: '→';
+    }
+    .flow-arrow {
+      align-self: center;
+      color: #FF573A;
+      font-size: 1.4rem;
+      font-weight: 800;
+      line-height: 1;
+      text-align: center;
+    }
+    @media (max-width: 767px) {
+      .value-grid {
+        grid-template-columns: 1fr;
+      }
+      .flow-phone-row {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+      }
+      .topic-benefit-layout,
+      .topic-state-grid {
+        grid-template-columns: 1fr;
+      }
+      .flow-arrow,
+      .topic-benefit-arrow {
+        display: none;
+      }
+    }
+
+    .callout {
+      position: absolute;
+      right: 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.35rem 0.55rem;
+      border: 1px solid rgba(255, 87, 58, 0.18);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.9);
+      color: #171717;
+      font-size: 11px;
+      font-weight: 700;
+      backdrop-filter: blur(8px);
+    }
+    .callout::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #FF573A;
+    }
+  </style>
+</head>
+
+<body class="font-sans text-neutral-900 bg-white antialiased">
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-sm border-b border-neutral-200/60">
+    <div class="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 flex items-center justify-between h-14 md:h-16">
+      <a href="portfolio2.html" class="text-sm font-semibold">
+        Sheryl<span class="text-[#FF573A]">.</span>
+      </a>
+      <a href="portfolio2.html" class="nav-link text-xs font-medium text-neutral-900">
+        ← Back / 返回作品集
+      </a>
+    </div>
+  </nav>
+
+  <header class="case-detail-hero pt-14 md:pt-16">
+    <div class="case-hero-cover">
+      <img
+        src="game-center-hero-cn.png"
+        alt="微博游戏中心体验升级头图，展示榜单首页、游戏中心首页和详情页"
+        loading="eager"
+        decoding="async"
+      >
+    </div>
+    <div class="case-hero-info">
+      <div class="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20">
+        <div class="case-hero-summary">
+          <div class="case-hero-title">
+            <h1 class="text-3xl md:text-5xl font-bold tracking-tight leading-heading">
+              <span class="hero-line block">微博游戏中心体验升级</span>
+            </h1>
+          </div>
+          <div class="hero-line case-hero-meta">
+            <div><p class="case-hero-meta-label">年份</p><p class="case-hero-meta-value">2025</p></div>
+            <div><p class="case-hero-meta-label">周期</p><p class="case-hero-meta-value">12 周</p></div>
+            <div><p class="case-hero-meta-label">角色</p><p class="case-hero-meta-value">UE/UI</p></div>
+          </div>
+        </div>
+        <div class="hero-line case-hero-divider mt-10" aria-hidden="true"></div>
+      </div>
+    </div>
+  </header>
+
+  <nav class="lg:hidden sticky top-14 md:top-16 z-40 bg-white/95 backdrop-blur-sm border-y border-neutral-200/70" aria-label="移动端章节导航">
+    <div class="px-6 md:px-12 overflow-x-auto">
+      <div class="flex items-center gap-6 min-w-max">
+        <a class="mobile-anchor active" href="#overview" data-section-link="overview" aria-current="true">01 项目概览</a>
+        <a class="mobile-anchor" href="#problem" data-section-link="problem">02 问题诊断</a>
+        <a class="mobile-anchor" href="#opportunity" data-section-link="opportunity">03 机会判断</a>
+        <a class="mobile-anchor" href="#strategy" data-section-link="strategy">04 方案选择</a>
+        <a class="mobile-anchor" href="#execution" data-section-link="execution">05 核心方案</a>
+        <a class="mobile-anchor" href="#results" data-section-link="results">06 线上效果与复盘</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="pb-24 md:pb-32">
+    <div class="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 lg:grid lg:grid-cols-12 lg:gap-8">
+      <aside class="hidden lg:block lg:col-span-2">
+        <nav class="sticky top-[120px] pt-2" aria-label="案例章节导航">
+          <p class="text-[11px] font-semibold text-neutral-400 mb-4">CASE INDEX</p>
+          <a class="side-nav-link active" href="#overview" data-section-link="overview" aria-current="true">01 项目概览</a>
+          <a class="side-nav-link" href="#problem" data-section-link="problem">02 问题诊断</a>
+          <a class="side-nav-link" href="#opportunity" data-section-link="opportunity">03 机会判断</a>
+          <a class="side-nav-link" href="#strategy" data-section-link="strategy">04 方案选择</a>
+          <a class="side-nav-link" href="#execution" data-section-link="execution">05 核心方案</a>
+          <a class="side-nav-link" href="#results" data-section-link="results">06 线上效果与复盘</a>
+        </nav>
+      </aside>
+
+      <div class="lg:col-span-10">
+        <section id="overview" class="case-section py-20 md:py-28 lg:pt-2">
+          <div class="reveal">
+            <p class="text-xs font-semibold text-neutral-400 mb-3"><span class="section-num">01</span> — 项目概览</p>
+            <h2 class="max-w-3xl text-2xl md:text-3xl font-bold leading-heading">
+              从静态入口到玩家经营阵地
+            </h2>
+          </div>
+
+          <div class="mt-8 space-y-10">
+            <div class="space-y-5">
+              <p class="reveal delay-1 text-sm md:text-[15px] leading-body text-neutral-500">
+                微博游戏中心是平台内连接游戏内容、玩家社区和福利权益的重要入口。随着业务从「游戏下载」走向「玩家经营」，原有页面逐渐暴露出分发效率低、权益触达弱、社区关系割裂等问题。
+              </p>
+              <p class="reveal delay-2 text-sm md:text-[15px] leading-body text-neutral-500">
+                这次改版不是一次单纯的界面翻新，而是围绕游戏分发链路进行的信息架构重构：让新用户更快发现游戏，让福利更容易被看见，让已关注游戏的用户有理由持续回来。
+              </p>
+              <div class="reveal delay-3">
+                <p class="text-xs font-semibold text-[#FF573A] mb-3">价值速览</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div class="border border-neutral-200 rounded-sm p-5 md:p-6">
+                    <p class="text-xs font-semibold text-neutral-400 mb-2">业务结果</p>
+                    <p class="text-sm md:text-base font-semibold leading-relaxed text-neutral-900">上线首周访问人数 +47.7%，访问次数 +34.8%</p>
+                  </div>
+                  <div class="border border-neutral-200 rounded-sm p-5 md:p-6">
+                    <p class="text-xs font-semibold text-neutral-400 mb-2">用户价值</p>
+                    <p class="text-sm md:text-base font-semibold leading-relaxed text-neutral-900">缩短「找游戏—领福利—进社区—持续回访」路径</p>
+                  </div>
+                  <div class="border border-neutral-200 rounded-sm p-5 md:p-6">
+                    <p class="text-xs font-semibold text-neutral-400 mb-2">设计动作</p>
+                    <p class="text-sm md:text-base font-semibold leading-relaxed text-neutral-900">重构首页信息架构、详情页信任信息、福利承载组件与话题页权益曝光</p>
+                  </div>
+                  <div class="border border-neutral-200 rounded-sm p-5 md:p-6">
+                    <p class="text-xs font-semibold text-neutral-400 mb-2">沉淀资产</p>
+                    <p class="text-sm md:text-base font-semibold leading-relaxed text-neutral-900">形成游戏分发、福利转化、社区承接的模块化设计方法</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="reveal delay-2">
+              <div class="case-compare-pair-grid">
+                <div class="case-compare-group">
+                  <p class="case-phone-caption mb-3">
+                    <strong>改版前</strong>
+                  </p>
+                  <div class="case-compare-group-phones">
+                    <div>
+                      <p class="case-phone-item-title">首页</p>
+                      <div class="case-phone-mockup">
+                        <div class="case-phone-screen" tabindex="0" aria-label="改版前首页截图，可上下滚动查看">
+                          <img src="game-center-before-home.png" alt="改版前：首页截图" />
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <p class="case-phone-item-title">游戏详情页</p>
+                      <div class="case-phone-mockup">
+                        <div class="case-phone-screen" tabindex="0" aria-label="改版前游戏详情页截图，可上下滚动查看">
+                          <img src="game-center-before-detail.png" alt="改版前：游戏详情页截图" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="case-compare-arrow" aria-hidden="true"></div>
+                <div class="case-compare-group">
+                  <p class="case-phone-caption mb-3">
+                    <strong class="is-accent">改版后</strong>
+                  </p>
+                  <div class="case-compare-group-phones">
+                    <div>
+                      <p class="case-phone-item-title is-accent">首页</p>
+                      <div class="case-phone-mockup is-after">
+                        <div class="case-phone-screen" tabindex="0" aria-label="改版后首页截图，可上下滚动查看">
+                          <img src="game-center-after-home.png" alt="改版后：首页截图" />
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <p class="case-phone-item-title is-accent">游戏详情页</p>
+                      <div class="case-phone-mockup is-after">
+                        <div class="case-phone-screen" tabindex="0" aria-label="改版后游戏详情页截图，可上下滚动查看">
+                          <img src="game-center-after-detail.png" alt="改版后：游戏详情页截图" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="reveal delay-3">
+              <p class="text-xs font-semibold text-[#FF573A] mb-3">改版成效</p>
+              <h3 class="text-xl md:text-2xl font-bold leading-heading mb-4">分发效率提升：入口更丰富，路径更短</h3>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                <div class="border border-neutral-200 rounded-sm p-5 md:p-6">
+                  <p class="text-xs md:text-sm leading-body text-neutral-500">
+                    <span class="block font-semibold text-neutral-900 mb-1">分发入口扩展</span>
+                    首页从单一聚合入口扩展为搜索、专区、榜单、福利等多分发位。
+                  </p>
+                </div>
+                <div class="border border-neutral-200 rounded-sm p-5 md:p-6">
+                  <p class="text-xs md:text-sm leading-body text-neutral-500">
+                    <span class="block font-semibold text-neutral-900 mb-1">触达路径缩短</span>
+                    用户从找游戏到进入目标内容的平均步骤减少，关键入口更直接。
+                  </p>
+                </div>
+                <div class="border border-neutral-200 rounded-sm p-5 md:p-6">
+                  <p class="text-xs md:text-sm leading-body text-neutral-500">
+                    <span class="block font-semibold text-neutral-900 mb-1">推荐更精准</span>
+                    叠加用户信号与推荐引擎，让不同分发位承接不同兴趣和回访场景。
+                  </p>
+                </div>
+              </div>
+              <figure class="overflow-hidden rounded-sm bg-white">
+                <img
+                  class="block w-full h-auto"
+                  src="game-center-distribution-efficiency.png"
+                  alt="微博游戏中心改版后分发效率提升示意图"
+                  loading="lazy"
+                  decoding="async"
+                >
+              </figure>
+            </div>
+          </div>
+        </section>
+
+        <div class="divider"></div>
+
+        <section id="problem" class="case-section py-20 md:py-28">
+          <div class="reveal">
+            <p class="text-xs font-semibold text-neutral-400 mb-3"><span class="section-num">02</span> — 问题诊断</p>
+            <h2 class="max-w-3xl text-2xl md:text-3xl font-bold leading-heading">
+              原游戏中心卡在了哪些关键问题上？
+            </h2>
+          </div>
+
+          <div class="mt-10 grid grid-cols-1 md:grid-cols-3 gap-4">
+            <article class="reveal delay-1 problem-card p-6">
+              <p class="text-xs font-semibold text-[#FF573A] mb-3">问题 1</p>
+              <h3 class="text-base font-bold mb-3">找不到</h3>
+              <p class="text-sm leading-body text-neutral-500">
+                游戏发现路径不清晰，首页不能快速帮助用户判断有哪些值得看的游戏。
+              </p>
+            </article>
+            <article class="reveal delay-2 problem-card p-6">
+              <p class="text-xs font-semibold text-[#FF573A] mb-3">问题 2</p>
+              <h3 class="text-base font-bold mb-3">看不见</h3>
+              <p class="text-sm leading-body text-neutral-500">
+                礼包、福利、预约奖励等高价值信息被埋在深层页面或长页面下方。
+              </p>
+            </article>
+            <article class="reveal delay-3 problem-card p-6">
+              <p class="text-xs font-semibold text-[#FF573A] mb-3">问题 3</p>
+              <h3 class="text-base font-bold mb-3">接不上</h3>
+              <p class="text-sm leading-body text-neutral-500">
+                游戏详情、福利权益、话题社区之间割裂，用户完成一次访问后缺少回访理由。
+              </p>
+            </article>
+          </div>
+
+          <div class="reveal delay-4 mt-10 highlight-card">
+            <p class="text-xs font-semibold text-neutral-900 mb-1">设计判断</p>
+            <p class="text-sm md:text-[15px] leading-body text-neutral-500">
+              因此，这个项目要解决的不是“页面不够好看”，而是“信息如何被更准确地分发，权益如何更高效地转化，社区关系如何进入游戏链路”。
+            </p>
+          </div>
+        </section>
+
+        <div class="divider"></div>
+
+        <section id="opportunity" class="case-section py-20 md:py-28">
+          <div class="reveal">
+            <p class="text-xs font-semibold text-neutral-400 mb-3"><span class="section-num">03</span> — 机会判断</p>
+            <h2 class="max-w-3xl text-2xl md:text-3xl font-bold leading-heading">
+              微博的游戏中心不只是下载入口，而是内容、福利和玩家关系的聚合场
+            </h2>
+          </div>
+
+          <p class="reveal delay-1 mt-8 text-sm md:text-[15px] leading-body text-neutral-500">
+            在竞品调研中，可以看到不同游戏分发入口各有侧重：TapTap 更强调内容深度和玩家评价，App Store 更偏标准化下载和编辑推荐，微信游戏则依托社交关系降低启动门槛。微博游戏中心的机会不在于复制其中任何一种模式，而是把微博已有的内容、热度和社区关系接入游戏分发链路。
+          </p>
+
+          <div class="reveal delay-2 mt-10 bg-[#FFF8F6] border border-[#FF573A]/15 rounded-sm p-6 md:p-8">
+            <h3 class="text-lg md:text-xl font-bold leading-heading mb-5">
+              微博可以做一种「内容分发 + 社区信任 + 福利转化」的混合型游戏中心。
+            </h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="highlight-card">
+                <p class="text-sm font-medium leading-body">用结构化导航提升找游戏效率</p>
+              </div>
+              <div class="highlight-card">
+                <p class="text-sm font-medium leading-body">用热度、评价、超话入口增强决策信任</p>
+              </div>
+              <div class="highlight-card">
+                <p class="text-sm font-medium leading-body">用礼包福利前置提升转化</p>
+              </div>
+              <div class="highlight-card">
+                <p class="text-sm font-medium leading-body">用关注游戏专区承接老玩家回访</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-10 game-comp-grid">
+            <article class="reveal delay-1 game-comp-card">
+              <h3 class="text-sm font-bold mb-1">TapTap</h3>
+              <p class="text-xs text-neutral-400 mb-4">内容深度 / 玩家评价</p>
+              <a href="game-center-comp-taptap.png" target="_blank" rel="noopener" class="game-comp-device">
+                <span class="game-comp-device-screen">
+                  <img src="game-center-comp-taptap.png" alt="TapTap 游戏推荐与内容分发界面截图" />
+                </span>
+              </a>
+              <div class="game-comp-body">
+                <p class="text-xs leading-relaxed text-neutral-500"><span class="font-semibold text-neutral-900">优势：</span>评价内容深，玩家讨论密度高。</p>
+                <p class="text-xs leading-relaxed text-neutral-500 mt-2"><span class="font-semibold text-neutral-900">局限：</span>轻量用户的查找成本偏高。</p>
+              </div>
+            </article>
+            <article class="reveal delay-2 game-comp-card">
+              <h3 class="text-sm font-bold mb-1">App Store</h3>
+              <p class="text-xs text-neutral-400 mb-4">标准下载 / 编辑推荐</p>
+              <a href="game-center-comp-appstore.png" target="_blank" rel="noopener" class="game-comp-device">
+                <span class="game-comp-device-screen">
+                  <img src="game-center-comp-appstore.png" alt="App Store 游戏卡牌频道界面截图" />
+                </span>
+              </a>
+              <div class="game-comp-body">
+                <p class="text-xs leading-relaxed text-neutral-500"><span class="font-semibold text-neutral-900">优势：</span>下载链路标准，编辑推荐清晰。</p>
+                <p class="text-xs leading-relaxed text-neutral-500 mt-2"><span class="font-semibold text-neutral-900">局限：</span>缺少玩家关系和社区讨论承接。</p>
+              </div>
+            </article>
+            <article class="reveal delay-3 game-comp-card">
+              <h3 class="text-sm font-bold mb-1">微信游戏</h3>
+              <p class="text-xs text-neutral-400 mb-4">社交关系 / 低门槛启动</p>
+              <a href="game-center-comp-wechat.png" target="_blank" rel="noopener" class="game-comp-device">
+                <span class="game-comp-device-screen">
+                  <img src="game-center-comp-wechat.png" alt="微信游戏发现与推荐界面截图" />
+                </span>
+              </a>
+              <div class="game-comp-body">
+                <p class="text-xs leading-relaxed text-neutral-500"><span class="font-semibold text-neutral-900">优势：</span>社交启动门槛低，关系链天然存在。</p>
+                <p class="text-xs leading-relaxed text-neutral-500 mt-2"><span class="font-semibold text-neutral-900">局限：</span>内容深度和游戏信息承载有限。</p>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <div class="divider"></div>
+
+        <section id="strategy" class="case-section py-20 md:py-28">
+          <div class="reveal">
+            <p class="text-xs font-semibold text-neutral-400 mb-3"><span class="section-num">04</span> — 方案选择</p>
+            <h2 class="max-w-3xl text-2xl md:text-3xl font-bold leading-heading">
+              为什么最终选择「内容型聚合首页」
+            </h2>
+          </div>
+
+          <div class="reveal delay-1 mt-8 space-y-5">
+            <p class="text-sm md:text-[15px] leading-body text-neutral-500">
+              我们比较过两种首页框架：
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <article class="border border-neutral-200 rounded-sm p-5 md:p-6">
+                <p class="text-xs font-semibold text-[#FF573A] mb-2">方案 A</p>
+                <h3 class="text-base font-bold mb-4">内容型聚合首页</h3>
+                <div class="space-y-3">
+                  <p class="text-sm leading-body text-neutral-500">
+                    <span class="font-semibold text-neutral-900">优势：</span>首屏即可承接多款游戏发现，适合扩大分发效率。
+                  </p>
+                  <p class="text-sm leading-body text-neutral-500">
+                    <span class="font-semibold text-neutral-900">风险：</span>需要更强的信息组织能力，避免首页变成资源堆砌。
+                  </p>
+                </div>
+              </article>
+              <article class="border border-neutral-200 rounded-sm p-5 md:p-6">
+                <p class="text-xs font-semibold text-[#FF573A] mb-2">方案 B</p>
+                <h3 class="text-base font-bold mb-4">单游戏专区首页</h3>
+                <div class="space-y-3">
+                  <p class="text-sm leading-body text-neutral-500">
+                    <span class="font-semibold text-neutral-900">优势：</span>对已关注单款游戏的用户更直接。
+                  </p>
+                  <p class="text-sm leading-body text-neutral-500">
+                    <span class="font-semibold text-neutral-900">风险：</span>新游戏发现效率低，整体分发广度不足。
+                  </p>
+                </div>
+              </article>
+            </div>
+            <div class="bg-[#FFF8F6] border border-[#FF573A]/15 rounded-sm p-5 md:p-6">
+              <p class="text-xs font-semibold text-[#FF573A] mb-2">最终选择</p>
+              <p class="text-sm md:text-[15px] leading-body text-neutral-500">
+                改版目标不是只服务单款游戏留存，而是提升平台级游戏发现、福利转化和社区承接效率，因此选择内容型聚合首页作为主框架。
+              </p>
+            </div>
+          </div>
+
+          <figure class="reveal delay-2 mt-10 overflow-hidden rounded-sm bg-[#FFF8F6]">
+            <img
+              class="block w-full h-auto"
+              src="weibo-gamecenter-content-vs-zone.png"
+              alt="聚合内容首页与单游戏专区首页策略对比图"
+              loading="lazy"
+              decoding="async"
+            >
+          </figure>
+
+          <div class="reveal delay-3 mt-8">
+            <p class="text-xs font-semibold text-neutral-900 mb-3">关键差异对比</p>
+            <div class="strategy-compare-table-wrap">
+              <table class="strategy-compare-table" aria-label="游戏中心首页两种框架关键差异对比">
+                <thead>
+                  <tr>
+                    <th scope="col">维度</th>
+                    <th scope="col">内容型 · 聚合内容首页 <span class="strategy-choice-badge">最终选择</span></th>
+                    <th scope="col">专区型 · 单游戏专区首页</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>首页本质</td>
+                    <td>聚合内容 / 分发页，首屏呈现多款游戏</td>
+                    <td>最近浏览的单款游戏专区，直达详情</td>
+                  </tr>
+                  <tr>
+                    <td>找游戏 / 发现</td>
+                    <td>首屏即发现，分发广度优先</td>
+                    <td>二级入口「找游戏」才进入大聚合页</td>
+                  </tr>
+                  <tr>
+                    <td>底部导航</td>
+                    <td>找游戏 · 订阅专区 · 赛事 · 我的礼包（4 Tab）</td>
+                    <td>游戏专区 · 我的礼包 · 商业（3 Tab）</td>
+                  </tr>
+                  <tr>
+                    <td>核心目标</td>
+                    <td>拉新 · 发现 · 分发广度</td>
+                    <td>单款留存 · 付费 · 商业化（深度）</td>
+                  </tr>
+                  <tr>
+                    <td>取舍</td>
+                    <td>长尾 / 新游曝光强，单款深度运营弱</td>
+                    <td>单款运营深，新游 / 长尾发现依赖二级入口</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="reveal delay-4 mt-10 highlight-card">
+            <p class="text-xs font-semibold text-neutral-900 mb-1">设计判断</p>
+            <p class="text-sm md:text-[15px] leading-body text-neutral-500">
+              用结构化承接确定性需求，用个性化提升分发效率，用社区信号增强决策信任。
+            </p>
+          </div>
+        </section>
+
+        <div class="divider"></div>
+
+        <section id="execution" class="case-section py-20 md:py-28">
+          <div class="reveal mb-6 md:mb-8">
+            <p class="text-xs font-semibold text-neutral-400"><span class="section-num">05</span> — 核心方案</p>
+          </div>
+
+          <article id="execution-home" class="module-block reveal mb-20 md:mb-28">
+            <div>
+              <h3 class="text-xl md:text-2xl font-bold leading-heading mb-3">方案一：分层首页</h3>
+              <p class="text-sm font-medium text-neutral-400 mb-5">解决：新用户发现效率低，老用户回访效率低</p>
+              <p class="text-sm md:text-[15px] leading-body text-neutral-500 mb-6">
+                首页不再对所有用户展示同一套内容，而是根据用户是否关注过游戏进行状态分流。新用户优先看到基于热度、社交关系和平台推荐的游戏内容，帮助他们快速建立兴趣判断；已关注用户则直接进入关注游戏的动态、福利和快捷入口，减少重复查找成本。
+              </p>
+              <div class="value-grid">
+                <div class="value-card p-4">
+                  <p class="text-xs font-semibold text-neutral-900 mb-1">问题</p>
+                  <p class="text-xs leading-relaxed text-neutral-500">所有用户看到同一套内容，既无法服务新用户发现，也没有提升老用户回访效率。</p>
+                </div>
+                <div class="value-card p-4 bg-[#FFF8F6] border-[#FF573A]/15">
+                  <p class="text-xs font-semibold text-[#FF573A] mb-1">设计</p>
+                  <p class="text-xs leading-relaxed text-neutral-500">根据关注状态区分首页内容，新用户看推荐，老用户看关注游戏。</p>
+                </div>
+                <div class="value-card p-4">
+                  <p class="text-xs font-semibold text-neutral-900 mb-1">价值</p>
+                  <p class="text-xs leading-relaxed text-neutral-500">从统一分发转向按用户状态分发，降低首次浏览成本，也提升老用户回访效率。</p>
+                </div>
+              </div>
+            </div>
+            <div class="mt-8">
+              <figure class="overflow-hidden rounded-sm bg-white">
+                <img
+                  class="block w-full h-auto"
+                  src="game-center-home-redesign-annotations.png"
+                  alt="微博游戏中心首页重构交互标注图"
+                  loading="lazy"
+                  decoding="async"
+                >
+              </figure>
+            </div>
+          </article>
+
+          <article id="execution-detail" class="module-block reveal mb-20 md:mb-28">
+            <div>
+              <h3 class="text-xl md:text-2xl font-bold leading-heading mb-3">方案二：详情页信任与回访</h3>
+              <p class="text-sm font-medium text-neutral-400 mb-5">解决：用户无法快速判断游戏价值，关注后缺少持续回访入口</p>
+              <p class="text-sm md:text-[15px] leading-body text-neutral-500 mb-6">
+                游戏详情页既是用户判断是否下载、预约或继续了解的关键页面，也是老玩家回访游戏内容、领取福利和发现相关游戏的固定入口。改版中，我把详情页拆成两个策略：头部强化社区信任，关注专区承接长期回访。
+              </p>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="value-card p-5 bg-[#FFF8F6] border-[#FF573A]/15">
+                  <p class="text-xs font-semibold text-[#FF573A] mb-2">策略一</p>
+                  <h4 class="text-sm font-bold text-neutral-900 mb-2">头部信任</h4>
+                  <p class="text-xs leading-relaxed text-neutral-500">
+                    将超话入口、热度指数、玩家评价等信任信号前置到详情页头部，让用户在第一屏就能感知游戏活跃度和社区讨论氛围，辅助下载或预约决策。
+                  </p>
+                </div>
+                <div class="value-card p-5">
+                  <p class="text-xs font-semibold text-[#FF573A] mb-2">策略二</p>
+                  <h4 class="text-sm font-bold text-neutral-900 mb-2">关注游戏专区</h4>
+                  <p class="text-xs leading-relaxed text-neutral-500">
+                    面向已关注游戏的用户，设置关注游戏专区，通过横向 Tab 快速切换不同游戏，并在关注内容中插入相关推荐，形成“关注 — 回访 — 再发现”的循环。
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="mt-8">
+              <figure class="overflow-hidden rounded-sm bg-white">
+                <img
+                  class="block w-full h-auto"
+                  src="game-center-detail-redesign-annotations.png"
+                  alt="微博游戏中心详情页重构交互标注图"
+                  loading="lazy"
+                  decoding="async"
+                >
+              </figure>
+            </div>
+          </article>
+
+          <article id="execution-welfare" class="module-block reveal mb-20 md:mb-28">
+            <div>
+              <h3 class="text-xl md:text-2xl font-bold leading-heading mb-3">方案三：福利组件与转化</h3>
+              <p class="text-sm font-medium text-neutral-400 mb-5">解决：礼包、预约奖励等权益被长页面吞掉</p>
+              <p class="text-sm md:text-[15px] leading-body text-neutral-500 mb-6">
+                礼包、福利、预约奖励是游戏中心里最直接影响转化的内容，但原有页面中容易被页面长度吞掉。为了解决这个问题，我设计了可拖拽的半屏承载组件：默认半屏保留详情页上下文，同时让福利内容进入用户可见范围；当用户需要查看更多内容时，可以继续展开为全屏。
+              </p>
+              <div class="value-grid">
+                <div class="value-card p-4">
+                  <p class="text-xs font-semibold text-neutral-900 mb-1">问题</p>
+                  <p class="text-xs leading-relaxed text-neutral-500">福利入口被埋在深层页面或长页面下方，用户不容易发现。</p>
+                </div>
+                <div class="value-card p-4 bg-[#FFF8F6] border-[#FF573A]/15">
+                  <p class="text-xs font-semibold text-[#FF573A] mb-1">设计</p>
+                  <p class="text-xs leading-relaxed text-neutral-500">使用可拖拽半屏组件承载礼包和福利，默认聚焦福利 Tab。</p>
+                </div>
+                <div class="value-card p-4">
+                  <p class="text-xs font-semibold text-neutral-900 mb-1">价值</p>
+                  <p class="text-xs leading-relaxed text-neutral-500">在不破坏详情页上下文的前提下，提升福利可见性，缩短从看到福利到领取福利的路径。</p>
+                </div>
+              </div>
+            </div>
+            <div class="mt-8">
+              <div class="flow-phone-row">
+                <div class="flow-phone-item">
+                  <p class="mb-3 text-center text-xs font-semibold text-neutral-500">收起态</p>
+                  <div class="welfare-phone-mockup">
+                    <div class="welfare-phone-screen" tabindex="0" aria-label="游戏详情页福利组件收起态截图，可上下滚动查看">
+                      <img src="game-detail-welfare-collapsed.png" alt="游戏详情页福利组件收起态截图" />
+                    </div>
+                  </div>
+                </div>
+                <div class="flow-arrow" aria-hidden="true">→</div>
+                <div class="flow-phone-item">
+                  <p class="mb-3 text-center text-xs font-semibold text-[#FF573A]">半屏态</p>
+                  <div class="welfare-phone-mockup">
+                    <div class="welfare-phone-screen" tabindex="0" aria-label="游戏详情页福利组件半屏态截图，可上下滚动查看">
+                      <img src="game-detail-welfare-half.png" alt="游戏详情页福利组件半屏态截图" />
+                    </div>
+                  </div>
+                </div>
+                <div class="flow-arrow" aria-hidden="true">→</div>
+                <div class="flow-phone-item">
+                  <p class="mb-3 text-center text-xs font-semibold text-neutral-500">全屏态</p>
+                  <div class="welfare-phone-mockup">
+                    <div class="welfare-phone-screen" tabindex="0" aria-label="游戏详情页福利组件全屏态截图，可上下滚动查看">
+                      <img src="game-detail-welfare-full.png" alt="游戏详情页福利组件全屏态截图" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article id="execution-esports" class="module-block reveal mb-20 md:mb-28">
+            <div>
+              <h3 class="text-xl md:text-2xl font-bold leading-heading mb-3">方案四：赛事与内容经营</h3>
+              <p class="text-sm font-medium text-neutral-400 mb-5">解决：游戏内容只被消费一次，缺少持续追踪理由</p>
+              <p class="text-sm md:text-[15px] leading-body text-neutral-500 mb-6">
+                赛事内容不只是一个列表入口，用户进入后需要快速判断赛事阶段、对阵双方、比分状态以及后续可去哪里看详情或榜单。因此我将原来的赛程信息重构为赛事聚合卡片，用比赛状态、比分、队伍与榜单入口形成更清晰的观看路径。
+              </p>
+              <div class="value-grid">
+                <div class="value-card p-4">
+                  <p class="text-xs font-semibold text-neutral-900 mb-1">问题</p>
+                  <p class="text-xs leading-relaxed text-neutral-500">赛程信息分散，用户需要在列表中自行判断赛事阶段、对阵状态和可继续查看的内容。</p>
+                </div>
+                <div class="value-card p-4 bg-[#FFF8F6] border-[#FF573A]/15">
+                  <p class="text-xs font-semibold text-[#FF573A] mb-1">设计</p>
+                  <p class="text-xs leading-relaxed text-neutral-500">用赛事聚合卡片承载赛程周期、比分对阵、进行中状态，并补充赛程详情、选手榜和战队榜入口。</p>
+                </div>
+                <div class="value-card p-4">
+                  <p class="text-xs font-semibold text-neutral-900 mb-1">价值</p>
+                  <p class="text-xs leading-relaxed text-neutral-500">让用户从“查赛程”进一步进入“看赛事、追榜单、回访关注内容”的连续路径。</p>
+                </div>
+              </div>
+            </div>
+            <div class="mt-8">
+              <figure class="overflow-hidden rounded-sm bg-white">
+                <img
+                  class="block w-full h-auto"
+                  src="game-center-esports-schedule-annotations.png"
+                  alt="微博游戏中心赛事赛程重构交互标注图"
+                  loading="lazy"
+                  decoding="async"
+                >
+              </figure>
+            </div>
+          </article>
+
+          <article id="execution-topic-benefits" class="module-block reveal mb-20 md:mb-28">
+            <div>
+              <h3 class="text-xl md:text-2xl font-bold leading-heading mb-3">方案五：话题页权益承接</h3>
+              <p class="text-sm font-medium text-neutral-400 mb-5">解决：玩家讨论场景和福利转化割裂</p>
+              <p class="text-sm md:text-[15px] leading-body text-neutral-500 mb-6">
+                话题页是玩家讨论和内容消费最自然的场景，我在话题头部下方增加游戏权益曝光模块，将游戏热议榜、礼包数量、活动数量和当前转化入口聚合呈现，让用户不离开话题页也能判断游戏价值并进入点评、预约、下载或抽奖任务。
+              </p>
+              <div class="value-grid mb-8">
+                <div class="value-card p-4">
+                  <p class="text-xs font-semibold text-neutral-900 mb-1">入口</p>
+                  <p class="text-xs leading-relaxed text-neutral-500">在话题页信息流前置游戏卡片，承接高热讨论流量。</p>
+                </div>
+                <div class="value-card p-4 bg-[#FFF8F6] border-[#FF573A]/15">
+                  <p class="text-xs font-semibold text-[#FF573A] mb-1">曝光</p>
+                  <p class="text-xs leading-relaxed text-neutral-500">统一展示热议榜、礼包、活动三类高价值信息。</p>
+                </div>
+                <div class="value-card p-4">
+                  <p class="text-xs font-semibold text-neutral-900 mb-1">转化</p>
+                  <p class="text-xs leading-relaxed text-neutral-500">根据点评、预约、下载等状态切换 CTA，减少跳转判断成本。</p>
+                </div>
+              </div>
+            </div>
+            <div class="topic-benefit-layout mt-8">
+              <div class="topic-benefit-source">
+                <div class="topic-benefit-phone">
+                  <img
+                    src="game-center-topic-benefits-page.png"
+                    alt="话题页新增游戏福利礼包模块页面截图"
+                    loading="lazy"
+                    decoding="async"
+                  >
+                </div>
+              </div>
+              <div class="topic-benefit-arrow" aria-hidden="true"></div>
+              <div class="topic-state-panel">
+                <div class="topic-state-grid">
+                  <div class="topic-state-item">
+                    <p class="topic-state-title">点评状态</p>
+                    <figure class="topic-state-card">
+                      <img src="game-center-topic-state-rating.png" alt="话题页游戏模块点评状态" loading="lazy" decoding="async">
+                    </figure>
+                  </div>
+                  <div class="topic-state-item">
+                    <p class="topic-state-title">无权益状态</p>
+                    <figure class="topic-state-card">
+                      <img src="game-center-topic-state-empty.png" alt="话题页游戏模块无礼包抽奖活动状态" loading="lazy" decoding="async">
+                    </figure>
+                  </div>
+                  <div class="topic-state-item">
+                    <p class="topic-state-title">可预约状态</p>
+                    <figure class="topic-state-card">
+                      <img src="game-center-topic-state-reserve.png" alt="话题页游戏模块可预约状态" loading="lazy" decoding="async">
+                    </figure>
+                  </div>
+                  <div class="topic-state-item">
+                    <p class="topic-state-title">可下载状态</p>
+                    <figure class="topic-state-card">
+                      <img src="game-center-topic-state-download.png" alt="话题页游戏模块可下载状态" loading="lazy" decoding="async">
+                    </figure>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+        </section>
+
+        <div class="divider"></div>
+
+        <section id="results" class="case-section py-20 md:py-28">
+          <div class="reveal">
+            <p class="text-xs font-semibold text-neutral-400 mb-3"><span class="section-num">06</span> — 线上效果与复盘</p>
+            <h2 class="max-w-3xl text-2xl md:text-3xl font-bold leading-heading">
+              访问承接效率提升，游戏分发链路更短
+            </h2>
+          </div>
+
+          <div id="online-effect" class="reveal mt-8">
+            <p class="text-xs font-semibold text-[#FF573A] mb-6">线上效果</p>
+            <div class="online-effect-showcase">
+              <div class="welfare-phone-mockup">
+                <div class="welfare-phone-screen" aria-label="微博游戏中心线上效果录屏 GIF">
+                  <img
+                    src="game-center-online-effect.gif"
+                    alt="微博游戏中心线上效果录屏 GIF"
+                    loading="lazy"
+                    decoding="async"
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="reveal delay-1 mt-8">
+            <p class="text-xs font-semibold text-[#FF573A] mb-3">数据结果</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <article class="metric-card p-6">
+                <p class="text-xs font-semibold text-neutral-400 mb-3">访问人数</p>
+                <p class="text-2xl md:text-3xl font-bold leading-none text-[#FF573A]">1.32w → 1.95w</p>
+                <p class="mt-3 text-xs md:text-sm leading-body text-neutral-500">+47.7%</p>
+              </article>
+              <article class="metric-card p-6">
+                <p class="text-xs font-semibold text-neutral-400 mb-3">访问次数</p>
+                <p class="text-2xl md:text-3xl font-bold leading-none text-[#FF573A]">2.3w → 3.1w</p>
+                <p class="mt-3 text-xs md:text-sm leading-body text-neutral-500">+34.8%</p>
+              </article>
+            </div>
+          </div>
+
+          <div class="reveal delay-2 mt-10">
+            <p class="text-xs font-semibold text-[#FF573A] mb-3">设计验证</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <article class="metric-card p-6">
+                <p class="text-sm font-bold text-neutral-900 mb-3">分层首页</p>
+                <p class="text-sm leading-body text-neutral-500">提升了游戏发现效率。</p>
+              </article>
+              <article class="metric-card p-6">
+                <p class="text-sm font-bold text-neutral-900 mb-3">福利组件</p>
+                <p class="text-sm leading-body text-neutral-500">缩短了权益触达路径。</p>
+              </article>
+              <article class="metric-card p-6">
+                <p class="text-sm font-bold text-neutral-900 mb-3">详情页与话题页</p>
+                <p class="text-sm leading-body text-neutral-500">增强了社区承接和回访理由。</p>
+              </article>
+            </div>
+          </div>
+
+          <div class="reveal delay-3 mt-10 border-l-2 border-[#FF573A] pl-6">
+            <p class="text-xs font-semibold text-[#FF573A] mb-3">复盘与沉淀</p>
+            <p class="text-base md:text-lg font-medium leading-relaxed text-neutral-700">
+              这次改版验证了微博游戏中心不应只是游戏入口，而应作为「内容分发 + 福利转化 + 社区经营」的混合型阵地。
+            </p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <section class="py-20 md:py-28 bg-neutral-50">
+    <div class="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 text-center">
+      <p class="reveal text-xs font-semibold text-neutral-400 mb-4">下一个项目</p>
+      <h2 class="reveal delay-1 text-2xl md:text-4xl font-bold">微博「超话星宝」体验设计</h2>
+      <a href="case-chaohua-starbaby-cn.html" class="reveal delay-2 inline-block mt-8 text-xs font-semibold text-[#FF573A]">
+        查看详情 →
+      </a>
+    </div>
+  </section>
+
+  <footer class="py-14 md:py-16">
+    <div class="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <a href="portfolio2.html" class="nav-link text-xs font-semibold">返回全部作品</a>
+        <p class="text-xs text-neutral-400">© 2026 Sheryl Gao</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const revealTargets = document.querySelectorAll('.reveal');
+
+      if ('IntersectionObserver' in window) {
+        const revealObserver = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+        revealTargets.forEach((target) => revealObserver.observe(target));
+      } else {
+        revealTargets.forEach((target) => target.classList.add('visible'));
+      }
+
+      const sectionLinks = Array.from(document.querySelectorAll('[data-section-link]'));
+      const sections = Array.from(document.querySelectorAll('.case-section'));
+      let activeSectionId = null;
+
+      const setActiveSection = (sectionId) => {
+        if (activeSectionId === sectionId) return;
+        activeSectionId = sectionId;
+
+        sectionLinks.forEach((link) => {
+          const isActive = link.dataset.sectionLink === sectionId;
+          link.classList.toggle('active', isActive);
+
+          if (isActive) {
+            link.setAttribute('aria-current', 'true');
+          } else {
+            link.removeAttribute('aria-current');
+          }
+        });
+
+        const activeMobileLink = document.querySelector(`.mobile-anchor[data-section-link="${sectionId}"]`);
+        const mobileScroller = activeMobileLink ? activeMobileLink.closest('.overflow-x-auto') : null;
+
+        if (activeMobileLink && mobileScroller && window.innerWidth < 1024) {
+          const targetLeft = activeMobileLink.offsetLeft - (mobileScroller.clientWidth / 2) + (activeMobileLink.clientWidth / 2);
+          mobileScroller.scrollTo({ left: Math.max(targetLeft, 0), behavior: 'smooth' });
+        }
+      };
+
+      sectionLinks.forEach((link) => {
+        link.addEventListener('click', () => setActiveSection(link.dataset.sectionLink));
+      });
+
+      const initialId = window.location.hash ? window.location.hash.slice(1) : 'overview';
+      if (sections.some((section) => section.id === initialId)) {
+        setActiveSection(initialId);
+      } else {
+        setActiveSection('overview');
+      }
+
+      const updateActiveByPosition = () => {
+        const probeLine = window.innerHeight * 0.38;
+        const currentSection = sections.find((section) => {
+          const rect = section.getBoundingClientRect();
+          return rect.top <= probeLine && rect.bottom > probeLine;
+        });
+
+        if (currentSection) {
+          setActiveSection(currentSection.id);
+        }
+      };
+
+      let scrollTicking = false;
+      const requestActiveUpdate = () => {
+        if (scrollTicking) return;
+        scrollTicking = true;
+        window.requestAnimationFrame(() => {
+          updateActiveByPosition();
+          scrollTicking = false;
+        });
+      };
+
+      if ('IntersectionObserver' in window) {
+        const spyObserver = new IntersectionObserver(() => {
+          requestActiveUpdate();
+        }, {
+          threshold: 0.01,
+          rootMargin: '-20% 0px -55% 0px',
+        });
+
+        sections.forEach((section) => spyObserver.observe(section));
+      }
+
+      window.addEventListener('scroll', requestActiveUpdate, { passive: true });
+      window.addEventListener('resize', requestActiveUpdate);
+      updateActiveByPosition();
+    });
+  </script>
+</body>
+</html>

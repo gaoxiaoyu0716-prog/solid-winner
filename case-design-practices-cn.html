@@ -1,0 +1,1299 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Design Practices — Sheryl Gao</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', '"PingFang SC"', '"Noto Sans SC"', '"Microsoft YaHei"', 'system-ui', 'sans-serif'],
+          },
+          letterSpacing: {
+            tight: '0em',
+            tighter: '0em',
+          },
+          lineHeight: {
+            body: '1.8',
+            heading: '1.15',
+          },
+        },
+      },
+    };
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: #fff;
+      color: #171717;
+      letter-spacing: 0;
+      text-rendering: geometricPrecision;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    ::selection { background: #FF573A; color: #fff; }
+
+    .case-detail-hero { background: #fff; }
+    .case-hero-cover {
+      position: relative;
+      display: block;
+      width: 100%;
+      overflow: visible;
+      background: transparent;
+    }
+    .case-hero-cover img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .case-hero-info { padding: 3.75rem 0 3.25rem; }
+    .case-hero-summary {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 0.4fr);
+      gap: clamp(2rem, 5vw, 5.5rem);
+      align-items: start;
+    }
+    .case-hero-title { max-width: 760px; }
+    .case-hero-meta {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(1.25rem, 3vw, 2.5rem);
+      padding-top: 0.35rem;
+    }
+    .case-hero-meta-label {
+      margin-bottom: 0.75rem;
+      color: #171717;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: 0;
+    }
+    .case-hero-meta-value {
+      color: #8a8a8a;
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 1.35;
+    }
+    .case-hero-divider {
+      width: 100%;
+      height: 1px;
+      background: #e5e5e5;
+    }
+    @media (max-width: 767px) {
+      .case-hero-cover { overflow: visible; }
+      .case-hero-info { padding: 2.5rem 0 2.5rem; }
+      .case-hero-summary { grid-template-columns: 1fr; }
+      .case-hero-meta { grid-template-columns: 1fr; }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition:
+        opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .delay-1 { transition-delay: 0.08s; }
+    .delay-2 { transition-delay: 0.16s; }
+    .delay-3 { transition-delay: 0.24s; }
+    .delay-4 { transition-delay: 0.32s; }
+
+    .hero-line {
+      opacity: 0;
+      transform: translateY(40px);
+      animation: heroSlide 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .hero-line:nth-child(1) { animation-delay: 0.08s; }
+    .hero-line:nth-child(2) { animation-delay: 0.18s; }
+    .hero-line:nth-child(3) { animation-delay: 0.28s; }
+    .hero-line:nth-child(4) { animation-delay: 0.38s; }
+    .hero-line:nth-child(5) { animation-delay: 0.48s; }
+    @keyframes heroSlide { to { opacity: 1; transform: translateY(0); } }
+
+    .nav-link { position: relative; }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: #171717;
+      transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .nav-link:hover::after { width: 100%; }
+
+    .case-section,
+    .module-block { scroll-margin-top: 9rem; }
+    @media (min-width: 1024px) {
+      .case-section,
+      .module-block { scroll-margin-top: 7.5rem; }
+    }
+
+    .divider { height: 1px; background: #e0e0e0; }
+    .section-num { color: #FF573A; font-variant-numeric: tabular-nums; }
+    .highlight-card { border-left: 2px solid #FF573A; padding-left: 1.25rem; }
+
+    .side-nav-link {
+      position: relative;
+      display: block;
+      padding: 0.45rem 0 0.45rem 1rem;
+      color: #a3a3a3;
+      font-size: 0.75rem;
+      line-height: 1.45;
+      font-weight: 500;
+      transition: color 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .side-nav-link::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 2px;
+      height: 0;
+      background: #FF573A;
+      transform: translateY(-50%);
+      opacity: 0;
+      transition:
+        height 0.24s cubic-bezier(0.16, 1, 0.3, 1),
+        opacity 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .side-nav-link:hover { color: #171717; }
+    .side-nav-link.active { color: #FF573A; font-weight: 600; }
+    .side-nav-link.active::before { height: 18px; opacity: 1; }
+
+    .mobile-anchor {
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      border-bottom: 2px solid transparent;
+      color: #a3a3a3;
+      font-size: 0.75rem;
+      font-weight: 600;
+      transition:
+        color 0.24s cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .mobile-anchor.active { color: #FF573A; border-bottom-color: #FF573A; }
+
+    .img-placeholder,
+    .img-placeholder-warm,
+    .img-placeholder-dark {
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 2px;
+      text-align: center;
+      color: #a3a3a3;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.6;
+    }
+    .img-placeholder {
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.72), rgba(255,255,255,0) 45%),
+        #f0f0f0;
+      border: 1px solid #e5e5e5;
+    }
+    .img-placeholder-warm {
+      background: linear-gradient(135deg, #FFF8F6 0%, #FFF3EE 100%);
+      border: 1px solid rgba(255, 87, 58, 0.14);
+      color: #c88c7f;
+    }
+    .img-placeholder-dark {
+      background: linear-gradient(135deg, #1a1a1a 0%, #2a201e 100%);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.55);
+    }
+    .placeholder-label { position: relative; z-index: 1; max-width: 78%; }
+    .placeholder-grid::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(23, 23, 23, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(23, 23, 23, 0.035) 1px, transparent 1px);
+      background-size: 24px 24px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.9), rgba(0,0,0,0.2));
+    }
+    .img-placeholder-dark.placeholder-grid::before {
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.055) 1px, transparent 1px);
+    }
+    .image-scroll-frame {
+      max-height: min(760px, 72vh);
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      scrollbar-gutter: stable;
+      background: #fff;
+    }
+    .image-scroll-frame:focus-visible {
+      outline: 2px solid rgba(255, 87, 58, 0.5);
+      outline-offset: 3px;
+    }
+    .prototype-video-frame {
+      width: 100%;
+      max-width: 224px;
+      aspect-ratio: 375 / 816;
+      padding: 5px;
+      overflow: hidden;
+      border: 1px solid #d8d8d8;
+      border-radius: 28px;
+      background: #fff;
+    }
+    @media (min-width: 768px) {
+      .prototype-video-frame {
+        max-width: 224px;
+      }
+    }
+    .prototype-video-frame video {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      background: #000;
+      border-radius: 21px;
+    }
+    .prototype-plan-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: clamp(1.5rem, 4vw, 3rem);
+      align-items: start;
+    }
+    .prototype-plan-item {
+      min-width: 0;
+      text-align: left;
+    }
+    .prototype-plan-media {
+      display: flex;
+      justify-content: center;
+      padding-top: 1.25rem;
+    }
+    @media (min-width: 768px) {
+      .prototype-plan-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    .clean-figure {
+      overflow: visible;
+      background: transparent;
+    }
+    .clean-figure img,
+    .clean-figure video {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .wide-image-scroll {
+      width: 100%;
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+      -webkit-overflow-scrolling: touch;
+      background: #fff;
+      scrollbar-gutter: stable;
+    }
+    .wide-image-scroll img {
+      display: block;
+      width: clamp(900px, 118vw, 1280px);
+      min-width: 100%;
+      max-width: none;
+      height: auto;
+    }
+    .wide-image-viewer {
+      position: relative;
+    }
+    .image-scroll-button {
+      position: absolute;
+      top: 50%;
+      z-index: 2;
+      width: 36px;
+      height: 36px;
+      border: 1px solid rgba(23, 23, 23, 0.12);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.92);
+      color: #171717;
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1;
+      transform: translateY(-50%);
+      transition:
+        border-color 0.2s ease,
+        color 0.2s ease,
+        background 0.2s ease;
+    }
+    .image-scroll-button:hover {
+      border-color: rgba(255, 87, 58, 0.45);
+      color: #FF573A;
+      background: #fff;
+    }
+    .image-scroll-button:disabled {
+      cursor: default;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .image-scroll-button.is-left { left: 12px; }
+    .image-scroll-button.is-right { right: 12px; }
+    @media (max-width: 767px) {
+      .wide-image-scroll img { min-width: 900px; }
+      .image-scroll-button {
+        width: 32px;
+        height: 32px;
+      }
+    }
+
+    .problem-card,
+    .value-card,
+    .comp-card,
+    .metric-card,
+    .flow-card,
+    .matrix-card,
+    .asset-card,
+    .practice-card,
+    .overview-card,
+    .note-card {
+      border: 1px solid #e5e5e5;
+      border-radius: 2px;
+      background: #fff;
+    }
+    .comp-card,
+    .flow-card,
+    .asset-card,
+    .practice-card,
+    .overview-card {
+      transition:
+        border-color 0.24s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .comp-card:hover,
+    .flow-card:hover,
+    .asset-card:hover,
+    .practice-card:hover,
+    .overview-card:hover {
+      border-color: rgba(255, 87, 58, 0.42);
+      transform: translateY(-2px);
+    }
+
+    .status-label {
+      display: inline-flex;
+      align-items: center;
+      height: 22px;
+      padding: 0 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1;
+    }
+    .callout {
+      position: absolute;
+      right: 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.35rem 0.55rem;
+      border: 1px solid rgba(255, 87, 58, 0.18);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.9);
+      color: #171717;
+      font-size: 11px;
+      font-weight: 700;
+      backdrop-filter: blur(8px);
+    }
+    .callout::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #FF573A;
+    }
+    .callout-left { left: 1rem; right: auto; }
+
+    .flow-line { position: relative; }
+    .flow-line::after {
+      content: '';
+      position: absolute;
+      left: 1.05rem;
+      top: 2.5rem;
+      bottom: -0.6rem;
+      width: 1px;
+      background: #e0e0e0;
+    }
+    .flow-line:last-child::after { display: none; }
+    .flow-dot {
+      flex: 0 0 auto;
+      width: 2.1rem;
+      height: 2.1rem;
+      border: 1px solid rgba(255, 87, 58, 0.2);
+      border-radius: 999px;
+      background: #FFF8F6;
+      color: #FF573A;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
+      z-index: 1;
+    }
+    .flow-arrow {
+      color: #FF573A;
+      font-size: 1.4rem;
+      font-weight: 800;
+      line-height: 1;
+      align-self: center;
+      justify-self: center;
+    }
+    .step-flow-card {
+      border: 1px solid #e5e5e5;
+      border-radius: 2px;
+      background: #fff;
+      padding: 1rem;
+      min-height: 112px;
+    }
+    .mini-tag {
+      display: inline-flex;
+      align-items: center;
+      height: 24px;
+      padding: 0 9px;
+      border: 1px solid #e5e5e5;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #737373;
+      background: #fff;
+    }
+    .matrix-row {
+      display: grid;
+      grid-template-columns: 0.9fr 1.2fr 1.2fr;
+      gap: 0;
+      border-top: 1px solid #e5e5e5;
+    }
+    .matrix-row:first-child { border-top: 0; }
+    .matrix-cell {
+      padding: 1rem;
+      border-left: 1px solid #e5e5e5;
+      font-size: 12px;
+      line-height: 1.7;
+      color: #737373;
+    }
+    .matrix-cell:first-child { border-left: 0; color: #171717; font-weight: 700; }
+    @media (max-width: 640px) {
+      .matrix-row { grid-template-columns: 1fr; }
+      .matrix-cell { border-left: 0; border-top: 1px solid #f0f0f0; }
+      .matrix-cell:first-child { border-top: 0; }
+    }
+
+    .diagram-node {
+      border: 1px solid #e5e5e5;
+      border-radius: 2px;
+      background: #fff;
+      padding: 0.875rem;
+      min-height: 78px;
+    }
+    .diagram-node.is-accent {
+      border-color: rgba(255,87,58,0.28);
+      background: #FFF8F6;
+    }
+    .node-kicker {
+      display: block;
+      font-size: 10px;
+      font-weight: 800;
+      color: #FF573A;
+      margin-bottom: 0.35rem;
+      letter-spacing: 0;
+    }
+    .thin-arrow {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 32px;
+      height: auto;
+      background: transparent;
+      color: #FF573A;
+      font-size: 1.4rem;
+      font-weight: 800;
+      line-height: 1;
+      align-self: center;
+    }
+    .thin-arrow::after {
+      content: '→';
+    }
+    @media (max-width: 768px) {
+      .thin-arrow { min-width: 1px; margin-left: 1rem; }
+    }
+  </style>
+</head>
+
+<body class="font-sans text-neutral-900 bg-white antialiased">
+  <!-- 顶部导航：沿用案例页固定导航。若你的游戏中心案例页返回链接不同，只需替换 href。 -->
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-sm border-b border-neutral-200/60">
+    <div class="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 flex items-center justify-between h-14 md:h-16">
+      <a href="portfolio2.html" class="text-sm font-semibold">
+        Sheryl<span class="text-[#FF573A]">.</span>
+      </a>
+      <a href="portfolio2.html" class="nav-link text-xs font-medium text-neutral-900">
+        ← Back / 返回作品集
+      </a>
+    </div>
+  </nav>
+
+  <header class="case-detail-hero pt-14 md:pt-16">
+    <div class="case-hero-cover">
+      <img
+        src="./case-design-practices-cn-assets/design-practices-hero-selected.png"
+        alt="设计实践沉淀项目头图，深色背景上展示 Design Practices 标题与抽象界面元素"
+      >
+    </div>
+    <div class="case-hero-info">
+      <div class="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20">
+        <div class="case-hero-summary">
+          <div class="case-hero-title">
+            <h1 class="text-3xl md:text-5xl font-bold tracking-tight leading-heading">
+              <span class="hero-line block">设计实践沉淀</span>
+            </h1>
+          </div>
+          <div class="hero-line case-hero-meta">
+            <div>
+              <p class="case-hero-meta-label">年份</p>
+              <p class="case-hero-meta-value">2024-2026</p>
+            </div>
+            <div>
+              <p class="case-hero-meta-label">类型</p>
+              <p class="case-hero-meta-value">方法论 / 规范</p>
+            </div>
+            <div>
+              <p class="case-hero-meta-label">角色</p>
+              <p class="case-hero-meta-value">交互设计师</p>
+            </div>
+          </div>
+        </div>
+        <div class="hero-line case-hero-divider mt-10" aria-hidden="true"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 移动端章节导航：保持案例页的横向锚点导航。 -->
+  <nav class="lg:hidden sticky top-14 md:top-16 z-40 bg-white/95 backdrop-blur-sm border-y border-neutral-200/70" aria-label="移动端章节导航">
+    <div class="px-6 md:px-12 overflow-x-auto">
+      <div class="flex items-center gap-6 min-w-max">
+        <a class="mobile-anchor active" href="#overview" data-section-link="overview" aria-current="true">01 总览</a>
+        <a class="mobile-anchor" href="#ai-workflow" data-section-link="ai-workflow">02 AI 全链路</a>
+        <a class="mobile-anchor" href="#campaign" data-section-link="campaign">03 活动方法论</a>
+        <a class="mobile-anchor" href="#guideline" data-section-link="guideline">04 交互规范</a>
+        <a class="mobile-anchor" href="#design-ops" data-section-link="design-ops">05 B端平台</a>
+        <a class="mobile-anchor" href="#value" data-section-link="value">06 综合价值</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="pb-24 md:pb-32">
+    <div class="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 lg:grid lg:grid-cols-12 lg:gap-8">
+      <!-- 桌面左侧导航：保持游戏中心/案例页的 sticky CASE INDEX 结构。 -->
+      <aside class="hidden lg:block lg:col-span-2">
+        <nav class="sticky top-[120px] pt-2" aria-label="案例章节导航">
+          <p class="text-[11px] font-semibold text-neutral-400 mb-4">CASE INDEX</p>
+          <a class="side-nav-link active" href="#overview" data-section-link="overview" aria-current="true">01 设计实践总览</a>
+          <a class="side-nav-link" href="#ai-workflow" data-section-link="ai-workflow">02 AI 项目全链路</a>
+          <a class="side-nav-link" href="#campaign" data-section-link="campaign">03 运营活动方法论</a>
+          <a class="side-nav-link" href="#guideline" data-section-link="guideline">04 交互规范沉淀</a>
+          <a class="side-nav-link" href="#design-ops" data-section-link="design-ops">05 B端需求管理平台</a>
+          <a class="side-nav-link" href="#value" data-section-link="value">06 综合价值</a>
+        </nav>
+      </aside>
+
+      <div class="lg:col-span-10">
+        <section id="overview" class="case-section py-20 md:py-28 lg:pt-2">
+          <div class="reveal">
+            <p class="text-xs font-semibold text-neutral-400 mb-3"><span class="section-num">01</span> 设计实践总览</p>
+            <h2 class="max-w-[1040px] text-2xl md:text-3xl font-bold leading-heading tracking-tight">
+              不只是完成项目，也把经验沉淀成可复用的工作系统
+            </h2>
+          </div>
+
+          <div class="mt-8">
+            <div class="reveal delay-2">
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <article class="overview-card p-5 min-h-[148px] bg-[#FFF8F6] border-[#FF573A]/20">
+                  <p class="text-[11px] font-bold text-[#FF573A] mb-3">01 / AI Workflow</p>
+                  <h3 class="text-sm font-bold mb-2">AI 全链路</h3>
+                  <p class="text-xs leading-relaxed text-neutral-500">从概念、生成体验、代码到后端对接，验证 AI 落地。</p>
+                </article>
+                <article class="overview-card p-5 min-h-[148px]">
+                  <p class="text-[11px] font-bold text-neutral-400 mb-3">02 / Methodology</p>
+                  <h3 class="text-sm font-bold mb-2">活动方法论</h3>
+                  <p class="text-xs leading-relaxed text-neutral-500">把活动机制、任务、激励和异常处理整理成可复用框架。</p>
+                </article>
+                <article class="overview-card p-5 min-h-[148px]">
+                  <p class="text-[11px] font-bold text-neutral-400 mb-3">03 / Guideline</p>
+                  <h3 class="text-sm font-bold mb-2">交互规范</h3>
+                  <p class="text-xs leading-relaxed text-neutral-500">统一高频交互模式，减少重复决策和协作误差。</p>
+                </article>
+                <article class="overview-card p-5 min-h-[148px]">
+                  <p class="text-[11px] font-bold text-neutral-400 mb-3">04 / Design Ops</p>
+                  <h3 class="text-sm font-bold mb-2">B端流程系统</h3>
+                  <p class="text-xs leading-relaxed text-neutral-500">用产品化方式管理提需、排期、评审、交付与归档。</p>
+                </article>
+              </div>
+            </div>
+          </div>
+
+        </section>
+
+        <div class="divider"></div>
+
+        <section id="ai-workflow" class="case-section py-20 md:py-28">
+          <div class="reveal">
+            <p class="text-xs font-semibold text-neutral-400 mb-3"><span class="section-num">02</span> AI 项目全链路探索</p>
+            <h2 class="max-w-[1040px] text-2xl md:text-3xl font-bold leading-heading tracking-tight">
+              微博世界杯记忆视频生成：从产品构思到可运行原型的 AI 工作流探索
+            </h2>
+          </div>
+
+          <div class="reveal delay-1 mt-8 max-w-[1040px] space-y-5">
+            <p class="text-sm md:text-[15px] leading-body text-neutral-500">
+              AI 生成能力正在改变内容产品的体验边界。相比传统活动页，AI 生成类产品需要同时处理用户输入、生成等待、结果反馈、失败兜底、内容预览和分享传播等复杂体验节点。
+            </p>
+            <p class="text-sm md:text-[15px] leading-body text-neutral-500">
+              这个探索项目围绕“生成我的世界杯记忆视频”展开：从产品概念、页面结构、交互状态、AI Coding 到后端对接，验证如何借助 AI 工作流更快把想法推进到可体验原型阶段。
+            </p>
+          </div>
+
+          <figure class="reveal delay-2 mt-10 clean-figure">
+            <img
+              class="block w-full h-auto"
+              src="./case-design-practices-cn-assets/ai-collaboration-path.png"
+              alt="世界杯记忆 H5 AI 协作路径图，展示从需求到 Demo 原型、交互补全、PRD 输出、研发上线的完整流程"
+              loading="lazy"
+              decoding="async"
+            >
+          </figure>
+          <p class="reveal delay-2 mt-3 text-[11px] leading-relaxed text-neutral-400">
+            图片注释：世界杯记忆 H5 的 AI 协作路径图，覆盖快速 Demo、设计确认、规范与 PRD 输出、研发协同上线等完整链路。
+          </p>
+
+          <div class="mt-12 grid grid-cols-1 md:grid-cols-[1fr_auto_1fr_auto_1fr] gap-4 md:gap-3 items-stretch">
+            <article class="reveal delay-1 diagram-node is-accent">
+              <span class="node-kicker">01 / Concept</span>
+              <p class="text-sm font-bold mb-2">产品构思</p>
+              <p class="text-xs leading-relaxed text-neutral-500">定义用户要生成什么、为什么生成、生成后如何分享。</p>
+            </article>
+            <div class="hidden md:block thin-arrow"></div>
+            <article class="reveal delay-2 diagram-node">
+              <span class="node-kicker">02 / UX Flow</span>
+              <p class="text-sm font-bold mb-2">生成流程</p>
+              <p class="text-xs leading-relaxed text-neutral-500">输入、等待、成功、失败、预览、重试等状态设计。</p>
+            </article>
+            <div class="hidden md:block thin-arrow"></div>
+            <article class="reveal delay-3 diagram-node">
+              <span class="node-kicker">03 / Prototype</span>
+              <p class="text-sm font-bold mb-2">可运行原型</p>
+              <p class="text-xs leading-relaxed text-neutral-500">用 AI Coding 辅助前端实现，并完成后端对接验证。</p>
+            </article>
+          </div>
+
+          <div class="reveal delay-4 mt-12">
+            <h3 class="text-xl md:text-2xl font-bold leading-heading tracking-tight mb-6">
+              AI 项目全链路探索过程产物
+            </h3>
+            <figure class="clean-figure">
+              <img
+                class="block w-full h-auto"
+                src="./case-design-practices-cn-assets/ai-workflow-process-output.png"
+                alt="AI 项目全链路探索过程产物，包含初步沟通 PPT、初版 DEMO、需求校准后 DEMO 和 PRD"
+                loading="lazy"
+                decoding="async"
+              >
+            </figure>
+          </div>
+
+          <div class="reveal delay-4 mt-12">
+            <p class="text-xs font-semibold text-neutral-400 mb-4">Prototype Plans</p>
+            <h3 class="text-xl md:text-2xl font-bold leading-heading tracking-tight mb-8">
+              两版可运行原型方案
+            </h3>
+            <div class="prototype-plan-grid">
+              <article class="prototype-plan-item">
+                <p class="text-xs font-semibold text-[#FF573A] mb-2">Prototype Plan 01</p>
+                <h4 class="text-base font-bold mb-3">可运行原型方案一</h4>
+                <p class="text-sm md:text-[15px] leading-body text-neutral-500">
+                  以强视觉冲击的风格方向切入，重点验证用户通过手势滑动选择视频风格卡片的互动体验，让团队先判断主题选择是否足够直观、有记忆点。
+                </p>
+                <div class="prototype-plan-media">
+                  <figure class="prototype-video-frame">
+                    <video
+                      src="./case-design-practices-cn-assets/ai-prototype-plan-01-mockup.mp4"
+                      poster="./case-design-practices-cn-assets/ai-prototype-plan-01-mockup-poster.png"
+                      controls
+                      muted
+                      loop
+                      playsinline
+                      preload="metadata"
+                      aria-label="世界杯记忆 H5 可运行原型方案一录屏"
+                    ></video>
+                  </figure>
+                </div>
+              </article>
+
+              <article class="prototype-plan-item">
+                <div class="mb-2 flex flex-wrap items-center gap-3">
+                  <p class="text-xs font-semibold text-neutral-400">Prototype Plan 02</p>
+                  <span class="inline-flex items-center rounded-full bg-[#FF573A] px-2.5 py-1 text-[11px] font-bold leading-none text-white">
+                    最终选择该方案
+                  </span>
+                </div>
+                <h4 class="text-base font-bold mb-3">可运行原型方案二</h4>
+                <p class="text-sm md:text-[15px] leading-body text-neutral-500">
+                  最终选择方案二，是因为它更完整地验证了“输入记忆 - 选择主题 - AI 生成 - 视频预览 - 保存分享”的最小闭环核心体验，能支撑后续设计确认与研发协同。
+                </p>
+                <div class="prototype-plan-media">
+                  <figure class="prototype-video-frame">
+                    <video
+                      src="./case-design-practices-cn-assets/ai-prototype-plan-02-selected-h264.m4v"
+                      poster="./case-design-practices-cn-assets/ai-prototype-plan-02-selected-poster.png"
+                      controls
+                      muted
+                      loop
+                      playsinline
+                      preload="metadata"
+                      aria-label="世界杯记忆 H5 可运行原型方案二录屏，最终选择方案"
+                    ></video>
+                  </figure>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <div class="divider"></div>
+
+        <section id="campaign" class="case-section py-20 md:py-28">
+          <div class="reveal">
+            <p class="text-xs font-semibold text-neutral-400 mb-3"><span class="section-num">03</span> 运营活动方法论</p>
+            <h2 class="max-w-[1040px] text-2xl md:text-3xl font-bold leading-heading tracking-tight">
+              微博运营活动方法论：把活动从一次性定制变成可复用框架
+            </h2>
+          </div>
+
+          <p class="reveal delay-1 mt-8 max-w-[1040px] text-sm md:text-[15px] leading-body text-neutral-500">
+            微博大型运营活动通常涉及复杂任务机制、奖励发放、用户分享、跨端适配、运营配置和高峰期流量承载。每个活动主题不同，但在用户路径、激励反馈和异常状态上存在大量可复用模式。
+          </p>
+
+          <figure class="reveal delay-2 mt-10 clean-figure">
+            <img
+              class="block w-full h-auto"
+              src="./case-design-practices-cn-assets/campaign-methodology.png"
+              alt="微博运营活动方法论沉淀图，展示不同活动类型、核心机制链路、共性模块和数据复盘"
+              loading="lazy"
+              decoding="async"
+            >
+          </figure>
+          <p class="reveal delay-2 mt-3 text-[11px] leading-relaxed text-neutral-400">
+            图片注释：运营活动方法论沉淀，按活动类型、机制链路、共性模块和数据复盘梳理可复用设计框架。
+          </p>
+
+          <div class="mt-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+            <article class="reveal delay-1 practice-card p-6">
+              <p class="text-xs font-semibold text-[#FF573A] mb-3">Context</p>
+              <h3 class="text-base font-bold mb-3">高节奏、多机制、强运营</h3>
+              <p class="text-sm leading-body text-neutral-500">活动项目需要在短周期内承接任务、奖励、分享、规则、异常和跨端适配，重复决策成本高。</p>
+            </article>
+            <article class="reveal delay-2 practice-card p-6">
+              <p class="text-xs font-semibold text-[#FF573A] mb-3">What I did</p>
+              <h3 class="text-base font-bold mb-3">复盘多个活动链路</h3>
+              <p class="text-sm leading-body text-neutral-500">整理活动首页、任务系统、奖励反馈、进度提示、分享召回、规则说明和异常状态等关键模块。</p>
+            </article>
+            <article class="reveal delay-3 practice-card p-6">
+              <p class="text-xs font-semibold text-[#FF573A] mb-3">Output</p>
+              <h3 class="text-base font-bold mb-3">形成活动检查表</h3>
+              <p class="text-sm leading-body text-neutral-500">沉淀活动体验链路框架、任务与激励反馈原则、跨端适配注意事项和异常场景清单。</p>
+            </article>
+            <article class="reveal delay-4 practice-card p-6">
+              <p class="text-xs font-semibold text-[#FF573A] mb-3">Value</p>
+              <h3 class="text-base font-bold mb-3">减少重复决策</h3>
+              <p class="text-sm leading-body text-neutral-500">帮助后续活动更快识别关键路径，在强运营节奏下保持体验稳定和交互一致。</p>
+            </article>
+          </div>
+
+        </section>
+
+        <div class="divider"></div>
+
+        <section id="guideline" class="case-section py-20 md:py-28">
+          <div class="reveal">
+            <p class="text-xs font-semibold text-neutral-400 mb-3"><span class="section-num">04</span> 交互规范沉淀</p>
+            <h2 class="max-w-[1040px] text-2xl md:text-3xl font-bold leading-heading tracking-tight">
+              让多业务线在同一套交互语言下协作
+            </h2>
+          </div>
+
+          <div class="reveal delay-1 mt-8 max-w-[1040px] space-y-5">
+            <p class="text-sm md:text-[15px] leading-body text-neutral-500">
+              长期迭代中，不同项目容易出现相似场景重复设计、状态定义不一致、反馈节奏不统一等问题。交互规范的价值不是限制创造，而是把高频场景中的重复决策前置，让团队在同一套逻辑下更快协作。
+            </p>
+            <div class="highlight-card">
+              <p class="text-xs font-semibold text-neutral-900 mb-1">设计判断</p>
+              <p class="text-sm md:text-[15px] leading-body text-neutral-500">
+                规范沉淀的核心，不是把所有场景做成统一模板，而是明确哪些部分应该保持一致，哪些部分可以为业务目标保留变化空间。
+              </p>
+            </div>
+          </div>
+
+          <div class="reveal delay-3 mt-10">
+            <figure class="clean-figure">
+              <img
+                class="block w-full h-auto"
+                src="./case-design-practices-cn-assets/interaction-component-guidelines.png"
+                alt="运营活动通用交互组件规范，展示分享、搜索、任务体系等高频运营活动组件规则"
+                loading="lazy"
+                decoding="async"
+              >
+            </figure>
+            <p class="mt-3 text-[11px] leading-relaxed text-neutral-400">
+              图片注释：运营活动通用交互组件规范，覆盖分享、搜索、任务体系等高频活动组件的结构、状态和使用边界。
+            </p>
+          </div>
+
+          <div class="reveal delay-4 mt-10 matrix-card overflow-hidden">
+            <div class="matrix-row bg-neutral-50">
+              <div class="matrix-cell">规范维度</div>
+              <div class="matrix-cell font-semibold text-neutral-900">定义内容</div>
+              <div class="matrix-cell font-semibold text-neutral-900">协作收益</div>
+            </div>
+            <div class="matrix-row">
+              <div class="matrix-cell">状态定义</div>
+              <div class="matrix-cell">加载中、已完成、失败、异常、空数据、不可操作等状态口径。</div>
+              <div class="matrix-cell">减少状态遗漏，帮助研发在边界场景中明确处理方式。</div>
+            </div>
+            <div class="matrix-row">
+              <div class="matrix-cell">反馈节奏</div>
+              <div class="matrix-cell">任务完成、奖励领取、升级庆祝、错误提示等反馈强弱层级。</div>
+              <div class="matrix-cell">避免所有反馈都同等强烈，让关键节点更有存在感。</div>
+            </div>
+            <div class="matrix-row">
+              <div class="matrix-cell">组件边界</div>
+              <div class="matrix-cell">按钮、弹层、浮层、Toast、底部操作区等组件使用场景。</div>
+              <div class="matrix-cell">让设计方案在不同业务线中保持一致，同时保留业务表达空间。</div>
+            </div>
+          </div>
+        </section>
+
+        <div class="divider"></div>
+
+        <section id="design-ops" class="case-section py-20 md:py-28">
+          <div class="reveal">
+            <p class="text-xs font-semibold text-neutral-400 mb-3"><span class="section-num">05</span> B端需求管理平台</p>
+            <h2 class="max-w-[1040px] text-2xl md:text-3xl font-bold leading-heading tracking-tight">
+              B端设计需求管理平台：让设计协作从人肉同步变成流程系统
+            </h2>
+          </div>
+
+          <p class="reveal delay-1 mt-8 max-w-[1040px] text-sm md:text-[15px] leading-body text-neutral-500">
+            设计团队在服务多个业务方时，常会面临需求入口分散、优先级不清、排期不可见、状态同步成本高和交付记录难追踪等问题。这个项目目前不展开完整案例，而作为 B 端流程系统和 Design Ops 思考的补充呈现。
+          </p>
+
+          <div class="reveal delay-2 mt-8 grid grid-cols-1 md:grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr] gap-4 md:gap-3 items-stretch">
+            <article class="step-flow-card">
+              <p class="text-xs font-bold text-[#FF573A] mb-2">01</p>
+              <h3 class="text-sm font-bold mb-2">业务方提需</h3>
+              <p class="text-xs leading-relaxed text-neutral-500">统一需求入口，收集背景、目标、优先级、时间节点和附件。</p>
+            </article>
+            <span class="hidden md:flex flow-arrow" aria-hidden="true">→</span>
+            <article class="step-flow-card">
+              <p class="text-xs font-bold text-[#FF573A] mb-2">02</p>
+              <h3 class="text-sm font-bold mb-2">负责人评估</h3>
+              <p class="text-xs leading-relaxed text-neutral-500">判断需求类型、设计投入、排期风险和资源分配。</p>
+            </article>
+            <span class="hidden md:flex flow-arrow" aria-hidden="true">→</span>
+            <article class="step-flow-card">
+              <p class="text-xs font-bold text-[#FF573A] mb-2">03</p>
+              <h3 class="text-sm font-bold mb-2">设计师推进</h3>
+              <p class="text-xs leading-relaxed text-neutral-500">进入设计中、评审中、修改中、已交付等状态。</p>
+            </article>
+            <span class="hidden md:flex flow-arrow" aria-hidden="true">→</span>
+            <article class="step-flow-card">
+              <p class="text-xs font-bold text-[#FF573A] mb-2">04</p>
+              <h3 class="text-sm font-bold mb-2">归档与复盘</h3>
+              <p class="text-xs leading-relaxed text-neutral-500">沉淀交付记录、延期原因、返工次数和周期数据。</p>
+            </article>
+          </div>
+
+          <div class="reveal delay-3 mt-10">
+            <h3 class="text-base font-bold mb-4">需求调研</h3>
+            <div class="wide-image-viewer">
+              <button class="image-scroll-button is-left" type="button" data-scroll-target="design-ops-research-scroll" data-scroll-dir="-1" aria-label="向左查看需求调研图">‹</button>
+              <div id="design-ops-research-scroll" class="wide-image-scroll" tabindex="0" aria-label="运营业务需求对接工作流横向预览">
+                <img
+                  src="./case-design-practices-cn-assets/design-ops-research-workflow.png"
+                  alt="运营业务需求对接工作流，展示中小型运营设计需求和大型运营设计需求的流转路径"
+                  loading="lazy"
+                  decoding="async"
+                >
+              </div>
+              <button class="image-scroll-button is-right" type="button" data-scroll-target="design-ops-research-scroll" data-scroll-dir="1" aria-label="向右查看需求调研图">›</button>
+            </div>
+            <p class="mt-3 text-[11px] leading-relaxed text-neutral-400">
+              图片注释：需求调研阶段梳理运营业务从创建、分配、排期到导入后台的需求对接工作流和状态口径。
+            </p>
+          </div>
+
+          <div class="reveal delay-4 mt-10 matrix-card overflow-hidden">
+            <div class="matrix-row bg-neutral-50">
+              <div class="matrix-cell">角色</div>
+              <div class="matrix-cell font-semibold text-neutral-900">核心诉求</div>
+              <div class="matrix-cell font-semibold text-neutral-900">对应功能</div>
+            </div>
+            <div class="matrix-row">
+              <div class="matrix-cell">业务方</div>
+              <div class="matrix-cell">知道如何提需、需求是否被接收、什么时候能交付。</div>
+              <div class="matrix-cell">提需表单、状态通知、需求详情、交付物入口。</div>
+            </div>
+            <div class="matrix-row">
+              <div class="matrix-cell">设计负责人</div>
+              <div class="matrix-cell">评估优先级、分配资源、掌握团队负载和交付风险。</div>
+              <div class="matrix-cell">需求池、优先级、排期视图、数据看板。</div>
+            </div>
+            <div class="matrix-row">
+              <div class="matrix-cell">设计师</div>
+              <div class="matrix-cell">清楚任务背景、节点、反馈记录和当前处理状态。</div>
+              <div class="matrix-cell">个人任务列表、需求详情、评审记录、交付归档。</div>
+            </div>
+          </div>
+
+          <div class="reveal delay-4 mt-10">
+            <h3 class="text-base font-bold mb-4">高保真交互设计稿</h3>
+            <figure
+              class="image-scroll-frame"
+              tabindex="0"
+              aria-label="高保真交互设计稿滚动预览"
+            >
+              <img
+                class="block w-full h-auto"
+                src="./case-design-practices-cn-assets/design-ops-hifi-01.png"
+                alt="B端需求管理平台高保真交互设计稿，展示需求流转流程"
+                loading="lazy"
+                decoding="async"
+              >
+              <img
+                class="block w-full h-auto"
+                src="./case-design-practices-cn-assets/design-ops-hifi-02.png"
+                alt="B端需求管理平台高保真交互设计稿，展示角色管理、用户组管理、业务线管理和提需流程"
+                loading="lazy"
+                decoding="async"
+              >
+              <img
+                class="block w-full h-auto"
+                src="./case-design-practices-cn-assets/design-ops-hifi-03.png"
+                alt="B端需求管理平台高保真交互设计稿，展示管理后台关键页面与流程补充"
+                loading="lazy"
+                decoding="async"
+              >
+            </figure>
+            <p class="mt-3 text-[11px] leading-relaxed text-neutral-400">
+              图片注释：高保真交互设计稿拼接展示，覆盖需求创建、分配、排期、导入、角色权限和后台管理等关键流程。
+            </p>
+          </div>
+
+          <div class="mt-10 grid grid-cols-1 md:grid-cols-3 gap-4">
+            <article class="reveal delay-1 metric-card p-6">
+              <p class="text-sm font-bold text-[#FF573A] mb-3">流程透明</p>
+              <p class="text-sm leading-body text-neutral-500">把分散沟通转化为可见状态，减少反复确认和遗漏。</p>
+            </article>
+            <article class="reveal delay-2 metric-card p-6">
+              <p class="text-sm font-bold text-neutral-900 mb-3">管理效率</p>
+              <p class="text-sm leading-body text-neutral-500">用数据看板观察需求量、延期率、返工率和交付周期。</p>
+            </article>
+            <article class="reveal delay-3 metric-card p-6">
+              <p class="text-sm font-bold text-neutral-900 mb-3">能力补位</p>
+              <p class="text-sm leading-body text-neutral-500">补充我在 B 端流程系统、权限角色和 Design Ops 方向的思考。</p>
+            </article>
+          </div>
+
+          <div class="reveal delay-4 mt-10">
+            <p class="text-xs font-semibold text-neutral-400 mb-4">线上效果</p>
+            <figure class="clean-figure">
+              <video
+                class="block w-full h-auto"
+                src="./case-design-practices-cn-assets/design-ops-site-mockup.mp4"
+                poster="./case-design-practices-cn-assets/design-ops-site-mockup-poster.png"
+                controls
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                aria-label="B端需求管理平台上线网站样式录屏"
+              ></video>
+            </figure>
+            <p class="mt-3 text-[11px] leading-relaxed text-neutral-400">
+              视频注释：通过 mockup 录屏呈现上线网站的页面样式、状态切换和后台操作体验。
+            </p>
+          </div>
+        </section>
+
+        <div class="divider"></div>
+
+        <section id="value" class="case-section py-20 md:py-28">
+          <div class="reveal">
+            <p class="text-xs font-semibold text-neutral-400 mb-3"><span class="section-num">06</span> 综合价值</p>
+            <h2 class="max-w-[1040px] text-2xl md:text-3xl font-bold leading-heading tracking-tight">
+              这些实践共同说明了什么
+            </h2>
+          </div>
+
+          <p class="reveal delay-1 mt-8 max-w-[1040px] text-sm md:text-[15px] leading-body text-neutral-500">
+            这些实践虽然不是完整展开的项目案例，但它们共同构成了我在长期设计工作中的另一部分能力：我不仅关注单个项目能否顺利上线，也关注经验是否能被复用、规则是否能被沉淀、流程是否能被优化，以及新的技术趋势是否能进入真实业务场景。
+          </p>
+
+          <div class="mt-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+            <article class="reveal delay-1 metric-card p-6">
+              <p class="text-sm font-bold text-[#FF573A] mb-3">复用能力</p>
+              <p class="text-sm leading-body text-neutral-500">能从多个活动和业务中抽象共性，形成方法论、检查表和流程框架。</p>
+            </article>
+            <article class="reveal delay-2 metric-card p-6">
+              <p class="text-sm font-bold text-neutral-900 mb-3">规范能力</p>
+              <p class="text-sm leading-body text-neutral-500">能沉淀高频交互模式，提升多项目、多角色协作中的一致性。</p>
+            </article>
+            <article class="reveal delay-3 metric-card p-6">
+              <p class="text-sm font-bold text-neutral-900 mb-3">前沿探索</p>
+              <p class="text-sm leading-body text-neutral-500">能将 AI 设计工具、AI Coding 和生成体验纳入真实工作流。</p>
+            </article>
+            <article class="reveal delay-4 metric-card p-6">
+              <p class="text-sm font-bold text-neutral-900 mb-3">流程意识</p>
+              <p class="text-sm leading-body text-neutral-500">能用产品化方式思考团队协作、需求管理和设计交付效率。</p>
+            </article>
+          </div>
+
+          <div class="reveal delay-4 mt-10 border-l-2 border-[#FF573A] pl-6 max-w-[1040px]">
+            <p class="text-base md:text-lg font-medium leading-relaxed text-neutral-700">
+              对我来说，设计不只是完成界面和交互方案，也包括建立方法、推动协作、验证新工具，并让复杂系统在长期运营中保持清晰、稳定和有温度。
+            </p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <section class="py-20 md:py-28 bg-neutral-50">
+    <div class="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 text-center">
+      <p class="reveal text-xs font-semibold text-neutral-400 mb-4">相关项目</p>
+      <h2 class="reveal delay-1 text-2xl md:text-4xl font-bold tracking-tight">精选作品</h2>
+      <div class="reveal delay-2 mt-8 flex flex-wrap justify-center gap-4">
+        <a href="case-chaohua-starbaby-cn.html" class="nav-link text-xs font-semibold text-[#FF573A]">微博超话星宝 →</a>
+        <a href="case-drama-2026.html" class="nav-link text-xs font-semibold text-[#FF573A]">2026 微博新春集卡「抓马赢红包」 →</a>
+        <a href="case-game-center-cn.html" class="nav-link text-xs font-semibold text-[#FF573A]">微博游戏中心体验升级 →</a>
+        <a href="case-weibo-acg-derivatives-cn.html" class="nav-link text-xs font-semibold text-[#FF573A]">微博ACG 衍生品 →</a>
+        <a href="portfolio2.html" class="nav-link text-xs font-semibold text-[#FF573A]">返回全部作品 →</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="py-14 md:py-16">
+    <div class="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <a href="portfolio2.html" class="nav-link text-xs font-semibold">返回全部作品</a>
+        <p class="text-xs text-neutral-400">© 2026 Sheryl Gao</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const revealTargets = document.querySelectorAll('.reveal');
+
+      if ('IntersectionObserver' in window) {
+        const revealObserver = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+        revealTargets.forEach((target) => revealObserver.observe(target));
+      } else {
+        revealTargets.forEach((target) => target.classList.add('visible'));
+      }
+
+      const scrollButtons = Array.from(document.querySelectorAll('[data-scroll-target]'));
+      const updateScrollControls = (targetId) => {
+        const scroller = document.getElementById(targetId);
+        if (!scroller) return;
+
+        const maxScrollLeft = scroller.scrollWidth - scroller.clientWidth;
+        scrollButtons
+          .filter((button) => button.dataset.scrollTarget === targetId)
+          .forEach((button) => {
+            const direction = Number(button.dataset.scrollDir || 1);
+            const disabled = maxScrollLeft <= 1
+              || (direction < 0 && scroller.scrollLeft <= 1)
+              || (direction > 0 && scroller.scrollLeft >= maxScrollLeft - 1);
+            button.disabled = disabled;
+          });
+      };
+      const scheduleScrollControlUpdate = (targetId) => {
+        window.requestAnimationFrame(() => updateScrollControls(targetId));
+        window.setTimeout(() => updateScrollControls(targetId), 300);
+        window.setTimeout(() => updateScrollControls(targetId), 1000);
+      };
+
+      scrollButtons.forEach((button) => {
+        const targetId = button.dataset.scrollTarget;
+        const scroller = targetId ? document.getElementById(targetId) : null;
+        if (!targetId || !scroller) return;
+
+        button.addEventListener('click', () => {
+          const direction = Number(button.dataset.scrollDir || 1);
+          scroller.scrollBy({
+            left: direction * scroller.clientWidth * 0.72,
+            behavior: 'smooth',
+          });
+        });
+        scroller.addEventListener('scroll', () => updateScrollControls(targetId), { passive: true });
+        scroller.querySelectorAll('img').forEach((image) => {
+          image.addEventListener('load', () => scheduleScrollControlUpdate(targetId), { once: true });
+        });
+        scheduleScrollControlUpdate(targetId);
+      });
+      window.addEventListener('load', () => {
+        scrollButtons.forEach((button) => {
+          if (button.dataset.scrollTarget) scheduleScrollControlUpdate(button.dataset.scrollTarget);
+        });
+      });
+
+      const sectionLinks = Array.from(document.querySelectorAll('[data-section-link]'));
+      const sections = Array.from(document.querySelectorAll('.case-section'));
+      let activeSectionId = null;
+
+      const setActiveSection = (sectionId) => {
+        if (activeSectionId === sectionId) return;
+        activeSectionId = sectionId;
+
+        sectionLinks.forEach((link) => {
+          const isActive = link.dataset.sectionLink === sectionId;
+          link.classList.toggle('active', isActive);
+
+          if (isActive) {
+            link.setAttribute('aria-current', 'true');
+          } else {
+            link.removeAttribute('aria-current');
+          }
+        });
+
+        const activeMobileLink = document.querySelector(`.mobile-anchor[data-section-link="${sectionId}"]`);
+        const mobileScroller = activeMobileLink ? activeMobileLink.closest('.overflow-x-auto') : null;
+
+        if (activeMobileLink && mobileScroller && window.innerWidth < 1024) {
+          const targetLeft = activeMobileLink.offsetLeft - (mobileScroller.clientWidth / 2) + (activeMobileLink.clientWidth / 2);
+          mobileScroller.scrollTo({ left: Math.max(targetLeft, 0), behavior: 'smooth' });
+        }
+      };
+
+      const scrollToSection = (sectionId, behavior = 'smooth') => {
+        const targetSection = document.getElementById(sectionId);
+        if (!targetSection) return;
+
+        const scrollMarginTop = parseFloat(window.getComputedStyle(targetSection).scrollMarginTop) || 0;
+        const targetTop = targetSection.getBoundingClientRect().top + window.scrollY - scrollMarginTop;
+        window.scrollTo({ top: Math.max(targetTop, 0), behavior });
+      };
+
+      const scheduleSectionAlignment = (sectionId, initialBehavior = 'smooth') => {
+        const alignSection = (behavior = 'auto') => {
+          if (window.location.hash.slice(1) === sectionId) {
+            scrollToSection(sectionId, behavior);
+          }
+        };
+
+        alignSection(initialBehavior);
+        [120, 400, 900, 1600, 2600].forEach((delay) => {
+          window.setTimeout(() => alignSection('auto'), delay);
+        });
+      };
+
+      sectionLinks.forEach((link) => {
+        link.addEventListener('click', (event) => {
+          const sectionId = link.dataset.sectionLink;
+          if (!sectionId || !document.getElementById(sectionId)) return;
+
+          event.preventDefault();
+          window.history.pushState(null, '', `#${sectionId}`);
+          setActiveSection(sectionId);
+          scheduleSectionAlignment(sectionId, 'smooth');
+        });
+      });
+
+      const initialId = window.location.hash ? window.location.hash.slice(1) : 'overview';
+      if (sections.some((section) => section.id === initialId)) {
+        setActiveSection(initialId);
+      } else {
+        setActiveSection('overview');
+      }
+
+      if (document.getElementById(initialId) && initialId !== 'overview') {
+        const scheduleInitialAlignment = () => {
+          scheduleSectionAlignment(initialId, 'auto');
+        };
+
+        window.requestAnimationFrame(scheduleInitialAlignment);
+        scheduleInitialAlignment();
+        window.addEventListener('load', () => {
+          scheduleInitialAlignment();
+        }, { once: true });
+      }
+
+      const updateActiveByPosition = () => {
+        const probeLine = window.innerHeight * 0.38;
+        const currentSection = sections.find((section) => {
+          const rect = section.getBoundingClientRect();
+          return rect.top <= probeLine && rect.bottom > probeLine;
+        });
+
+        if (currentSection) {
+          setActiveSection(currentSection.id);
+        }
+      };
+
+      let scrollTicking = false;
+      const requestActiveUpdate = () => {
+        if (scrollTicking) return;
+        scrollTicking = true;
+        window.requestAnimationFrame(() => {
+          updateActiveByPosition();
+          scrollTicking = false;
+        });
+      };
+
+      if ('IntersectionObserver' in window) {
+        const spyObserver = new IntersectionObserver(() => {
+          requestActiveUpdate();
+        }, {
+          threshold: 0.01,
+          rootMargin: '-20% 0px -55% 0px',
+        });
+
+        sections.forEach((section) => spyObserver.observe(section));
+      }
+
+      window.addEventListener('scroll', requestActiveUpdate, { passive: true });
+      window.addEventListener('resize', () => {
+        requestActiveUpdate();
+        scrollButtons.forEach((button) => {
+          if (button.dataset.scrollTarget) updateScrollControls(button.dataset.scrollTarget);
+        });
+      });
+      updateActiveByPosition();
+    });
+  </script>
+</body>
+</html>

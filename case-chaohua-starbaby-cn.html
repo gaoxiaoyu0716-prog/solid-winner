@@ -1,0 +1,2036 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>微博超话星宝 — Sheryl Gao</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', '"PingFang SC"', '"Noto Sans SC"', '"Microsoft YaHei"', 'system-ui', 'sans-serif'],
+          },
+          letterSpacing: {
+            tight: '0em',
+            tighter: '0em',
+          },
+          lineHeight: {
+            body: '1.8',
+            heading: '1.15',
+          },
+        },
+      },
+    };
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: #fff;
+      color: #171717;
+      letter-spacing: 0;
+      text-rendering: geometricPrecision;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    ::selection { background: #FF573A; color: #fff; }
+
+    .case-detail-hero {
+      background: #fff;
+    }
+    .case-hero-cover {
+      position: relative;
+      width: 100%;
+      height: clamp(360px, 52vw, 680px);
+      overflow: hidden;
+      background: #f5f5f5;
+    }
+    .case-hero-cover img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+    }
+    .case-hero-info {
+      padding: 3.75rem 0 4.5rem;
+    }
+    .case-hero-summary {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 0.4fr);
+      gap: clamp(2rem, 5vw, 5.5rem);
+      align-items: start;
+    }
+    .case-hero-title {
+      max-width: 760px;
+    }
+    .case-hero-meta {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(1.25rem, 3vw, 2.5rem);
+      padding-top: 0.35rem;
+    }
+    .case-hero-meta-label {
+      margin-bottom: 0.75rem;
+      color: #171717;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: 0;
+    }
+    .case-hero-meta-value {
+      color: #8a8a8a;
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 1.35;
+    }
+    .case-hero-divider {
+      width: 100%;
+      height: 1px;
+      background: #e5e5e5;
+    }
+    .case-hero-overview {
+      padding-top: 0;
+      border-top: 0;
+    }
+    @media (max-width: 767px) {
+      .case-hero-cover {
+        height: clamp(280px, 78vw, 420px);
+      }
+      .case-hero-info {
+        padding: 2.5rem 0 3.25rem;
+      }
+      .case-hero-summary {
+        grid-template-columns: 1fr;
+      }
+      .case-hero-meta {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition:
+        opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .delay-1 { transition-delay: 0.08s; }
+    .delay-2 { transition-delay: 0.16s; }
+    .delay-3 { transition-delay: 0.24s; }
+    .delay-4 { transition-delay: 0.32s; }
+
+    .hero-line {
+      opacity: 0;
+      transform: translateY(40px);
+      animation: heroSlide 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .hero-line:nth-child(1) { animation-delay: 0.08s; }
+    .hero-line:nth-child(2) { animation-delay: 0.18s; }
+    .hero-line:nth-child(3) { animation-delay: 0.28s; }
+    .hero-line:nth-child(4) { animation-delay: 0.38s; }
+    .hero-line:nth-child(5) { animation-delay: 0.48s; }
+    @keyframes heroSlide {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .nav-link { position: relative; }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: #171717;
+      transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .nav-link:hover::after { width: 100%; }
+
+    .case-section,
+    .module-block {
+      scroll-margin-top: 9rem;
+    }
+    @media (min-width: 1024px) {
+      .case-section,
+      .module-block {
+        scroll-margin-top: 7.5rem;
+      }
+    }
+
+    .divider { height: 1px; background: #e0e0e0; }
+    .section-num {
+      color: #FF573A;
+      font-variant-numeric: tabular-nums;
+    }
+    .highlight-card {
+      border-left: 2px solid #FF573A;
+      padding-left: 1.25rem;
+    }
+
+    .side-nav-link {
+      position: relative;
+      display: block;
+      padding: 0.45rem 0 0.45rem 1rem;
+      color: #a3a3a3;
+      font-size: 0.75rem;
+      line-height: 1.45;
+      font-weight: 500;
+      transition: color 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .side-nav-link::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 2px;
+      height: 0;
+      background: #FF573A;
+      transform: translateY(-50%);
+      opacity: 0;
+      transition:
+        height 0.24s cubic-bezier(0.16, 1, 0.3, 1),
+        opacity 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .side-nav-link:hover { color: #171717; }
+    .side-nav-link.active {
+      color: #FF573A;
+      font-weight: 600;
+    }
+    .side-nav-link.active::before {
+      height: 18px;
+      opacity: 1;
+    }
+
+    .mobile-anchor {
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      border-bottom: 2px solid transparent;
+      color: #a3a3a3;
+      font-size: 0.75rem;
+      font-weight: 600;
+      transition:
+        color 0.24s cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .mobile-anchor.active {
+      color: #FF573A;
+      border-bottom-color: #FF573A;
+    }
+
+    .img-frame,
+    .img-frame-warm {
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 2px;
+      text-align: center;
+      color: #a3a3a3;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.6;
+    }
+    img,
+    a:has(img) {
+      border: 0;
+      outline: 0;
+      box-shadow: none;
+    }
+    img:focus,
+    a:has(img):focus,
+    a:has(img):focus-visible {
+      outline: 0;
+      box-shadow: none;
+    }
+    .wide-visual-scroll {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .wide-visual-scroll > a {
+      display: block;
+      width: 100%;
+      border: 0 !important;
+      box-shadow: none !important;
+    }
+    @media (max-width: 767px) {
+      .wide-visual-scroll > a {
+        min-width: 920px;
+      }
+    }
+    .motion-table-scroll {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 8px;
+    }
+    .motion-table-board {
+      display: grid;
+      grid-template-columns: 920px 760px 900px;
+      gap: 36px;
+      align-items: stretch;
+      width: 2652px;
+      max-width: none;
+      padding: 0;
+      background: transparent;
+    }
+    .motion-table-group {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      min-width: 0;
+      padding: 20px;
+      border: 1px solid #e5e5e5;
+      border-radius: 2px;
+      background: #fff;
+    }
+    .motion-table-kicker {
+      margin-bottom: 16px;
+      color: #737373;
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1.5;
+    }
+    .motion-table-label {
+      margin-bottom: 8px;
+      color: #171717;
+      font-size: 20px;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+    .motion-table-card {
+      overflow: hidden;
+      height: 364px;
+      border: 1px solid #e5e5e5;
+      border-radius: 2px;
+      background: #fff;
+    }
+    .motion-table {
+      width: 100%;
+      height: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+      color: #333;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+    .motion-table th {
+      padding: 14px 18px;
+      background: #ff5b16;
+      color: #fff;
+      text-align: left;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+    .motion-table td {
+      padding: 14px 18px;
+      border-top: 1px solid #e6e6e6;
+      border-left: 1px solid #ededed;
+      vertical-align: top;
+    }
+    .motion-table td:first-child,
+    .motion-table th:first-child {
+      border-left: 0;
+      font-weight: 700;
+    }
+    .motion-tag {
+      display: inline-flex;
+      align-items: center;
+      height: 22px;
+      padding: 0 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1;
+      white-space: nowrap;
+    }
+    .motion-tag.high {
+      border: 1px solid rgba(255, 154, 40, 0.45);
+      color: #ff8a00;
+      background: #fff8ec;
+    }
+    .motion-tag.normal {
+      border: 1px solid rgba(28, 153, 255, 0.35);
+      color: #1785e8;
+      background: #f0f8ff;
+    }
+    .motion-tag.break {
+      border: 1px solid rgba(255, 87, 58, 0.35);
+      color: #ff573a;
+      background: #fff2ef;
+    }
+    .motion-tag.keep {
+      border: 1px solid rgba(105, 198, 61, 0.38);
+      color: #3da822;
+      background: #f3ffef;
+    }
+    .motion-tag.auto {
+      border: 1px solid rgba(28, 153, 255, 0.3);
+      color: #1785e8;
+      background: #f0f8ff;
+    }
+    .motion-tag.random {
+      border: 1px solid rgba(148, 104, 255, 0.32);
+      color: #7a4cff;
+      background: #f6f1ff;
+    }
+    .motion-tag.none {
+      border: 1px solid #e0e0e0;
+      color: #999;
+      background: #f7f7f7;
+    }
+    .motion-table-notes {
+      margin-top: 16px;
+      padding-left: 14px;
+      border-left: 2px solid #FF573A;
+      color: #737373;
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 1.75;
+    }
+    @media (max-width: 767px) {
+      .motion-table-board {
+        width: 2188px;
+        grid-template-columns: 760px 620px 752px;
+        gap: 28px;
+        padding: 0;
+      }
+      .motion-table-label {
+        font-size: 18px;
+      }
+      .motion-table {
+        font-size: 12px;
+      }
+      .motion-table-card {
+        height: 322px;
+      }
+    }
+    .aigc-visual-scroll {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 8px;
+    }
+    .aigc-visual-row {
+      display: inline-grid;
+      grid-template-columns: auto auto auto;
+      gap: clamp(20px, 3vw, 36px);
+      align-items: center;
+      min-width: 100%;
+    }
+    .aigc-visual-frame {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: min(76vh, 760px);
+      min-height: 560px;
+      background: #fff;
+      overflow: hidden;
+    }
+    .aigc-visual-frame.is-scroll-y {
+      align-items: flex-start;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      -webkit-overflow-scrolling: touch;
+    }
+    .aigc-visual-frame img {
+      display: block;
+      width: auto;
+      height: 100%;
+      max-width: none;
+      object-fit: contain;
+    }
+    .aigc-visual-frame.is-scroll-y img {
+      border: 1px solid #e5e5e5;
+      height: 254%;
+    }
+    .aigc-flow-arrow {
+      color: #FF573A;
+      font-size: 1.4rem;
+      font-weight: 800;
+      line-height: 1;
+    }
+    .aigc-visual-item {
+      display: grid;
+      gap: 0.75rem;
+      justify-items: center;
+    }
+    .aigc-visual-title {
+      color: #171717;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1;
+    }
+    .aigc-phone-mockup {
+      position: relative;
+      padding: 5px;
+      border: 1px solid #d8d8d8;
+      border-radius: 28px;
+      background: #fff;
+      overflow: hidden;
+    }
+    .aigc-phone-mockup::before {
+      display: none;
+    }
+    .aigc-phone-mockup img {
+      border-radius: 20px;
+    }
+    @media (max-width: 767px) {
+      .aigc-visual-row {
+        min-width: max-content;
+      }
+      .aigc-visual-frame {
+        height: 520px;
+        min-height: 520px;
+      }
+    }
+    .img-frame {
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.72), rgba(255,255,255,0) 45%),
+        #f0f0f0;
+      border: 0;
+    }
+    .img-frame-warm {
+      background:
+        linear-gradient(135deg, #FFF8F6 0%, #FFF3EE 100%);
+      border: 0;
+      color: #c88c7f;
+    }
+    .media-label {
+      position: relative;
+      z-index: 1;
+      max-width: 78%;
+    }
+    .media-grid::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(23, 23, 23, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(23, 23, 23, 0.035) 1px, transparent 1px);
+      background-size: 24px 24px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.9), rgba(0,0,0,0.2));
+    }
+
+    .problem-card,
+    .value-card,
+    .metric-card,
+    .flow-card,
+    .matrix-card,
+    .asset-card {
+      border: 1px solid #e5e5e5;
+      border-radius: 2px;
+      background: #fff;
+    }
+    .comp-card {
+      border: 0;
+      background: transparent;
+      min-width: 0;
+      text-align: center;
+    }
+    .comp-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: clamp(18px, 2.5vw, 30px);
+      align-items: start;
+    }
+    .comp-device {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      max-width: 206px;
+      aspect-ratio: 9 / 18.5;
+      margin: 0 auto;
+      padding: 5px;
+      border: 1px solid #d8d8d8;
+      border-radius: 28px;
+      overflow: hidden;
+      background: #fff;
+    }
+    .comp-device-screen {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      border-radius: 20px;
+      background: #fff;
+    }
+    .comp-device-screen img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: top center;
+    }
+    @media (max-width: 900px) {
+      .comp-grid {
+        grid-template-columns: repeat(4, minmax(146px, 1fr));
+        overflow-x: auto;
+        padding-bottom: 8px;
+      }
+    }
+    @media (max-width: 640px) {
+      .comp-grid {
+        margin-right: -1.5rem;
+        padding-right: 1.5rem;
+      }
+    }
+    .comp-card,
+    .flow-card,
+    .asset-card {
+      transition: none;
+    }
+    .comp-card:hover,
+    .flow-card:hover,
+    .asset-card:hover {
+      border-color: #e5e5e5;
+      transform: none;
+    }
+    .module-value-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      align-items: stretch;
+    }
+    .module-value-grid > .value-card {
+      height: 100%;
+    }
+    .module-step-flow {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
+      gap: 12px;
+      align-items: stretch;
+    }
+    .module-step-flow > .flow-card {
+      height: 100%;
+      padding: 1rem;
+    }
+    .flow-arrow {
+      align-self: center;
+      color: #FF573A;
+      font-size: 1.4rem;
+      font-weight: 800;
+      line-height: 1;
+    }
+    @media (max-width: 767px) {
+      .module-value-grid {
+        grid-template-columns: 1fr;
+      }
+      .module-step-flow {
+        grid-template-columns: 1fr;
+      }
+      .flow-arrow {
+        display: none;
+      }
+    }
+
+    .global-tabs {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px;
+      margin-bottom: 18px;
+      border-radius: 999px;
+      background: #f5f5f5;
+    }
+    .global-tab {
+      height: 32px;
+      padding: 0 14px;
+      border: 0;
+      border-radius: 999px;
+      background: transparent;
+      color: #737373;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .global-tab.active {
+      background: #171717;
+      color: #fff;
+    }
+    .global-panel {
+      display: none;
+    }
+    .global-panel.active {
+      display: block;
+    }
+    .global-panel a {
+      display: block;
+      width: 100%;
+      max-height: 720px;
+      overflow: auto;
+      border-radius: 2px;
+      background: #fff;
+    }
+    .global-panel img {
+      display: block;
+      width: auto;
+      min-width: 1200px;
+      max-width: none;
+      height: auto;
+    }
+    @media (max-width: 767px) {
+      .global-panel img {
+        min-width: 920px;
+      }
+    }
+
+    .strategy-selected {
+      position: relative;
+      border: 0;
+      border-radius: 2px;
+      background: #fff;
+    }
+    .strategy-muted {
+      position: relative;
+      border: 0;
+      border-radius: 2px;
+      background: #fff;
+      opacity: 0.64;
+    }
+    .strategy-visual {
+      height: 360px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    @media (min-width: 768px) {
+      .strategy-visual {
+        height: 440px;
+      }
+    }
+    .status-label {
+      display: inline-flex;
+      align-items: center;
+      height: 22px;
+      padding: 0 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .online-effect-showcase {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      padding: clamp(1.5rem, 4vw, 3rem) 0;
+      background: #f7f7f7;
+    }
+    .welfare-phone-mockup {
+      width: 100%;
+      max-width: 224px;
+      margin: 0 auto;
+      padding: 5px;
+      border: 1px solid #d8d8d8;
+      border-radius: 28px;
+      background: #fff;
+      overflow: hidden;
+    }
+    .welfare-phone-screen {
+      aspect-ratio: 375 / 816;
+      overflow-y: auto;
+      overflow-x: hidden;
+      border-radius: 20px;
+      background: #f5f5f5;
+      overscroll-behavior: contain;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255, 87, 58, 0.55) rgba(23, 23, 23, 0.06);
+    }
+    .welfare-phone-screen::-webkit-scrollbar {
+      width: 4px;
+    }
+    .welfare-phone-screen::-webkit-scrollbar-track {
+      background: rgba(23, 23, 23, 0.06);
+      border-radius: 999px;
+    }
+    .welfare-phone-screen::-webkit-scrollbar-thumb {
+      background: rgba(255, 87, 58, 0.55);
+      border-radius: 999px;
+    }
+    .welfare-phone-screen img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .callout {
+      position: absolute;
+      right: 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.35rem 0.55rem;
+      border: 1px solid rgba(255, 87, 58, 0.18);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.9);
+      color: #171717;
+      box-shadow: 0 10px 24px rgba(23, 23, 23, 0.06);
+      font-size: 11px;
+      font-weight: 700;
+      backdrop-filter: blur(8px);
+    }
+    .callout::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #FF573A;
+    }
+
+    .mini-tag {
+      display: inline-flex;
+      align-items: center;
+      height: 24px;
+      padding: 0 9px;
+      border: 1px solid #e5e5e5;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #737373;
+      background: #fff;
+    }
+    .matrix-row {
+      display: grid;
+      grid-template-columns: 0.9fr 1.2fr 1.2fr;
+      gap: 0;
+      border-top: 1px solid #e5e5e5;
+    }
+    .matrix-row:first-child { border-top: 0; }
+    .matrix-cell {
+      padding: 1rem;
+      border-left: 1px solid #e5e5e5;
+      font-size: 12px;
+      line-height: 1.7;
+      color: #737373;
+    }
+    .matrix-cell:first-child { border-left: 0; color: #171717; font-weight: 700; }
+    @media (max-width: 640px) {
+      .matrix-row { grid-template-columns: 1fr; }
+      .matrix-cell { border-left: 0; border-top: 1px solid #f0f0f0; }
+      .matrix-cell:first-child { border-top: 0; }
+    }
+  </style>
+</head>
+
+<body class="font-sans text-neutral-900 bg-white antialiased">
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-sm border-b border-neutral-200/60">
+    <div class="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 flex items-center justify-between h-14 md:h-16">
+      <a href="portfolio2.html" class="text-sm font-semibold">
+        Sheryl<span class="text-[#FF573A]">.</span>
+      </a>
+      <a href="portfolio2.html" class="nav-link text-xs font-medium text-neutral-900">
+        ← Back / 返回作品集
+      </a>
+    </div>
+  </nav>
+
+  <header class="case-detail-hero pt-14 md:pt-16">
+    <div class="case-hero-cover">
+      <img src="头图.png" alt="微博超话星宝项目封面" />
+    </div>
+    <div class="case-hero-info">
+      <div class="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20">
+        <div class="case-hero-summary">
+          <div class="case-hero-title">
+            <h1 class="text-3xl md:text-5xl font-bold tracking-tight leading-heading">
+              <span class="hero-line block">微博「超话星宝」体验设计</span>
+            </h1>
+          </div>
+          <div class="hero-line case-hero-meta">
+            <div>
+              <p class="case-hero-meta-label">年份</p>
+              <p class="case-hero-meta-value">2026</p>
+            </div>
+            <div>
+              <p class="case-hero-meta-label">周期</p>
+              <p class="case-hero-meta-value">8周</p>
+            </div>
+            <div>
+              <p class="case-hero-meta-label">角色</p>
+              <p class="case-hero-meta-value">交互设计师</p>
+            </div>
+          </div>
+        </div>
+        <div class="hero-line case-hero-divider mt-10" aria-hidden="true"></div>
+        <div class="hero-line case-hero-overview mt-10 grid grid-cols-1 gap-8">
+          <div>
+            <p class="text-xs font-semibold text-neutral-400 mb-3">Overview</p>
+            <p class="text-sm md:text-[15px] leading-body text-neutral-500">
+              基于明星超话与粉丝生态，设计一套「全员共同守护一个萌宠」的虚拟养成体验，将签到、发帖、任务等数据行为转化为陪伴、成长与集体荣誉反馈，提升超话互动频率、停留时长和持续回访意愿。
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <nav class="lg:hidden sticky top-14 md:top-16 z-40 bg-white/95 backdrop-blur-sm border-y border-neutral-200/70" aria-label="移动端章节导航">
+    <div class="px-6 md:px-12 overflow-x-auto">
+      <div class="flex items-center gap-6 min-w-max">
+        <a class="mobile-anchor active" href="#overview" data-section-link="overview" aria-current="true">01 项目概览</a>
+        <a class="mobile-anchor" href="#problem" data-section-link="problem">02 问题诊断</a>
+        <a class="mobile-anchor" href="#opportunity" data-section-link="opportunity">03 设计机会</a>
+        <a class="mobile-anchor" href="#strategy" data-section-link="strategy">04 设计策略</a>
+        <a class="mobile-anchor" href="#execution" data-section-link="execution">05 核心方案</a>
+        <a class="mobile-anchor" href="#results" data-section-link="results">06 上线效果与复盘</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="pb-24 md:pb-32">
+    <div class="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 lg:grid lg:grid-cols-12 lg:gap-8">
+      <aside class="hidden lg:block lg:col-span-2">
+        <nav class="sticky top-[120px] pt-2" aria-label="案例章节导航">
+          <p class="text-[11px] font-semibold text-neutral-400 mb-4">CASE INDEX</p>
+          <a class="side-nav-link active" href="#overview" data-section-link="overview" aria-current="true">01 项目概览</a>
+          <a class="side-nav-link" href="#problem" data-section-link="problem">02 问题诊断</a>
+          <a class="side-nav-link" href="#opportunity" data-section-link="opportunity">03 设计机会</a>
+          <a class="side-nav-link" href="#strategy" data-section-link="strategy">04 设计策略</a>
+          <a class="side-nav-link" href="#execution" data-section-link="execution">05 核心方案</a>
+          <a class="side-nav-link" href="#results" data-section-link="results">06 上线效果与复盘</a>
+        </nav>
+      </aside>
+
+      <div class="lg:col-span-10">
+        <section id="overview" class="case-section py-20 md:py-28">
+          <div class="reveal">
+            <p class="text-xs font-semibold text-neutral-400 mb-3"><span class="section-num">01</span> 项目概览</p>
+            <h2 class="max-w-[1040px] text-2xl md:text-3xl font-bold leading-heading">
+              项目概览：超话需要从“做数据”走向“有陪伴”
+            </h2>
+            <div class="mt-6 max-w-[1040px] space-y-4 text-sm md:text-[15px] leading-body text-neutral-500">
+              <p>
+                超话用户每天都会通过签到、发帖、评论、互动等方式为社区贡献活跃度，但这些行为本身偏工具化，反馈也较分散，用户很难持续感知“我的贡献对超话有什么影响”。
+              </p>
+              <p>
+                「超话星宝」希望把这些分散的社区行为转译成一个可感知、可反馈、可共同参与的养成系统：用户不只是完成任务，而是在和同好一起养成一个属于超话的星宝。
+              </p>
+            </div>
+            <div class="mt-8 highlight-card max-w-[1040px]">
+              <p class="text-xs font-semibold text-neutral-900 mb-1">项目定位</p>
+              <h3 class="text-lg md:text-xl font-bold leading-heading mb-3">从个人任务完成，升级为粉丝共同养成</h3>
+              <p class="text-sm md:text-[15px] leading-body text-neutral-500">
+                超话星宝不是单个用户的宠物，而是整个超话共同维护的情绪载体。它把签到、发帖、互动、任务等行为转化为星宝成长、爱心贡献、动作反馈和集体荣誉。
+              </p>
+            </div>
+          </div>
+
+        </section>
+
+        <div class="divider"></div>
+
+        <section id="problem" class="case-section py-20 md:py-28">
+          <div class="reveal">
+            <p class="text-xs font-semibold text-neutral-400 mb-3"><span class="section-num">02</span> 问题诊断</p>
+            <h2 class="max-w-[1040px] text-2xl md:text-3xl font-bold leading-heading">
+              为什么超话任务难以形成长期牵引
+            </h2>
+          </div>
+
+          <div class="mt-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+            <article class="reveal delay-1 problem-card p-6">
+              <p class="text-xs font-semibold text-[#FF573A] mb-3">问题 1</p>
+              <h3 class="text-base font-bold mb-3">任务完成感强，情绪回报弱</h3>
+              <p class="text-sm leading-body text-neutral-500">
+                用户完成签到、发帖、互动后，反馈多停留在数字增长和任务完成，缺少“被回应”的陪伴感。
+              </p>
+            </article>
+            <article class="reveal delay-2 problem-card p-6">
+              <p class="text-xs font-semibold text-[#FF573A] mb-3">问题 2</p>
+              <h3 class="text-base font-bold mb-3">个体努力没有被集体可视化</h3>
+              <p class="text-sm leading-body text-neutral-500">
+                粉丝共同做数据，但页面没有把群体贡献转化成可见的共同目标，集体荣誉感被削弱。
+              </p>
+            </article>
+            <article class="reveal delay-3 problem-card p-6">
+              <p class="text-xs font-semibold text-[#FF573A] mb-3">问题 3</p>
+              <h3 class="text-base font-bold mb-3">互动链路缺少趣味反馈</h3>
+              <p class="text-sm leading-body text-neutral-500">
+                传统任务链路偏列表化、结果化，用户做完即走，难以形成“再看一眼”“再互动一次”的停留动机。
+              </p>
+            </article>
+            <article class="reveal delay-4 problem-card p-6">
+              <p class="text-xs font-semibold text-[#FF573A] mb-3">问题 4</p>
+              <h3 class="text-base font-bold mb-3">百量级 IP 扩展成本高</h3>
+              <p class="text-sm leading-body text-neutral-500">
+                明星超话数量多，如果每个形象和动作都依赖重度手工制作，后续运营和迭代成本难以控制。
+              </p>
+            </article>
+          </div>
+
+          <div class="reveal delay-4 mt-10 highlight-card max-w-[1040px]">
+            <p class="text-xs font-semibold text-neutral-900 mb-1">设计判断</p>
+            <p class="text-sm md:text-[15px] leading-body text-neutral-500">
+              项目要解决的不是“在超话里加一个宠物”，而是重新定义粉丝任务的反馈方式：把数据行为变成情感投入，把个人操作变成集体养成。
+            </p>
+          </div>
+
+          <div class="reveal delay-2 mt-8 wide-visual-scroll">
+            <a href="微博星宝-产品定位图 1.png" target="_blank" rel="noopener" class="block rounded-sm overflow-hidden bg-white">
+              <img src="微博星宝-产品定位图 1.png" alt="微博星宝产品定位图" class="w-full h-auto object-contain" />
+            </a>
+          </div>
+        </section>
+
+        <div class="divider"></div>
+
+        <section id="opportunity" class="case-section py-20 md:py-28">
+          <div class="reveal">
+            <p class="text-xs font-semibold text-neutral-400 mb-3"><span class="section-num">03</span> 设计机会</p>
+            <h2 class="max-w-[1040px] text-2xl md:text-3xl font-bold leading-heading">
+              设计机会：将粉丝任务转译为群体共养体验
+            </h2>
+          </div>
+
+          <div class="reveal delay-2 mt-10">
+            <p class="text-xs font-semibold text-neutral-400 mb-3">横向竞品对比</p>
+            <p class="max-w-[1040px] text-sm md:text-[15px] leading-body text-neutral-500">
+              我把同类产品拆成对象定义、主导功能、生活感、众养模式和 AI 辅助五个维度，判断超话星宝不应该只做一个“可爱的宠物入口”，而要承接明星 IP、粉丝二创和社区任务关系，形成更有微博属性的共同养成体验。
+            </p>
+
+            <div class="mt-8 comp-grid">
+              <div class="comp-card">
+                <div class="mb-4">
+                  <p class="text-sm font-bold">Friends App</p>
+                  <p class="text-xs text-neutral-400 mt-1">AI 伴侣</p>
+                </div>
+                <a href="超话星宝/fan-interaction-product.png" target="_blank" rel="noopener" class="comp-device">
+                  <span class="comp-device-screen">
+                    <img src="超话星宝/fan-interaction-product.png" alt="Friends App AI 伴侣界面参考" />
+                  </span>
+                </a>
+              </div>
+              <div class="comp-card">
+                <div class="mb-4">
+                  <p class="text-sm font-bold">抖音</p>
+                  <p class="text-xs text-neutral-400 mt-1">小火人 / 火花</p>
+                </div>
+                <a href="超话星宝/pet-companion-product.png" target="_blank" rel="noopener" class="comp-device">
+                  <span class="comp-device-screen">
+                    <img src="超话星宝/pet-companion-product.png" alt="抖音小火人界面参考" />
+                  </span>
+                </a>
+              </div>
+              <div class="comp-card">
+                <div class="mb-4">
+                  <p class="text-sm font-bold">快手</p>
+                  <p class="text-xs text-neutral-400 mt-1">云养娃</p>
+                </div>
+                <a href="超话星宝/community-task-product.png" target="_blank" rel="noopener" class="comp-device">
+                  <span class="comp-device-screen">
+                    <img src="超话星宝/community-task-product.png" alt="快手云养娃界面参考" />
+                  </span>
+                </a>
+              </div>
+              <div class="comp-card">
+                <div class="mb-4">
+                  <p class="text-sm font-bold">QQ 音乐</p>
+                  <p class="text-xs text-neutral-400 mt-1">伴听 / 宠物</p>
+                </div>
+                <a href="超话星宝/qq-music-pet-product.png" target="_blank" rel="noopener" class="comp-device">
+                  <span class="comp-device-screen">
+                    <img src="超话星宝/qq-music-pet-product.png" alt="QQ 音乐伴听宠物界面参考" />
+                  </span>
+                </a>
+              </div>
+            </div>
+
+            <div class="mt-8 overflow-x-auto">
+              <table class="w-full min-w-[1040px] border-collapse text-xs md:text-sm">
+                <thead>
+                  <tr class="bg-neutral-900 text-white">
+                    <th class="w-[12%] border border-neutral-300 px-4 py-3 text-left font-semibold">维度</th>
+                    <th class="border border-neutral-300 px-4 py-3 text-left font-semibold">Friends App（AI 伴侣）</th>
+                    <th class="border border-neutral-300 px-4 py-3 text-left font-semibold">抖音（小火人 / 火花）</th>
+                    <th class="border border-neutral-300 px-4 py-3 text-left font-semibold">快手（云养娃）</th>
+                    <th class="border border-neutral-300 px-4 py-3 text-left font-semibold">QQ 音乐（伴听 / 宠物）</th>
+                    <th class="border border-neutral-300 px-4 py-3 text-left font-semibold">微博（超话星宝）</th>
+                  </tr>
+                </thead>
+                <tbody class="text-neutral-600">
+                  <tr>
+                    <th class="border border-neutral-200 bg-neutral-50 px-4 py-4 text-left font-semibold text-neutral-900">对象定义</th>
+                    <td class="border border-neutral-200 px-4 py-4 align-top">懂我的 AI 灵魂</td>
+                    <td class="border border-neutral-200 px-4 py-4 align-top">朋友关系的量化符号</td>
+                    <td class="border border-neutral-200 px-4 py-4 align-top">娱乐化的电子宠物</td>
+                    <td class="border border-neutral-200 px-4 py-4 align-top">听歌伴随物</td>
+                    <td class="border border-neutral-200 px-4 py-4 align-top font-medium text-neutral-900">明星 / IP / 粉丝二创的微博分身</td>
+                  </tr>
+                  <tr>
+                    <th class="border border-neutral-200 bg-neutral-50 px-4 py-4 text-left font-semibold text-neutral-900">主导功能</th>
+                    <td class="border border-neutral-200 px-4 py-4 align-top">纯对话</td>
+                    <td class="border border-neutral-200 px-4 py-4 align-top">聊天标识</td>
+                    <td class="border border-neutral-200 px-4 py-4 align-top">虚拟养成 + 任务体系</td>
+                    <td class="border border-neutral-200 px-4 py-4 align-top">挂机升级；有机会获得线下演唱会门票和实物周边</td>
+                    <td class="border border-neutral-200 px-4 py-4 align-top font-medium text-neutral-900">生活互动 + 装扮 + AI 互动；皮肤商业化</td>
+                  </tr>
+                  <tr>
+                    <th class="border border-neutral-200 bg-neutral-50 px-4 py-4 text-left font-semibold text-neutral-900">生活感</th>
+                    <td class="border border-neutral-200 px-4 py-4 align-top">弱，仅文字 / 语音</td>
+                    <td class="border border-neutral-200 px-4 py-4 align-top">无，仅图标</td>
+                    <td class="border border-neutral-200 px-4 py-4 align-top">中，可以看到角色吃饭等行为</td>
+                    <td class="border border-neutral-200 px-4 py-4 align-top">弱，以舞蹈动作为主</td>
+                    <td class="border border-neutral-200 px-4 py-4 align-top font-medium text-neutral-900">强，同步洗脸、刷牙、起居等日常节奏</td>
+                  </tr>
+                  <tr>
+                    <th class="border border-neutral-200 bg-neutral-50 px-4 py-4 text-left font-semibold text-neutral-900">众养模式</th>
+                    <td class="border border-neutral-200 px-4 py-4 align-top">无，偏私密孤岛</td>
+                    <td class="border border-neutral-200 px-4 py-4 align-top">无</td>
+                    <td class="border border-neutral-200 px-4 py-4 align-top">弱，主要通过榜单连接</td>
+                    <td class="border border-neutral-200 px-4 py-4 align-top">弱，主要通过榜单连接</td>
+                    <td class="border border-neutral-200 px-4 py-4 align-top font-medium text-neutral-900">强，社区图腾 + 全员供养</td>
+                  </tr>
+                  <tr>
+                    <th class="border border-neutral-200 bg-neutral-50 px-4 py-4 text-left font-semibold text-neutral-900">AI 辅助</th>
+                    <td class="border border-neutral-200 px-4 py-4 align-top">情感记忆</td>
+                    <td class="border border-neutral-200 px-4 py-4 align-top">无</td>
+                    <td class="border border-neutral-200 px-4 py-4 align-top">无</td>
+                    <td class="border border-neutral-200 px-4 py-4 align-top">歌曲推荐</td>
+                    <td class="border border-neutral-200 px-4 py-4 align-top font-medium text-neutral-900">AI 互动玩法</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <p class="reveal delay-2 mt-10 max-w-[1040px] text-sm md:text-[15px] leading-body text-neutral-500">
+            竞品分析中，我重点拆解了养成类产品和社区任务产品在加载动画、角色动作、新手引导、成长值提示、任务完成反馈、升级庆祝动效等场景中的处理方式。最终判断：超话星宝不能只复制“单人宠物养成”，而要放大微博超话独有的粉丝群体关系。
+          </p>
+
+          <div class="reveal delay-2 mt-10 bg-[#FFF8F6] border border-[#FF573A]/15 rounded-sm p-6 md:p-8">
+            <h3 class="text-lg md:text-xl font-bold leading-heading mb-5">
+              超话星宝可以成为「粉丝行为 → 共同贡献 → 星宝反馈 → 集体荣誉」的情绪容器。
+            </h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="highlight-card">
+                <p class="text-sm font-medium leading-body">用萌宠反馈承接签到、发帖、任务等高频行为</p>
+              </div>
+              <div class="highlight-card">
+                <p class="text-sm font-medium leading-body">用共同成长强化粉丝群体目标和身份认同</p>
+              </div>
+              <div class="highlight-card">
+                <p class="text-sm font-medium leading-body">用角色动作制造即时情绪奖励和停留动机</p>
+              </div>
+              <div class="highlight-card">
+                <p class="text-sm font-medium leading-body">用可运营的形象/道具/动作体系承接商业化</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="reveal delay-4 mt-10 matrix-card overflow-hidden">
+            <div class="matrix-row bg-neutral-50">
+              <div class="matrix-cell">场景</div>
+              <div class="matrix-cell font-semibold text-neutral-900">竞品观察</div>
+              <div class="matrix-cell font-semibold text-neutral-900">转化为星宝设计</div>
+            </div>
+            <div class="matrix-row">
+              <div class="matrix-cell">加载 / 首屏</div>
+              <div class="matrix-cell">角色需要在第一眼建立情绪吸引，不能只展示静态入口。</div>
+              <div class="matrix-cell">首屏突出星宝状态与可互动动作，降低用户理解成本。</div>
+            </div>
+            <div class="matrix-row">
+              <div class="matrix-cell">角色动作</div>
+              <div class="matrix-cell">常见做法是用待机、开心、期待等循环动作建立生命感。</div>
+              <div class="matrix-cell">建立状态动作与瞬态动作体系，保证反馈连续而不冲突。</div>
+            </div>
+            <div class="matrix-row">
+              <div class="matrix-cell">任务反馈</div>
+              <div class="matrix-cell">任务完成后需要立即出现奖励反馈，否则用户不理解行为价值。</div>
+              <div class="matrix-cell">将任务奖励转化为爱心，并让爱心直接驱动喂养互动。</div>
+            </div>
+            <div class="matrix-row">
+              <div class="matrix-cell">成长 / 升级</div>
+              <div class="matrix-cell">成长值提示和升级庆祝是留存牵引的关键节点。</div>
+              <div class="matrix-cell">强化成长进度、阶段目标和升级庆祝动效，放大集体成就感。</div>
+            </div>
+          </div>
+
+        </section>
+
+        <div class="divider"></div>
+
+        <section id="strategy" class="case-section py-20 md:py-28">
+          <div class="reveal">
+            <p class="text-xs font-semibold text-neutral-400 mb-3"><span class="section-num">04</span> 设计策略</p>
+            <h2 class="max-w-[1040px] text-2xl md:text-3xl font-bold leading-heading">
+              设计策略：优先可规模化，而不是单个角色的局部精致
+            </h2>
+          </div>
+
+          <div class="reveal delay-1 mt-8 max-w-[1040px] space-y-5">
+            <p class="text-sm md:text-[15px] leading-body text-neutral-500">
+              项目前期面临一个关键选择：如果只做少量星宝形象，2D 序列帧可以快速做出细腻表现；但项目目标是支持百量级明星 IP 扩展，需要同时考虑动作复用、快速适配、后续运营和工程稳定性。
+            </p>
+            <p class="text-sm md:text-[15px] leading-body text-neutral-500">
+              我推动设计侧对 AI 工具、2D 序列帧工作流和 3D 骨骼绑定方案进行可行性验证，最终选择以 3D 骨骼绑定为主要落地方案，并配合标准化动作清单与角色/道具分离原则降低后续迭代成本。
+            </p>
+          </div>
+
+          <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-5">
+            <article class="reveal delay-2 strategy-selected p-6 md:p-7">
+              <span class="status-label bg-[#FF573A] text-white mb-5">最终选择</span>
+              <h3 class="text-lg font-bold mb-2">3D 骨骼绑定</h3>
+              <p class="text-xs leading-relaxed text-neutral-400 mb-3">GLB（3D 模型网格 + 骨骼绑定数据 + 贴图、材质 + 动画关键帧）</p>
+              <p class="text-sm leading-body text-neutral-500 mb-6">
+                前期绑定成本更高，但动作可复用、扩展性更强，更适合多明星形象和长期运营迭代。
+              </p>
+              <div class="strategy-visual rounded-sm overflow-hidden bg-white">
+                <img src="超话星宝/3d-skeleton-binding.gif" alt="3D 骨骼绑定方案演示动图" class="max-w-full max-h-full object-contain" />
+              </div>
+            </article>
+            <article class="reveal delay-3 strategy-muted p-6 md:p-7">
+              <span class="status-label bg-neutral-200 text-neutral-600 mb-5">暂不采用</span>
+              <h3 class="text-lg font-bold mb-2">2D 序列帧</h3>
+              <p class="text-xs leading-relaxed text-neutral-400 mb-3">PNG序列图</p>
+              <p class="text-sm leading-body text-neutral-500 mb-6">
+                单个动作表现可控，但面对大量 IP、动作扩展和后续修改时，人力投入与维护成本过高。
+              </p>
+              <a href="超话星宝/2d-sequence-overview.png" target="_blank" rel="noopener" class="strategy-visual rounded-sm overflow-hidden bg-white">
+                <img src="超话星宝/2d-sequence-overview.png" alt="2D 序列帧动作总览" class="max-w-full max-h-full object-contain" />
+              </a>
+            </article>
+          </div>
+
+          <div class="reveal delay-4 mt-10 space-y-6">
+            <div class="highlight-card max-w-[1040px]">
+              <p class="text-xs font-semibold text-neutral-900 mb-1">设计判断</p>
+              <p class="text-sm md:text-[15px] leading-body text-neutral-500">
+                超话星宝的设计策略不是“做一个角色”，而是“建立一套可复制的角色生产与互动运营系统”。
+              </p>
+            </div>
+            <div class="matrix-card overflow-hidden">
+              <div class="matrix-row bg-neutral-50">
+                <div class="matrix-cell">评估维度</div>
+                <div class="matrix-cell font-semibold text-neutral-900">2D 序列帧</div>
+                <div class="matrix-cell font-semibold text-neutral-900">3D 骨骼绑定</div>
+              </div>
+              <div class="matrix-row">
+                <div class="matrix-cell">批量扩展</div>
+                <div class="matrix-cell">每个形象和动作都需要较多重复制作。</div>
+                <div class="matrix-cell">动作骨架可复用，适合多形象快速适配。</div>
+              </div>
+              <div class="matrix-row">
+                <div class="matrix-cell">后期修改</div>
+                <div class="matrix-cell">修改单个动作可能需要重绘多帧。</div>
+                <div class="matrix-cell">可通过绑定、关键帧和参数调整迭代。</div>
+              </div>
+              <div class="matrix-row">
+                <div class="matrix-cell">工程协作</div>
+                <div class="matrix-cell">素材量大，动作状态管理复杂。</div>
+                <div class="matrix-cell">可建立统一动作命名、状态机和资产清单。</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="divider"></div>
+
+        <section id="execution" class="case-section py-20 md:py-28">
+          <div class="reveal mb-14 md:mb-20">
+            <p class="text-xs font-semibold text-neutral-400 mb-3"><span class="section-num">05</span> 核心方案</p>
+            <h2 class="max-w-[1040px] text-2xl md:text-3xl font-bold leading-heading">
+              核心方案：核心玩法流程
+            </h2>
+          </div>
+
+          <article id="execution-flow" class="module-block reveal mb-20 md:mb-28">
+            <div class="max-w-[1040px]">
+              <p class="text-xs font-semibold text-[#FF573A] mb-3">核心流程</p>
+              <h3 class="text-xl md:text-2xl font-bold leading-heading mb-3">核心养成闭环</h3>
+              <p class="text-sm font-medium text-neutral-400 mb-5">让任务行为自然流向星宝互动</p>
+              <p class="text-sm md:text-[15px] leading-body text-neutral-500 mb-6">
+                我梳理了用户进入主流程、任务与爱心获取流程、喂养互动流程、成长升级流程，确保用户能理解“做什么能获得爱心”“爱心如何照顾星宝”“星宝如何成长”。
+              </p>
+              <div class="module-value-grid">
+                <div class="value-card p-4">
+                  <p class="text-xs font-semibold text-neutral-900 mb-1">问题</p>
+                  <p class="text-xs leading-relaxed text-neutral-500">任务完成与角色反馈之间如果没有强关联，用户会继续把星宝当作额外入口。</p>
+                </div>
+                <div class="value-card p-4 bg-[#FFF8F6] border-[#FF573A]/15">
+                  <p class="text-xs font-semibold text-[#FF573A] mb-1">设计</p>
+                  <p class="text-xs leading-relaxed text-neutral-500">把签到、发帖、互动转化为爱心，再用爱心驱动摸 ta、投喂、洗漱、玩耍等互动。</p>
+                </div>
+                <div class="value-card p-4">
+                  <p class="text-xs font-semibold text-neutral-900 mb-1">价值</p>
+                  <p class="text-xs leading-relaxed text-neutral-500">让超话原有高频行为获得更有温度的情绪反馈，形成回访牵引。</p>
+                </div>
+              </div>
+            </div>
+            <div class="mt-8 space-y-6">
+              <div class="wide-visual-scroll">
+                <a href="微博星宝-核心玩法流程 2.png" target="_blank" rel="noopener" class="block rounded-sm overflow-hidden bg-white">
+                  <img src="微博星宝-核心玩法流程 2.png" alt="微博星宝核心玩法流程" class="w-full h-auto object-contain" />
+                </a>
+              </div>
+              <div class="wide-visual-scroll">
+                <a href="weibo-xingbao-flow-journey 1.png" target="_blank" rel="noopener" class="block rounded-sm overflow-hidden bg-white">
+                  <img src="weibo-xingbao-flow-journey 1.png" alt="微博星宝核心交互流程旅程地图" class="w-full h-auto object-contain" />
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <article id="execution-aigc-concept" class="module-block reveal mb-20 md:mb-28">
+            <div class="max-w-[1040px] mb-6">
+              <p class="text-xs font-semibold text-[#FF573A] mb-3">AIGC 视觉概念探索</p>
+              <h3 class="text-xl md:text-2xl font-bold leading-heading mb-3">快速拼装主界面，通过汇报验证方向</h3>
+              <p class="text-sm md:text-[15px] leading-body text-neutral-500">
+                在高保真细化前，我先用 AIGC 与快速拼装方式验证主界面氛围、星宝角色位置、任务入口和成长反馈，帮助团队在短周期内对“角色形象 + 超话任务 + 养成反馈”的组合达成共识。
+              </p>
+            </div>
+            <div class="aigc-visual-scroll">
+              <div class="aigc-visual-row">
+                <div class="aigc-visual-item">
+                  <p class="aigc-visual-title">3D 形象 AI 探索流程</p>
+                  <a href="3D形象概念 AI 探索流程图.png" target="_blank" rel="noopener" class="aigc-visual-frame is-scroll-y" aria-label="查看 3D 形象概念 AI 探索流程图原图">
+                    <img src="3D形象概念 AI 探索流程图.png" alt="3D 形象概念 AI 探索流程图" />
+                  </a>
+                </div>
+                <span class="aigc-flow-arrow" aria-hidden="true">→</span>
+                <div class="aigc-visual-item">
+                  <p class="aigc-visual-title">主界面（高保真交互稿）</p>
+                  <a href="睡觉无道具界面.png" target="_blank" rel="noopener" class="aigc-visual-frame aigc-phone-mockup" aria-label="查看星宝主界面原图">
+                    <img src="睡觉无道具界面.png" alt="星宝主界面" />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article id="execution-home-framework" class="module-block reveal mb-20 md:mb-28">
+            <div class="max-w-[1040px] mb-8">
+              <p class="text-xs font-semibold text-[#FF573A] mb-3">首页框架</p>
+              <h3 class="text-xl md:text-2xl font-bold leading-heading mb-3">首页框架探索</h3>
+              <p class="text-sm font-medium text-neutral-400 mb-5">先确定首屏信息层级，再进入细化设计</p>
+              <p class="text-sm md:text-[15px] leading-body text-neutral-500 mb-6">
+                首页需要同时承载星宝角色、成长状态、任务入口、互动行为和运营入口。我先梳理不同框架方案，确认哪些信息必须首屏可见、哪些操作需要保持高频触达，避免后续视觉细化时只强调氛围而削弱任务转化。
+              </p>
+              <div class="module-value-grid">
+                <div class="value-card p-4">
+                  <p class="text-xs font-semibold text-neutral-900 mb-1">角色焦点</p>
+                  <p class="text-xs leading-relaxed text-neutral-500">让星宝成为首屏视觉中心，优先建立陪伴感和可互动预期。</p>
+                </div>
+                <div class="value-card p-4 bg-[#FFF8F6] border-[#FF573A]/15">
+                  <p class="text-xs font-semibold text-[#FF573A] mb-1">任务入口</p>
+                  <p class="text-xs leading-relaxed text-neutral-500">把签到、爱心和互动入口放在用户能自然发现的位置。</p>
+                </div>
+                <div class="value-card p-4">
+                  <p class="text-xs font-semibold text-neutral-900 mb-1">成长反馈</p>
+                  <p class="text-xs leading-relaxed text-neutral-500">用等级、成长值和陪伴榜承接长期目标，形成回访理由。</p>
+                </div>
+              </div>
+            </div>
+            <div class="wide-visual-scroll mb-6">
+              <a href="weibo-xingbao-main-annotation-lively 2.png" target="_blank" rel="noopener" class="block rounded-sm overflow-hidden bg-white">
+                <img src="weibo-xingbao-main-annotation-lively 2.png" alt="超话星宝主界面交互标注图" class="w-full h-auto object-contain" />
+              </a>
+            </div>
+            <div class="max-w-[1040px] mb-5">
+              <h4 class="text-base md:text-lg font-bold leading-heading mb-2">确定其他页面框架</h4>
+              <p class="text-xs md:text-sm leading-relaxed text-neutral-400">
+                基于首页框架继续推导上推菜单、半蒙层抽屉和榜单页，统一高频场景的信息层级与操作反馈。
+              </p>
+            </div>
+            <div class="overflow-x-auto mb-6">
+              <div class="grid grid-cols-4 gap-4 min-w-[920px] md:min-w-0">
+                <div>
+                  <p class="mb-3 text-center text-[11px] font-semibold text-neutral-400">首页框架</p>
+                  <a href="首页框架.png" target="_blank" rel="noopener" class="block overflow-hidden bg-white">
+                    <img src="首页框架.png" alt="首页框架" class="w-full h-auto object-contain" />
+                  </a>
+                </div>
+                <div>
+                  <p class="mb-3 text-center text-[11px] font-semibold text-neutral-400">角色上推菜单框架</p>
+                  <a href="角色上推菜单框架.png" target="_blank" rel="noopener" class="block overflow-hidden bg-white">
+                    <img src="角色上推菜单框架.png" alt="角色上推菜单框架" class="w-full h-auto object-contain" />
+                  </a>
+                </div>
+                <div>
+                  <p class="mb-3 text-center text-[11px] font-semibold text-neutral-400">半蒙层抽屉框架</p>
+                  <a href="半蒙层抽屉框架.png" target="_blank" rel="noopener" class="block overflow-hidden bg-white">
+                    <img src="半蒙层抽屉框架.png" alt="半蒙层抽屉框架" class="w-full h-auto object-contain" />
+                  </a>
+                </div>
+                <div>
+                  <p class="mb-3 text-center text-[11px] font-semibold text-neutral-400">全屏榜单页框架</p>
+                  <a href="全屏榜单页面框架.png" target="_blank" rel="noopener" class="block overflow-hidden bg-white">
+                    <img src="全屏榜单页面框架.png" alt="全屏榜单页面框架" class="w-full h-auto object-contain" />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article id="execution-onboarding" class="module-block reveal mb-20 md:mb-28">
+            <div class="max-w-[1040px] mb-8">
+              <p class="text-xs font-semibold text-[#FF573A] mb-3">新手引导</p>
+              <h3 class="text-xl md:text-2xl font-bold leading-heading mb-3">新手引导</h3>
+              <p class="text-sm font-medium text-neutral-400 mb-5">先让用户理解“这是谁、能做什么、下一步去哪里”</p>
+              <p class="text-sm md:text-[15px] leading-body text-neutral-500 mb-6">
+                新用户第一次进入时，需要在很短时间内理解星宝与超话的关系、爱心的来源，以及互动会带来的反馈。引导不做长说明，而是通过首屏状态、任务入口和首次互动，把用户自然带入养成闭环。
+              </p>
+              <div class="module-value-grid">
+                <div class="value-card p-4">
+                  <p class="text-xs font-semibold text-neutral-900 mb-1">身份建立</p>
+                  <p class="text-xs leading-relaxed text-neutral-500">说明星宝来自超话共同贡献，不是孤立的单人宠物。</p>
+                </div>
+                <div class="value-card p-4 bg-[#FFF8F6] border-[#FF573A]/15">
+                  <p class="text-xs font-semibold text-[#FF573A] mb-1">目标提示</p>
+                  <p class="text-xs leading-relaxed text-neutral-500">用任务和爱心提示建立“做行为 → 得爱心 → 照顾星宝”的认知。</p>
+                </div>
+                <div class="value-card p-4">
+                  <p class="text-xs font-semibold text-neutral-900 mb-1">动作承接</p>
+                  <p class="text-xs leading-relaxed text-neutral-500">把用户带到第一次喂养或互动，让反馈尽快发生。</p>
+                </div>
+              </div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div>
+                <p class="mb-3 text-center text-[11px] font-semibold text-neutral-400">认识星宝</p>
+                <a href="新手引导1.png" target="_blank" rel="noopener" class="block rounded-sm overflow-hidden border border-neutral-200 bg-white">
+                  <img src="新手引导1.png" alt="新手引导 01：认识星宝" class="w-full h-auto object-contain" />
+                </a>
+              </div>
+              <div>
+                <p class="mb-3 text-center text-[11px] font-semibold text-neutral-400">获得爱心</p>
+                <a href="新手引导2.png" target="_blank" rel="noopener" class="block rounded-sm overflow-hidden border border-neutral-200 bg-white">
+                  <img src="新手引导2.png" alt="新手引导 02：获得爱心" class="w-full h-auto object-contain" />
+                </a>
+              </div>
+              <div>
+                <p class="mb-3 text-center text-[11px] font-semibold text-neutral-400">开始照顾</p>
+                <a href="新手引导3.png" target="_blank" rel="noopener" class="block rounded-sm overflow-hidden border border-neutral-200 bg-white">
+                  <img src="新手引导3.png" alt="新手引导 03：开始照顾" class="w-full h-auto object-contain" />
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <article id="execution-interaction" class="module-block reveal mb-20 md:mb-28">
+            <div class="max-w-[1040px]">
+              <p class="text-xs font-semibold text-[#FF573A] mb-3">互动流程</p>
+              <h3 class="text-xl md:text-2xl font-bold leading-heading mb-3">喂养互动流程</h3>
+              <p class="text-sm font-medium text-neutral-400 mb-5">把“点击按钮”设计成“照顾 ta”</p>
+              <p class="text-sm md:text-[15px] leading-body text-neutral-500 mb-6">
+                我围绕摸 ta、投喂、洗漱、玩耍拆解了交互节点：用户触发、道具出现、动作播放、状态变化、爱心消耗或奖励反馈。每个行为都需要有清晰的操作前因和情绪后果。
+              </p>
+              <div class="module-value-grid">
+                <div class="value-card p-4">
+                  <p class="text-xs font-semibold text-neutral-900 mb-1">触发</p>
+                  <p class="text-xs leading-relaxed text-neutral-500">用户点击互动入口，系统判断星宝当前状态、爱心数量和可用动作。</p>
+                </div>
+                <div class="value-card p-4 bg-[#FFF8F6] border-[#FF573A]/15">
+                  <p class="text-xs font-semibold text-[#FF573A] mb-1">反馈</p>
+                  <p class="text-xs leading-relaxed text-neutral-500">播放瞬态动作，并通过表情、音效、特效或成长值变化强化照顾感。</p>
+                </div>
+                <div class="value-card p-4">
+                  <p class="text-xs font-semibold text-neutral-900 mb-1">回落</p>
+                  <p class="text-xs leading-relaxed text-neutral-500">动作结束后回到对应状态，避免角色状态与用户理解产生冲突。</p>
+                </div>
+              </div>
+            </div>
+            <div class="wide-visual-scroll mt-8">
+              <a href="weibo-xingbao-step04-layout 1.png" target="_blank" rel="noopener" class="block rounded-sm overflow-hidden bg-white">
+                <img src="weibo-xingbao-step04-layout 1.png" alt="超话星宝喂养互动状态设计" class="w-full h-auto object-contain" />
+              </a>
+            </div>
+          </article>
+
+          <article id="execution-growth" class="module-block reveal mb-20 md:mb-28">
+            <div class="max-w-[1040px]">
+              <p class="text-xs font-semibold text-[#FF573A] mb-3">任务成长</p>
+              <h3 class="text-xl md:text-2xl font-bold leading-heading mb-3">任务、爱心与成长体系</h3>
+              <p class="text-sm font-medium text-neutral-400 mb-5">让用户理解每次行为都在推动星宝成长</p>
+              <p class="text-sm md:text-[15px] leading-body text-neutral-500 mb-6">
+                任务系统承担行为转化，爱心承担情感化资源，成长体系承担长期目标。我将三者串联起来，让用户完成超话行为后能立即看到爱心变化，并通过成长值、阶段节点和升级庆祝感知集体努力的结果。
+              </p>
+              <div class="module-step-flow">
+                <div class="flow-card">
+                  <p class="text-sm font-bold mb-1">完成超话任务</p>
+                  <p class="text-xs leading-relaxed text-neutral-500">签到、发帖、浏览、互动等行为进入任务面板。</p>
+                </div>
+                <span class="flow-arrow" aria-hidden="true">→</span>
+                <div class="flow-card">
+                  <p class="text-sm font-bold mb-1">获得爱心</p>
+                  <p class="text-xs leading-relaxed text-neutral-500">爱心作为养成资源，连接任务行为和照顾动作。</p>
+                </div>
+                <span class="flow-arrow" aria-hidden="true">→</span>
+                <div class="flow-card">
+                  <p class="text-sm font-bold mb-1">推动成长</p>
+                  <p class="text-xs leading-relaxed text-neutral-500">成长值达到节点后触发升级庆祝和阶段反馈。</p>
+                </div>
+              </div>
+            </div>
+            <div class="wide-visual-scroll mt-8">
+              <a href="weibo-xingbao-module05-growth 1.png" target="_blank" rel="noopener" class="block rounded-sm overflow-hidden bg-white">
+                <img src="weibo-xingbao-module05-growth 1.png" alt="超话星宝任务爱心成长体系" class="w-full h-auto object-contain" />
+              </a>
+            </div>
+          </article>
+
+          <article id="execution-motion" class="module-block reveal mb-20 md:mb-28">
+            <div class="max-w-[1040px]">
+              <p class="text-xs font-semibold text-[#FF573A] mb-3">动作体系</p>
+              <h3 class="text-xl md:text-2xl font-bold leading-heading mb-3">角色动作体系</h3>
+              <p class="text-sm font-medium text-neutral-400 mb-5">区分状态与瞬态，避免动作冲突</p>
+              <p class="text-sm md:text-[15px] leading-body text-neutral-500 mb-6">
+                星宝的生命感来自动作反馈。我将动作拆为“状态”和“瞬态”两类，并进一步明确触发条件、播放优先级、打断规则和回落状态，帮助设计、动效和开发在同一套逻辑下协作。
+              </p>
+              <div class="module-value-grid">
+                <div class="value-card p-4">
+                  <p class="text-xs font-semibold text-neutral-900 mb-1">状态动作</p>
+                  <p class="text-xs leading-relaxed text-neutral-500">用于持续表达星宝当前情绪或身体状态，如待机、开心、困倦、饥饿。</p>
+                </div>
+                <div class="value-card p-4 bg-[#FFF8F6] border-[#FF573A]/15">
+                  <p class="text-xs font-semibold text-[#FF573A] mb-1">瞬态动作</p>
+                  <p class="text-xs leading-relaxed text-neutral-500">用于承接操作反馈，如摸 ta、投喂、洗漱、玩耍、任务完成、升级庆祝。</p>
+                </div>
+                <div class="value-card p-4">
+                  <p class="text-xs font-semibold text-neutral-900 mb-1">衔接规则</p>
+                  <p class="text-xs leading-relaxed text-neutral-500">瞬态播放后根据结果回到普通待机、开心状态或新的成长状态。</p>
+                </div>
+              </div>
+            </div>
+            <div class="motion-table-scroll mt-8" aria-label="星宝动作体系 HTML 表格，横向滚动查看">
+              <div class="motion-table-board">
+                <section class="motion-table-group">
+                  <p class="motion-table-label">状态</p>
+                  <p class="motion-table-kicker">有持续时长的角色行为，期间触摸不中断状态，一期：吃饭 / 睡觉 / 看书</p>
+                  <div class="motion-table-card">
+                    <table class="motion-table">
+                      <colgroup>
+                        <col style="width: 18%">
+                        <col style="width: 33%">
+                        <col style="width: 16%">
+                        <col style="width: 22%">
+                        <col style="width: 11%">
+                      </colgroup>
+                      <thead>
+                        <tr>
+                          <th>状态名</th>
+                          <th>触发条件</th>
+                          <th>持续时长</th>
+                          <th>气泡文案</th>
+                          <th>优先级</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>吃饭</td>
+                          <td>8:00~8:30 / 12:00~13:00 / 18:00~19:00 时段自动触发</td>
+                          <td>30min / 1h</td>
+                          <td>“Ta在吃饭哦”</td>
+                          <td><span class="motion-tag high">最高</span></td>
+                        </tr>
+                        <tr>
+                          <td>睡觉</td>
+                          <td>00:00~7:00 / 22:00~00:00 自动触发</td>
+                          <td>9h</td>
+                          <td>“嘘~Ta在睡觉”</td>
+                          <td><span class="motion-tag high">最高</span></td>
+                        </tr>
+                        <tr>
+                          <td>健身</td>
+                          <td>随机触发（每天最多1次）</td>
+                          <td>30min</td>
+                          <td>“Ta在锻炼中~”</td>
+                          <td><span class="motion-tag normal">普通</span></td>
+                        </tr>
+                        <tr>
+                          <td>看书</td>
+                          <td>随机触发（每天最多1次）</td>
+                          <td>30min</td>
+                          <td>“Ta在学习呢”</td>
+                          <td><span class="motion-tag normal">普通</span></td>
+                        </tr>
+                        <tr>
+                          <td>刷微博</td>
+                          <td>随机触发（每天最多1次）</td>
+                          <td>30min</td>
+                          <td>“Ta沉迷刷微博中”</td>
+                          <td><span class="motion-tag normal">普通</span></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="motion-table-notes">
+                    <p>1. 允许连续操作同一类，例如连续点击洗漱，判断爱心值，爱心值充足时连续扣除爱心并增加成长值。</p>
+                    <p>2. 喂养互动动画中，如触摸 / 洗漱播放中，点击投喂 / 玩耍可直接打断当前动画。</p>
+                  </div>
+                </section>
+
+                <section class="motion-table-group">
+                  <p class="motion-table-label">瞬态</p>
+                  <p class="motion-table-kicker">几秒内完成的角色动作，无状态时自动循环播放，一期：打招呼 / 站立 / 打瞌睡</p>
+                  <div class="motion-table-card">
+                    <table class="motion-table">
+                      <colgroup>
+                        <col style="width: 22%">
+                        <col style="width: 38%">
+                        <col style="width: 22%">
+                        <col style="width: 18%">
+                      </colgroup>
+                      <thead>
+                        <tr>
+                          <th>瞬态名</th>
+                          <th>触发条件</th>
+                          <th>持续时长</th>
+                          <th>循环顺序</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>打招呼</td>
+                          <td>当天首次进入（非状态时段）</td>
+                          <td>一次性播放</td>
+                          <td><span class="motion-tag random">第1步</span></td>
+                        </tr>
+                        <tr>
+                          <td>站立</td>
+                          <td>默认待机状态</td>
+                          <td>持续</td>
+                          <td><span class="motion-tag random">第2步</span></td>
+                        </tr>
+                        <tr>
+                          <td>比心</td>
+                          <td>站立态超过1分钟后自动触发</td>
+                          <td>约3秒</td>
+                          <td><span class="motion-tag random">第3步</span></td>
+                        </tr>
+                        <tr>
+                          <td>打瞌睡</td>
+                          <td>比心之后紧接播放</td>
+                          <td>约3秒</td>
+                          <td><span class="motion-tag random">第4步</span></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </section>
+
+                <section class="motion-table-group">
+                  <p class="motion-table-label">状态 / 瞬态核心区别</p>
+                  <p class="motion-table-kicker">区分长时间状态与短时间反馈，明确中断、恢复和触发规则</p>
+                  <div class="motion-table-card">
+                    <table class="motion-table">
+                      <colgroup>
+                        <col style="width: 26%">
+                        <col style="width: 37%">
+                        <col style="width: 37%">
+                      </colgroup>
+                      <thead>
+                        <tr>
+                          <th>对比维度</th>
+                          <th>状态（长时间）</th>
+                          <th>瞬态（短时间）</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>持续时长</td>
+                          <td>30min ~ 7小时</td>
+                          <td>几秒</td>
+                        </tr>
+                        <tr>
+                          <td>触摸是否中断</td>
+                          <td><span class="motion-tag break">不中断</span> 显示拒绝文案</td>
+                          <td><span class="motion-tag keep">中断</span> 播放触摸反应</td>
+                        </tr>
+                        <tr>
+                          <td>投喂是否中断</td>
+                          <td><span class="motion-tag keep">中断</span> 执行投喂动画</td>
+                          <td><span class="motion-tag keep">中断</span> 执行投喂动画</td>
+                        </tr>
+                        <tr>
+                          <td>洗漱是否中断</td>
+                          <td><span class="motion-tag keep">中断</span> 执行洗漱动画</td>
+                          <td><span class="motion-tag keep">中断</span> 执行洗漱动画</td>
+                        </tr>
+                        <tr>
+                          <td>玩耍是否中断</td>
+                          <td><span class="motion-tag keep">中断</span> 执行玩耍动画</td>
+                          <td><span class="motion-tag keep">中断</span> 执行玩耍动画</td>
+                        </tr>
+                        <tr>
+                          <td>触发方式</td>
+                          <td><span class="motion-tag auto">时段自动</span> <span class="motion-tag random">随机</span></td>
+                          <td><span class="motion-tag none">无状态时自动循环</span></td>
+                        </tr>
+                        <tr>
+                          <td>每天次数</td>
+                          <td>吃饭3次 / 睡觉1次 / 随机状态1次</td>
+                          <td>无限循环</td>
+                        </tr>
+                        <tr>
+                          <td>中断后恢复</td>
+                          <td><span class="motion-tag break">不恢复</span> 回到站立态</td>
+                          <td><span class="motion-tag break">不恢复</span> 回到站立态</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </article>
+
+          <article id="execution-production" class="module-block reveal">
+            <div class="max-w-[1040px]">
+              <p class="text-xs font-semibold text-[#FF573A] mb-3">资产协作</p>
+              <h3 class="text-xl md:text-2xl font-bold leading-heading mb-3">3D 动画落地与资产协作</h3>
+              <p class="text-sm font-medium text-neutral-400 mb-5">用角色/道具分离降低穿模和排期风险</p>
+              <p class="text-sm md:text-[15px] leading-body text-neutral-500 mb-6">
+                采用 3D 骨骼绑定后，我进一步细化了投喂、洗漱、睡觉等动画的表现规则：通过角色动作、道具出现/移动/消失、外部特效和状态切换营造互动感，避免复杂绑定导致穿模或批量适配困难。
+              </p>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
+                <div class="asset-card p-4">
+                  <p class="text-xs font-bold text-neutral-900 mb-2">投喂</p>
+                  <p class="text-xs leading-relaxed text-neutral-500">食物与角色分离，通过路径、遮挡和嘴部反馈模拟进食。</p>
+                </div>
+                <div class="asset-card p-4">
+                  <p class="text-xs font-bold text-neutral-900 mb-2">洗漱</p>
+                  <p class="text-xs leading-relaxed text-neutral-500">用泡泡、水花和清洁道具增强照顾感，减少真实碰撞。</p>
+                </div>
+                <div class="asset-card p-4">
+                  <p class="text-xs font-bold text-neutral-900 mb-2">睡觉</p>
+                  <p class="text-xs leading-relaxed text-neutral-500">用姿态、道具遮挡和循环动作稳定表达睡眠状态。</p>
+                </div>
+              </div>
+              <div class="highlight-card">
+                <p class="text-xs font-semibold text-neutral-900 mb-1">协作推进</p>
+                <p class="text-sm leading-body text-neutral-500">
+                  汇总项目涉及的所有动作与动效并分类，推动游戏工程师与动效设计师确认实现方式、优先级和排期。
+                </p>
+              </div>
+            </div>
+            <div class="mt-8">
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div>
+                  <p class="mb-3 text-center text-[11px] font-semibold text-neutral-400">投喂动画</p>
+                  <a href="超话星宝/星宝-投喂动画.gif" target="_blank" rel="noopener" class="block overflow-hidden bg-white">
+                    <img src="超话星宝/星宝-投喂动画.gif" alt="星宝-投喂动画" class="w-full h-auto object-contain" />
+                  </a>
+                </div>
+                <div>
+                  <p class="mb-3 text-center text-[11px] font-semibold text-neutral-400">洗澡动画</p>
+                  <a href="超话星宝/星宝-洗澡动画.gif" target="_blank" rel="noopener" class="block overflow-hidden bg-white">
+                    <img src="超话星宝/星宝-洗澡动画.gif" alt="星宝-洗澡动画" class="w-full h-auto object-contain" />
+                  </a>
+                </div>
+                <div>
+                  <p class="mb-3 text-center text-[11px] font-semibold text-neutral-400">睡觉动画</p>
+                  <a href="超话星宝/星宝-睡觉动画.gif" target="_blank" rel="noopener" class="block overflow-hidden bg-white">
+                    <img src="超话星宝/星宝-睡觉动画.gif" alt="星宝-睡觉动画" class="w-full h-auto object-contain" />
+                  </a>
+                </div>
+              </div>
+              <div class="mt-5 matrix-card overflow-hidden">
+                <div class="matrix-row bg-neutral-50">
+                  <div class="matrix-cell">资产分类</div>
+                  <div class="matrix-cell font-semibold text-neutral-900">设计输出</div>
+                  <div class="matrix-cell font-semibold text-neutral-900">协作对象</div>
+                </div>
+                <div class="matrix-row">
+                  <div class="matrix-cell">角色状态</div>
+                  <div class="matrix-cell">待机、开心、困倦、脏、期待等循环动作。</div>
+                  <div class="matrix-cell">动效设计师 / 游戏工程师</div>
+                </div>
+                <div class="matrix-row">
+                  <div class="matrix-cell">互动瞬态</div>
+                  <div class="matrix-cell">摸 ta、投喂、洗漱、玩耍、升级庆祝等触发动作。</div>
+                  <div class="matrix-cell">动效设计师 / 游戏工程师</div>
+                </div>
+                <div class="matrix-row">
+                  <div class="matrix-cell">页面反馈</div>
+                  <div class="matrix-cell">任务完成、爱心增加、成长值变化、弹层与转场。</div>
+                  <div class="matrix-cell">交互设计 / 前端 / 游戏工程</div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article id="execution-detail-marquee" class="module-block reveal mt-16 md:mt-20">
+            <div class="max-w-[1040px] mb-8">
+              <p class="text-xs font-semibold text-[#FF573A] mb-3">设计细节</p>
+              <h3 class="text-xl md:text-2xl font-bold leading-heading mb-3">首页跑马灯强化“大家一起养”的现场感</h3>
+              <p class="text-sm font-medium text-neutral-400 mb-5">把分散的粉丝行为转译为连续可见的共同贡献</p>
+              <p class="text-sm md:text-[15px] leading-body text-neutral-500">
+                为了避免星宝看起来只是单人宠物，我在首页加入实时跑马灯，把签到、投喂、互动和成长贡献以轻量消息流呈现。用户进入页面后能立刻看到“其他人也在照顾星宝”，从而感知超话成员共同参与的养成氛围。
+              </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+              <div class="value-card p-4">
+                <p class="text-xs font-semibold text-neutral-900 mb-1">实时动态</p>
+                <p class="text-xs leading-relaxed text-neutral-500">展示其他用户刚刚完成的投喂、互动或任务行为。</p>
+              </div>
+              <div class="value-card p-4 bg-[#FFF8F6] border-[#FF573A]/15">
+                <p class="text-xs font-semibold text-[#FF573A] mb-1">群体贡献</p>
+                <p class="text-xs leading-relaxed text-neutral-500">把个人行为汇入共同成长，让用户感知自己在参与集体养成。</p>
+              </div>
+              <div class="value-card p-4">
+                <p class="text-xs font-semibold text-neutral-900 mb-1">状态反馈</p>
+                <p class="text-xs leading-relaxed text-neutral-500">跑马灯与星宝状态、成长值变化形成呼应，提升页面鲜活感。</p>
+              </div>
+            </div>
+            <a href="weibo-xingbao-module05-growth%202.png" target="_blank" rel="noopener" class="block rounded-sm overflow-hidden bg-white">
+              <img src="weibo-xingbao-module05-growth%202.png" alt="首页跑马灯设计：实时贡献消息、成员互动反馈与星宝状态变化" class="w-full h-auto object-contain" />
+            </a>
+          </article>
+        </section>
+
+        <div class="divider"></div>
+
+        <section id="global-interaction" class="case-section py-20 md:py-28" data-tab-group>
+          <div class="reveal max-w-[1040px] mb-8">
+            <p class="text-xs font-semibold text-neutral-400 mb-3">全局交互稿</p>
+            <h2 class="text-2xl md:text-3xl font-bold leading-heading mb-5">全局交互稿</h2>
+            <p class="text-sm md:text-[15px] leading-body text-neutral-500">
+              汇总核心页面、流程节点与动效拆解，帮助团队在同一份全局稿中对齐页面关系、交互状态和动效落地范围。
+            </p>
+          </div>
+
+          <div class="reveal delay-1">
+            <div class="global-tabs" role="tablist" aria-label="全局交互稿切换">
+              <button type="button" class="global-tab active" role="tab" aria-selected="true" data-tab-target="global-flow">全局交互稿</button>
+              <button type="button" class="global-tab" role="tab" aria-selected="false" data-tab-target="global-motion">全局动效梳理</button>
+            </div>
+            <div class="global-panel active" role="tabpanel" data-tab-panel="global-flow">
+              <a href="全局交互稿.png" target="_blank" rel="noopener">
+                <img src="全局交互稿.png" alt="超话星宝全局交互稿" />
+              </a>
+            </div>
+            <div class="global-panel" role="tabpanel" data-tab-panel="global-motion">
+              <a href="全局动效梳理.png" target="_blank" rel="noopener">
+                <img src="全局动效梳理.png" alt="超话星宝全局动效梳理" />
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <div class="divider"></div>
+
+        <section id="online-effect" class="pb-20 md:pb-28">
+          <div class="reveal">
+            <p class="text-xs font-semibold text-[#FF573A] mb-6">线上效果</p>
+            <div class="online-effect-showcase">
+              <div class="welfare-phone-mockup">
+                <div class="welfare-phone-screen" aria-label="星宝线上效果录屏 GIF">
+                  <img
+                    src="超话星宝/星宝录屏.gif"
+                    alt="星宝线上效果录屏 GIF"
+                    loading="lazy"
+                    decoding="async"
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="divider"></div>
+
+        <section id="results" class="case-section py-20 md:py-28">
+          <div class="reveal">
+            <p class="text-xs font-semibold text-neutral-400 mb-3"><span class="section-num">06</span> 上线效果与复盘</p>
+            <h2 class="max-w-[1040px] text-2xl md:text-3xl font-bold leading-heading">
+              上线效果与复盘：让超话从任务入口变成情感经营场景
+            </h2>
+          </div>
+
+          <p class="reveal delay-1 mt-8 max-w-[1040px] text-sm md:text-[15px] leading-body text-neutral-500">
+            由于具体数据涉及内部口径，页面中不展示数值，而以指标方向和设计贡献呈现项目价值。
+          </p>
+
+          <div class="mt-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+            <article class="reveal delay-1 metric-card p-6">
+              <p class="text-sm font-bold text-[#FF573A] mb-3">互动频率</p>
+              <p class="text-sm leading-body text-neutral-500">
+                通过摸 ta、投喂、洗漱、玩耍等高频互动，将任务完成后的停留行为继续延长。
+              </p>
+            </article>
+            <article class="reveal delay-2 metric-card p-6">
+              <p class="text-sm font-bold text-neutral-900 mb-3">停留与回访</p>
+              <p class="text-sm leading-body text-neutral-500">
+                通过成长值、升级庆祝和星宝状态变化，强化用户持续回到超话的理由。
+              </p>
+            </article>
+            <article class="reveal delay-3 metric-card p-6">
+              <p class="text-sm font-bold text-neutral-900 mb-3">情感连接</p>
+              <p class="text-sm leading-body text-neutral-500">
+                将个人数据行为转化为集体守护结果，提升粉丝的陪伴感与群体荣誉感。
+              </p>
+            </article>
+            <article class="reveal delay-4 metric-card p-6">
+              <p class="text-sm font-bold text-neutral-900 mb-3">规模化运营</p>
+              <p class="text-sm leading-body text-neutral-500">
+                通过 3D 骨骼绑定、动作分类和资产清单，为多明星 IP 快速适配提供基础。
+              </p>
+            </article>
+          </div>
+
+          <div class="reveal delay-4 mt-10 border-l-2 border-[#FF573A] pl-6 max-w-[1040px]">
+            <p class="text-base md:text-lg font-medium leading-relaxed text-neutral-700">
+              这次项目的核心价值，是把超话中原本偏工具化的数据行为，重新包装成有角色、有反馈、有集体目标的情感化体验。对用户来说，星宝是一个可爱的萌宠；对超话来说，它是连接粉丝行为、留存经营和后续商业化的产品载体。
+            </p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <section class="py-20 md:py-28 bg-neutral-50">
+    <div class="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 text-center">
+      <p class="reveal text-xs font-semibold text-neutral-400 mb-4">相关项目</p>
+      <h2 class="reveal delay-1 text-2xl md:text-4xl font-bold">微博游戏中心体验升级</h2>
+      <a href="case-game-center-cn.html" class="reveal delay-2 inline-block mt-8 text-xs font-semibold text-[#FF573A]">
+        查看详情 →
+      </a>
+    </div>
+  </section>
+
+  <footer class="py-14 md:py-16">
+    <div class="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <a href="portfolio2.html" class="nav-link text-xs font-semibold">返回全部作品</a>
+        <p class="text-xs text-neutral-400">© 2026 Sheryl Gao</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const revealTargets = document.querySelectorAll('.reveal');
+
+      if ('IntersectionObserver' in window) {
+        const revealObserver = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+        revealTargets.forEach((target) => revealObserver.observe(target));
+      } else {
+        revealTargets.forEach((target) => target.classList.add('visible'));
+      }
+
+      const sectionLinks = Array.from(document.querySelectorAll('[data-section-link]'));
+      const sections = Array.from(document.querySelectorAll('.case-section'));
+      let activeSectionId = null;
+
+      const setActiveSection = (sectionId) => {
+        if (activeSectionId === sectionId) return;
+        activeSectionId = sectionId;
+
+        sectionLinks.forEach((link) => {
+          const isActive = link.dataset.sectionLink === sectionId;
+          link.classList.toggle('active', isActive);
+
+          if (isActive) {
+            link.setAttribute('aria-current', 'true');
+          } else {
+            link.removeAttribute('aria-current');
+          }
+        });
+
+        const activeMobileLink = document.querySelector(`.mobile-anchor[data-section-link="${sectionId}"]`);
+        const mobileScroller = activeMobileLink ? activeMobileLink.closest('.overflow-x-auto') : null;
+
+        if (activeMobileLink && mobileScroller && window.innerWidth < 1024) {
+          const targetLeft = activeMobileLink.offsetLeft - (mobileScroller.clientWidth / 2) + (activeMobileLink.clientWidth / 2);
+          mobileScroller.scrollTo({ left: Math.max(targetLeft, 0), behavior: 'smooth' });
+        }
+      };
+
+      sectionLinks.forEach((link) => {
+        link.addEventListener('click', () => setActiveSection(link.dataset.sectionLink));
+      });
+
+      const initialId = window.location.hash ? window.location.hash.slice(1) : 'overview';
+      if (sections.some((section) => section.id === initialId)) {
+        setActiveSection(initialId);
+      } else {
+        setActiveSection('overview');
+      }
+
+      const updateActiveByPosition = () => {
+        const probeLine = window.innerHeight * 0.38;
+        const currentSection = sections.find((section) => {
+          const rect = section.getBoundingClientRect();
+          return rect.top <= probeLine && rect.bottom > probeLine;
+        });
+
+        if (currentSection) {
+          setActiveSection(currentSection.id);
+        }
+      };
+
+      let scrollTicking = false;
+      const requestActiveUpdate = () => {
+        if (scrollTicking) return;
+        scrollTicking = true;
+        window.requestAnimationFrame(() => {
+          updateActiveByPosition();
+          scrollTicking = false;
+        });
+      };
+
+      if ('IntersectionObserver' in window) {
+        const spyObserver = new IntersectionObserver(() => {
+          requestActiveUpdate();
+        }, {
+          threshold: 0.01,
+          rootMargin: '-20% 0px -55% 0px',
+        });
+
+        sections.forEach((section) => spyObserver.observe(section));
+      }
+
+      window.addEventListener('scroll', requestActiveUpdate, { passive: true });
+      window.addEventListener('resize', requestActiveUpdate);
+      updateActiveByPosition();
+
+      document.querySelectorAll('[data-tab-group]').forEach((group) => {
+        const tabs = Array.from(group.querySelectorAll('[data-tab-target]'));
+        const panels = Array.from(group.querySelectorAll('[data-tab-panel]'));
+
+        tabs.forEach((tab) => {
+          tab.addEventListener('click', () => {
+            const target = tab.dataset.tabTarget;
+
+            tabs.forEach((item) => {
+              const isActive = item === tab;
+              item.classList.toggle('active', isActive);
+              item.setAttribute('aria-selected', isActive ? 'true' : 'false');
+            });
+
+            panels.forEach((panel) => {
+              panel.classList.toggle('active', panel.dataset.tabPanel === target);
+            });
+          });
+        });
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,1551 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>微博 ACG 衍生品 — Sheryl Gao</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', '"PingFang SC"', '"Noto Sans SC"', '"Microsoft YaHei"', 'system-ui', 'sans-serif'],
+          },
+          letterSpacing: {
+            tight: '0em',
+            tighter: '0em',
+          },
+          lineHeight: {
+            body: '1.8',
+            heading: '1.15',
+          },
+        },
+      },
+    };
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: #fff;
+      color: #171717;
+      letter-spacing: 0;
+      text-rendering: geometricPrecision;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    ::selection { background: #FF573A; color: #fff; }
+
+    .case-detail-hero {
+      background: #fff;
+    }
+    .case-hero-cover {
+      position: relative;
+      display: block;
+      width: 100%;
+      overflow: hidden;
+      background: #f5f5f5;
+    }
+    .case-hero-cover img {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      object-position: center center;
+    }
+    .case-hero-info {
+      padding: 3.75rem 0 4.5rem;
+    }
+    .case-hero-summary {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 0.4fr);
+      gap: clamp(2rem, 5vw, 5.5rem);
+      align-items: start;
+    }
+    .case-hero-title {
+      max-width: 760px;
+    }
+    .case-hero-meta {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(1.25rem, 3vw, 2.5rem);
+      padding-top: 0.35rem;
+    }
+    .case-hero-meta-label {
+      margin-bottom: 0.75rem;
+      color: #171717;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: 0;
+    }
+    .case-hero-meta-value {
+      color: #8a8a8a;
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 1.35;
+    }
+    .case-hero-divider {
+      width: 100%;
+      height: 1px;
+      background: #e5e5e5;
+    }
+    .case-hero-overview {
+      padding-top: 0;
+      border-top: 0;
+    }
+    @media (max-width: 767px) {
+      .case-hero-info {
+        padding: 2.5rem 0 3.25rem;
+      }
+      .case-hero-summary,
+      .case-hero-meta {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition:
+        opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .delay-1 { transition-delay: 0.08s; }
+    .delay-2 { transition-delay: 0.16s; }
+    .delay-3 { transition-delay: 0.24s; }
+    .delay-4 { transition-delay: 0.32s; }
+
+    .hero-line {
+      opacity: 0;
+      transform: translateY(40px);
+      animation: heroSlide 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .hero-line:nth-child(1) { animation-delay: 0.08s; }
+    .hero-line:nth-child(2) { animation-delay: 0.18s; }
+    .hero-line:nth-child(3) { animation-delay: 0.28s; }
+    .hero-line:nth-child(4) { animation-delay: 0.38s; }
+    .hero-line:nth-child(5) { animation-delay: 0.48s; }
+    @keyframes heroSlide {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .nav-link { position: relative; }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: #171717;
+      transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .nav-link:hover::after { width: 100%; }
+
+    .case-section,
+    .module-block {
+      scroll-margin-top: 9rem;
+    }
+    @media (min-width: 1024px) {
+      .case-section,
+      .module-block {
+        scroll-margin-top: 7.5rem;
+      }
+    }
+
+    .divider { height: 1px; background: #e0e0e0; }
+    .section-num {
+      color: #FF573A;
+      font-variant-numeric: tabular-nums;
+    }
+    .highlight-card {
+      border-left: 2px solid #FF573A;
+      padding-left: 1.25rem;
+    }
+
+    .side-nav-link {
+      position: relative;
+      display: block;
+      padding: 0.45rem 0 0.45rem 1rem;
+      color: #a3a3a3;
+      font-size: 0.75rem;
+      line-height: 1.45;
+      font-weight: 500;
+      transition: color 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .side-nav-link::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 2px;
+      height: 0;
+      background: #FF573A;
+      transform: translateY(-50%);
+      opacity: 0;
+      transition:
+        height 0.24s cubic-bezier(0.16, 1, 0.3, 1),
+        opacity 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .side-nav-link:hover { color: #171717; }
+    .side-nav-link.active {
+      color: #FF573A;
+      font-weight: 600;
+    }
+    .side-nav-link.active::before {
+      height: 18px;
+      opacity: 1;
+    }
+
+    .mobile-anchor {
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      border-bottom: 2px solid transparent;
+      color: #a3a3a3;
+      font-size: 0.75rem;
+      font-weight: 600;
+      transition:
+        color 0.24s cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .mobile-anchor.active {
+      color: #FF573A;
+      border-bottom-color: #FF573A;
+    }
+
+    .img-frame,
+    .img-frame-warm,
+    .img-frame-dark {
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 2px;
+      text-align: center;
+      color: #a3a3a3;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.6;
+    }
+    .img-frame {
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.72), rgba(255,255,255,0) 45%),
+        #f0f0f0;
+      border: 1px solid #e5e5e5;
+    }
+    .img-frame-warm {
+      background:
+        linear-gradient(135deg, #FFF8F6 0%, #FFF3EE 100%);
+      border: 1px solid rgba(255, 87, 58, 0.14);
+      color: #c88c7f;
+    }
+    .img-frame-dark {
+      background:
+        radial-gradient(circle at 20% 10%, rgba(255, 87, 58, 0.22), transparent 28%),
+        linear-gradient(135deg, #171717 0%, #2a1a17 52%, #111 100%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: rgba(255,255,255,0.68);
+    }
+    .media-label {
+      position: relative;
+      z-index: 1;
+      max-width: 78%;
+    }
+    .media-grid::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(23, 23, 23, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(23, 23, 23, 0.035) 1px, transparent 1px);
+      background-size: 24px 24px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.9), rgba(0,0,0,0.2));
+    }
+    .img-frame-dark.media-grid::before {
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    }
+
+    .launch-mockup-stage {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+    .launch-phone-mockup {
+      width: 100%;
+      max-width: 224px;
+      margin: 0 auto;
+      padding: 5px;
+      border: 1px solid #d8d8d8;
+      border-radius: 28px;
+      background: #fff;
+      overflow: hidden;
+      box-shadow: none;
+    }
+    .launch-phone-screen {
+      aspect-ratio: 375 / 816;
+      overflow: hidden;
+      border-radius: 20px;
+      background: #f5f5f5;
+    }
+    .launch-phone-video {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+    }
+    .case-phone-mockup {
+      position: relative;
+      width: 100%;
+      max-width: 224px;
+      margin: 0 auto;
+      border: 1px solid #d8d8d8;
+      border-radius: 28px;
+      background: #fff;
+      padding: 5px;
+      overflow: hidden;
+    }
+    .case-phone-mockup.is-after {
+      border-color: #d8d8d8;
+      background: #fff;
+    }
+    .case-phone-screen {
+      aspect-ratio: 375 / 816;
+      overflow-y: auto;
+      overflow-x: hidden;
+      border-radius: 20px;
+      background: #f5f5f5;
+      overscroll-behavior: contain;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255, 87, 58, 0.55) rgba(23, 23, 23, 0.06);
+    }
+    .case-phone-screen::-webkit-scrollbar {
+      width: 4px;
+    }
+    .case-phone-screen::-webkit-scrollbar-track {
+      background: rgba(23, 23, 23, 0.06);
+      border-radius: 999px;
+    }
+    .case-phone-screen::-webkit-scrollbar-thumb {
+      background: rgba(255, 87, 58, 0.55);
+      border-radius: 999px;
+    }
+    .case-phone-screen img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .case-phone-caption {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      margin-top: 0;
+      min-height: 40px;
+      text-align: center;
+    }
+    .case-phone-caption strong {
+      color: #171717;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.4;
+      display: block;
+    }
+    .case-phone-caption .is-accent {
+      color: #FF573A;
+    }
+    .case-compare-pair-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 2.5rem minmax(0, 1fr);
+      gap: clamp(1rem, 2.4vw, 2rem);
+      align-items: center;
+    }
+    .case-compare-group {
+      min-width: 0;
+    }
+    .case-compare-group-phones {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: clamp(0.75rem, 1.6vw, 1.2rem);
+      align-items: start;
+      justify-items: center;
+    }
+    .case-compare-group-phones.is-single {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .case-compare-group-phones.is-triple {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(0.6rem, 1.2vw, 1rem);
+    }
+    .case-phone-item-title {
+      min-height: 18px;
+      margin: 0 0 0.875rem;
+      color: #737373;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.35;
+      text-align: center;
+    }
+    .case-phone-item-title.is-accent {
+      color: #737373;
+    }
+    .case-compare-pair-grid .case-phone-mockup {
+      width: 100%;
+      max-width: 190px;
+    }
+    .case-compare-pair-grid .is-triple .case-phone-mockup {
+      max-width: 150px;
+    }
+    .case-compare-arrow {
+      position: static;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      justify-self: center;
+      width: 2.5rem;
+      height: 2.5rem;
+      margin-top: 3.25rem;
+      color: #FF573A;
+      font-size: 1.4rem;
+      font-weight: 800;
+      line-height: 1;
+      pointer-events: none;
+    }
+    .case-compare-arrow::before {
+      content: '\2192';
+    }
+    @media (max-width: 639px) {
+      .case-compare-pair-grid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+      }
+      .case-compare-group-phones {
+        grid-template-columns: repeat(2, minmax(150px, 1fr));
+        overflow-x: auto;
+        padding-bottom: 8px;
+      }
+      .case-compare-group-phones.is-single {
+        grid-template-columns: minmax(150px, 1fr);
+        overflow-x: visible;
+        padding-bottom: 0;
+      }
+      .case-compare-group-phones.is-triple {
+        grid-template-columns: repeat(3, minmax(150px, 1fr));
+        overflow-x: auto;
+        padding-bottom: 8px;
+      }
+      .case-compare-arrow {
+        display: none;
+      }
+    }
+    @media (min-width: 640px) and (max-width: 1023px) {
+      .case-compare-pair-grid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+      }
+      .case-compare-group-phones {
+        grid-template-columns: repeat(2, minmax(150px, 1fr));
+        overflow-x: auto;
+        padding-bottom: 8px;
+      }
+      .case-compare-group-phones.is-single {
+        grid-template-columns: minmax(150px, 1fr);
+        overflow-x: visible;
+        padding-bottom: 0;
+      }
+      .case-compare-group-phones.is-triple {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+      .case-compare-pair-grid .is-triple .case-phone-mockup {
+        max-width: 170px;
+      }
+      .case-compare-arrow {
+        display: none;
+      }
+    }
+    .online-effect-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 224px));
+      justify-content: center;
+      gap: clamp(2rem, 4vw, 3rem);
+      align-items: start;
+      width: 100%;
+      padding: clamp(1.5rem, 4vw, 3rem) 0;
+      background: #f7f7f7;
+    }
+    .online-effect-title {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 18px;
+      margin: 0 0 0.875rem;
+      text-align: center;
+      color: #737373;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+    @media (max-width: 767px) {
+      .online-effect-grid {
+        grid-template-columns: minmax(0, 224px);
+        gap: 2rem;
+      }
+    }
+
+    .problem-card,
+    .value-card,
+    .metric-card,
+    .product-card,
+    .spec-card,
+    .flow-card,
+    .timeline-card {
+      border: 1px solid #e5e5e5;
+      border-radius: 2px;
+      background: #fff;
+    }
+    .product-card,
+    .spec-card {
+      transition:
+        border-color 0.24s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .product-card:hover,
+    .spec-card:hover {
+      border-color: rgba(255, 87, 58, 0.42);
+      transform: translateY(-2px);
+    }
+
+    .media-link {
+      display: block;
+      overflow: hidden;
+      background: #f7f7f7;
+    }
+    .media-link img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .comp-card {
+      min-width: 0;
+      text-align: center;
+    }
+    .comp-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(18px, 2.5vw, 30px);
+      align-items: start;
+    }
+    .comp-device {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      max-width: 206px;
+      aspect-ratio: 9 / 18.5;
+      margin: 0 auto;
+      padding: 5px;
+      border: 1px solid #d8d8d8;
+      border-radius: 28px;
+      overflow: hidden;
+      background: #fff;
+    }
+    .comp-device-screen {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      border-radius: 20px;
+      background: #fff;
+      color: #a3a3a3;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.6;
+    }
+    .comp-device-screen img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: top center;
+    }
+    .comp-device-frame {
+      padding: 1rem;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.82), rgba(255,255,255,0.2) 42%),
+        #f5f5f5;
+    }
+    @media (max-width: 900px) {
+      .comp-grid {
+        grid-template-columns: repeat(3, minmax(146px, 1fr));
+        overflow-x: auto;
+        padding-bottom: 8px;
+      }
+    }
+    @media (max-width: 640px) {
+      .comp-grid {
+        margin-right: -1.5rem;
+        padding-right: 1.5rem;
+      }
+    }
+
+    .strategy-selected {
+      position: relative;
+      border: 2px solid #FF573A;
+      border-radius: 2px;
+      background: #FFF8F6;
+    }
+    .strategy-muted {
+      position: relative;
+      border: 1px solid #d4d4d4;
+      border-radius: 2px;
+      background: #fff;
+      opacity: 0.64;
+    }
+    .status-label {
+      display: inline-flex;
+      align-items: center;
+      height: 22px;
+      padding: 0 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .callout {
+      position: absolute;
+      right: 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.35rem 0.55rem;
+      border: 1px solid rgba(255, 87, 58, 0.18);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.9);
+      color: #171717;
+      box-shadow: 0 10px 24px rgba(23, 23, 23, 0.06);
+      font-size: 11px;
+      font-weight: 700;
+      backdrop-filter: blur(8px);
+    }
+    .callout::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #FF573A;
+    }
+    .callout.left { left: 1rem; right: auto; }
+    .callout.dark {
+      background: rgba(23, 23, 23, 0.76);
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.16);
+    }
+
+    .metric-number {
+      font-variant-numeric: tabular-nums;
+      letter-spacing: 0;
+    }
+    .flow-dot {
+      position: relative;
+      z-index: 1;
+      width: 34px;
+      height: 34px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 87, 58, 0.25);
+      background: #FFF8F6;
+      color: #FF573A;
+      font-weight: 800;
+      font-size: 11px;
+      font-variant-numeric: tabular-nums;
+    }
+    .phone-shell {
+      border: 1px solid #d8d8d8;
+      border-radius: 28px;
+      background: #fff;
+      padding: 5px;
+      box-shadow: none;
+    }
+    .phone-screen {
+      border-radius: 20px;
+      background: #f6f6f6;
+      overflow: hidden;
+      min-height: 260px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #a3a3a3;
+      font-size: 11px;
+      font-weight: 700;
+      text-align: center;
+      line-height: 1.6;
+      position: relative;
+    }
+    .phone-screen.warm {
+      background: linear-gradient(135deg, #FFF8F6 0%, #FFF0ED 100%);
+      color: #c88c7f;
+    }
+    .phone-shot .phone-screen {
+      aspect-ratio: 9 / 19.5;
+      min-height: auto;
+    }
+    .phone-screen img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: top center;
+    }
+    .wide-scroll {
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding-bottom: 10px;
+      scroll-snap-type: x proximity;
+    }
+    .wide-scroll img {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      scroll-snap-align: start;
+    }
+    .long-preview {
+      max-height: 720px;
+      object-fit: contain;
+      object-position: top center;
+      background: #f7f7f7;
+    }
+    .timeline-card {
+      position: relative;
+      padding: 1rem;
+    }
+    .timeline-card::before {
+      content: '';
+      position: absolute;
+      left: -1px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: #FF573A;
+      transform: scaleY(0.0);
+      transform-origin: top;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .timeline-card:hover::before { transform: scaleY(1); }
+    .note {
+      border: 1px dashed rgba(255, 87, 58, 0.36);
+      background: #FFF8F6;
+      color: #737373;
+      border-radius: 2px;
+    }
+  </style>
+</head>
+
+<body class="font-sans text-neutral-900 bg-white antialiased">
+  <!-- 顶部导航：保持与 case-game-center-cn.html 一致 -->
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-sm border-b border-neutral-200/60">
+    <div class="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 flex items-center justify-between h-14 md:h-16">
+      <a href="portfolio2.html" class="text-sm font-semibold" data-home-link>
+        Sheryl<span class="text-[#FF573A]">.</span>
+      </a>
+      <a href="portfolio2.html" class="nav-link text-xs font-medium text-neutral-900" data-home-link>
+        ← Back / 返回作品集
+      </a>
+    </div>
+  </nav>
+
+  <header class="case-detail-hero pt-14 md:pt-16">
+    <a href="acg/acg项目头图.png" target="_blank" rel="noopener" class="case-hero-cover" aria-label="打开微博 ACG 衍生品项目封面">
+      <img src="acg/acg项目头图.png" alt="微博 ACG 衍生品项目封面" />
+    </a>
+    <div class="case-hero-info">
+      <div class="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20">
+        <div class="case-hero-summary">
+          <div class="case-hero-title">
+            <h1 class="text-3xl md:text-5xl font-bold leading-heading">
+              <span class="hero-line block">微博 ACG 衍生品</span>
+            </h1>
+          </div>
+          <div class="hero-line case-hero-meta">
+            <div>
+              <p class="case-hero-meta-label">年份</p>
+              <p class="case-hero-meta-value">2025</p>
+            </div>
+            <div>
+              <p class="case-hero-meta-label">周期</p>
+              <p class="case-hero-meta-value">半年</p>
+            </div>
+            <div>
+              <p class="case-hero-meta-label">角色</p>
+              <p class="case-hero-meta-value">UE/UI</p>
+            </div>
+          </div>
+        </div>
+        <div class="hero-line case-hero-divider mt-10" aria-hidden="true"></div>
+        <div class="hero-line case-hero-overview mt-10">
+          <p class="text-xs font-semibold text-neutral-400 mb-3">Overview</p>
+          <p class="text-sm md:text-[15px] leading-body text-neutral-500">
+            围绕微博 ACG 衍生品售卖效率不足的问题，搭建从 0 到 1 的抽赏产品「欧力赏」，并升级已有抽卡机，统一 ACG 购买场景中的视觉风格、信息层级与核心交互，把普通售卖转化为带有 IP 情绪、玩法刺激和资产沉淀的消费闭环。
+          </p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 移动端章节导航：保持与游戏中心项目一致 -->
+  <nav class="lg:hidden sticky top-14 md:top-16 z-40 bg-white/95 backdrop-blur-sm border-y border-neutral-200/70" aria-label="移动端章节导航">
+    <div class="px-6 md:px-12 overflow-x-auto">
+      <div class="flex items-center gap-6 min-w-max">
+        <a class="mobile-anchor active" href="#overview" data-section-link="overview" aria-current="true">01 项目背景</a>
+        <a class="mobile-anchor" href="#problem" data-section-link="problem">02 问题拆解</a>
+        <a class="mobile-anchor" href="#opportunity" data-section-link="opportunity">03 机会判断</a>
+        <a class="mobile-anchor" href="#strategy" data-section-link="strategy">04 策略选择</a>
+        <a class="mobile-anchor" href="#execution" data-section-link="execution">05 设计落地</a>
+        <a class="mobile-anchor" href="#results" data-section-link="results">06 结果复盘</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="pb-24 md:pb-32">
+    <div class="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 lg:grid lg:grid-cols-12 lg:gap-8">
+      <aside class="hidden lg:block lg:col-span-2">
+        <!-- 左侧导航：保持与游戏中心项目一致 -->
+        <nav class="sticky top-[120px] pt-2" aria-label="案例章节导航">
+          <p class="text-[11px] font-semibold text-neutral-400 mb-4">CASE INDEX</p>
+          <a class="side-nav-link active" href="#overview" data-section-link="overview" aria-current="true">01 项目背景</a>
+          <a class="side-nav-link" href="#problem" data-section-link="problem">02 问题拆解</a>
+          <a class="side-nav-link" href="#opportunity" data-section-link="opportunity">03 机会判断</a>
+          <a class="side-nav-link" href="#strategy" data-section-link="strategy">04 策略选择</a>
+          <a class="side-nav-link" href="#execution" data-section-link="execution">05 设计落地</a>
+          <a class="side-nav-link" href="#results" data-section-link="results">06 结果复盘</a>
+        </nav>
+      </aside>
+
+      <div class="lg:col-span-10">
+        <section id="overview" class="case-section py-20 md:py-28">
+          <div class="reveal">
+            <p class="text-xs font-semibold text-neutral-400 mb-3"><span class="section-num">01</span> 项目背景</p>
+            <h2 class="max-w-[1040px] text-2xl md:text-3xl font-bold leading-heading">
+              项目背景：ACG 衍生品售卖需要更强的玩法刺激与情绪价值
+            </h2>
+          </div>
+
+          <div class="mt-8 space-y-8">
+            <div class="max-w-[1040px] space-y-5">
+              <p class="reveal delay-1 text-sm md:text-[15px] leading-body text-neutral-500">
+                微博具备天然的 ACG 内容和超话圈层优势，但衍生品售卖在早期更偏普通商品交易，缺少抽赏、抽卡等能激发复购和惊喜感的玩法，商品售卖效果不如预期。
+              </p>
+              <p class="reveal delay-2 text-sm md:text-[15px] leading-body text-neutral-500">
+                因此，项目希望通过「欧力赏」和「抽卡机」两个产品方向，补齐微博 ACG 衍生品从浏览、购买、开奖、资产沉淀到分享传播的完整链路，把 IP 内容兴趣转化为更稳定的消费行为。
+              </p>
+            </div>
+
+            <div class="reveal delay-3 bg-[#FFF8F6] border border-[#FF573A]/15 rounded-sm p-6 md:p-7 max-w-[1040px]">
+              <p class="text-xs font-semibold text-[#FF573A] mb-2">设计目标</p>
+              <p class="text-base md:text-lg font-semibold leading-relaxed text-neutral-900">
+                通过品牌化抽赏平台、抽卡体验升级和跨产品交互规范，提升用户购买信任、玩法理解效率、支付转化与复购动机。
+              </p>
+            </div>
+
+            <div class="reveal delay-4 grid grid-cols-1 md:grid-cols-3 gap-4">
+              <article class="product-card p-5">
+                <p class="text-[11px] font-semibold text-[#FF573A] mb-2">从 0 到 1</p>
+                <h3 class="text-lg font-bold mb-2">欧力赏</h3>
+                <p class="text-xs leading-relaxed text-neutral-500">依托微博生态的品牌化抽赏平台，围绕赏池、赏箱、赏品、订单、开奖和背包搭建完整抽赏交易链路。</p>
+              </article>
+              <article class="product-card p-5">
+                <p class="text-[11px] font-semibold text-[#FF573A] mb-2">已有产品升级</p>
+                <h3 class="text-lg font-bold mb-2">抽卡机</h3>
+                <p class="text-xs leading-relaxed text-neutral-500">完成从 H5 到小程序的迁移，重构卡包详情页、抽卡反馈、卡牌收藏与分享链路。</p>
+              </article>
+              <article class="product-card p-5 bg-neutral-50">
+                <p class="text-[11px] font-semibold text-neutral-400 mb-2">设计沉淀</p>
+                <h3 class="text-lg font-bold mb-2">ACG 交互规范</h3>
+                <p class="text-xs leading-relaxed text-neutral-500">基于微博主端规范，统一欧力赏与抽卡机相关页面的信息层级、交互模式和视觉风格。</p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <div class="divider"></div>
+
+        <section id="problem" class="case-section py-20 md:py-28">
+          <div class="reveal">
+            <p class="text-xs font-semibold text-neutral-400 mb-3"><span class="section-num">02</span> 问题拆解</p>
+            <h2 class="max-w-[1040px] text-2xl md:text-3xl font-bold leading-heading">
+              问题拆解：抽取式消费的难点不在“随机”，而在信任、理解和复购
+            </h2>
+          </div>
+
+          <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-4">
+            <article class="reveal delay-1 problem-card p-6">
+              <p class="text-xs font-semibold text-[#FF573A] mb-3">问题 1</p>
+              <h3 class="text-base font-bold mb-3">信任成本高：用户需要确认品牌、IP 与正版背书</h3>
+              <p class="text-sm leading-body text-neutral-500">
+                ACG 衍生品消费高度依赖 IP 和授权信任。如果页面只突出抽奖刺激，而没有品牌、IP、概率和库存等信息，用户容易担心盗版、履约和公平性。
+              </p>
+            </article>
+            <article class="reveal delay-2 problem-card p-6">
+              <p class="text-xs font-semibold text-[#FF573A] mb-3">问题 2</p>
+              <h3 class="text-base font-bold mb-3">玩法层级复杂：赏池、赏箱、赏别、赏品需要被清晰解释</h3>
+              <p class="text-sm leading-body text-neutral-500">
+                抽赏不是普通商品详情页。用户需要理解买的是哪个赏箱、可能抽到哪些赏品、概率如何变化、Last 赏如何触发，以及抽中后商品如何流转。
+              </p>
+            </article>
+            <article class="reveal delay-3 problem-card p-6">
+              <p class="text-xs font-semibold text-[#FF573A] mb-3">问题 3</p>
+              <h3 class="text-base font-bold mb-3">转化链路长：从浏览到支付中间存在多次决策损耗</h3>
+              <p class="text-sm leading-body text-neutral-500">
+                用户需要先看 IP、看奖品、理解规则、判断价格和优惠，再进入下单支付。任何一个节点信息不清晰，都会造成下单或支付环节流失。
+              </p>
+            </article>
+            <article class="reveal delay-4 problem-card p-6">
+              <p class="text-xs font-semibold text-[#FF573A] mb-3">问题 4</p>
+              <h3 class="text-base font-bold mb-3">多产品体验割裂：欧力赏与抽卡机需要统一消费语境</h3>
+              <p class="text-sm leading-body text-neutral-500">
+                欧力赏和抽卡机玩法不同，但都属于微博 ACG 购买场景。若视觉风格、信息层级和抽取反馈不一致，会增加用户在不同产品间切换的适应成本。
+              </p>
+            </article>
+          </div>
+
+          <div class="reveal delay-4 mt-10 highlight-card max-w-[1040px]">
+            <p class="text-xs font-semibold text-neutral-900 mb-1">设计判断</p>
+            <p class="text-sm md:text-[15px] leading-body text-neutral-500">
+              这个项目要解决的不是“做一个抽奖页面”，而是把 IP 信任、玩法理解、支付转化、资产沉淀和分享复购组织成一个完整交易闭环。
+            </p>
+          </div>
+        </section>
+
+        <div class="divider"></div>
+
+        <section id="opportunity" class="case-section py-20 md:py-28">
+          <div class="reveal">
+            <p class="text-xs font-semibold text-neutral-400 mb-3"><span class="section-num">03</span> 机会判断</p>
+            <h2 class="max-w-[1040px] text-2xl md:text-3xl font-bold leading-heading">
+              机会判断：微博的优势不是单纯售卖，而是 IP 圈层与社交传播
+            </h2>
+          </div>
+
+          <p class="reveal delay-1 mt-8 max-w-[1040px] text-sm md:text-[15px] leading-body text-neutral-500">
+            我在项目早期对一番赏 Online、B 站魔力赏、LOFTER 元气赏等产品进行基础分析。不同平台的抽赏能力各有侧重：一番赏 Online 强调正版授权和沉浸体验，B 站魔力赏依托站内生态与粉丝经济，LOFTER 元气赏更偏小众兴趣圈层和轻量化运营。
+          </p>
+
+          <div class="mt-10 comp-grid">
+            <article class="reveal delay-1 comp-card">
+              <div class="mb-4">
+                <p class="text-sm font-bold">一番赏 Online</p>
+                <p class="text-xs text-neutral-400 mt-1">正版授权 / 沉浸抽赏</p>
+              </div>
+              <a href="acg/competitor-screenshots/一番赏首页.PNG" target="_blank" rel="noopener" class="comp-device" aria-label="打开一番赏 Online 首页截图">
+                <span class="comp-device-screen">
+                  <img src="acg/competitor-screenshots/一番赏首页.PNG" alt="一番赏 Online 首页截图" />
+                </span>
+              </a>
+              <p class="mt-4 text-xs leading-relaxed text-neutral-500"><span class="font-semibold text-neutral-900">启发：</span>购买前需要建立品牌、IP 与正版授权信任。</p>
+            </article>
+            <article class="reveal delay-2 comp-card">
+              <div class="mb-4">
+                <p class="text-sm font-bold">B站魔力赏</p>
+                <p class="text-xs text-neutral-400 mt-1">内容生态 / 粉丝消费</p>
+              </div>
+              <a href="acg/competitor-screenshots/磁力赏首页.PNG" target="_blank" rel="noopener" class="comp-device" aria-label="打开 B 站魔力赏首页截图">
+                <span class="comp-device-screen">
+                  <img src="acg/competitor-screenshots/磁力赏首页.PNG" alt="B 站魔力赏首页截图" />
+                </span>
+              </a>
+              <p class="mt-4 text-xs leading-relaxed text-neutral-500"><span class="font-semibold text-neutral-900">启发：</span>需要把站内内容关系和购买链路自然衔接。</p>
+            </article>
+            <article class="reveal delay-3 comp-card">
+              <div class="mb-4">
+                <p class="text-sm font-bold">LOFTER 元气赏</p>
+                <p class="text-xs text-neutral-400 mt-1">轻量运营 / 小众圈层</p>
+              </div>
+              <a href="acg/competitor-screenshots/元气赏首页.PNG" target="_blank" rel="noopener" class="comp-device" aria-label="打开 LOFTER 元气赏首页截图">
+                <span class="comp-device-screen">
+                  <img src="acg/competitor-screenshots/元气赏首页.PNG" alt="LOFTER 元气赏首页截图" />
+                </span>
+              </a>
+              <p class="mt-4 text-xs leading-relaxed text-neutral-500"><span class="font-semibold text-neutral-900">启发：</span>轻量化启动适合验证初期业务模型。</p>
+            </article>
+          </div>
+
+          <div class="reveal delay-2 mt-10 bg-[#FFF8F6] border border-[#FF573A]/15 rounded-sm p-6 md:p-8">
+            <h3 class="text-lg md:text-xl font-bold leading-heading mb-5">
+              微博更适合做「品牌合作 + IP 圈层 + 抽取式购买」的 ACG 衍生品消费场景。
+            </h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="highlight-card">
+                <p class="text-sm font-medium leading-body">用品牌和 IP 双背书降低用户购买顾虑</p>
+              </div>
+              <div class="highlight-card">
+                <p class="text-sm font-medium leading-body">用超话和内容关系承接 ACG 圈层兴趣</p>
+              </div>
+              <div class="highlight-card">
+                <p class="text-sm font-medium leading-body">用抽赏和抽卡玩法提升复购刺激</p>
+              </div>
+              <div class="highlight-card">
+                <p class="text-sm font-medium leading-body">用背包、图鉴和分享延长消费链路</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="divider"></div>
+
+        <section id="strategy" class="case-section py-20 md:py-28">
+          <div class="reveal">
+            <p class="text-xs font-semibold text-neutral-400 mb-3"><span class="section-num">04</span> 策略选择</p>
+            <h2 class="max-w-[1040px] text-2xl md:text-3xl font-bold leading-heading">
+              策略选择：用“品牌信任 + 玩法转化 + 资产沉淀”搭建 ACG 消费闭环
+            </h2>
+          </div>
+
+          <div class="reveal delay-1 mt-8 max-w-[1040px] space-y-5">
+            <p class="text-sm md:text-[15px] leading-body text-neutral-500">
+              抽赏和抽卡表面上是随机玩法，但真正影响用户决策的是：用户是否相信商品价值、是否理解玩法规则、是否感受到抽中结果的惊喜，以及购买后是否有继续互动和复购的理由。
+            </p>
+            <p class="text-sm md:text-[15px] leading-body text-neutral-500">
+              因此，我把设计策略拆成三个方向：先建立品牌与 IP 信任，再让用户以低成本理解玩法并完成支付，最后把抽中结果沉淀为可管理、可展示、可分享的用户资产。
+            </p>
+          </div>
+
+          <div class="mt-10 grid grid-cols-1 md:grid-cols-3 gap-5">
+            <article class="reveal delay-1 strategy-selected p-6 md:p-7">
+              <span class="status-label bg-[#FF573A] text-white mb-5">策略 01</span>
+              <h3 class="text-lg font-bold mb-3">品牌信任</h3>
+              <p class="text-sm leading-body text-neutral-500">
+                在购买前展示品牌、IP、赏品、概率、库存和规则，让用户明确商品来源和抽取边界。
+              </p>
+            </article>
+            <article class="reveal delay-2 strategy-selected p-6 md:p-7">
+              <span class="status-label bg-[#FF573A] text-white mb-5">策略 02</span>
+              <h3 class="text-lg font-bold mb-3">玩法转化</h3>
+              <p class="text-sm leading-body text-neutral-500">
+                把赏池详情页和卡包详情页作为转化中枢，前置核心操作、优惠信息和低门槛试玩。
+              </p>
+            </article>
+            <article class="reveal delay-3 strategy-selected p-6 md:p-7">
+              <span class="status-label bg-[#FF573A] text-white mb-5">策略 03</span>
+              <h3 class="text-lg font-bold mb-3">资产沉淀</h3>
+              <p class="text-sm leading-body text-neutral-500">
+                通过背包、图鉴、翻卡和分享，让一次购买结果继续产生收藏、展示和传播价值。
+              </p>
+            </article>
+          </div>
+
+          <div class="reveal delay-4 mt-10 grid grid-cols-1 md:grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr_auto_1fr] gap-3 md:gap-4 items-stretch md:items-center">
+            <div class="flow-card p-5 text-center">
+              <p class="text-xs font-bold text-neutral-900">IP 信任</p>
+              <p class="mt-2 text-[11px] leading-relaxed text-neutral-500">品牌、授权、商品价值先被确认</p>
+            </div>
+            <span class="hidden md:flex items-center justify-center text-[#FF573A] text-[1.4rem] font-extrabold">→</span>
+            <div class="flow-card p-5 text-center">
+              <p class="text-xs font-bold text-neutral-900">玩法理解</p>
+              <p class="mt-2 text-[11px] leading-relaxed text-neutral-500">奖池、概率、库存和价格清晰可见</p>
+            </div>
+            <span class="hidden md:flex items-center justify-center text-[#FF573A] text-[1.4rem] font-extrabold">→</span>
+            <div class="flow-card p-5 text-center">
+              <p class="text-xs font-bold text-neutral-900">支付开奖</p>
+              <p class="mt-2 text-[11px] leading-relaxed text-neutral-500">操作路径短，反馈有仪式感</p>
+            </div>
+            <span class="hidden md:flex items-center justify-center text-[#FF573A] text-[1.4rem] font-extrabold">→</span>
+            <div class="flow-card p-5 text-center">
+              <p class="text-xs font-bold text-neutral-900">资产沉淀</p>
+              <p class="mt-2 text-[11px] leading-relaxed text-neutral-500">背包、图鉴和卡牌承接结果</p>
+            </div>
+            <span class="hidden md:flex items-center justify-center text-[#FF573A] text-[1.4rem] font-extrabold">→</span>
+            <div class="flow-card p-5 text-center">
+              <p class="text-xs font-bold text-neutral-900">分享复购</p>
+              <p class="mt-2 text-[11px] leading-relaxed text-neutral-500">结果可展示，可重新回到购买链路</p>
+            </div>
+          </div>
+        </section>
+
+        <div class="divider"></div>
+
+        <section id="execution" class="case-section py-20 md:py-28">
+          <div class="reveal mb-14 md:mb-20">
+            <p class="text-xs font-semibold text-neutral-400 mb-3"><span class="section-num">05</span> 设计落地</p>
+            <h2 class="max-w-[1040px] text-2xl md:text-3xl font-bold leading-heading">
+              设计落地：从新产品搭建到跨产品体验沉淀
+            </h2>
+          </div>
+
+          <article id="execution-olishow-flow" class="module-block reveal mb-20 md:mb-28">
+            <p class="text-xs font-semibold text-[#FF573A] mb-3">欧力赏一期</p>
+            <h3 class="max-w-[1040px] text-xl md:text-2xl font-bold leading-heading mb-3">欧力赏一期：搭建从 0 到 1 的抽赏交易链路</h3>
+            <p class="text-sm font-medium text-neutral-400 mb-5">让用户从浏览赏池到支付开奖都能形成完整闭环</p>
+            <p class="max-w-[1040px] text-sm md:text-[15px] leading-body text-neutral-500 mb-6">
+              一期重点是先跑通完整抽赏流程。我负责赏池列表、赏池详情、赏品详情、背包、确认订单、支付购买和开奖结果等核心页面交互，确保复杂的抽赏规则能被用户逐步理解。
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div class="value-card p-4">
+                <p class="text-xs font-semibold text-neutral-900 mb-1">问题</p>
+                <p class="text-xs leading-relaxed text-neutral-500">抽赏产品层级复杂，如果直接堆叠规则，用户难以理解买什么、抽什么、抽中后去哪里看。</p>
+              </div>
+              <div class="value-card p-4 bg-[#FFF8F6] border-[#FF573A]/15">
+                <p class="text-xs font-semibold text-[#FF573A] mb-1">设计</p>
+                <p class="text-xs leading-relaxed text-neutral-500">按“看池子 — 看奖品 — 试玩法 — 下单 — 开奖 — 背包”的顺序搭建主链路。</p>
+              </div>
+              <div class="value-card p-4">
+                <p class="text-xs font-semibold text-neutral-900 mb-1">价值</p>
+                <p class="text-xs leading-relaxed text-neutral-500">让抽赏从一个规则复杂的玩法，转化为可理解、可支付、可管理的交易产品。</p>
+              </div>
+            </div>
+
+            <a href="acg/06_抽赏交易链路0到1 1.png" target="_blank" rel="noopener" class="mt-8 wide-scroll block bg-neutral-50" aria-label="打开抽赏交易链路从 0 到 1 原图">
+              <img src="acg/06_抽赏交易链路0到1 1.png" alt="抽赏交易链路从 0 到 1" />
+            </a>
+          </article>
+
+          <article id="execution-detail" class="module-block reveal mb-20 md:mb-28">
+            <p class="text-xs font-semibold text-[#FF573A] mb-3">核心转化页</p>
+            <h3 class="max-w-[1040px] text-xl md:text-2xl font-bold leading-heading mb-3">赏池详情页：把复杂玩法组织成转化中枢</h3>
+            <p class="text-sm font-medium text-neutral-400 mb-5">查看赏池、免费试玩、切换赏箱、查看赏品详情与购买决策都在这里发生</p>
+            <p class="max-w-[1040px] text-sm md:text-[15px] leading-body text-neutral-500 mb-6">
+              赏池详情页承担欧力赏最重要的转化功能。我将规则解释、奖品展示、概率库存、试玩入口和购买操作按用户决策顺序组织，避免用户在大量信息中迷失。
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div class="value-card p-4">
+                <p class="text-xs font-semibold text-neutral-900 mb-1">问题</p>
+                <p class="text-xs leading-relaxed text-neutral-500">用户需要同时理解 IP、赏箱、赏别、赏品、概率、价格和支付方式，信息密度高。</p>
+              </div>
+              <div class="value-card p-4 bg-[#FFF8F6] border-[#FF573A]/15">
+                <p class="text-xs font-semibold text-[#FF573A] mb-1">设计</p>
+                <p class="text-xs leading-relaxed text-neutral-500">将页面组织为“先建立信任，再理解奖品，再低成本试玩，最后购买”的连续路径。</p>
+              </div>
+              <div class="value-card p-4">
+                <p class="text-xs font-semibold text-neutral-900 mb-1">价值</p>
+                <p class="text-xs leading-relaxed text-neutral-500">提升用户对玩法和商品的理解效率，为下单支付建立充分决策依据。</p>
+              </div>
+            </div>
+            <a href="acg/05_详情页交互全景 1.png" target="_blank" rel="noopener" class="mt-8 wide-scroll block bg-neutral-50" aria-label="打开详情页交互全景原图">
+              <img src="acg/05_详情页交互全景 1.png" alt="详情页交互全景" />
+            </a>
+            <a href="acg/04_抽赏玩法机制 1.png" target="_blank" rel="noopener" class="mt-6 wide-scroll block bg-neutral-50" aria-label="打开详情页抽赏玩法机制原图">
+              <img src="acg/04_抽赏玩法机制 1.png" alt="详情页抽赏玩法机制" />
+            </a>
+          </article>
+
+          <article id="execution-iteration" class="module-block reveal mb-20 md:mb-28">
+            <p class="text-xs font-semibold text-[#FF573A] mb-3">持续迭代</p>
+            <h3 class="max-w-[1040px] text-xl md:text-2xl font-bold leading-heading mb-3">欧力赏迭代：补齐运营、优惠和履约能力</h3>
+            <p class="text-sm font-medium text-neutral-400 mb-5">从“能买”继续迭代到“更好卖、更好管、更好发”</p>
+            <p class="max-w-[1040px] text-sm md:text-[15px] leading-body text-neutral-500 mb-6">
+              一期上线后，项目进入持续迭代。我继续跟进优惠券、折扣价、IP 筛选、商家卡片、STAGE 赏、分享、自动发货私信触达和后台配置等需求。由于 UI 资源紧张，我也参与了部分 UI 设计。
+            </p>
+            <div class="note p-4 max-w-[1040px]">
+              <p class="text-xs font-semibold text-neutral-900 mb-1">迭代重点</p>
+              <p class="text-xs leading-relaxed">把一期验证过的购买链路继续扩展为可运营、可配置、可触达的长期商品体系。</p>
+            </div>
+            <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div class="timeline-card">
+                <p class="text-[11px] font-semibold text-[#FF573A] mb-2">2025.08</p>
+                <h4 class="text-sm font-bold mb-2">折扣价与 IP 库后台</h4>
+                <p class="text-xs leading-relaxed text-neutral-500">支持折扣价计算规则、IP 后台编辑弹窗，增强商品与活动配置能力。</p>
+              </div>
+              <div class="timeline-card">
+                <p class="text-[11px] font-semibold text-[#FF573A] mb-2">2025.09</p>
+                <h4 class="text-sm font-bold mb-2">IP 筛选与前台展示</h4>
+                <p class="text-xs leading-relaxed text-neutral-500">更新 IP 筛选项展示位置、折后价展示规则、IP 展示顺序和前台交互规则。</p>
+              </div>
+              <div class="timeline-card">
+                <p class="text-[11px] font-semibold text-[#FF573A] mb-2">后续迭代</p>
+                <h4 class="text-sm font-bold mb-2">优惠券与商家卡片</h4>
+                <p class="text-xs leading-relaxed text-neutral-500">优化优惠券展示、领取、适配欧力赏商品，并在赏池详情页强化商家信息。</p>
+              </div>
+              <div class="timeline-card">
+                <p class="text-[11px] font-semibold text-[#FF573A] mb-2">后续迭代</p>
+                <h4 class="text-sm font-bold mb-2">STAGE 赏与履约触达</h4>
+                <p class="text-xs leading-relaxed text-neutral-500">新增 STAGE 赏、自动发货当天私信触达，补齐运营玩法和发货通知链路。</p>
+              </div>
+            </div>
+            <a href="acg/我参与的部分UI设计.png" target="_blank" rel="noopener" class="mt-6 wide-scroll block bg-neutral-50" aria-label="打开我参与的部分 UI 设计原图">
+              <img src="acg/我参与的部分UI设计.png" alt="我参与的部分 UI 设计" />
+            </a>
+          </article>
+
+          <article id="execution-card-machine" class="module-block reveal mb-20 md:mb-28">
+            <p class="text-xs font-semibold text-[#FF573A] mb-3">抽卡机升级</p>
+            <h3 class="max-w-[1040px] text-xl md:text-2xl font-bold leading-heading mb-3">抽卡机升级：从 H5 迁移到小程序，并重构核心转化页</h3>
+            <p class="text-sm font-medium text-neutral-400 mb-5">保持品牌与体验一致，同时提升下单后的支付完成率</p>
+            <p class="max-w-[1040px] text-sm md:text-[15px] leading-body text-neutral-500 mb-6">
+              抽卡机是已有产品升级。我在迁移过程中重构卡包详情页，将抽卡相关操作、优惠券信息和购买入口前置；同时支持详情页左右滑切换卡包，降低跳转频次，并通过稀有度、图鉴、翻卡和分享强化收藏价值。
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div class="value-card p-4">
+                <p class="text-xs font-semibold text-neutral-900 mb-1">问题</p>
+                <p class="text-xs leading-relaxed text-neutral-500">原有详情页信息和操作分散，用户需要滑动或跳转才能完成抽卡决策。</p>
+              </div>
+              <div class="value-card p-4 bg-[#FFF8F6] border-[#FF573A]/15">
+                <p class="text-xs font-semibold text-[#FF573A] mb-1">设计</p>
+                <p class="text-xs leading-relaxed text-neutral-500">重构详情页布局，外露抽卡操作、优惠券信息和卡包切换能力。</p>
+              </div>
+              <div class="value-card p-4">
+                <p class="text-xs font-semibold text-neutral-900 mb-1">价值</p>
+                <p class="text-xs leading-relaxed text-neutral-500">降低浏览到支付的路径损耗，同时增强抽卡结果的仪式感和分享动机。</p>
+              </div>
+            </div>
+            <a href="acg/微博ACG抽卡机改版_抽卡机玩法 1.png" target="_blank" rel="noopener" class="mt-12 md:mt-14 wide-scroll block bg-neutral-50" aria-label="打开微博 ACG 抽卡机玩法机制图">
+              <img src="acg/微博ACG抽卡机改版_抽卡机玩法 1.png" alt="微博 ACG 抽卡机玩法机制图" />
+            </a>
+
+            <div class="mt-14 md:mt-16">
+              <p class="text-xs font-semibold text-[#FF573A] mb-3">抽卡机详情页优化</p>
+              <h4 class="max-w-[1040px] text-lg md:text-xl font-bold leading-heading mb-3">详情页架构与交互</h4>
+              <a href="acg/微博ACG抽卡机改版_详情页架构交互 2.png" target="_blank" rel="noopener" class="mt-6 wide-scroll block bg-neutral-50" aria-label="打开微博 ACG 抽卡机详情页架构交互图">
+                <img src="acg/微博ACG抽卡机改版_详情页架构交互 2.png" alt="微博 ACG 抽卡机详情页架构交互" />
+              </a>
+            </div>
+
+            <div class="mt-12 md:mt-14">
+              <div class="case-compare-pair-grid">
+                <div class="case-compare-group">
+                  <p class="case-phone-caption mb-3">
+                    <strong>改版前</strong>
+                  </p>
+                  <div class="case-compare-group-phones is-triple">
+                    <div>
+                      <p class="case-phone-item-title">卡池</p>
+                      <a href="改版前-卡池.png" target="_blank" rel="noopener" class="case-phone-mockup block" aria-label="打开抽卡机改版前卡池截图">
+                        <div class="case-phone-screen" tabindex="0" aria-label="改版前卡池截图，可上下滚动查看">
+                          <img src="改版前-卡池.png" alt="抽卡机改版前卡池" />
+                        </div>
+                      </a>
+                    </div>
+                    <div>
+                      <p class="case-phone-item-title">详情页</p>
+                      <a href="改版前-商品详情页.png" target="_blank" rel="noopener" class="case-phone-mockup block" aria-label="打开抽卡机改版前详情页截图">
+                        <div class="case-phone-screen" tabindex="0" aria-label="改版前详情页截图，可上下滚动查看">
+                          <img src="改版前-商品详情页.png" alt="抽卡机改版前详情页" />
+                        </div>
+                      </a>
+                    </div>
+                    <div>
+                      <p class="case-phone-item-title">图鉴</p>
+                      <a href="改版前-图鉴.png" target="_blank" rel="noopener" class="case-phone-mockup block" aria-label="打开抽卡机改版前图鉴截图">
+                        <div class="case-phone-screen" tabindex="0" aria-label="改版前图鉴截图，可上下滚动查看">
+                          <img src="改版前-图鉴.png" alt="抽卡机改版前图鉴" />
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="case-compare-arrow" aria-hidden="true"></div>
+                <div class="case-compare-group">
+                  <p class="case-phone-caption mb-3">
+                    <strong class="is-accent">改版后</strong>
+                  </p>
+                  <div class="case-compare-group-phones is-triple">
+                    <div>
+                      <p class="case-phone-item-title is-accent">卡池</p>
+                      <a href="抽卡机-改版后卡池.PNG" target="_blank" rel="noopener" class="case-phone-mockup is-after block" aria-label="打开抽卡机改版后卡池截图">
+                        <div class="case-phone-screen" tabindex="0" aria-label="改版后卡池截图，可上下滚动查看">
+                          <img src="抽卡机-改版后卡池.PNG" alt="抽卡机改版后卡池" />
+                        </div>
+                      </a>
+                    </div>
+                    <div>
+                      <p class="case-phone-item-title is-accent">详情页</p>
+                      <a href="acg/抽卡机-改版后商品详情页.PNG" target="_blank" rel="noopener" class="case-phone-mockup is-after block" aria-label="打开抽卡机改版后详情页截图">
+                        <div class="case-phone-screen" tabindex="0" aria-label="改版后详情页截图，可上下滚动查看">
+                          <img src="acg/抽卡机-改版后商品详情页.PNG" alt="抽卡机改版后详情页" />
+                        </div>
+                      </a>
+                    </div>
+                    <div>
+                      <p class="case-phone-item-title is-accent">图鉴</p>
+                      <a href="acg/抽卡机-改版后图鉴.PNG" target="_blank" rel="noopener" class="case-phone-mockup is-after block" aria-label="打开抽卡机改版后图鉴截图">
+                        <div class="case-phone-screen" tabindex="0" aria-label="改版后图鉴截图，可上下滚动查看">
+                          <img src="acg/抽卡机-改版后图鉴.PNG" alt="抽卡机改版后图鉴" />
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-14 md:mt-16">
+              <p class="text-xs font-semibold text-[#FF573A] mb-3">翻卡动效优化</p>
+              <h4 class="max-w-[1040px] text-lg md:text-xl font-bold leading-heading mb-3">翻卡流程竞品洞察</h4>
+              <p class="max-w-[1040px] text-sm md:text-[15px] leading-body text-neutral-500 mb-6">
+                对竞品的翻卡方式、稀有度反馈、一键全开和重复卡处理进行对比，提炼新版翻卡反馈的节奏和记忆点。
+              </p>
+              <a href="acg/微博ACG抽卡机改版_翻卡竞品洞察 2.png" target="_blank" rel="noopener" class="wide-scroll block bg-neutral-50" aria-label="打开微博 ACG 抽卡机翻卡竞品洞察图">
+                <img src="acg/微博ACG抽卡机改版_翻卡竞品洞察 2.png" alt="微博 ACG 抽卡机翻卡竞品洞察" />
+              </a>
+              <a href="acg/微博ACG抽卡机改版_翻卡流程交互方案2 1.png" target="_blank" rel="noopener" class="mt-6 wide-scroll block bg-neutral-50" aria-label="打开微博 ACG 抽卡机翻卡流程交互方案图">
+                <img src="acg/微博ACG抽卡机改版_翻卡流程交互方案2 1.png" alt="微博 ACG 抽卡机翻卡流程交互方案" />
+              </a>
+            </div>
+          </article>
+
+          <article id="execution-guideline" class="module-block reveal">
+            <p class="text-xs font-semibold text-[#FF573A] mb-3">规范沉淀</p>
+            <h3 class="max-w-[1040px] text-xl md:text-2xl font-bold leading-heading mb-3">ACG 交互规范：从单点页面设计沉淀为跨产品标准</h3>
+            <p class="text-sm font-medium text-neutral-400 mb-5">统一欧力赏 / 抽卡机相关页面的视觉风格、信息层级与交互模式</p>
+            <p class="max-w-[1040px] text-sm md:text-[15px] leading-body text-neutral-500 mb-6">
+              两个产品完成后，我基于微博主端规范，提炼 ACG 衍生品相关页面的交互规范，覆盖商品与 IP 信息展示、购买与抽取反馈、背包与图鉴资产、运营位和分享链路，降低后续重复设计成本。
+            </p>
+            <div class="highlight-card max-w-[1040px]">
+              <p class="text-sm md:text-[15px] leading-body text-neutral-500">
+                规范的核心目标不是限制页面，而是让不同 ACG 消费产品都能在统一框架下扩展，帮助用户获得熟悉、连贯的购买体验。
+              </p>
+            </div>
+            <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <article class="spec-card p-5">
+                <p class="text-[11px] font-semibold text-[#FF573A] mb-2">规范 01</p>
+                <h4 class="text-sm font-bold mb-2">信息层级</h4>
+                <p class="text-xs leading-relaxed text-neutral-500">统一 IP、品牌、商品、概率、库存、价格、优惠等高敏感信息的展示优先级。</p>
+              </article>
+              <article class="spec-card p-5">
+                <p class="text-[11px] font-semibold text-[#FF573A] mb-2">规范 02</p>
+                <h4 class="text-sm font-bold mb-2">抽取反馈</h4>
+                <p class="text-xs leading-relaxed text-neutral-500">统一开奖、翻卡、稀有度、中奖反馈、空状态与二次购买入口的交互规则。</p>
+              </article>
+              <article class="spec-card p-5">
+                <p class="text-[11px] font-semibold text-[#FF573A] mb-2">规范 03</p>
+                <h4 class="text-sm font-bold mb-2">资产管理</h4>
+                <p class="text-xs leading-relaxed text-neutral-500">统一背包、图鉴、卡牌状态、发货状态和分享场景的操作路径。</p>
+              </article>
+              <article class="spec-card p-5">
+                <p class="text-[11px] font-semibold text-[#FF573A] mb-2">规范 04</p>
+                <h4 class="text-sm font-bold mb-2">运营分发</h4>
+                <p class="text-xs leading-relaxed text-neutral-500">统一 IP 筛选、运营位、活动入口、商家卡片和优惠券展示规则。</p>
+              </article>
+            </div>
+            <a href="acg/ACG产品交互规范-部分.png" target="_blank" rel="noopener" class="mt-6 block max-h-[720px] overflow-y-auto bg-neutral-50" aria-label="打开 ACG 产品交互规范原图">
+              <img src="acg/ACG产品交互规范-部分.png" alt="ACG 产品交互规范部分预览" class="block w-full h-auto" />
+            </a>
+          </article>
+
+        </section>
+
+        <div class="divider"></div>
+
+        <section id="online-effect" class="case-section py-20 md:py-28">
+          <div class="reveal mb-6">
+            <p class="text-xs font-semibold text-[#FF573A]">线上效果</p>
+          </div>
+          <div class="reveal delay-1 online-effect-grid">
+            <article>
+              <div class="launch-mockup-stage">
+                <h3 class="online-effect-title">欧力赏</h3>
+                <div class="launch-phone-mockup">
+                  <div class="launch-phone-screen" aria-label="欧力赏线上效果录屏">
+                    <video class="launch-phone-video" src="acg/欧力赏录屏.MP4" autoplay muted loop playsinline preload="metadata"></video>
+                  </div>
+                </div>
+              </div>
+            </article>
+            <article>
+              <div class="launch-mockup-stage">
+                <h3 class="online-effect-title">抽卡机</h3>
+                <div class="launch-phone-mockup">
+                  <div class="launch-phone-screen" aria-label="抽卡机线上效果录屏">
+                    <video class="launch-phone-video" src="acg/抽卡机录屏.MP4" autoplay muted loop playsinline preload="metadata"></video>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <div class="divider"></div>
+
+        <section id="results" class="case-section py-20 md:py-28">
+          <div class="reveal">
+            <p class="text-xs font-semibold text-neutral-400 mb-3"><span class="section-num">06</span> 结果复盘</p>
+            <h2 class="max-w-[1040px] text-2xl md:text-3xl font-bold leading-heading">
+              结果复盘：支付转化明显提升，玩法型消费链路得到验证
+            </h2>
+          </div>
+
+          <p class="reveal delay-1 mt-8 max-w-[1040px] text-sm md:text-[15px] leading-body text-neutral-500">
+            抽卡机新版于 11 月 18 日上线后，根据产品侧反馈的 11 月 24 日至 11 月 28 日数据，下单后的支付完成效率明显提升。数据不能单独归因于设计，但可以验证“核心信息前置、操作路径简化、优惠感知增强”的优化方向有效。
+          </p>
+
+          <div class="mt-10 grid grid-cols-1 md:grid-cols-3 gap-4">
+            <article class="reveal delay-1 metric-card p-6 bg-[#FFF8F6] border-[#FF573A]/15">
+              <p class="text-sm font-bold text-neutral-900 mb-3">成功支付 GMV / 下单 GMV</p>
+              <div class="flex items-baseline gap-2 mb-2">
+                <span class="metric-number text-4xl md:text-5xl font-black text-[#FF573A]">93%</span>
+                <span class="text-xs font-semibold text-neutral-400">上线前 76%</span>
+              </div>
+              <p class="text-xs leading-relaxed text-neutral-500">提升 17 个百分点，说明下单金额中的支付完成比例明显提高。</p>
+            </article>
+            <article class="reveal delay-2 metric-card p-6">
+              <p class="text-sm font-bold text-neutral-900 mb-3">成功支付人数 / 下单人数</p>
+              <div class="flex items-baseline gap-2 mb-2">
+                <span class="metric-number text-4xl md:text-5xl font-black text-[#FF573A]">98%</span>
+                <span class="text-xs font-semibold text-neutral-400">上线前 72%</span>
+              </div>
+              <p class="text-xs leading-relaxed text-neutral-500">提升 26 个百分点，说明用户从下单到支付成功的流失被显著压缩。</p>
+            </article>
+            <article class="reveal delay-3 metric-card p-6">
+              <p class="text-sm font-bold text-neutral-900 mb-3">项目沉淀</p>
+              <div class="flex items-baseline gap-2 mb-2">
+                <span class="metric-number text-4xl md:text-5xl font-black text-neutral-900">2+1</span>
+                <span class="text-xs font-semibold text-neutral-400">产品 + 规范</span>
+              </div>
+              <p class="text-xs leading-relaxed text-neutral-500">完成欧力赏、抽卡机两个产品方向，并沉淀 ACG 交互规范。</p>
+            </article>
+          </div>
+
+          <div class="reveal delay-4 mt-10 border-l-2 border-[#FF573A] pl-6 max-w-[1040px]">
+            <p class="text-base md:text-lg font-medium leading-relaxed text-neutral-700">
+              这次项目让我更清楚地理解到：ACG 衍生品售卖的核心不是把商品换成随机抽取，而是把 IP 情感、品牌信任、稀缺刺激、购买反馈和社交分享组织成完整体验。只有当用户相信商品价值、理解玩法规则，并能把购买结果继续沉淀和传播时，交易链路才具备持续复购的基础。
+            </p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <section class="py-20 md:py-28 bg-neutral-50">
+    <div class="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 text-center">
+      <p class="reveal text-xs font-semibold text-neutral-400 mb-4">上一个项目</p>
+      <h2 class="reveal delay-1 text-2xl md:text-4xl font-bold">微博游戏中心体验升级</h2>
+      <a href="case-game-center-cn.html" class="reveal delay-2 inline-block mt-8 text-xs font-semibold text-[#FF573A]">
+        查看详情 →
+      </a>
+    </div>
+  </section>
+
+  <footer class="py-14 md:py-16">
+    <div class="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <a href="portfolio2.html" class="nav-link text-xs font-semibold" data-home-link>返回全部作品</a>
+        <p class="text-xs text-neutral-400">© 2026 Sheryl Gao</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.location.protocol === 'file:') {
+        document.querySelectorAll('[data-home-link]').forEach((link) => {
+          link.href = 'portfolio2.html';
+        });
+      }
+
+      const revealTargets = document.querySelectorAll('.reveal');
+
+      if ('IntersectionObserver' in window) {
+        const revealObserver = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+        revealTargets.forEach((target) => revealObserver.observe(target));
+      } else {
+        revealTargets.forEach((target) => target.classList.add('visible'));
+      }
+
+      const sectionLinks = Array.from(document.querySelectorAll('[data-section-link]'));
+      const sections = Array.from(document.querySelectorAll('.case-section'));
+      let activeSectionId = null;
+
+      const setActiveSection = (sectionId) => {
+        if (activeSectionId === sectionId) return;
+        activeSectionId = sectionId;
+
+        sectionLinks.forEach((link) => {
+          const isActive = link.dataset.sectionLink === sectionId;
+          link.classList.toggle('active', isActive);
+
+          if (isActive) {
+            link.setAttribute('aria-current', 'true');
+          } else {
+            link.removeAttribute('aria-current');
+          }
+        });
+
+        const activeMobileLink = document.querySelector(`.mobile-anchor[data-section-link="${sectionId}"]`);
+        const mobileScroller = activeMobileLink ? activeMobileLink.closest('.overflow-x-auto') : null;
+
+        if (activeMobileLink && mobileScroller && window.innerWidth < 1024) {
+          const targetLeft = activeMobileLink.offsetLeft - (mobileScroller.clientWidth / 2) + (activeMobileLink.clientWidth / 2);
+          mobileScroller.scrollTo({ left: Math.max(targetLeft, 0), behavior: 'smooth' });
+        }
+      };
+
+      sectionLinks.forEach((link) => {
+        link.addEventListener('click', () => setActiveSection(link.dataset.sectionLink));
+      });
+
+      const initialId = window.location.hash ? window.location.hash.slice(1) : 'overview';
+      if (sections.some((section) => section.id === initialId)) {
+        setActiveSection(initialId);
+      } else {
+        setActiveSection('overview');
+      }
+
+      const updateActiveByPosition = () => {
+        const probeLine = window.innerHeight * 0.38;
+        const currentSection = sections.find((section) => {
+          const rect = section.getBoundingClientRect();
+          return rect.top <= probeLine && rect.bottom > probeLine;
+        });
+
+        if (currentSection) {
+          setActiveSection(currentSection.id);
+        }
+      };
+
+      let scrollTicking = false;
+      const requestActiveUpdate = () => {
+        if (scrollTicking) return;
+        scrollTicking = true;
+        window.requestAnimationFrame(() => {
+          updateActiveByPosition();
+          scrollTicking = false;
+        });
+      };
+
+      if ('IntersectionObserver' in window) {
+        const spyObserver = new IntersectionObserver(() => {
+          requestActiveUpdate();
+        }, {
+          threshold: 0.01,
+          rootMargin: '-20% 0px -55% 0px',
+        });
+
+        sections.forEach((section) => spyObserver.observe(section));
+      }
+
+      window.addEventListener('scroll', requestActiveUpdate, { passive: true });
+      window.addEventListener('resize', requestActiveUpdate);
+      updateActiveByPosition();
+    });
+  </script>
+</body>
+</html>
