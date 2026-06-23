@@ -163,7 +163,7 @@
       height: 100%;
       overflow: hidden;
       border-radius: 46% 54% 51% 49% / 57% 43% 56% 44%;
-      background: #171717;
+      background: #fff;
       box-shadow: 0 26px 70px rgba(23, 23, 23, 0.2);
       transform: rotate(-2deg);
     }
@@ -175,13 +175,30 @@
       border-radius: inherit;
       pointer-events: none;
     }
-    .hero-video {
+    .hero-video-fallback {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
       display: block;
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: center center;
+    }
+    .hero-video {
+      position: relative;
+      z-index: 1;
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      opacity: 0;
       transform: scale(1.12) rotate(2deg);
+      transition: opacity 0.2s ease;
+    }
+    .hero-video-shell.is-video-ready .hero-video {
+      opacity: 1;
     }
     /* Hero font comparison variants: append ?font=v1, v2, v3, or v4 to preview. */
     .hero-title {
@@ -627,7 +644,28 @@
         <div class="hero-media" aria-label="Homepage intro animation">
           <div class="hero-video-orbit">
             <div class="hero-video-shell">
-              <video class="hero-video" autoplay muted loop playsinline preload="metadata" aria-label="Sheryl intro animation">
+              <img
+                class="hero-video-fallback"
+                src="./portfolio2-assets/hero-intro-poster.jpg"
+                alt=""
+                aria-hidden="true"
+                loading="eager"
+                decoding="async"
+              />
+              <video
+                class="hero-video"
+                autoplay
+                muted
+                loop
+                playsinline
+                webkit-playsinline
+                x5-playsinline
+                x5-video-player-type="h5"
+                x5-video-player-fullscreen="false"
+                preload="metadata"
+                poster="./portfolio2-assets/hero-intro-poster.jpg"
+                aria-label="Sheryl intro animation"
+              >
                 <source src="./jimeng-2026-06-12-3794-帮我生成一个视频，我想放在作品集的首页，从敲电脑的动作然后挥手sayhi，再到瑜....mp4" type="video/mp4" />
               </video>
             </div>
@@ -883,6 +921,35 @@
     document.querySelectorAll('.reveal').forEach((el) => {
       revealObserver.observe(el);
     });
+
+    // Keep a real image visible in browsers that block or delay autoplay.
+    const heroVideo = document.querySelector('.hero-video');
+    const heroVideoShell = document.querySelector('.hero-video-shell');
+    if (heroVideo && heroVideoShell) {
+      heroVideo.muted = true;
+      heroVideo.defaultMuted = true;
+      heroVideo.playsInline = true;
+
+      const markHeroVideoReady = () => {
+        if (!heroVideo.paused && heroVideo.currentTime > 0) {
+          heroVideoShell.classList.add('is-video-ready');
+        }
+      };
+      const tryPlayHeroVideo = () => {
+        const playAttempt = heroVideo.play();
+        if (playAttempt && typeof playAttempt.catch === 'function') {
+          playAttempt.catch(() => {});
+        }
+      };
+
+      heroVideo.addEventListener('playing', markHeroVideoReady);
+      heroVideo.addEventListener('timeupdate', markHeroVideoReady);
+      window.addEventListener('pageshow', tryPlayHeroVideo);
+      document.addEventListener('visibilitychange', () => {
+        if (!document.hidden) tryPlayHeroVideo();
+      });
+      tryPlayHeroVideo();
+    }
 
     // Smooth scroll for anchor links
     document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
