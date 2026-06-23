@@ -662,11 +662,11 @@
                 x5-playsinline
                 x5-video-player-type="h5"
                 x5-video-player-fullscreen="false"
-                preload="metadata"
+                preload="auto"
                 poster="./portfolio2-assets/hero-intro-poster.jpg"
                 aria-label="Sheryl intro animation"
               >
-                <source src="./jimeng-2026-06-12-3794-帮我生成一个视频，我想放在作品集的首页，从敲电脑的动作然后挥手sayhi，再到瑜....mp4" type="video/mp4" />
+                <source src="./portfolio2-assets/hero-intro-mobile.mp4" type="video/mp4" />
               </video>
             </div>
           </div>
@@ -929,6 +929,9 @@
       heroVideo.muted = true;
       heroVideo.defaultMuted = true;
       heroVideo.playsInline = true;
+      heroVideo.setAttribute('muted', '');
+      heroVideo.setAttribute('playsinline', '');
+      heroVideo.setAttribute('webkit-playsinline', '');
 
       const markHeroVideoReady = () => {
         if (!heroVideo.paused && heroVideo.currentTime > 0) {
@@ -945,6 +948,8 @@
       heroVideo.addEventListener('playing', markHeroVideoReady);
       heroVideo.addEventListener('timeupdate', markHeroVideoReady);
       window.addEventListener('pageshow', tryPlayHeroVideo);
+      document.addEventListener('WeixinJSBridgeReady', tryPlayHeroVideo, false);
+      document.addEventListener('touchstart', tryPlayHeroVideo, { once: true, passive: true });
       document.addEventListener('visibilitychange', () => {
         if (!document.hidden) tryPlayHeroVideo();
       });
