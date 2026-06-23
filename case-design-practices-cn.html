@@ -271,10 +271,12 @@
       display: grid;
       grid-template-columns: 1fr;
       gap: clamp(1.5rem, 4vw, 3rem);
-      align-items: start;
+      align-items: stretch;
     }
     .prototype-plan-item {
       min-width: 0;
+      display: flex;
+      flex-direction: column;
       text-align: left;
     }
     .prototype-plan-media {
@@ -284,6 +286,7 @@
     }
     @media (min-width: 768px) {
       .prototype-plan-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .prototype-plan-media { margin-top: auto; }
     }
     .clean-figure {
       overflow: visible;
@@ -724,7 +727,7 @@
             </h3>
             <div class="prototype-plan-grid">
               <article class="prototype-plan-item">
-                <p class="text-xs font-semibold text-[#FF573A] mb-2">Prototype Plan 01</p>
+                <p class="text-xs font-semibold text-neutral-400 mb-2">Prototype Plan 01</p>
                 <h4 class="text-base font-bold mb-3">可运行原型方案一</h4>
                 <p class="text-sm md:text-[15px] leading-body text-neutral-500">
                   以强视觉冲击的风格方向切入，重点验证用户通过手势滑动选择视频风格卡片的互动体验，让团队先判断主题选择是否足够直观、有记忆点。
@@ -738,7 +741,7 @@
                       muted
                       loop
                       playsinline
-                      preload="metadata"
+                      preload="none"
                       aria-label="世界杯记忆 H5 可运行原型方案一录屏"
                     ></video>
                   </figure>
@@ -747,7 +750,7 @@
 
               <article class="prototype-plan-item">
                 <div class="mb-2 flex flex-wrap items-center gap-3">
-                  <p class="text-xs font-semibold text-neutral-400">Prototype Plan 02</p>
+                  <p class="text-xs font-semibold text-[#FF573A]">Prototype Plan 02</p>
                   <span class="inline-flex items-center rounded-full bg-[#FF573A] px-2.5 py-1 text-[11px] font-bold leading-none text-white">
                     最终选择该方案
                   </span>
@@ -765,7 +768,7 @@
                       muted
                       loop
                       playsinline
-                      preload="metadata"
+                      preload="none"
                       aria-label="世界杯记忆 H5 可运行原型方案二录屏，最终选择方案"
                     ></video>
                   </figure>
@@ -1028,9 +1031,9 @@
                 poster="./case-design-practices-cn-assets/design-ops-site-mockup-poster.png"
                 controls
                 muted
-                loop
                 playsinline
-                preload="metadata"
+                preload="none"
+                data-stay-first-frame
                 aria-label="B端需求管理平台上线网站样式录屏"
               ></video>
             </figure>
@@ -1124,6 +1127,32 @@
       } else {
         revealTargets.forEach((target) => target.classList.add('visible'));
       }
+
+      const firstFrameVideos = Array.from(document.querySelectorAll('[data-stay-first-frame]'));
+      const holdAtFirstFrame = (video) => {
+        video.autoplay = false;
+        video.pause();
+
+        if (video.readyState >= 1 && video.currentTime !== 0) {
+          try {
+            video.currentTime = 0;
+          } catch (error) {
+            // Some browsers block seeking until metadata is ready.
+          }
+        }
+      };
+
+      firstFrameVideos.forEach((video) => {
+        holdAtFirstFrame(video);
+        video.addEventListener('loadedmetadata', () => holdAtFirstFrame(video), { once: true });
+      });
+
+      window.addEventListener('pageshow', () => {
+        firstFrameVideos.forEach((video) => {
+          holdAtFirstFrame(video);
+          window.setTimeout(() => holdAtFirstFrame(video), 120);
+        });
+      });
 
       const scrollButtons = Array.from(document.querySelectorAll('[data-scroll-target]'));
       const updateScrollControls = (targetId) => {
