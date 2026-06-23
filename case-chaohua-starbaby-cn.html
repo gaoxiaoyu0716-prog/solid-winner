@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <script src="portfolio-case-i18n.js"></script>
   <script>
     tailwind.config = {
       theme: {
@@ -45,20 +46,18 @@
     }
     .case-hero-cover {
       position: relative;
+      display: block;
       width: 100%;
-      height: clamp(360px, 52vw, 680px);
-      overflow: hidden;
-      background: #f5f5f5;
+      overflow: visible;
+      background: transparent;
     }
     .case-hero-cover img {
       display: block;
       width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center center;
+      height: auto;
     }
     .case-hero-info {
-      padding: 3.75rem 0 4.5rem;
+      padding: 3.75rem 0 3.25rem;
     }
     .case-hero-summary {
       display: grid;
@@ -94,16 +93,12 @@
       height: 1px;
       background: #e5e5e5;
     }
-    .case-hero-overview {
-      padding-top: 0;
-      border-top: 0;
-    }
     @media (max-width: 767px) {
       .case-hero-cover {
-        height: clamp(280px, 78vw, 420px);
+        overflow: visible;
       }
       .case-hero-info {
-        padding: 2.5rem 0 3.25rem;
+        padding: 2.5rem 0 2.5rem;
       }
       .case-hero-summary {
         grid-template-columns: 1fr;
@@ -175,6 +170,19 @@
     .highlight-card {
       border-left: 2px solid #FF573A;
       padding-left: 1.25rem;
+    }
+    .section-label {
+      margin-bottom: 0.9rem;
+      color: #a3a3a3;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+    .soft-card {
+      border: 1px solid #e5e5e5;
+      border-radius: 2px;
+      background: #fff;
+      padding: 1.25rem;
     }
 
     .side-nav-link {
@@ -622,6 +630,20 @@
       height: 100%;
       padding: 1rem;
     }
+    .nurture-loop-flow {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
+      gap: 10px;
+      align-items: stretch;
+    }
+    .nurture-loop-flow > .flow-card {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 88px;
+      padding: 1rem;
+      text-align: center;
+    }
     .flow-arrow {
       align-self: center;
       color: #FF573A;
@@ -634,6 +656,9 @@
         grid-template-columns: 1fr;
       }
       .module-step-flow {
+        grid-template-columns: 1fr;
+      }
+      .nurture-loop-flow {
         grid-template-columns: 1fr;
       }
       .flow-arrow {
@@ -870,14 +895,6 @@
           </div>
         </div>
         <div class="hero-line case-hero-divider mt-10" aria-hidden="true"></div>
-        <div class="hero-line case-hero-overview mt-10 grid grid-cols-1 gap-8">
-          <div>
-            <p class="text-xs font-semibold text-neutral-400 mb-3">Overview</p>
-            <p class="text-sm md:text-[15px] leading-body text-neutral-500">
-              基于明星超话与粉丝生态，设计一套「全员共同守护一个萌宠」的虚拟养成体验，将签到、发帖、任务等数据行为转化为陪伴、成长与集体荣誉反馈，提升超话互动频率、停留时长和持续回访意愿。
-            </p>
-          </div>
-        </div>
       </div>
     </div>
   </header>
@@ -910,11 +927,11 @@
       </aside>
 
       <div class="lg:col-span-10">
-        <section id="overview" class="case-section py-20 md:py-28">
+        <section id="overview" class="case-section py-20 md:py-28 lg:pt-2">
           <div class="reveal">
             <p class="text-xs font-semibold text-neutral-400 mb-3"><span class="section-num">01</span> 项目概览</p>
             <h2 class="max-w-[1040px] text-2xl md:text-3xl font-bold leading-heading">
-              项目概览：超话需要从“做数据”走向“有陪伴”
+              超话需要从“做数据”走向“有陪伴”
             </h2>
             <div class="mt-6 max-w-[1040px] space-y-4 text-sm md:text-[15px] leading-body text-neutral-500">
               <p>
@@ -924,13 +941,39 @@
                 「超话星宝」希望把这些分散的社区行为转译成一个可感知、可反馈、可共同参与的养成系统：用户不只是完成任务，而是在和同好一起养成一个属于超话的星宝。
               </p>
             </div>
-            <div class="mt-8 highlight-card max-w-[1040px]">
-              <p class="text-xs font-semibold text-neutral-900 mb-1">项目定位</p>
-              <h3 class="text-lg md:text-xl font-bold leading-heading mb-3">从个人任务完成，升级为粉丝共同养成</h3>
-              <p class="text-sm md:text-[15px] leading-body text-neutral-500">
-                超话星宝不是单个用户的宠物，而是整个超话共同维护的情绪载体。它把签到、发帖、互动、任务等行为转化为星宝成长、爱心贡献、动作反馈和集体荣誉。
-              </p>
+            <div class="mt-16">
+              <div class="max-w-[1040px] mb-8">
+                <p class="section-label">项目定位</p>
+                <h3 class="text-xl md:text-2xl font-bold leading-heading mb-4">从个人任务完成，升级为粉丝共同养成</h3>
+                <p class="text-sm md:text-[15px] leading-body text-neutral-500">
+                  超话星宝不是单个用户的宠物，而是整个超话共同维护的情绪载体。它把签到、发帖、互动、任务等行为转化为星宝成长、爱心贡献、动作反馈和集体荣誉。
+                </p>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-[1040px]">
+                <div class="soft-card">
+                  <p class="text-xs font-semibold mb-3">星宝成长</p>
+                  <p class="text-xs leading-relaxed text-neutral-500">社区行为被转化为可持续积累的成长进度。</p>
+                </div>
+                <div class="soft-card">
+                  <p class="text-xs font-semibold mb-3">爱心贡献</p>
+                  <p class="text-xs leading-relaxed text-neutral-500">个人完成任务后，贡献能被明确记录和感知。</p>
+                </div>
+                <div class="soft-card">
+                  <p class="text-xs font-semibold mb-3">动作反馈</p>
+                  <p class="text-xs leading-relaxed text-neutral-500">星宝通过状态和动作回应用户的参与行为。</p>
+                </div>
+                <div class="soft-card">
+                  <p class="text-xs font-semibold mb-3">集体荣誉</p>
+                  <p class="text-xs leading-relaxed text-neutral-500">让粉丝看到个人努力如何汇入整个超话目标。</p>
+                </div>
+              </div>
             </div>
+          </div>
+
+          <div class="reveal delay-2 mt-10 wide-visual-scroll">
+            <a href="微博星宝-产品定位图 1.png" target="_blank" rel="noopener" class="block rounded-sm overflow-hidden bg-white">
+              <img src="微博星宝-产品定位图 1.png" alt="微博星宝产品定位图" class="w-full h-auto object-contain" />
+            </a>
           </div>
 
         </section>
@@ -941,53 +984,34 @@
           <div class="reveal">
             <p class="text-xs font-semibold text-neutral-400 mb-3"><span class="section-num">02</span> 问题诊断</p>
             <h2 class="max-w-[1040px] text-2xl md:text-3xl font-bold leading-heading">
-              为什么超话任务难以形成长期牵引
+              任务可以带来行为，但不一定带来情感连接
             </h2>
           </div>
 
-          <div class="mt-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+          <div class="mt-10 grid grid-cols-1 md:grid-cols-3 gap-4">
             <article class="reveal delay-1 problem-card p-6">
               <p class="text-xs font-semibold text-[#FF573A] mb-3">问题 1</p>
-              <h3 class="text-base font-bold mb-3">任务完成感强，情绪回报弱</h3>
+              <h3 class="text-base font-bold mb-3">任务反馈弱</h3>
               <p class="text-sm leading-body text-neutral-500">
-                用户完成签到、发帖、互动后，反馈多停留在数字增长和任务完成，缺少“被回应”的陪伴感。
+                用户完成签到、发帖、互动后，反馈往往停留在数字变化，缺少可感知的情绪回报。
               </p>
             </article>
             <article class="reveal delay-2 problem-card p-6">
               <p class="text-xs font-semibold text-[#FF573A] mb-3">问题 2</p>
-              <h3 class="text-base font-bold mb-3">个体努力没有被集体可视化</h3>
+              <h3 class="text-base font-bold mb-3">个人行为和集体目标脱节</h3>
               <p class="text-sm leading-body text-neutral-500">
-                粉丝共同做数据，但页面没有把群体贡献转化成可见的共同目标，集体荣誉感被削弱。
+                用户知道自己完成了任务，但不容易感受到自己的行为如何影响整个超话。
               </p>
             </article>
             <article class="reveal delay-3 problem-card p-6">
               <p class="text-xs font-semibold text-[#FF573A] mb-3">问题 3</p>
-              <h3 class="text-base font-bold mb-3">互动链路缺少趣味反馈</h3>
+              <h3 class="text-base font-bold mb-3">长期参与缺少陪伴感</h3>
               <p class="text-sm leading-body text-neutral-500">
-                传统任务链路偏列表化、结果化，用户做完即走，难以形成“再看一眼”“再互动一次”的停留动机。
-              </p>
-            </article>
-            <article class="reveal delay-4 problem-card p-6">
-              <p class="text-xs font-semibold text-[#FF573A] mb-3">问题 4</p>
-              <h3 class="text-base font-bold mb-3">百量级 IP 扩展成本高</h3>
-              <p class="text-sm leading-body text-neutral-500">
-                明星超话数量多，如果每个形象和动作都依赖重度手工制作，后续运营和迭代成本难以控制。
+                单纯任务容易形成机械打卡，难以持续产生“我想回来看看”的理由。
               </p>
             </article>
           </div>
 
-          <div class="reveal delay-4 mt-10 highlight-card max-w-[1040px]">
-            <p class="text-xs font-semibold text-neutral-900 mb-1">设计判断</p>
-            <p class="text-sm md:text-[15px] leading-body text-neutral-500">
-              项目要解决的不是“在超话里加一个宠物”，而是重新定义粉丝任务的反馈方式：把数据行为变成情感投入，把个人操作变成集体养成。
-            </p>
-          </div>
-
-          <div class="reveal delay-2 mt-8 wide-visual-scroll">
-            <a href="微博星宝-产品定位图 1.png" target="_blank" rel="noopener" class="block rounded-sm overflow-hidden bg-white">
-              <img src="微博星宝-产品定位图 1.png" alt="微博星宝产品定位图" class="w-full h-auto object-contain" />
-            </a>
-          </div>
         </section>
 
         <div class="divider"></div>
@@ -996,7 +1020,7 @@
           <div class="reveal">
             <p class="text-xs font-semibold text-neutral-400 mb-3"><span class="section-num">03</span> 设计机会</p>
             <h2 class="max-w-[1040px] text-2xl md:text-3xl font-bold leading-heading">
-              设计机会：将粉丝任务转译为群体共养体验
+              将粉丝任务转译为群体共养体验
             </h2>
           </div>
 
@@ -1170,8 +1194,35 @@
         <section id="strategy" class="case-section py-20 md:py-28">
           <div class="reveal">
             <p class="text-xs font-semibold text-neutral-400 mb-3"><span class="section-num">04</span> 设计策略</p>
+          </div>
+
+          <div class="reveal delay-1 mt-8 grid grid-cols-1 md:grid-cols-3 gap-4 max-w-[1040px]">
+            <article class="soft-card">
+              <p class="text-xs font-semibold text-[#FF573A] mb-3">策略一</p>
+              <h3 class="text-base font-bold mb-3">行为可映射</h3>
+              <p class="text-sm leading-body text-neutral-500">
+                把签到、发帖、互动、任务等行为统一映射为爱心、成长值和阶段变化。
+              </p>
+            </article>
+            <article class="soft-card">
+              <p class="text-xs font-semibold text-[#FF573A] mb-3">策略二</p>
+              <h3 class="text-base font-bold mb-3">反馈可感知</h3>
+              <p class="text-sm leading-body text-neutral-500">
+                通过表情、动作、状态、成长变化，让用户感受到“我的行为产生了影响”。
+              </p>
+            </article>
+            <article class="soft-card">
+              <p class="text-xs font-semibold text-[#FF573A] mb-3">策略三</p>
+              <h3 class="text-base font-bold mb-3">运营可规模化</h3>
+              <p class="text-sm leading-body text-neutral-500">
+                用通用动作体系、成长阶段和状态规则，支持更多超话复用，而不是每个超话单独定制一套角色。
+              </p>
+            </article>
+          </div>
+
+          <div class="reveal delay-1 mt-10">
             <h2 class="max-w-[1040px] text-2xl md:text-3xl font-bold leading-heading">
-              设计策略：优先可规模化，而不是单个角色的局部精致
+              规模化优先，而不是单角色精致化
             </h2>
           </div>
 
@@ -1210,12 +1261,6 @@
           </div>
 
           <div class="reveal delay-4 mt-10 space-y-6">
-            <div class="highlight-card max-w-[1040px]">
-              <p class="text-xs font-semibold text-neutral-900 mb-1">设计判断</p>
-              <p class="text-sm md:text-[15px] leading-body text-neutral-500">
-                超话星宝的设计策略不是“做一个角色”，而是“建立一套可复制的角色生产与互动运营系统”。
-              </p>
-            </div>
             <div class="matrix-card overflow-hidden">
               <div class="matrix-row bg-neutral-50">
                 <div class="matrix-cell">评估维度</div>
@@ -1247,30 +1292,36 @@
           <div class="reveal mb-14 md:mb-20">
             <p class="text-xs font-semibold text-neutral-400 mb-3"><span class="section-num">05</span> 核心方案</p>
             <h2 class="max-w-[1040px] text-2xl md:text-3xl font-bold leading-heading">
-              核心方案：核心玩法流程
+              把社区行为转化为可持续养成闭环
             </h2>
           </div>
 
           <article id="execution-flow" class="module-block reveal mb-20 md:mb-28">
             <div class="max-w-[1040px]">
-              <p class="text-xs font-semibold text-[#FF573A] mb-3">核心流程</p>
-              <h3 class="text-xl md:text-2xl font-bold leading-heading mb-3">核心养成闭环</h3>
-              <p class="text-sm font-medium text-neutral-400 mb-5">让任务行为自然流向星宝互动</p>
+              <p class="text-xs font-semibold text-[#FF573A] mb-3">养成闭环</p>
+              <h3 class="text-xl md:text-2xl font-bold leading-heading mb-3">从用户行为到星宝反馈，形成持续参与闭环</h3>
               <p class="text-sm md:text-[15px] leading-body text-neutral-500 mb-6">
                 我梳理了用户进入主流程、任务与爱心获取流程、喂养互动流程、成长升级流程，确保用户能理解“做什么能获得爱心”“爱心如何照顾星宝”“星宝如何成长”。
               </p>
-              <div class="module-value-grid">
-                <div class="value-card p-4">
-                  <p class="text-xs font-semibold text-neutral-900 mb-1">问题</p>
-                  <p class="text-xs leading-relaxed text-neutral-500">任务完成与角色反馈之间如果没有强关联，用户会继续把星宝当作额外入口。</p>
+              <div class="nurture-loop-flow">
+                <div class="flow-card">
+                  <p class="text-sm font-semibold leading-snug text-neutral-900">完成社区行为</p>
                 </div>
-                <div class="value-card p-4 bg-[#FFF8F6] border-[#FF573A]/15">
-                  <p class="text-xs font-semibold text-[#FF573A] mb-1">设计</p>
-                  <p class="text-xs leading-relaxed text-neutral-500">把签到、发帖、互动转化为爱心，再用爱心驱动摸 ta、投喂、洗漱、玩耍等互动。</p>
+                <span class="flow-arrow" aria-hidden="true">→</span>
+                <div class="flow-card">
+                  <p class="text-sm font-semibold leading-snug text-neutral-900">获得爱心 / 成长值</p>
                 </div>
-                <div class="value-card p-4">
-                  <p class="text-xs font-semibold text-neutral-900 mb-1">价值</p>
-                  <p class="text-xs leading-relaxed text-neutral-500">让超话原有高频行为获得更有温度的情绪反馈，形成回访牵引。</p>
+                <span class="flow-arrow" aria-hidden="true">→</span>
+                <div class="flow-card">
+                  <p class="text-sm font-semibold leading-snug text-neutral-900">星宝状态变化</p>
+                </div>
+                <span class="flow-arrow" aria-hidden="true">→</span>
+                <div class="flow-card">
+                  <p class="text-sm font-semibold leading-snug text-neutral-900">用户获得情绪反馈</p>
+                </div>
+                <span class="flow-arrow" aria-hidden="true">→</span>
+                <div class="flow-card">
+                  <p class="text-sm font-semibold leading-snug text-neutral-900">继续签到 / 发帖 / 任务</p>
                 </div>
               </div>
             </div>
@@ -1323,20 +1374,6 @@
               <p class="text-sm md:text-[15px] leading-body text-neutral-500 mb-6">
                 首页需要同时承载星宝角色、成长状态、任务入口、互动行为和运营入口。我先梳理不同框架方案，确认哪些信息必须首屏可见、哪些操作需要保持高频触达，避免后续视觉细化时只强调氛围而削弱任务转化。
               </p>
-              <div class="module-value-grid">
-                <div class="value-card p-4">
-                  <p class="text-xs font-semibold text-neutral-900 mb-1">角色焦点</p>
-                  <p class="text-xs leading-relaxed text-neutral-500">让星宝成为首屏视觉中心，优先建立陪伴感和可互动预期。</p>
-                </div>
-                <div class="value-card p-4 bg-[#FFF8F6] border-[#FF573A]/15">
-                  <p class="text-xs font-semibold text-[#FF573A] mb-1">任务入口</p>
-                  <p class="text-xs leading-relaxed text-neutral-500">把签到、爱心和互动入口放在用户能自然发现的位置。</p>
-                </div>
-                <div class="value-card p-4">
-                  <p class="text-xs font-semibold text-neutral-900 mb-1">成长反馈</p>
-                  <p class="text-xs leading-relaxed text-neutral-500">用等级、成长值和陪伴榜承接长期目标，形成回访理由。</p>
-                </div>
-              </div>
             </div>
             <div class="wide-visual-scroll mb-6">
               <a href="weibo-xingbao-main-annotation-lively 2.png" target="_blank" rel="noopener" class="block rounded-sm overflow-hidden bg-white">
@@ -1382,25 +1419,10 @@
           <article id="execution-onboarding" class="module-block reveal mb-20 md:mb-28">
             <div class="max-w-[1040px] mb-8">
               <p class="text-xs font-semibold text-[#FF573A] mb-3">新手引导</p>
-              <h3 class="text-xl md:text-2xl font-bold leading-heading mb-3">新手引导</h3>
-              <p class="text-sm font-medium text-neutral-400 mb-5">先让用户理解“这是谁、能做什么、下一步去哪里”</p>
+              <h3 class="text-xl md:text-2xl font-bold leading-heading mb-3">先让用户理解“这是谁、能做什么、下一步去哪里”</h3>
               <p class="text-sm md:text-[15px] leading-body text-neutral-500 mb-6">
                 新用户第一次进入时，需要在很短时间内理解星宝与超话的关系、爱心的来源，以及互动会带来的反馈。引导不做长说明，而是通过首屏状态、任务入口和首次互动，把用户自然带入养成闭环。
               </p>
-              <div class="module-value-grid">
-                <div class="value-card p-4">
-                  <p class="text-xs font-semibold text-neutral-900 mb-1">身份建立</p>
-                  <p class="text-xs leading-relaxed text-neutral-500">说明星宝来自超话共同贡献，不是孤立的单人宠物。</p>
-                </div>
-                <div class="value-card p-4 bg-[#FFF8F6] border-[#FF573A]/15">
-                  <p class="text-xs font-semibold text-[#FF573A] mb-1">目标提示</p>
-                  <p class="text-xs leading-relaxed text-neutral-500">用任务和爱心提示建立“做行为 → 得爱心 → 照顾星宝”的认知。</p>
-                </div>
-                <div class="value-card p-4">
-                  <p class="text-xs font-semibold text-neutral-900 mb-1">动作承接</p>
-                  <p class="text-xs leading-relaxed text-neutral-500">把用户带到第一次喂养或互动，让反馈尽快发生。</p>
-                </div>
-              </div>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div>
@@ -1426,26 +1448,11 @@
 
           <article id="execution-interaction" class="module-block reveal mb-20 md:mb-28">
             <div class="max-w-[1040px]">
-              <p class="text-xs font-semibold text-[#FF573A] mb-3">互动流程</p>
-              <h3 class="text-xl md:text-2xl font-bold leading-heading mb-3">喂养互动流程</h3>
-              <p class="text-sm font-medium text-neutral-400 mb-5">把“点击按钮”设计成“照顾 ta”</p>
+              <p class="text-xs font-semibold text-[#FF573A] mb-3">喂养互动流程</p>
+              <h3 class="text-xl md:text-2xl font-bold leading-heading mb-3">把“点击按钮”设计成“照顾 ta”</h3>
               <p class="text-sm md:text-[15px] leading-body text-neutral-500 mb-6">
                 我围绕摸 ta、投喂、洗漱、玩耍拆解了交互节点：用户触发、道具出现、动作播放、状态变化、爱心消耗或奖励反馈。每个行为都需要有清晰的操作前因和情绪后果。
               </p>
-              <div class="module-value-grid">
-                <div class="value-card p-4">
-                  <p class="text-xs font-semibold text-neutral-900 mb-1">触发</p>
-                  <p class="text-xs leading-relaxed text-neutral-500">用户点击互动入口，系统判断星宝当前状态、爱心数量和可用动作。</p>
-                </div>
-                <div class="value-card p-4 bg-[#FFF8F6] border-[#FF573A]/15">
-                  <p class="text-xs font-semibold text-[#FF573A] mb-1">反馈</p>
-                  <p class="text-xs leading-relaxed text-neutral-500">播放瞬态动作，并通过表情、音效、特效或成长值变化强化照顾感。</p>
-                </div>
-                <div class="value-card p-4">
-                  <p class="text-xs font-semibold text-neutral-900 mb-1">回落</p>
-                  <p class="text-xs leading-relaxed text-neutral-500">动作结束后回到对应状态，避免角色状态与用户理解产生冲突。</p>
-                </div>
-              </div>
             </div>
             <div class="wide-visual-scroll mt-8">
               <a href="weibo-xingbao-step04-layout 1.png" target="_blank" rel="noopener" class="block rounded-sm overflow-hidden bg-white">
@@ -1456,28 +1463,11 @@
 
           <article id="execution-growth" class="module-block reveal mb-20 md:mb-28">
             <div class="max-w-[1040px]">
-              <p class="text-xs font-semibold text-[#FF573A] mb-3">任务成长</p>
-              <h3 class="text-xl md:text-2xl font-bold leading-heading mb-3">任务、爱心与成长体系</h3>
-              <p class="text-sm font-medium text-neutral-400 mb-5">让用户理解每次行为都在推动星宝成长</p>
+              <p class="text-xs font-semibold text-[#FF573A] mb-3">任务、爱心与成长体系</p>
+              <h3 class="text-xl md:text-2xl font-bold leading-heading mb-3">让用户理解每次行为都在推动星宝成长</h3>
               <p class="text-sm md:text-[15px] leading-body text-neutral-500 mb-6">
                 任务系统承担行为转化，爱心承担情感化资源，成长体系承担长期目标。我将三者串联起来，让用户完成超话行为后能立即看到爱心变化，并通过成长值、阶段节点和升级庆祝感知集体努力的结果。
               </p>
-              <div class="module-step-flow">
-                <div class="flow-card">
-                  <p class="text-sm font-bold mb-1">完成超话任务</p>
-                  <p class="text-xs leading-relaxed text-neutral-500">签到、发帖、浏览、互动等行为进入任务面板。</p>
-                </div>
-                <span class="flow-arrow" aria-hidden="true">→</span>
-                <div class="flow-card">
-                  <p class="text-sm font-bold mb-1">获得爱心</p>
-                  <p class="text-xs leading-relaxed text-neutral-500">爱心作为养成资源，连接任务行为和照顾动作。</p>
-                </div>
-                <span class="flow-arrow" aria-hidden="true">→</span>
-                <div class="flow-card">
-                  <p class="text-sm font-bold mb-1">推动成长</p>
-                  <p class="text-xs leading-relaxed text-neutral-500">成长值达到节点后触发升级庆祝和阶段反馈。</p>
-                </div>
-              </div>
             </div>
             <div class="wide-visual-scroll mt-8">
               <a href="weibo-xingbao-module05-growth 1.png" target="_blank" rel="noopener" class="block rounded-sm overflow-hidden bg-white">
@@ -1488,26 +1478,11 @@
 
           <article id="execution-motion" class="module-block reveal mb-20 md:mb-28">
             <div class="max-w-[1040px]">
-              <p class="text-xs font-semibold text-[#FF573A] mb-3">动作体系</p>
-              <h3 class="text-xl md:text-2xl font-bold leading-heading mb-3">角色动作体系</h3>
-              <p class="text-sm font-medium text-neutral-400 mb-5">区分状态与瞬态，避免动作冲突</p>
+              <p class="text-xs font-semibold text-[#FF573A] mb-3">角色动作体系</p>
+              <h3 class="text-xl md:text-2xl font-bold leading-heading mb-3">区分状态与瞬态，避免动作冲突</h3>
               <p class="text-sm md:text-[15px] leading-body text-neutral-500 mb-6">
                 星宝的生命感来自动作反馈。我将动作拆为“状态”和“瞬态”两类，并进一步明确触发条件、播放优先级、打断规则和回落状态，帮助设计、动效和开发在同一套逻辑下协作。
               </p>
-              <div class="module-value-grid">
-                <div class="value-card p-4">
-                  <p class="text-xs font-semibold text-neutral-900 mb-1">状态动作</p>
-                  <p class="text-xs leading-relaxed text-neutral-500">用于持续表达星宝当前情绪或身体状态，如待机、开心、困倦、饥饿。</p>
-                </div>
-                <div class="value-card p-4 bg-[#FFF8F6] border-[#FF573A]/15">
-                  <p class="text-xs font-semibold text-[#FF573A] mb-1">瞬态动作</p>
-                  <p class="text-xs leading-relaxed text-neutral-500">用于承接操作反馈，如摸 ta、投喂、洗漱、玩耍、任务完成、升级庆祝。</p>
-                </div>
-                <div class="value-card p-4">
-                  <p class="text-xs font-semibold text-neutral-900 mb-1">衔接规则</p>
-                  <p class="text-xs leading-relaxed text-neutral-500">瞬态播放后根据结果回到普通待机、开心状态或新的成长状态。</p>
-                </div>
-              </div>
             </div>
             <div class="motion-table-scroll mt-8" aria-label="星宝动作体系 HTML 表格，横向滚动查看">
               <div class="motion-table-board">
@@ -1694,9 +1669,8 @@
 
           <article id="execution-production" class="module-block reveal">
             <div class="max-w-[1040px]">
-              <p class="text-xs font-semibold text-[#FF573A] mb-3">资产协作</p>
-              <h3 class="text-xl md:text-2xl font-bold leading-heading mb-3">3D 动画落地与资产协作</h3>
-              <p class="text-sm font-medium text-neutral-400 mb-5">用角色/道具分离降低穿模和排期风险</p>
+              <p class="text-xs font-semibold text-[#FF573A] mb-3">3D 动画落地与资产协作</p>
+              <h3 class="text-xl md:text-2xl font-bold leading-heading mb-3">用角色/道具分离降低穿模和排期风险</h3>
               <p class="text-sm md:text-[15px] leading-body text-neutral-500 mb-6">
                 采用 3D 骨骼绑定后，我进一步细化了投喂、洗漱、睡觉等动画的表现规则：通过角色动作、道具出现/移动/消失、外部特效和状态切换营造互动感，避免复杂绑定导致穿模或批量适配困难。
               </p>
@@ -1801,7 +1775,6 @@
         <section id="global-interaction" class="case-section py-20 md:py-28" data-tab-group>
           <div class="reveal max-w-[1040px] mb-8">
             <p class="text-xs font-semibold text-neutral-400 mb-3">全局交互稿</p>
-            <h2 class="text-2xl md:text-3xl font-bold leading-heading mb-5">全局交互稿</h2>
             <p class="text-sm md:text-[15px] leading-body text-neutral-500">
               汇总核心页面、流程节点与动效拆解，帮助团队在同一份全局稿中对齐页面关系、交互状态和动效落地范围。
             </p>
@@ -1814,12 +1787,12 @@
             </div>
             <div class="global-panel active" role="tabpanel" data-tab-panel="global-flow">
               <a href="全局交互稿.png" target="_blank" rel="noopener">
-                <img src="全局交互稿.png" alt="超话星宝全局交互稿" />
+                <img src="全局交互稿-preview.jpg" alt="超话星宝全局交互稿" loading="lazy" decoding="async" />
               </a>
             </div>
             <div class="global-panel" role="tabpanel" data-tab-panel="global-motion">
               <a href="全局动效梳理.png" target="_blank" rel="noopener">
-                <img src="全局动效梳理.png" alt="超话星宝全局动效梳理" />
+                <img src="全局动效梳理-preview.jpg" alt="超话星宝全局动效梳理" loading="lazy" decoding="async" />
               </a>
             </div>
           </div>
@@ -1827,8 +1800,15 @@
 
         <div class="divider"></div>
 
-        <section id="online-effect" class="pb-20 md:pb-28">
+        <section id="results" class="case-section py-20 md:py-28">
           <div class="reveal">
+            <p class="text-xs font-semibold text-neutral-400 mb-3"><span class="section-num">06</span> 上线效果与复盘</p>
+            <h2 class="max-w-[1040px] text-2xl md:text-3xl font-bold leading-heading">
+              星宝让社区贡献变得可感知
+            </h2>
+          </div>
+
+          <div id="online-effect" class="reveal delay-1 mt-10">
             <p class="text-xs font-semibold text-[#FF573A] mb-6">线上效果</p>
             <div class="online-effect-showcase">
               <div class="welfare-phone-mockup">
@@ -1843,19 +1823,8 @@
               </div>
             </div>
           </div>
-        </section>
 
-        <div class="divider"></div>
-
-        <section id="results" class="case-section py-20 md:py-28">
-          <div class="reveal">
-            <p class="text-xs font-semibold text-neutral-400 mb-3"><span class="section-num">06</span> 上线效果与复盘</p>
-            <h2 class="max-w-[1040px] text-2xl md:text-3xl font-bold leading-heading">
-              上线效果与复盘：让超话从任务入口变成情感经营场景
-            </h2>
-          </div>
-
-          <p class="reveal delay-1 mt-8 max-w-[1040px] text-sm md:text-[15px] leading-body text-neutral-500">
+          <p class="reveal delay-2 mt-10 max-w-[1040px] text-sm md:text-[15px] leading-body text-neutral-500">
             由于具体数据涉及内部口径，页面中不展示数值，而以指标方向和设计贡献呈现项目价值。
           </p>
 
@@ -1898,9 +1867,9 @@
 
   <section class="py-20 md:py-28 bg-neutral-50">
     <div class="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 text-center">
-      <p class="reveal text-xs font-semibold text-neutral-400 mb-4">相关项目</p>
-      <h2 class="reveal delay-1 text-2xl md:text-4xl font-bold">微博游戏中心体验升级</h2>
-      <a href="case-game-center-cn.html" class="reveal delay-2 inline-block mt-8 text-xs font-semibold text-[#FF573A]">
+      <p class="reveal text-xs font-semibold text-neutral-400 mb-4">下一个项目</p>
+      <h2 class="reveal delay-1 text-2xl md:text-4xl font-bold">微博 ACG 衍生品商业化体验设计</h2>
+      <a href="case-weibo-acg-derivatives-cn.html" class="reveal delay-2 inline-block mt-8 text-xs font-semibold text-[#FF573A]">
         查看详情 →
       </a>
     </div>
