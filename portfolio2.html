@@ -299,11 +299,31 @@
     }
 
     @media (max-width: 809.98px) {
+      .hero-layout {
+        gap: 2rem;
+      }
       .hero-media {
-        justify-content: flex-start;
+        justify-content: center;
       }
       .hero-video-orbit {
-        width: min(52vw, 220px);
+        width: min(100%, 342px);
+        aspect-ratio: 1112 / 834;
+      }
+      .hero-video-orbit::before {
+        inset: -8px;
+        border-radius: 28px;
+        transform: rotate(1.5deg);
+      }
+      .hero-video-orbit::after {
+        display: none;
+      }
+      .hero-video-shell {
+        border-radius: 24px;
+        transform: none;
+      }
+      .hero-video {
+        object-fit: cover;
+        transform: none;
       }
       .hero-photo-stage {
         justify-content: flex-start;
