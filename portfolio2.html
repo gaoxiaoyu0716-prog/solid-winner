@@ -185,12 +185,17 @@
       object-fit: cover;
       object-position: center center;
     }
+    @keyframes heroPosterDrift {
+      from { transform: scale(1.02) translate3d(0, 0, 0); }
+      to { transform: scale(1.07) translate3d(-1.5%, -1%, 0); }
+    }
     .hero-video {
       position: relative;
       z-index: 1;
       display: block;
       width: 100%;
-      height: 100%;
+      height: 100% !important;
+      max-width: none;
       object-fit: cover;
       object-position: center center;
       opacity: 0;
@@ -198,7 +203,17 @@
       transition: opacity 0.2s ease;
     }
     .hero-video-shell.is-video-ready .hero-video {
-      opacity: 1;
+      opacity: 1 !important;
+    }
+    .hero-video-shell.is-wechat-fallback .hero-video {
+      display: none !important;
+    }
+    .hero-video-shell.is-wechat-fallback .hero-video-fallback,
+    .hero-video-shell.is-video-unavailable .hero-video-fallback {
+      z-index: 2;
+    }
+    .hero-video-shell.is-wechat-fallback .hero-video-fallback {
+      animation: heroPosterDrift 5s ease-in-out infinite alternate;
     }
     /* Hero font comparison variants: append ?font=v1, v2, v3, or v4 to preview. */
     .hero-title {
@@ -362,7 +377,18 @@
     .work-list {
       margin-top: 100px;
     }
-    .work-item { cursor: pointer; }
+    .work-item {
+      display: block;
+      color: inherit;
+      text-decoration: none;
+      cursor: pointer;
+      -webkit-tap-highlight-color: rgba(255, 87, 58, 0.12);
+    }
+    .work-item:focus-visible {
+      outline: 2px solid #FF573A;
+      outline-offset: 6px;
+      border-radius: 18px;
+    }
     .work-item .work-cover {
       border-radius: 16px;
       overflow: hidden;
@@ -685,7 +711,7 @@
       <div class="work-list grid grid-cols-1 md:grid-cols-2 gap-x-8 lg:gap-x-12 gap-y-12 md:gap-y-14">
 
         <!-- Work 01 -->
-        <article class="work-item reveal" onclick="window.location.href='case-drama-2026.html'">
+        <a class="work-item reveal" href="case-drama-2026.html" aria-label="查看「抓马赢红包」春节活动体验设计">
           <div class="work-cover aspect-[16/9] bg-white">
             <img src="assets/drama/hero-cover.png" alt="抓马赢红包项目封面" class="work-img w-full h-full object-cover" />
           </div>
@@ -693,10 +719,10 @@
             <h3 class="text-xl md:text-2xl font-bold tracking-tighter leading-tight" data-en="Drama 2026 Spring Festival Campaign Experience Design" data-zh="「抓马赢红包」春节活动体验设计">「抓马赢红包」春节活动体验设计</h3>
             <p class="mt-3 text-sm leading-body text-neutral-500" data-en="Breaking complex Spring Festival gameplay into clear entrances, tasks, states, and feedback so users know what to do at every step." data-zh="把复杂春节玩法拆成清晰的入口、任务、状态和反馈，让用户每一步都知道该做什么。">把复杂春节玩法拆成清晰的入口、任务、状态和反馈，让用户每一步都知道该做什么。</p>
           </div>
-        </article>
+        </a>
 
         <!-- Work 02 -->
-        <article class="work-item reveal" onclick="window.location.href='case-game-center-cn.html'">
+        <a class="work-item reveal" href="case-game-center-cn.html" aria-label="查看微博游戏中心体验升级">
           <div class="work-cover aspect-[16/9] bg-white">
             <img src="game-center-hero-cn.png" alt="游戏中心项目封面" class="work-img w-full h-full object-cover" />
           </div>
@@ -704,10 +730,10 @@
             <h3 class="text-xl md:text-2xl font-bold tracking-tighter leading-tight" data-en="Weibo Game Center Redesign" data-zh="微博游戏中心体验升级">微博游戏中心体验升级</h3>
             <p class="mt-3 text-sm leading-body text-neutral-500" data-en="Rebuilding game discovery, benefit claiming, and community handoff paths so users can find content faster, get rewards, and return." data-zh="重构游戏发现、福利领取与社区承接路径，让用户更快找到内容、获得权益并形成回访。">重构游戏发现、福利领取与社区承接路径，让用户更快找到内容、获得权益并形成回访。</p>
           </div>
-        </article>
+        </a>
 
         <!-- Work 03 -->
-        <article class="work-item reveal" onclick="window.location.href='case-chaohua-starbaby-cn.html'">
+        <a class="work-item reveal" href="case-chaohua-starbaby-cn.html" aria-label="查看微博「超话星宝」体验设计">
           <div class="work-cover aspect-[16/9] bg-white">
             <img src="portfolio2-assets/starbaby-hero.png" alt="超话星宝项目封面" class="work-img w-full h-full object-cover" />
           </div>
@@ -715,10 +741,10 @@
             <h3 class="text-xl md:text-2xl font-bold tracking-tighter leading-tight" data-en="Weibo Chaohua Starbaby Experience Design" data-zh="微博「超话星宝」体验设计">微博「超话星宝」体验设计</h3>
             <p class="mt-3 text-sm leading-body text-neutral-500" data-en="Translating community tasks into Starbaby growth, heart feedback, and shared goals so fan actions are seen, rewarded, and turned into sustained participation." data-zh="把社区任务转译为星宝成长、爱心反馈和集体目标，让粉丝行为被看见、被反馈，并形成持续参与动力。">把社区任务转译为星宝成长、爱心反馈和集体目标，让粉丝行为被看见、被反馈，并形成持续参与动力。</p>
           </div>
-        </article>
+        </a>
 
         <!-- Work 04 -->
-        <article class="work-item reveal" onclick="window.location.href='case-weibo-acg-derivatives-cn.html'">
+        <a class="work-item reveal" href="case-weibo-acg-derivatives-cn.html" aria-label="查看微博 ACG 衍生品商业化体验设计">
           <div class="work-cover aspect-[16/9] bg-white">
             <img src="portfolio2-assets/acg-hero.png" alt="ACG 衍生品项目封面" class="work-img w-full h-full object-cover" />
           </div>
@@ -726,7 +752,7 @@
             <h3 class="text-xl md:text-2xl font-bold tracking-tighter leading-tight" data-en="Weibo ACG Derivatives Commercialization Experience Design" data-zh="微博 ACG 衍生品商业化体验设计">微博 ACG 衍生品商业化体验设计</h3>
             <p class="mt-3 text-sm leading-body text-neutral-500" data-en="Reworking the hierarchy and purchase path of blind-box and card-draw detail pages so users can understand prizes, rules, pricing, benefits, and complete orders faster." data-zh="重构抽赏 / 抽卡详情页的信息层级与购买路径，让用户更快看懂奖品、规则、价格和权益，并完成下单。">重构抽赏 / 抽卡详情页的信息层级与购买路径，让用户更快看懂奖品、规则、价格和权益，并完成下单。</p>
           </div>
-        </article>
+        </a>
 
 
 
@@ -926,34 +952,63 @@
     const heroVideo = document.querySelector('.hero-video');
     const heroVideoShell = document.querySelector('.hero-video-shell');
     if (heroVideo && heroVideoShell) {
-      heroVideo.muted = true;
-      heroVideo.defaultMuted = true;
-      heroVideo.playsInline = true;
-      heroVideo.setAttribute('muted', '');
-      heroVideo.setAttribute('playsinline', '');
-      heroVideo.setAttribute('webkit-playsinline', '');
+      const isWeChatBrowser = /MicroMessenger/i.test(navigator.userAgent);
 
-      const markHeroVideoReady = () => {
-        if (!heroVideo.paused && heroVideo.currentTime > 0) {
-          heroVideoShell.classList.add('is-video-ready');
-        }
-      };
-      const tryPlayHeroVideo = () => {
-        const playAttempt = heroVideo.play();
-        if (playAttempt && typeof playAttempt.catch === 'function') {
-          playAttempt.catch(() => {});
-        }
-      };
+      if (isWeChatBrowser) {
+        heroVideoShell.classList.add('is-wechat-fallback');
+        heroVideo.removeAttribute('autoplay');
+        heroVideo.pause();
+        heroVideo.querySelectorAll('source').forEach((source) => {
+          source.removeAttribute('src');
+        });
+        heroVideo.removeAttribute('src');
+        heroVideo.load();
+      } else {
+        heroVideo.muted = true;
+        heroVideo.defaultMuted = true;
+        heroVideo.playsInline = true;
+        heroVideo.setAttribute('muted', '');
+        heroVideo.setAttribute('playsinline', '');
+        heroVideo.setAttribute('webkit-playsinline', '');
 
-      heroVideo.addEventListener('playing', markHeroVideoReady);
-      heroVideo.addEventListener('timeupdate', markHeroVideoReady);
-      window.addEventListener('pageshow', tryPlayHeroVideo);
-      document.addEventListener('WeixinJSBridgeReady', tryPlayHeroVideo, false);
-      document.addEventListener('touchstart', tryPlayHeroVideo, { once: true, passive: true });
-      document.addEventListener('visibilitychange', () => {
-        if (!document.hidden) tryPlayHeroVideo();
-      });
-      tryPlayHeroVideo();
+        const markHeroVideoReady = () => {
+          if (!heroVideo.paused && heroVideo.readyState >= 2 && heroVideo.currentTime > 0.08) {
+            heroVideoShell.classList.add('is-video-ready');
+            heroVideoShell.classList.remove('is-video-unavailable');
+            heroVideo.style.opacity = '1';
+          }
+        };
+        const tryPlayHeroVideo = () => {
+          const playAttempt = heroVideo.play();
+          if (playAttempt && typeof playAttempt.catch === 'function') {
+            playAttempt.catch(() => {
+              heroVideoShell.classList.add('is-video-unavailable');
+              heroVideo.style.opacity = '0';
+            });
+          }
+        };
+
+        heroVideo.addEventListener('canplay', tryPlayHeroVideo, { once: true });
+        heroVideo.addEventListener('playing', markHeroVideoReady);
+        heroVideo.addEventListener('timeupdate', markHeroVideoReady);
+        heroVideo.addEventListener('error', () => {
+          heroVideoShell.classList.add('is-video-unavailable');
+          heroVideo.style.opacity = '0';
+        });
+        heroVideo.addEventListener('stalled', () => {
+          if (!heroVideoShell.classList.contains('is-video-ready')) {
+            heroVideoShell.classList.add('is-video-unavailable');
+            heroVideo.style.opacity = '0';
+          }
+        });
+        window.addEventListener('pageshow', tryPlayHeroVideo);
+        document.addEventListener('WeixinJSBridgeReady', tryPlayHeroVideo, false);
+        document.addEventListener('touchstart', tryPlayHeroVideo, { once: true, passive: true });
+        document.addEventListener('visibilitychange', () => {
+          if (!document.hidden) tryPlayHeroVideo();
+        });
+        tryPlayHeroVideo();
+      }
     }
 
     // Smooth scroll for anchor links
