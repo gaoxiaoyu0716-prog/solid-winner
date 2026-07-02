@@ -1,0 +1,2319 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>微博开新年・抓马赢红包 — Sheryl Gao</title>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', '"PingFang SC"', '"Noto Sans SC"', '"Microsoft YaHei"', 'system-ui', 'sans-serif'],
+          },
+          letterSpacing: { tight: '0', tighter: '0' },
+          lineHeight: { body: '1.8', heading: '1.15' },
+        },
+      },
+    };
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: #fff;
+      color: #171717;
+      letter-spacing: 0;
+      text-rendering: geometricPrecision;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    ::selection { background: #FF573A; color: #fff; }
+    :root {
+      --case-copy-width: 100%;
+    }
+    img {
+      box-shadow: none;
+      filter: none;
+    }
+    .case-detail-hero {
+      background: #fff;
+      border: 0;
+      box-shadow: none;
+      filter: none;
+    }
+    body > nav.fixed {
+      border-bottom: 0 !important;
+      background: #fff !important;
+      box-shadow: none !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+    }
+    .case-hero-cover {
+      position: relative;
+      width: 100%;
+      height: clamp(360px, 52vw, 680px);
+      overflow: hidden;
+      background: #fff;
+      border: 0;
+      box-shadow: none;
+      filter: none;
+    }
+    .case-hero-cover::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -2px;
+      height: 8px;
+      background: #fff;
+      pointer-events: none;
+    }
+    .case-hero-cover img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      box-shadow: none;
+      filter: none;
+    }
+    .case-hero-info {
+      padding: 3.75rem 0 3.25rem;
+    }
+    .case-hero-summary {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 0.4fr);
+      gap: clamp(2rem, 5vw, 5.5rem);
+      align-items: start;
+    }
+    .case-hero-title {
+      max-width: min(100%, 1040px);
+    }
+    .case-hero-meta {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(1.25rem, 3vw, 2.5rem);
+      padding-top: 0.35rem;
+    }
+    .case-hero-meta-label {
+      margin-bottom: 0.75rem;
+      color: #171717;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: 0;
+    }
+    .case-hero-meta-value {
+      color: #8a8a8a;
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 1.35;
+    }
+    .case-hero-divider {
+      width: 100%;
+      height: 1px;
+      background: #e5e5e5;
+    }
+    .case-hero-overview {
+      padding-top: 0;
+      border-top: 0;
+    }
+    @media (max-width: 767px) {
+      .case-hero-cover {
+        height: clamp(280px, 78vw, 420px);
+      }
+      .case-hero-info {
+        padding: 2.5rem 0 2.5rem;
+      }
+      .case-hero-summary {
+        grid-template-columns: 1fr;
+      }
+      .case-hero-meta {
+        grid-template-columns: 1fr;
+      }
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .72s cubic-bezier(.16,1,.3,1), transform .72s cubic-bezier(.16,1,.3,1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+	    .delay-1 { transition-delay: .08s; }
+	    .delay-2 { transition-delay: .16s; }
+	    .delay-3 { transition-delay: .24s; }
+	    .delay-4 { transition-delay: .32s; }
+    .hero-line {
+      opacity: 0;
+      transform: translateY(40px);
+      animation: heroSlide 1s cubic-bezier(.16,1,.3,1) forwards;
+    }
+    .hero-line:nth-child(1) { animation-delay: .08s; }
+    .hero-line:nth-child(2) { animation-delay: .18s; }
+    .hero-line:nth-child(3) { animation-delay: .28s; }
+    .hero-line:nth-child(4) { animation-delay: .38s; }
+    .hero-line:nth-child(5) { animation-delay: .48s; }
+    @keyframes heroSlide { to { opacity: 1; transform: translateY(0); } }
+    .nav-link { position: relative; }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+      width: 0;
+      height: 1px;
+      background: #171717;
+      transition: width .24s cubic-bezier(.16,1,.3,1);
+    }
+    .nav-link:hover::after { width: 100%; }
+    .case-section, .module-block { scroll-margin-top: 8.5rem; }
+	    .section-label {
+	      margin-bottom: .9rem;
+	      color: #a3a3a3;
+	      font-size: 13px;
+	      font-weight: 700;
+	      line-height: 1.35;
+	    }
+	    .section-label .section-index {
+	      color: #FF573A;
+	    }
+    .case-section > .reveal:first-child.max-w-3xl,
+    .case-section > .reveal:first-child > .max-w-3xl,
+    .case-section > .reveal > .max-w-3xl {
+      max-width: var(--case-copy-width);
+      margin-left: 0;
+      margin-right: 0;
+    }
+    .case-section .max-w-3xl {
+      max-width: var(--case-copy-width);
+    }
+    .case-section > .reveal:first-child h2,
+    .case-section > .reveal:first-child .i18n-title,
+    #overview [data-i18n="context.title"] {
+      margin-bottom: 1.25rem;
+      color: #171717;
+      font-size: clamp(1.5rem, 2.4vw, 2rem);
+      font-weight: 700;
+      line-height: 1.18;
+      letter-spacing: 0;
+    }
+    .case-section .max-w-3xl h3,
+    .case-section .gameplay-chapter > h3,
+    #overview .highlight-card > h3,
+    #overview .reveal.delay-2 h3,
+    #overview .reveal.delay-3 > h3,
+    #craft .soft-card > h3 {
+      color: #171717;
+      font-size: clamp(1.25rem, 2vw, 1.5rem);
+      font-weight: 700;
+      line-height: 1.25;
+      letter-spacing: 0;
+    }
+    .case-section h3.i18n-title,
+    .case-section h4.i18n-title,
+    .case-section [data-i18n="gameplay.loopTitle"],
+    .case-section [data-i18n="venue.progressTitle"] {
+      font-size: clamp(1.375rem, 2.4vw, 2rem);
+      line-height: 1.18;
+    }
+    .case-section .i18n-body {
+      max-width: var(--case-copy-width);
+      line-height: 1.8;
+    }
+	    .divider { height: 1px; background: #ededed; }
+    .side-nav-link {
+      position: relative;
+      display: block;
+      padding: .55rem 0 .55rem 1rem;
+      color: #a3a3a3;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.3;
+      transition: color .2s cubic-bezier(.16,1,.3,1);
+    }
+    .side-nav-link::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 2px;
+      height: 0;
+      background: #FF573A;
+      transform: translateY(-50%);
+      transition: height .2s cubic-bezier(.16,1,.3,1);
+    }
+    .side-nav-link.active, .side-nav-link:hover { color: #171717; }
+    .side-nav-link.active::before { height: 20px; }
+    .mobile-anchor {
+      display: inline-flex;
+      flex: 0 0 auto;
+      align-items: center;
+      height: 48px;
+      border-bottom: 2px solid transparent;
+      color: #a3a3a3;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .mobile-anchor.active { color: #171717; border-bottom-color: #FF573A; }
+    .soft-card, .metric-card {
+      border: 1px solid #e5e5e5;
+      border-radius: 2px;
+      background: #fff;
+    }
+    .soft-card { padding: 1.25rem; }
+    .gameplay-card-kicker {
+      margin-bottom: .5rem;
+      color: #FF573A;
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1.3;
+    }
+    .metric-card { padding: 1.25rem; }
+    .challenge-role-card {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      border: 1px solid #e5e5e5;
+      border-radius: 2px;
+      background: #fff;
+      padding: clamp(1.1rem, 2vw, 1.5rem);
+    }
+    .challenge-role-divider {
+      position: relative;
+      width: 100%;
+      height: 16px;
+      min-height: 16px;
+      background: transparent;
+    }
+    .challenge-role-divider::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: #FF573A;
+    }
+    .challenge-role-divider::after {
+      content: '';
+      position: absolute;
+      top: 1px;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-top: 10px solid #FF573A;
+      border-right: 7px solid transparent;
+      border-bottom: 0;
+      border-left: 7px solid transparent;
+      transform: translateX(-50%);
+    }
+    .challenge-role-kicker {
+      margin-bottom: .65rem;
+      color: #a3a3a3;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+    .role-pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      padding: 0 .55rem;
+      border: 1px solid #e5e5e5;
+      background: #f5f5f5;
+      color: #737373;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+    .case-image-card {
+      border: 0;
+      border-radius: 2px;
+      background: transparent;
+      padding: 0;
+      box-shadow: none;
+      filter: none;
+    }
+    #content .space-y-6 > .case-image-card {
+      background: #fff;
+      padding: clamp(1rem, 2vw, 1.5rem);
+    }
+	    #gameplay .border.border-neutral-200 {
+	      border: 0 !important;
+	      box-shadow: none !important;
+	    }
+    .image-slot {
+      position: relative;
+      overflow: hidden;
+      display: block;
+      width: 100%;
+      background: #f7f7f7;
+      border: 0;
+      box-shadow: none;
+      filter: none;
+    }
+    .image-slot > img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+    .image-slot .object-contain { object-fit: contain; }
+    .image-fallback {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      min-height: 220px;
+      color: #a3a3a3;
+      font-size: 12px;
+      text-align: center;
+    }
+    img.hidden + .image-fallback { display: flex; }
+    .flow-map-scroll {
+      aspect-ratio: 16 / 9;
+      overflow-x: auto;
+      overflow-y: hidden;
+      overscroll-behavior-x: contain;
+      -webkit-overflow-scrolling: touch;
+      background: #000;
+    }
+    .flow-map-strip {
+      display: flex;
+      align-items: stretch;
+      width: max-content;
+      height: 100%;
+    }
+    .flow-map-strip a,
+    .flow-map-strip img {
+      display: block;
+      height: 100%;
+      width: auto;
+      max-width: none;
+    }
+    .state-wide-scroll-frame { position: relative; }
+    .state-wide-scroll {
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+      -webkit-overflow-scrolling: touch;
+    }
+    .state-wide-scroll img {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+    }
+    .state-wide-scroll .flow-map-strip a,
+    .state-wide-scroll .flow-map-strip img {
+      height: 100%;
+      width: auto;
+      max-width: none;
+    }
+    .global-map-composite-scroll {
+      overflow: auto;
+      overscroll-behavior: contain;
+    }
+    .global-map-composite-scroll .flow-map-strip {
+      align-items: flex-start;
+    }
+    .global-map-composite-scroll .flow-map-strip .global-map-primary {
+      height: 155%;
+    }
+    .global-map-composite-scroll .global-map-primary img {
+      height: 100%;
+      width: auto;
+      max-width: none;
+    }
+    .state-wide-scroll-fit {
+      aspect-ratio: 8745 / 5481;
+      height: auto;
+      overflow-x: auto;
+      overflow-y: hidden;
+      background: #071b2d;
+    }
+    .state-wide-scroll-fit a {
+      display: block;
+      width: 150%;
+      max-width: none;
+      height: auto !important;
+    }
+    .state-wide-scroll-fit img {
+      width: 100%;
+      max-width: none;
+      height: auto;
+    }
+    .fortune-state-scroll {
+      aspect-ratio: 11311 / 5842;
+      height: auto;
+      overflow-x: auto;
+      overflow-y: hidden;
+      background: #071b2d;
+    }
+    .fortune-state-scroll a {
+      display: block;
+      width: 224%;
+      max-width: none;
+    }
+    .fortune-state-scroll img {
+      width: 100%;
+      max-width: none;
+      height: auto;
+    }
+    .state-swipe-arrow:disabled {
+      opacity: 0;
+      pointer-events: none;
+    }
+    #flow > .reveal > .image-slot,
+    #venue > .reveal > a.case-image-card > .image-slot,
+    #gameplay > .space-y-10 > .reveal > .case-image-card > a.image-slot,
+    [data-global-map-link] > .image-slot {
+      width: 100%;
+      height: auto;
+      aspect-ratio: auto !important;
+      background: transparent;
+    }
+    #flow > .reveal > .image-slot > img,
+    #venue > .reveal > a.case-image-card > .image-slot > img,
+    #gameplay > .space-y-10 > .reveal > .case-image-card > a.image-slot > img,
+    [data-global-map-link] > .image-slot > img {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      object-fit: contain;
+      object-position: center;
+    }
+    [data-global-map-link] > .image-pan-scroll > img {
+      width: 100%;
+      max-width: 100%;
+    }
+    .image-pan-scroll {
+      overflow: auto;
+      overscroll-behavior: contain;
+      -webkit-overflow-scrolling: touch;
+    }
+    .image-pan-scroll > img {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+    .state-swipe-arrow {
+      position: absolute;
+      top: 50%;
+      z-index: 3;
+      width: 34px;
+      height: 34px;
+      border: 1px solid rgba(23, 23, 23, .12);
+      border-radius: 999px;
+      background: rgba(255,255,255,.92);
+      color: #171717;
+      transform: translateY(-50%);
+      box-shadow: none;
+    }
+    .state-swipe-arrow-left { left: .75rem; }
+    .state-swipe-arrow-right { right: .75rem; }
+    .fortune-state-scroll + .state-swipe-arrow,
+    .state-wide-scroll-fit + .state-swipe-arrow,
+    .state-wide-scroll-frame:has(.state-wide-scroll-fit) .state-swipe-arrow,
+    .state-wide-scroll-frame:has(.fortune-state-scroll) .state-swipe-arrow,
+    .state-wide-scroll-frame:has(.flow-map-scroll) .state-swipe-arrow {
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .state-wide-scroll-frame:has(.state-wide-scroll-fit) .state-swipe-arrow:disabled,
+    .state-wide-scroll-frame:has(.fortune-state-scroll) .state-swipe-arrow:disabled,
+    .state-wide-scroll-frame:has(.flow-map-scroll) .state-swipe-arrow:disabled {
+      opacity: .45;
+    }
+    .media-caption {
+      margin-top: .75rem;
+      color: #737373;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.5;
+    }
+    .diff-old, .diff-new {
+      min-height: 84px;
+      border-left: 2px solid;
+      padding: 1rem 1.1rem;
+      background: #fff5f5;
+      color: #737373;
+      font-size: 15px;
+      font-weight: 650;
+      line-height: 1.65;
+    }
+    .diff-old { border-color: #fca5a5; }
+    .diff-new { border-color: #FF573A; color: #171717; }
+    #gameplay > .space-y-10 > .reveal > p:first-child {
+      display: block;
+      margin-bottom: 1.25rem;
+      color: #171717;
+      font-size: clamp(1.375rem, 2.2vw, 1.75rem);
+      font-weight: 800;
+      line-height: 1.18;
+    }
+    #gameplay .case-image-card > p:first-child,
+    #gameplay .case-image-card > .max-w-3xl > p:first-child {
+      color: #171717;
+      font-size: 13px;
+      font-weight: 750;
+      line-height: 1.4;
+    }
+    #gameplay .case-image-card > p:nth-child(2),
+    #gameplay .case-image-card > .max-w-3xl > p:nth-child(2) {
+      max-width: var(--case-copy-width);
+      color: #737373;
+      font-size: 13px;
+      line-height: 1.75;
+    }
+    .venue-stage-grid {
+      position: relative;
+      width: 100%;
+    }
+    .venue-stage-card {
+      position: relative;
+      z-index: 1;
+      min-width: 0;
+      text-align: center;
+    }
+    .venue-stage-head {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.75rem;
+    }
+    .venue-stage-pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 1.75rem;
+      padding: 0 0.75rem;
+      border: 1px solid rgba(255, 87, 58, 0.26);
+      border-radius: 999px;
+      background: #FFF0ED;
+      color: #FF573A;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1;
+      box-shadow: 0 8px 18px rgba(255, 87, 58, 0.12);
+    }
+    .venue-stage-caption {
+      margin-top: 0.5rem;
+      text-align: center;
+    }
+    .venue-stage-card .case-image-card {
+      display: flex;
+      justify-content: center;
+    }
+    .venue-stage-card .soft-card {
+      text-align: center;
+    }
+    @media (min-width: 768px) {
+      .venue-stage-grid::before {
+        content: '';
+        position: absolute;
+        top: 0.875rem;
+        left: 25%;
+        right: 25%;
+        height: 1px;
+        background: #e5e5e5;
+        z-index: 0;
+      }
+      .venue-stage-pill {
+        position: relative;
+        z-index: 1;
+        background: #FFF0ED;
+      }
+    }
+    .venue-scroll-shot {
+      position: relative;
+      width: min(100%, 300px);
+      overflow-x: hidden;
+      overflow-y: auto;
+      border: 0;
+      border-radius: 2px;
+      background: #f7f7f7;
+      -webkit-overflow-scrolling: touch;
+    }
+    .venue-scroll-shot img {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-width: 100%;
+    }
+    .progress-card-grid {
+      grid-template-columns: 1fr !important;
+    }
+    .progress-card-grid > .case-image-card {
+      min-width: 0;
+    }
+    .progress-card-grid .image-slot {
+      width: min(100%, 320px);
+      margin-left: auto;
+      margin-right: auto;
+      background: #f7f7f7;
+    }
+    .progress-card-grid .image-slot > img {
+      object-fit: cover;
+      object-position: top center;
+    }
+    #gameplay > .space-y-10 > .reveal:nth-child(2) > .progress-card-grid,
+    #gameplay > .space-y-10 > .reveal:nth-child(3) > .progress-card-grid,
+    .spirit-state-grid {
+      align-items: start;
+    }
+    #gameplay > .space-y-10 > .reveal:nth-child(2) > .progress-card-grid > .case-image-card,
+    #gameplay > .space-y-10 > .reveal:nth-child(3) > .progress-card-grid > .case-image-card,
+    .spirit-state-grid > .case-image-card {
+      position: relative;
+    }
+    #gameplay > .space-y-10 > .reveal:nth-child(2) > .progress-card-grid .image-slot,
+    .spirit-state-grid .image-slot {
+      width: min(100%, 300px);
+      aspect-ratio: 9 / 16 !important;
+      background: #fff8ee;
+    }
+    #gameplay > .space-y-10 > .reveal:nth-child(2) > .progress-card-grid .image-slot > img,
+    .spirit-state-grid .image-slot > img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 28%;
+    }
+    @media (min-width: 768px) {
+      #gameplay > .space-y-10 > .reveal:nth-child(2) > .progress-card-grid,
+      #gameplay > .space-y-10 > .reveal:nth-child(3) > .progress-card-grid,
+      .spirit-state-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+        column-gap: clamp(2rem, 5vw, 3.25rem) !important;
+      }
+      #gameplay > .space-y-10 > .reveal:nth-child(2) > .progress-card-grid > .case-image-card:not(:last-child)::after,
+      #gameplay > .space-y-10 > .reveal:nth-child(3) > .progress-card-grid > .case-image-card:not(:last-child)::after,
+      .spirit-state-grid > .case-image-card:not(:last-child)::after {
+        content: '→';
+        position: absolute;
+        top: clamp(15rem, 34vw, 20rem);
+        right: calc(-1 * clamp(1rem, 2.5vw, 1.75rem));
+        transform: translate(50%, -50%);
+        color: #FF573A;
+        font-size: 1.4rem;
+        font-weight: 800;
+        line-height: 1;
+        pointer-events: none;
+      }
+    }
+    @media (min-width: 1024px) {
+      .progress-card-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+      }
+    }
+    .insight-note {
+      border-left: 2px solid #FF573A;
+      padding-left: 1rem;
+      color: #737373;
+      line-height: 1.8;
+    }
+    .spirit-phase2-media {
+      display: grid;
+      grid-template-columns: minmax(360px, 1.05fr) 1.75rem minmax(0, .95fr);
+      gap: 14px;
+      align-items: stretch;
+    }
+    .spirit-phase2-demo {
+      align-self: stretch;
+      justify-self: stretch;
+      display: flex;
+      min-height: 0;
+      flex-direction: column;
+    }
+    .spirit-phase2-main-title {
+      margin-bottom: 6px;
+      color: #171717;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+    .spirit-phase2-demo .image-slot {
+      flex: 1;
+      min-height: 0;
+      aspect-ratio: auto;
+      background: #fff8ee;
+    }
+    .spirit-phase2-demo img,
+    .spirit-phase2-state-card img { object-fit: contain; object-position: center; }
+    .spirit-phase2-arrow {
+      align-self: center;
+      justify-self: center;
+      width: 1.75rem;
+      height: 1.75rem;
+      color: #FF573A;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      font-weight: 800;
+      line-height: 1;
+      pointer-events: none;
+    }
+    .spirit-phase2-state-list {
+      display: grid;
+      gap: 12px;
+      align-self: stretch;
+      justify-self: end;
+      align-content: space-between;
+      width: min(100%, 600px);
+    }
+    .spirit-phase2-state-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .spirit-phase2-state-card { min-width: 0; }
+    .spirit-phase2-state-title {
+      margin-bottom: 6px;
+      color: #525252;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+    .spirit-phase2-state-card .image-slot {
+      aspect-ratio: 630 / 433;
+      background: #fff8ee;
+    }
+    .online-effect-showcase {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      padding: clamp(1.5rem, 4vw, 3rem) 0;
+      background: #f7f7f7;
+    }
+    .case-phone-mockup {
+      position: relative;
+      width: 100%;
+      max-width: 224px;
+      margin: 0 auto;
+      border: 1px solid #d8d8d8;
+      border-radius: 28px;
+      background: #fff;
+      padding: 5px;
+      overflow: hidden;
+    }
+    .case-phone-screen {
+      aspect-ratio: 375 / 816;
+      overflow-y: auto;
+      overflow-x: hidden;
+      border-radius: 20px;
+      background: #f5f5f5;
+      overscroll-behavior: contain;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255, 87, 58, 0.55) rgba(23, 23, 23, 0.06);
+    }
+    .case-phone-screen::-webkit-scrollbar { width: 4px; }
+    .case-phone-screen::-webkit-scrollbar-track {
+      background: rgba(23, 23, 23, 0.06);
+      border-radius: 999px;
+    }
+    .case-phone-screen::-webkit-scrollbar-thumb {
+      background: rgba(255, 87, 58, 0.55);
+      border-radius: 999px;
+    }
+    .case-phone-screen img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    @media (max-width: 767px) {
+      .venue-scroll-shot { height: 520px; }
+      .spirit-phase2-media { grid-template-columns: 1fr; }
+      .spirit-phase2-demo { justify-self: center; width: min(100%, 520px); }
+      .spirit-phase2-arrow { transform: rotate(90deg); }
+      .spirit-phase2-state-list { justify-self: stretch; width: 100%; }
+      .image-pan-scroll > img { width: 100%; max-width: 100%; }
+    }
+    @media (max-width: 520px) {
+      .spirit-phase2-state-row { grid-template-columns: 1fr; }
+    }
+
+    .gameplay-chapter {
+      scroll-margin-top: 6rem;
+    }
+    .gameplay-kicker {
+      margin-bottom: 0.75rem;
+      color: #FF573A;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.35;
+      letter-spacing: 0;
+    }
+    .state-table {
+      width: 100%;
+      min-width: 720px;
+      border-collapse: collapse;
+      color: #525252;
+      font-size: 12px;
+      line-height: 1.65;
+    }
+    .state-table th,
+    .state-table td {
+      border-bottom: 1px solid #e5e5e5;
+      padding: 0.85rem 1rem;
+      vertical-align: top;
+    }
+    .state-table th {
+      color: #171717;
+      font-size: 11px;
+      font-weight: 800;
+      text-align: left;
+      background: #fafafa;
+    }
+    .state-table td:first-child {
+      width: 22%;
+      color: #171717;
+      font-weight: 750;
+    }
+    .bump-motion-card {
+      padding: clamp(1.25rem, 3vw, 1.75rem);
+      border: 1px solid #e5e5e5;
+      border-radius: 2px;
+      background: #fafafa;
+    }
+    .bump-motion-card > .max-w-2xl {
+      display: grid;
+      max-width: none;
+      gap: 1.25rem;
+      align-items: start;
+      margin-bottom: 1.75rem;
+    }
+    .bump-motion-card > .max-w-2xl > h4 {
+      margin-bottom: 0;
+      font-size: clamp(1rem, 1.4vw, 1.125rem);
+      font-weight: 800;
+      line-height: 1.35;
+    }
+    .bump-motion-card > .max-w-2xl > p {
+      max-width: 760px;
+      color: #737373;
+      font-size: 0.875rem;
+      line-height: 1.8;
+    }
+    .bump-motion-card > .max-w-2xl > .motion-sequence-note {
+      margin: 0;
+      background: #fafafa;
+    }
+    .bump-motion-card > .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      align-items: start;
+    }
+    .bump-motion-card > .grid > div {
+      display: flex;
+      min-width: 0;
+      flex-direction: column;
+      align-items: center;
+    }
+    .bump-motion-card > .grid > div > p:first-child {
+      width: min(100%, 280px);
+      margin-bottom: 0.75rem;
+      color: #171717;
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1.4;
+      text-align: center;
+    }
+    .bump-motion-card > .grid > div > a.image-slot {
+      width: min(100%, 280px);
+      max-width: none;
+      margin: 0 auto;
+      background: #f7f7f7;
+    }
+    @media (min-width: 768px) {
+      .bump-motion-card > .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: clamp(1.5rem, 4vw, 3rem);
+      }
+      .bump-motion-card > .grid > div:first-child {
+        position: relative;
+      }
+      .bump-motion-card > .grid > div:first-child::after {
+        content: '→';
+        position: absolute;
+        top: clamp(15rem, 34vw, 20rem);
+        right: calc(-1 * clamp(1rem, 2.5vw, 1.75rem));
+        transform: translate(50%, -50%);
+        color: #FF573A;
+        font-size: 1.4rem;
+        font-weight: 800;
+        line-height: 1;
+        pointer-events: none;
+      }
+    }
+
+    .highlight-card { border: 1px solid #e5e5e5; border-radius: 2px; background: #fafafa; padding: 1.25rem; }
+    .motion-sequence-note { margin: 1rem 0 0; padding: 0.875rem 1rem; border: 1px solid #e5e5e5; border-left: 2px solid #FF573A; border-radius: 2px; background: #fff; }
+    .motion-sequence-note ol { display: grid; gap: 0.55rem; list-style: none; counter-reset: motion-step; }
+    .motion-sequence-note li { position: relative; padding-left: 2rem; font-size: 11px; line-height: 1.6; color: #525252; }
+    .motion-sequence-note li::before { counter-increment: motion-step; content: counter(motion-step, decimal-leading-zero); position: absolute; left: 0; top: 0.05rem; font-size: 10px; line-height: 1.4; font-weight: 800; color: #FF573A; }
+    .motion-sequence-note strong { color: #171717; font-weight: 700; }
+    #gameplay > .space-y-10 > .reveal:nth-child(3) > .mt-4 {
+      margin-top: 2rem;
+      padding: 2rem 0 0;
+      border: 0;
+      border-top: 1px solid #e5e5e5;
+      background: transparent;
+    }
+    #gameplay > .space-y-10 > .reveal:nth-child(3) > .mt-4 > .max-w-2xl {
+      display: grid;
+      max-width: none;
+      gap: 1.25rem;
+      align-items: start;
+      margin-bottom: 1.75rem;
+    }
+    #gameplay > .space-y-10 > .reveal:nth-child(3) > .mt-4 > .max-w-2xl > h4 {
+      margin-bottom: 0;
+      font-size: clamp(1.25rem, 2vw, 1.75rem);
+      font-weight: 800;
+      line-height: 1.18;
+    }
+    #gameplay > .space-y-10 > .reveal:nth-child(3) > .mt-4 > .max-w-2xl > p {
+      max-width: 760px;
+      color: #737373;
+      font-size: 0.875rem;
+      line-height: 1.8;
+    }
+    #gameplay > .space-y-10 > .reveal:nth-child(3) > .mt-4 > .max-w-2xl > .motion-sequence-note {
+      margin: 0;
+      background: #fafafa;
+    }
+    #gameplay > .space-y-10 > .reveal:nth-child(3) > .mt-4 > .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      align-items: start;
+    }
+    #gameplay > .space-y-10 > .reveal:nth-child(3) > .mt-4 > .grid > div {
+      display: flex;
+      min-width: 0;
+      flex-direction: column;
+      align-items: center;
+    }
+    #gameplay > .space-y-10 > .reveal:nth-child(3) > .mt-4 > .grid > div > p:first-child {
+      width: min(100%, 280px);
+      margin-bottom: 0.75rem;
+      color: #171717;
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1.4;
+      text-align: center;
+    }
+    #gameplay > .space-y-10 > .reveal:nth-child(3) > .mt-4 > .grid > div > a.image-slot {
+      width: min(100%, 280px);
+      max-width: none;
+      margin: 0 auto;
+      background: #f7f7f7;
+    }
+    @media (min-width: 768px) {
+      #gameplay > .space-y-10 > .reveal:nth-child(3) > .mt-4 > .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: clamp(1.5rem, 4vw, 3rem);
+      }
+      #gameplay > .space-y-10 > .reveal:nth-child(3) > .mt-4 > .grid > div:first-child {
+        position: relative;
+      }
+      #gameplay > .space-y-10 > .reveal:nth-child(3) > .mt-4 > .grid > div:first-child::after {
+        content: '→';
+        position: absolute;
+        top: clamp(15rem, 34vw, 20rem);
+        right: calc(-1 * clamp(1rem, 2.5vw, 1.75rem));
+        transform: translate(50%, -50%);
+        color: #FF573A;
+        font-size: 1.4rem;
+        font-weight: 800;
+        line-height: 1;
+        pointer-events: none;
+      }
+    }
+    @media (min-width: 1024px) {
+      #gameplay > .space-y-10 > .reveal:nth-child(3) > .mt-4 > .max-w-2xl {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 1.25rem;
+      }
+      #gameplay > .space-y-10 > .reveal:nth-child(3) > .mt-4 > .max-w-2xl > h4 {
+        grid-column: auto;
+        grid-row: auto;
+      }
+      #gameplay > .space-y-10 > .reveal:nth-child(3) > .mt-4 > .max-w-2xl > p {
+        grid-column: auto;
+        grid-row: auto;
+      }
+      #gameplay > .space-y-10 > .reveal:nth-child(3) > .mt-4 > .max-w-2xl > .motion-sequence-note {
+        grid-column: auto;
+        grid-row: auto;
+      }
+    }
+    #content .case-image-card > .grid { display: block; }
+    #content .case-image-card .lg\:col-span-4 { display: none; }
+    #content .case-image-card .lg\:col-span-8 { width: 100%; }
+    html[lang="zh-CN"] .i18n-title { letter-spacing: 0; }
+  </style>
+</head>
+<body class="font-sans text-neutral-900 bg-white antialiased">
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-sm border-b border-neutral-200/60">
+    <div class="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 flex items-center justify-between h-14 md:h-16">
+      <a href="portfolio2.html" class="text-sm font-semibold">Sheryl<span class="text-[#FF573A]">.</span></a>
+      <a href="portfolio2.html" class="nav-link text-xs font-medium text-neutral-900">← 返回</a>
+    </div>
+  </nav>
+
+  <header class="case-detail-hero pt-14 md:pt-16">
+    <div class="case-hero-cover">
+      <img src="assets/drama/hero-cover.png" alt="抓马赢红包活动主视觉">
+    </div>
+    <div class="case-hero-info">
+      <div class="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20">
+        <div class="case-hero-summary">
+          <div class="case-hero-title">
+            <h1 class="text-3xl md:text-5xl font-bold tracking-tight leading-heading">
+              <span class="hero-line block">「抓马赢红包」春节活动体验设计</span>
+            </h1>
+          </div>
+          <div class="hero-line case-hero-meta">
+            <div>
+              <p class="case-hero-meta-label">年份</p>
+              <p class="case-hero-meta-value">2026</p>
+            </div>
+            <div>
+              <p class="case-hero-meta-label">周期</p>
+              <p class="case-hero-meta-value">12周</p>
+            </div>
+            <div>
+              <p class="case-hero-meta-label">角色</p>
+              <p class="case-hero-meta-value">交互设计师</p>
+            </div>
+          </div>
+        </div>
+        <div class="hero-line case-hero-divider mt-10" aria-hidden="true"></div>
+      </div>
+    </div>
+  </header>
+
+  <nav class="lg:hidden sticky top-14 md:top-16 z-40 bg-white/95 backdrop-blur-sm border-y border-neutral-200/70" aria-label="移动端章节导航">
+    <div class="px-6 md:px-12 overflow-x-auto">
+      <div class="flex items-center gap-6 min-w-max">
+        <a class="mobile-anchor active" href="#overview" data-section-link="overview">01 项目概览</a>
+        <a class="mobile-anchor" href="#flow" data-section-link="flow">02 链路与玩法总览</a>
+        <a class="mobile-anchor" href="#venue" data-section-link="venue">03 首页的动态化设计</a>
+        <a class="mobile-anchor" href="#gameplay" data-section-link="gameplay">04 多层玩法串联</a>
+        <a class="mobile-anchor" href="#craft" data-section-link="craft">05 体验细节</a>
+        <a class="mobile-anchor" href="#results" data-section-link="results">06 上线效果与复盘</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="pb-24 md:pb-32">
+    <div class="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 lg:grid lg:grid-cols-12 lg:gap-8">
+      <aside class="hidden lg:block lg:col-span-2">
+        <nav class="sticky top-[120px] pt-2" aria-label="案例章节导航">
+          <p class="text-[11px] font-semibold text-neutral-400 mb-4">CASE INDEX</p>
+          <a class="side-nav-link active" href="#overview" data-section-link="overview">01 项目概览</a>
+          <a class="side-nav-link" href="#flow" data-section-link="flow">02 链路与玩法总览</a>
+          <a class="side-nav-link" href="#venue" data-section-link="venue">03 首页的动态化设计</a>
+          <a class="side-nav-link" href="#gameplay" data-section-link="gameplay">04 多层玩法串联</a>
+          <a class="side-nav-link" href="#craft" data-section-link="craft">05 体验细节</a>
+          <a class="side-nav-link" href="#results" data-section-link="results">06 上线效果与复盘</a>
+        </nav>
+      </aside>
+
+      <div class="lg:col-span-10">
+        <section id="overview" class="case-section py-20 md:py-28 lg:pt-2">
+          <div class="reveal mb-12 max-w-3xl">
+            <p class="section-label" data-i18n="context.label"></p>
+            <h2 class="text-2xl md:text-3xl font-bold tracking-tighter leading-tight mb-6 i18n-title" data-i18n="context.title"></h2>
+            <p class="text-sm text-neutral-500 i18n-body" data-i18n="context.body"></p>
+          </div>
+
+          <div class="reveal delay-1 mb-12">
+            <p class="gameplay-kicker" data-i18n="positioning.label"></p>
+            <div class="highlight-card bg-[#FFF8F6] border-[#FF573A]/15">
+              <h3 class="mb-3" data-i18n="positioning.title"></h3>
+              <p class="text-sm font-normal leading-body text-neutral-600" data-i18n="positioning.body"></p>
+            </div>
+          </div>
+
+          <div class="reveal delay-2 mb-12">
+            <div class="max-w-3xl mb-4">
+              <p class="gameplay-kicker" data-i18n="context.snapshotTitle"></p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div class="metric-card">
+                <p class="text-xs font-semibold text-neutral-400 mb-2" data-i18n="context.metric1Label"></p>
+                <p class="text-base font-bold tracking-tight text-neutral-900" data-i18n="context.metric1Value"></p>
+              </div>
+              <div class="metric-card">
+                <p class="text-xs font-semibold text-neutral-400 mb-2" data-i18n="context.metric2Label"></p>
+                <p class="text-base font-bold tracking-tight text-neutral-900" data-i18n="context.metric2Value"></p>
+              </div>
+              <div class="metric-card">
+                <p class="text-xs font-semibold text-neutral-400 mb-2" data-i18n="context.metric3Label"></p>
+                <p class="text-base font-bold tracking-tight text-neutral-900" data-i18n="context.metric3Value"></p>
+              </div>
+              <div class="metric-card">
+                <p class="text-xs font-semibold text-neutral-400 mb-2" data-i18n="context.metric4Label"></p>
+                <p class="text-base font-bold tracking-tight text-neutral-900 leading-snug" data-i18n="context.metric4Value"></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="reveal delay-3">
+            <p class="gameplay-kicker" data-i18n="context.challengeRoleLabel"></p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+              <div class="challenge-role-card">
+                <div>
+                  <h4 class="text-base font-bold tracking-tight mb-2" data-i18n="context.h1Title"></h4>
+                  <p class="text-xs text-neutral-500 i18n-body" data-i18n="context.h1Body"></p>
+                </div>
+                <div class="challenge-role-divider" aria-hidden="true"></div>
+                <div>
+                  <div class="flex flex-wrap gap-2 mb-3">
+                    <span class="role-pill" data-i18n="context.role1Title"></span>
+                    <span class="role-pill" data-i18n="context.role4Title"></span>
+                  </div>
+                  <p class="text-xs text-neutral-500 i18n-body" data-i18n="context.h1ActionBody"></p>
+                </div>
+              </div>
+              <div class="challenge-role-card">
+                <div>
+                  <h4 class="text-base font-bold tracking-tight mb-2" data-i18n="context.h2Title"></h4>
+                  <p class="text-xs text-neutral-500 i18n-body" data-i18n="context.h2Body"></p>
+                </div>
+                <div class="challenge-role-divider" aria-hidden="true"></div>
+                <div>
+                  <div class="flex flex-wrap gap-2 mb-3">
+                    <span class="role-pill" data-i18n="context.role2Title"></span>
+                    <span class="role-pill" data-i18n="context.role3Title"></span>
+                  </div>
+                  <p class="text-xs text-neutral-500 i18n-body" data-i18n="context.h2ActionBody"></p>
+                </div>
+              </div>
+              <div class="challenge-role-card">
+                <div>
+                  <h4 class="text-base font-bold tracking-tight mb-2" data-i18n="context.h3Title"></h4>
+                  <p class="text-xs text-neutral-500 i18n-body" data-i18n="context.h3Body"></p>
+                </div>
+                <div class="challenge-role-divider" aria-hidden="true"></div>
+                <div>
+                  <div class="flex flex-wrap gap-2 mb-3">
+                    <span class="role-pill" data-i18n="context.role1Title"></span>
+                    <span class="role-pill" data-i18n="context.role2Title"></span>
+                    <span class="role-pill" data-i18n="context.role3Title"></span>
+                  </div>
+                  <p class="text-xs text-neutral-500 i18n-body" data-i18n="context.h3ActionBody"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <div class="divider"></div>
+
+        <section id="flow" class="case-section py-20 md:py-28">
+          <div class="reveal max-w-3xl mb-14">
+            <p class="section-label" data-i18n="flow.label"></p>
+            <h2 class="text-2xl md:text-3xl font-bold tracking-tighter leading-tight mb-6 i18n-title" data-i18n="flow.title"></h2>
+            <p class="text-sm text-neutral-500 i18n-body" data-i18n="flow.body"></p>
+          </div>
+          <div class="reveal delay-1 mb-20">
+            <div class="max-w-3xl mb-6">
+              <p class="gameplay-kicker" data-i18n="flow.linkMapLabel"></p>
+              <h3 data-i18n="flow.linkMapTitle"></h3>
+            </div>
+            <a data-disabled-full-image="true" class="case-image-card block">
+              <div class="image-slot aspect-[16/9] bg-black">
+                <img src="assets/drama/product-link-flow-optimized.jpg" alt="产品链路图" class="object-contain bg-black" loading="lazy" decoding="async" onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden');">
+                <div class="hidden image-fallback absolute inset-0"><span>assets/drama/product-link-flow-optimized.jpg</span></div>
+              </div>
+            </a>
+          </div>
+          <div class="reveal delay-2">
+            <div class="max-w-3xl mb-6">
+              <p class="gameplay-kicker" data-i18n="flow.gameplayLabel"></p>
+              <h3 class="mb-4" data-i18n="gameplay.title"></h3>
+              <p class="text-sm text-neutral-500 i18n-body" data-i18n="gameplay.intro"></p>
+            </div>
+            <div class="image-slot aspect-[4519/2857] bg-black"><img src="assets/drama/activity-gameplay-frame.png" alt="活动玩法补充图" class="object-contain bg-black" onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden');"><div class="hidden image-fallback absolute inset-0"><span>assets/drama/activity-gameplay-frame.png</span></div></div>
+          </div>
+        </section>
+        <div class="divider"></div>
+
+                <section id="venue" class="case-section py-20 md:py-28">
+          <div class="reveal mb-14 max-w-3xl">
+            <p class="section-label" data-i18n="venue.label"></p>
+            <h2 class="text-2xl md:text-4xl font-bold tracking-tighter leading-tight mb-6 i18n-title" data-i18n="venue.title"></h2>
+            <p class="text-sm text-neutral-500 i18n-body" data-i18n="venue.body"></p>
+          </div>
+
+          <div class="reveal mb-20">
+            <div class="max-w-3xl mb-6">
+              <p class="gameplay-kicker" data-i18n="media.venue.keyWireframes.label"></p>
+              <h3 class="mb-4" data-i18n="media.venue.keyWireframes.title"></h3>
+              <p class="text-sm text-neutral-500 i18n-body" data-i18n="media.venue.keyWireframes.body"></p>
+            </div>
+            <a data-disabled-full-image="true" class="case-image-card block">
+              <div class="image-slot aspect-[8400/4600] bg-white">
+                <img src="assets/drama/card-key-page-wireframes-v2.png" alt="" data-i18n-alt="media.venue.keyWireframes.alt" class="object-contain object-center" loading="lazy" onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden');">
+                <div class="hidden image-fallback absolute inset-0"><span>assets/drama/card-key-page-wireframes-v2.png</span></div>
+              </div>
+            </a>
+            <p class="media-caption mt-4" data-i18n="media.venue.keyWireframes.caption"></p>
+          </div>
+
+          <div class="reveal delay-1 mb-20">
+            <div class="mb-6">
+              <div class="max-w-3xl">
+                <p class="gameplay-kicker" data-i18n="media.venue.frameworkEvolution.label"></p>
+                <h3 class="mb-4" data-i18n="media.venue.frameworkEvolution.title"></h3>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-4 md:gap-5 items-stretch max-w-5xl">
+                <div class="soft-card p-5 md:p-6">
+                  <p class="gameplay-kicker" data-i18n="media.venue.frameworkEvolution.hypothesisTitle"></p>
+                  <p class="text-lg md:text-xl font-bold tracking-tight mb-5" data-i18n="media.venue.frameworkEvolution.hypothesisVersion"></p>
+                  <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div>
+                      <p class="text-xs font-semibold text-neutral-400 mb-2" data-i18n="media.venue.frameworkEvolution.issueLabel"></p>
+                      <p class="text-sm text-neutral-600 leading-body" data-i18n="media.venue.frameworkEvolution.issueBody"></p>
+                    </div>
+                    <div>
+                      <p class="text-xs font-semibold text-neutral-400 mb-2" data-i18n="media.venue.frameworkEvolution.productConcernLabel"></p>
+                      <p class="text-sm text-neutral-600 leading-body" data-i18n="media.venue.frameworkEvolution.productConcernBody"></p>
+                    </div>
+                    <div>
+                      <p class="text-xs font-semibold text-neutral-400 mb-2" data-i18n="media.venue.frameworkEvolution.opsConcernLabel"></p>
+                      <p class="text-sm text-neutral-600 leading-body" data-i18n="media.venue.frameworkEvolution.opsConcernBody"></p>
+                    </div>
+                  </div>
+                </div>
+                <div class="flex items-center justify-center text-2xl md:text-3xl font-bold leading-none text-[#FF573A]" aria-hidden="true">
+                  <span class="hidden md:inline">→</span>
+                  <span class="md:hidden">↓</span>
+                </div>
+                <div class="soft-card p-5 md:p-6 bg-[#FFF8F6] border-[#FF573A]/25">
+                  <p class="gameplay-kicker" data-i18n="media.venue.frameworkEvolution.decisionTitle"></p>
+                  <p class="text-lg md:text-xl font-bold tracking-tight mb-5" data-i18n="media.venue.frameworkEvolution.decisionVersion"></p>
+                  <p class="text-sm md:text-base font-semibold leading-body text-[#FF573A]" data-i18n="media.venue.frameworkEvolution.decisionBody"></p>
+                </div>
+              </div>
+            </div>
+            <div class="case-image-card">
+              <div class="state-wide-scroll-frame">
+                <button class="state-swipe-arrow state-swipe-arrow-left" type="button" data-state-scroll="prev" aria-label="向左滑动首页框架迭代图">←</button>
+                <button class="state-swipe-arrow state-swipe-arrow-right" type="button" data-state-scroll="next" aria-label="向右滑动首页框架迭代图">→</button>
+                <div class="state-wide-scroll state-wide-scroll-fit" data-auto-scroll="true" data-auto-scroll-speed="36">
+                  <a data-disabled-full-image="true" class="block h-full">
+                    <img src="assets/drama/home-framework-evolution.png" alt="" data-i18n-alt="media.venue.frameworkEvolution.alt" loading="lazy" onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden');">
+                    <div class="hidden image-fallback absolute inset-0"><span>assets/drama/home-framework-evolution.png</span></div>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <p class="media-caption mt-4" data-i18n="media.venue.frameworkEvolution.caption"></p>
+          </div>
+
+          <div class="reveal delay-2 mb-16">
+            <div class="max-w-3xl mb-6">
+              <p class="gameplay-kicker" data-i18n="venue.progressLabel"></p>
+              <h3 class="mb-4" data-i18n="venue.progressTitle"></h3>
+            </div>
+            <div class="venue-stage-grid grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-[960px] mx-auto">
+              <div class="venue-stage-card">
+                <div class="venue-stage-head">
+                  <span class="venue-stage-pill" data-i18n="venue.stage1Label"></span>
+                  <p class="media-caption venue-stage-caption" data-i18n="media.venue.before.label"></p>
+                </div>
+                <div class="case-image-card">
+                  <div class="venue-scroll-shot h-[560px] md:h-[620px] max-w-[300px] mx-auto">
+                    <img src="assets/drama/venue-before-uncollected.png" alt="" data-i18n-alt="media.venue.before.alt" onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden');">
+                    <div class="hidden image-fallback min-h-[240px]"><span>assets/drama/venue-before-uncollected.png</span></div>
+                  </div>
+                </div>
+                <div class="soft-card mt-4">
+                  <p class="text-xs font-semibold mb-2" data-i18n="venue.phase1Title"></p>
+                  <p class="text-sm text-neutral-500 i18n-body" data-i18n="venue.phase1Body"></p>
+                </div>
+              </div>
+              <div class="venue-stage-card">
+                <div class="venue-stage-head">
+                  <span class="venue-stage-pill" data-i18n="venue.stage2Label"></span>
+                  <p class="media-caption venue-stage-caption" data-i18n="media.venue.after.label"></p>
+                </div>
+                <div class="case-image-card">
+                  <div class="venue-scroll-shot h-[560px] md:h-[620px] max-w-[300px] mx-auto">
+                    <img src="assets/drama/venue-after-collected.png" alt="" data-i18n-alt="media.venue.after.alt" onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden');">
+                    <div class="hidden image-fallback min-h-[240px]"><span>assets/drama/venue-after-collected.png</span></div>
+                  </div>
+                </div>
+                <div class="soft-card mt-4">
+                  <p class="text-xs font-semibold mb-2" data-i18n="venue.phase2Title"></p>
+                  <p class="text-sm text-neutral-500 i18n-body" data-i18n="venue.phase2Body"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </section>
+        <div class="divider"></div>
+
+        <section id="gameplay" class="case-section py-20 md:py-28">
+          <div class="reveal mb-16">
+            <div class="max-w-3xl">
+              <p class="section-label" data-i18n="gameplay.strategyLabel"></p>
+              <h2 class="text-2xl md:text-4xl font-bold tracking-tighter leading-tight mb-6 i18n-title" data-i18n="gameplay.strategyTitle"></h2>
+              <div class="space-y-4 text-sm text-neutral-500 i18n-body">
+                <p data-i18n="gameplay.strategyBody1"></p>
+                <p data-i18n="gameplay.strategyBody2"></p>
+              </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mt-6">
+              <div class="soft-card">
+                <p class="gameplay-card-kicker">玩法一</p>
+                <p class="text-sm font-semibold mb-2" data-i18n="media.gameplay.fortune.title"></p>
+                <p class="text-xs text-neutral-500 i18n-body" data-i18n="media.gameplay.fortune.body"></p>
+              </div>
+              <div class="soft-card">
+                <p class="gameplay-card-kicker">玩法二</p>
+                <p class="text-sm font-semibold mb-2" data-i18n="media.gameplay.spirit.title"></p>
+                <p class="text-xs text-neutral-500 i18n-body" data-i18n="media.gameplay.spirit.body"></p>
+              </div>
+              <div class="soft-card">
+                <p class="gameplay-card-kicker">玩法三</p>
+                <p class="text-sm font-semibold mb-2" data-i18n="media.gameplay.bump.title"></p>
+                <p class="text-xs text-neutral-500 i18n-body" data-i18n="media.gameplay.bump.body"></p>
+              </div>
+              <div class="soft-card">
+                <p class="gameplay-card-kicker">玩法四</p>
+                <p class="text-sm font-semibold mb-2" data-i18n="media.gameplay.theme.title"></p>
+                <p class="text-xs text-neutral-500 i18n-body" data-i18n="media.gameplay.theme.body"></p>
+              </div>
+              <div class="soft-card">
+                <p class="gameplay-card-kicker">玩法五</p>
+                <p class="text-sm font-semibold mb-2" data-i18n="media.gameplay.luckyMoney.title"></p>
+                <p class="text-xs text-neutral-500 i18n-body" data-i18n="media.gameplay.luckyMoney.body"></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="gameplay-chapter reveal delay-1 mb-20">
+            <p class="gameplay-kicker" data-i18n="gameplay.mapLabel"></p>
+            <div class="max-w-3xl mb-6">
+              <h3 class="text-xl md:text-2xl font-bold tracking-tighter leading-tight mb-4" data-i18n="media.globalMap.title"></h3>
+              <div class="space-y-4 text-sm text-neutral-500 i18n-body">
+                <p data-i18n="media.globalMap.body1"></p>
+                <p data-i18n="media.globalMap.body2"></p>
+              </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+              <div class="soft-card"><p class="text-xs font-semibold mb-2" data-i18n="media.globalMap.venueStateTitle"></p><p class="text-xs text-neutral-500 i18n-body" data-i18n="media.globalMap.venueStateBody"></p></div>
+              <div class="soft-card"><p class="text-xs font-semibold mb-2" data-i18n="media.globalMap.cardFlowTitle"></p><p class="text-xs text-neutral-500 i18n-body" data-i18n="media.globalMap.cardFlowBody"></p></div>
+              <div class="soft-card"><p class="text-xs font-semibold mb-2" data-i18n="media.globalMap.feedbackTitle"></p><p class="text-xs text-neutral-500 i18n-body" data-i18n="media.globalMap.feedbackBody"></p></div>
+              <div class="soft-card"><p class="text-xs font-semibold mb-2" data-i18n="media.globalMap.returnTitle"></p><p class="text-xs text-neutral-500 i18n-body" data-i18n="media.globalMap.returnBody"></p></div>
+            </div>
+            <div class="global-map-viewer" data-global-map-viewer data-active-map="all">
+              <div class="state-wide-scroll-frame">
+                <button class="state-swipe-arrow state-swipe-arrow-left" type="button" data-state-scroll="prev" aria-label="向左滑动全局交互流程图">←</button>
+                <button class="state-swipe-arrow state-swipe-arrow-right" type="button" data-state-scroll="next" aria-label="向右滑动全局交互流程图">→</button>
+                <div class="flow-map-scroll state-wide-scroll global-map-composite-scroll">
+                  <div class="flow-map-strip">
+                    <a data-disabled-full-image="true" class="global-map-primary" data-global-map-link>
+                      <img src="assets/drama/global-interaction-map-full-optimized.jpg" alt="" data-i18n-alt="media.globalMap.alt" data-global-map-img loading="lazy" decoding="async" onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden');">
+                      <div class="hidden image-fallback absolute inset-0"><span>assets/drama/global-interaction-map-full-optimized.jpg</span></div>
+                    </a>
+                    <a data-disabled-full-image="true">
+                      <img src="assets/drama/global-interaction-flow-slice-2-optimized.jpg" alt="全局交互流程图第二部分" loading="lazy" decoding="async" onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden');">
+                      <div class="hidden image-fallback absolute inset-0"><span>assets/drama/global-interaction-flow-slice-2-optimized.jpg</span></div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="gameplay-chapter reveal mb-20">
+            <p class="gameplay-kicker" data-i18n="gameplay.fortuneLabel"></p>
+            <div class="max-w-3xl mb-6">
+              <h3 class="text-xl md:text-2xl font-bold tracking-tighter leading-tight mb-4" data-i18n="gameplay.fortuneTitle"></h3>
+              <div class="space-y-4 text-sm text-neutral-500 i18n-body">
+                <p data-i18n="gameplay.fortuneBody1"></p>
+              </div>
+            </div>
+            <div class="case-image-card">
+              <p class="text-xs font-semibold tracking-tight mb-2" data-i18n="media.gameplay.fortuneStates.title"></p>
+              <p class="text-xs text-neutral-500 i18n-body mb-3" data-i18n="media.gameplay.fortuneStates.body"></p>
+              <div class="state-wide-scroll-frame">
+                <button class="state-swipe-arrow state-swipe-arrow-left" type="button" data-state-scroll="prev" aria-label="向左滑动状态图">←</button>
+                <button class="state-swipe-arrow state-swipe-arrow-right" type="button" data-state-scroll="next" aria-label="向右滑动状态图">→</button>
+                <div class="state-wide-scroll fortune-state-scroll" data-auto-scroll="true" data-auto-scroll-speed="36">
+                  <a data-disabled-full-image="true" class="block">
+                    <img src="assets/drama/fortune-card-states.png" alt="" data-i18n-alt="media.gameplay.fortuneStates.alt" onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden');">
+                    <div class="hidden image-fallback min-h-[320px]"><span>assets/drama/fortune-card-states.png</span></div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="gameplay-chapter reveal mb-20">
+            <p class="gameplay-kicker" data-i18n="gameplay.loopLabel"></p>
+            <div class="max-w-3xl mb-6">
+              <h3 class="text-xl md:text-2xl font-bold tracking-tighter leading-tight mb-4" data-i18n="gameplay.loopTitle"></h3>
+              <div class="space-y-4 text-sm text-neutral-500 i18n-body">
+                <p data-i18n="gameplay.loopBody1"></p>
+                <p data-i18n="gameplay.loopBody2"></p>
+              </div>
+            </div>
+            <a data-disabled-full-image="true" class="case-image-card block">
+              <div class="image-slot aspect-[4800/4063] bg-[#FFF8EE]">
+                <img src="assets/drama/loop-flow-layout-v1.png" alt="重复卡兑换神马卡流程图" data-i18n-alt="media.gameplay.loopFlow.alt" class="object-contain object-center" loading="lazy" onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden');">
+                <div class="hidden image-fallback absolute inset-0"><span>assets/drama/loop-flow-layout-v1.png</span></div>
+              </div>
+            </a>
+          </div>
+
+          <div class="gameplay-chapter reveal mb-20">
+            <p class="gameplay-kicker" data-i18n="gameplay.spiritLabel"></p>
+            <div class="max-w-3xl mb-6">
+              <h3 class="text-xl md:text-2xl font-bold tracking-tighter leading-tight mb-4" data-i18n="gameplay.spiritTitle"></h3>
+              <p class="text-sm text-neutral-500 i18n-body" data-i18n="gameplay.spiritBody"></p>
+            </div>
+            <div class="case-image-card mb-6">
+              <a data-disabled-full-image="true" class="image-slot aspect-[9600/5360] block bg-[#FFF8EE]">
+                <img src="assets/drama/shenma-card-gameplay-mechanism.png" alt="" data-i18n-alt="media.gameplay.spiritMechanism.alt" class="object-contain object-center" loading="lazy" onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden');">
+                <div class="hidden image-fallback absolute inset-0"><span>assets/drama/shenma-card-gameplay-mechanism.png</span></div>
+              </a>
+            </div>
+            <div class="case-image-card mb-6 overflow-x-auto">
+              <table class="state-table">
+                <thead><tr><th data-i18n="gameplay.tableState"></th><th data-i18n="gameplay.tableTreatment"></th><th data-i18n="gameplay.tablePurpose"></th></tr></thead>
+                <tbody>
+                  <tr><td data-i18n="gameplay.spiritTable.newState"></td><td data-i18n="gameplay.spiritTable.newTreatment"></td><td data-i18n="gameplay.spiritTable.newPurpose"></td></tr>
+                  <tr><td data-i18n="gameplay.spiritTable.noCardState"></td><td data-i18n="gameplay.spiritTable.noCardTreatment"></td><td data-i18n="gameplay.spiritTable.noCardPurpose"></td></tr>
+                  <tr><td data-i18n="gameplay.spiritTable.hasCardState"></td><td data-i18n="gameplay.spiritTable.hasCardTreatment"></td><td data-i18n="gameplay.spiritTable.hasCardPurpose"></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="progress-card-grid spirit-state-grid grid grid-cols-1 md:grid-cols-3 gap-y-10 md:gap-x-6">
+              <div class="case-image-card"><p class="text-xs font-semibold tracking-tight mb-2" data-i18n="media.gameplay.spiritIntro.title"></p><p class="text-xs text-neutral-500 i18n-body mb-4" data-i18n="media.gameplay.spiritIntro.body"></p><a data-disabled-full-image="true" class="image-slot aspect-[9/16] block"><img src="assets/drama/gameplay-spirit-card-new-user-state.png" alt="" data-i18n-alt="media.gameplay.spiritIntro.alt" class="object-cover spirit-state-focus" loading="lazy" onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden');"><div class="hidden image-fallback absolute inset-0"><span>assets/drama/gameplay-spirit-card-new-user-state.png</span></div></a></div>
+              <div class="case-image-card"><p class="text-xs font-semibold tracking-tight mb-2" data-i18n="media.gameplay.spiritNoCard.title"></p><p class="text-xs text-neutral-500 i18n-body mb-4" data-i18n="media.gameplay.spiritNoCard.body"></p><a data-disabled-full-image="true" class="image-slot aspect-[9/16] block"><img src="assets/drama/gameplay-spirit-card-no-card.png" alt="" data-i18n-alt="media.gameplay.spiritNoCard.alt" class="object-cover spirit-state-focus" loading="lazy" onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden');"><div class="hidden image-fallback absolute inset-0"><span>assets/drama/gameplay-spirit-card-no-card.png</span></div></a></div>
+              <div class="case-image-card"><p class="text-xs font-semibold tracking-tight mb-2" data-i18n="media.gameplay.spiritHasCard.title"></p><p class="text-xs text-neutral-500 i18n-body mb-4" data-i18n="media.gameplay.spiritHasCard.body"></p><a data-disabled-full-image="true" class="image-slot aspect-[9/16] block"><img src="assets/drama/gameplay-spirit-card-has-card.png" alt="" data-i18n-alt="media.gameplay.spiritHasCard.alt" class="object-cover spirit-state-focus" loading="lazy" onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden');"><div class="hidden image-fallback absolute inset-0"><span>assets/drama/gameplay-spirit-card-has-card.png</span></div></a></div>
+            </div>
+          </div>
+
+          <div class="gameplay-chapter reveal mb-20">
+            <div>
+              <div class="max-w-3xl mb-7">
+                <p class="gameplay-kicker" data-i18n="media.gameplay.spiritPhase2.label"></p>
+                <h3 class="text-xl md:text-2xl font-bold tracking-tighter leading-tight mb-4" data-i18n="media.gameplay.spiritPhase2.title"></h3>
+                <p class="text-sm text-neutral-500 i18n-body" data-i18n="media.gameplay.spiritPhase2.body"></p>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                <div class="soft-card"><p class="text-xs font-semibold mb-2" data-i18n="media.gameplay.spiritPhase2.problemTitle"></p><p class="text-xs text-neutral-500 i18n-body" data-i18n="media.gameplay.spiritPhase2.problemBody"></p></div>
+                <div class="soft-card"><p class="text-xs font-semibold mb-2" data-i18n="media.gameplay.spiritPhase2.strategyTitle"></p><p class="text-xs text-neutral-500 i18n-body" data-i18n="media.gameplay.spiritPhase2.strategyBody"></p></div>
+                <div class="soft-card"><p class="text-xs font-semibold mb-2" data-i18n="media.gameplay.spiritPhase2.experienceTitle"></p><p class="text-xs text-neutral-500 i18n-body" data-i18n="media.gameplay.spiritPhase2.experienceBody"></p></div>
+                <div class="soft-card"><p class="text-xs font-semibold mb-2" data-i18n="media.gameplay.spiritPhase2.valueTitle"></p><p class="text-xs text-neutral-500 i18n-body" data-i18n="media.gameplay.spiritPhase2.valueBody"></p></div>
+              </div>
+              <div class="spirit-phase2-media">
+                <a data-disabled-full-image="true" class="spirit-phase2-demo case-image-card block">
+                  <p class="spirit-phase2-main-title" data-i18n="media.gameplay.spiritPhase2.timedTitle"></p>
+                  <div class="image-slot"><img src="assets/drama/daily-shenma-insert-inpage.gif" alt="" data-i18n-alt="media.gameplay.spiritPhase2.timedAlt" loading="lazy" onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden');"><div class="hidden image-fallback absolute inset-0"><span>assets/drama/daily-shenma-insert-inpage.gif</span></div></div>
+                </a>
+                <span class="spirit-phase2-arrow" aria-hidden="true">→</span>
+                <div class="spirit-phase2-state-list" aria-label="每日限时神马卡状态">
+                  <div class="spirit-phase2-state-row"><a data-disabled-full-image="true" class="spirit-phase2-state-card case-image-card block"><p class="spirit-phase2-state-title">福马不足</p><div class="image-slot"><img src="assets/drama/福马不足.png" alt="福马不足" loading="lazy" onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden');"><div class="hidden image-fallback absolute inset-0"><span>assets/drama/福马不足.png</span></div></div></a><a data-disabled-full-image="true" class="spirit-phase2-state-card case-image-card block"><p class="spirit-phase2-state-title">可以兑换</p><div class="image-slot"><img src="assets/drama/可以兑换.png" alt="可以兑换" loading="lazy" onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden');"><div class="hidden image-fallback absolute inset-0"><span>assets/drama/可以兑换.png</span></div></div></a></div>
+                  <div class="spirit-phase2-state-row"><a data-disabled-full-image="true" class="spirit-phase2-state-card case-image-card block"><p class="spirit-phase2-state-title">猜对了，可以领红包了</p><div class="image-slot"><img src="assets/drama/猜对了，可以领红包了.png" alt="猜对了，可以领红包了" loading="lazy" onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden');"><div class="hidden image-fallback absolute inset-0"><span>assets/drama/猜对了，可以领红包了.png</span></div></div></a><a data-disabled-full-image="true" class="spirit-phase2-state-card case-image-card block"><p class="spirit-phase2-state-title">猜错了</p><div class="image-slot"><img src="assets/drama/猜错了.png" alt="猜错了" loading="lazy" onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden');"><div class="hidden image-fallback absolute inset-0"><span>assets/drama/猜错了.png</span></div></div></a></div>
+                  <div class="spirit-phase2-state-row"><a data-disabled-full-image="true" class="spirit-phase2-state-card case-image-card block"><p class="spirit-phase2-state-title">领完红包了</p><div class="image-slot"><img src="assets/drama/领完红包了.png" alt="领完红包了" loading="lazy" onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden');"><div class="hidden image-fallback absolute inset-0"><span>assets/drama/领完红包了.png</span></div></div></a><a data-disabled-full-image="true" class="spirit-phase2-state-card case-image-card block"><p class="spirit-phase2-state-title">红包被抢光了</p><div class="image-slot"><img src="assets/drama/红包被抢光了.png" alt="红包被抢光了" loading="lazy" onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden');"><div class="hidden image-fallback absolute inset-0"><span>assets/drama/红包被抢光了.png</span></div></div></a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="gameplay-chapter reveal mb-20">
+            <p class="gameplay-kicker" data-i18n="gameplay.bumpLabel"></p>
+            <div class="max-w-3xl mb-6">
+              <h3 class="text-xl md:text-2xl font-bold tracking-tighter leading-tight mb-4" data-i18n="gameplay.bumpTitle"></h3>
+              <p class="text-sm text-neutral-500 i18n-body" data-i18n="gameplay.bumpBody"></p>
+            </div>
+            <div class="case-image-card mb-6">
+              <a data-disabled-full-image="true" class="image-slot aspect-[9600/5360] block bg-[#FFF8EE]"><img src="assets/drama/bump-card-gameplay-mechanism.png" alt="" data-i18n-alt="media.gameplay.bumpMechanism.alt" class="object-contain object-center" loading="lazy" onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden');"><div class="hidden image-fallback absolute inset-0"><span>assets/drama/bump-card-gameplay-mechanism.png</span></div></a>
+            </div>
+            <div class="case-image-card mb-6 overflow-x-auto">
+              <table class="state-table">
+                <thead><tr><th data-i18n="gameplay.tableState"></th><th data-i18n="gameplay.tableTreatment"></th><th data-i18n="gameplay.tablePurpose"></th></tr></thead>
+                <tbody>
+                  <tr><td data-i18n="gameplay.bumpTable.firstState"></td><td data-i18n="gameplay.bumpTable.firstTreatment"></td><td data-i18n="gameplay.bumpTable.firstPurpose"></td></tr>
+                  <tr><td data-i18n="gameplay.bumpTable.oneCardState"></td><td data-i18n="gameplay.bumpTable.oneCardTreatment"></td><td data-i18n="gameplay.bumpTable.oneCardPurpose"></td></tr>
+                  <tr><td data-i18n="gameplay.bumpTable.successState"></td><td data-i18n="gameplay.bumpTable.successTreatment"></td><td data-i18n="gameplay.bumpTable.successPurpose"></td></tr>
+                  <tr><td data-i18n="gameplay.bumpTable.failState"></td><td data-i18n="gameplay.bumpTable.failTreatment"></td><td data-i18n="gameplay.bumpTable.failPurpose"></td></tr>
+                  <tr><td data-i18n="gameplay.bumpTable.familiarState"></td><td data-i18n="gameplay.bumpTable.familiarTreatment"></td><td data-i18n="gameplay.bumpTable.familiarPurpose"></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="progress-card-grid spirit-state-grid grid grid-cols-1 md:grid-cols-3 gap-y-10 md:gap-x-6">
+              <div class="case-image-card"><p class="text-xs font-semibold tracking-tight mb-2" data-i18n="media.gameplay.bumpNew.title"></p><p class="text-xs text-neutral-500 i18n-body mb-4" data-i18n="media.gameplay.bumpNew.body"></p><a data-disabled-full-image="true" class="image-slot aspect-[9/16] block"><img src="assets/drama/gameplay-bump-card-initial.png" alt="" data-i18n-alt="media.gameplay.bumpNew.alt" class="object-cover object-top" loading="lazy" onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden');"><div class="hidden image-fallback absolute inset-0"><span>assets/drama/gameplay-bump-card-initial.png</span></div></a></div>
+              <div class="case-image-card"><p class="text-xs font-semibold tracking-tight mb-2" data-i18n="media.gameplay.bumpOneCard.title"></p><p class="text-xs text-neutral-500 i18n-body mb-4" data-i18n="media.gameplay.bumpOneCard.body"></p><a data-disabled-full-image="true" class="image-slot aspect-[9/16] block"><img src="assets/drama/gameplay-bump-card-one-card.png" alt="" data-i18n-alt="media.gameplay.bumpOneCard.alt" class="object-cover object-top" loading="lazy" onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden');"><div class="hidden image-fallback absolute inset-0"><span>assets/drama/gameplay-bump-card-one-card.png</span></div></a></div>
+              <div class="case-image-card"><p class="text-xs font-semibold tracking-tight mb-2" data-i18n="media.gameplay.bumpSuccess.title"></p><p class="text-xs text-neutral-500 i18n-body mb-4" data-i18n="media.gameplay.bumpSuccess.body"></p><a data-disabled-full-image="true" class="image-slot aspect-[9/16] block"><img src="assets/drama/gameplay-bump-card-success.png" alt="" data-i18n-alt="media.gameplay.bumpSuccess.alt" class="object-cover object-top" loading="lazy" onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden');"><div class="hidden image-fallback absolute inset-0"><span>assets/drama/gameplay-bump-card-success.png</span></div></a></div>
+            </div>
+            <div class="bump-motion-card mt-8 rounded-sm border border-neutral-200 bg-white p-5 md:p-6">
+              <div class="max-w-2xl mb-5"><h4 class="text-lg md:text-xl font-bold tracking-tight leading-tight mb-2" data-i18n="media.gameplay.bumpFlowMotion.title"></h4><p class="text-xs md:text-sm text-neutral-500 i18n-body" data-i18n="media.gameplay.bumpFlowMotion.body"></p><div class="motion-sequence-note" data-i18n-html="media.gameplay.bumpFlowMotion.sequenceHtml"></div></div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4"><div><p class="text-xs font-semibold tracking-tight mb-2" data-i18n="media.gameplay.bumpFlowMotion.designTitle"></p><a data-disabled-full-image="true" class="image-slot block mx-auto max-w-[280px]" style="aspect-ratio: 420 / 913;"><img src="assets/drama/bump-card-claim-design-v2.gif" alt="" data-i18n-alt="media.gameplay.bumpFlowMotion.designAlt" class="object-cover object-top" loading="lazy" onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden');"><div class="hidden image-fallback absolute inset-0"><span>assets/drama/bump-card-claim-design-v2.gif</span></div></a></div><div><p class="text-xs font-semibold tracking-tight mb-2" data-i18n="media.gameplay.bumpFlowMotion.onlineTitle"></p><a data-disabled-full-image="true" class="image-slot block mx-auto max-w-[280px]" style="aspect-ratio: 420 / 913;"><img src="assets/drama/bump-card-online-effect.gif" alt="" data-i18n-alt="media.gameplay.bumpFlowMotion.alt" class="object-cover object-top" loading="lazy" onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden');"><div class="hidden image-fallback absolute inset-0"><span>assets/drama/bump-card-online-effect.gif</span></div></a></div></div>
+            </div>
+          </div>
+
+        </section>
+        <div class="divider"></div>
+
+        <section id="craft" class="case-section py-20 md:py-28">
+          <div class="reveal mb-10 max-w-3xl">
+            <p class="section-label" data-i18n="craft.label"></p>
+          </div>
+
+          <div class="reveal max-w-3xl mb-6">
+            <p class="gameplay-kicker" data-i18n="craft.entryLabel"></p>
+            <h3 class="mb-4" data-i18n="craft.entryTitle"></h3>
+            <p class="text-sm text-neutral-500 i18n-body" data-i18n="craft.entryBody"></p>
+          </div>
+          <div class="case-image-card reveal delay-2 mt-10">
+            <a data-disabled-full-image="true" class="block">
+              <div class="image-slot bg-black" style="aspect-ratio: 1720 / 870;">
+                <img src="assets/drama/experience-detail-signin-entry-anchor.png" alt="签到入口隐藏后，通过提示挂件锚定到对应模块的体验细节方案" class="object-contain object-center" loading="lazy" onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden');">
+                <div class="hidden image-fallback absolute inset-0"><span>assets/drama/experience-detail-signin-entry-anchor.png</span></div>
+              </div>
+            </a>
+          </div>
+
+          <div class="reveal mt-20 pt-14">
+            <div class="max-w-3xl mb-6">
+              <p class="gameplay-kicker" data-i18n="craft.pipeline"></p>
+              <h3 class="mb-4" data-i18n="craft.pipelineTitle"></h3>
+              <div class="space-y-4 text-sm text-neutral-500 i18n-body">
+                <p data-i18n="craft.pipelineBody1"></p>
+                <p data-i18n="craft.pipelineBody2"></p>
+              </div>
+            </div>
+            <a data-disabled-full-image="true" class="case-image-card block">
+              <div class="image-slot aspect-[16/9] bg-black">
+                <img src="assets/drama/maka-ip-concept-exploration.png" alt="马卡 IP 概念探索流程" class="object-contain object-center" loading="lazy" onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden');">
+                <div class="hidden image-fallback absolute inset-0"><span>assets/drama/maka-ip-concept-exploration.png</span></div>
+              </div>
+            </a>
+          </div>
+
+                    <div id="content" class="mt-20 pt-14"><div class="reveal max-w-3xl mb-8"><p class="gameplay-kicker" data-i18n="content.label"></p><h3 class="mb-4" data-i18n="content.title"></h3><p class="text-sm text-neutral-500 i18n-body" data-i18n="content.body"></p></div><div class="space-y-6"><div class="case-image-card reveal"><div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start"><div class="lg:col-span-8"><p class="text-xs font-semibold tracking-tight text-neutral-400 mb-3" data-i18n="media.copy.case1.label"></p><div class="grid grid-cols-1 md:grid-cols-2 gap-3"><div><p class="text-[10px] font-bold text-red-400 tracking-widest mb-1" data-i18n="content.before"></p><div class="diff-old" data-i18n-html="media.copy.case1.before"></div></div><div><p class="text-[10px] font-bold text-[#FF573A] tracking-widest mb-1" data-i18n="content.after"></p><div class="diff-new" data-i18n-html="media.copy.case1.after"></div></div></div><p class="copy-note text-sm text-neutral-500 i18n-body mt-4" data-i18n="media.copy.case1.note"></p></div></div></div><div class="case-image-card reveal"><div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start"><div class="lg:col-span-8"><p class="text-xs font-semibold tracking-tight text-neutral-400 mb-3" data-i18n="media.copy.case2.label"></p><div class="grid grid-cols-1 md:grid-cols-2 gap-3"><div><p class="text-[10px] font-bold text-red-400 tracking-widest mb-1" data-i18n="content.before"></p><div class="diff-old" data-i18n-html="media.copy.case2.before"></div></div><div><p class="text-[10px] font-bold text-[#FF573A] tracking-widest mb-1" data-i18n="content.after"></p><div class="diff-new" data-i18n-html="media.copy.case2.after"></div></div></div><p class="copy-note text-sm text-neutral-500 i18n-body mt-4" data-i18n="media.copy.case2.note"></p></div></div></div><div class="case-image-card reveal"><div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start"><div class="lg:col-span-8"><p class="text-xs font-semibold tracking-tight text-neutral-400 mb-3" data-i18n="media.copy.case3.label"></p><div class="grid grid-cols-1 md:grid-cols-2 gap-3"><div><p class="text-[10px] font-bold text-red-400 tracking-widest mb-1" data-i18n="content.before"></p><div class="diff-old" data-i18n-html="media.copy.case3.before"></div></div><div><p class="text-[10px] font-bold text-[#FF573A] tracking-widest mb-1" data-i18n="content.after"></p><div class="diff-new" data-i18n-html="media.copy.case3.after"></div></div></div><p class="copy-note text-sm text-neutral-500 i18n-body mt-4" data-i18n="media.copy.case3.note"></p></div></div></div><div class="case-image-card reveal"><div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start"><div class="lg:col-span-8"><p class="text-xs font-semibold tracking-tight text-neutral-400 mb-3" data-i18n="media.copy.case4.label"></p><div class="grid grid-cols-1 md:grid-cols-2 gap-3"><div><p class="text-[10px] font-bold text-red-400 tracking-widest mb-1" data-i18n="content.before"></p><div class="diff-old" data-i18n-html="media.copy.case4.before"></div></div><div><p class="text-[10px] font-bold text-[#FF573A] tracking-widest mb-1" data-i18n="content.after"></p><div class="diff-new" data-i18n-html="media.copy.case4.after"></div></div></div><p class="copy-note text-sm text-neutral-500 i18n-body mt-4" data-i18n="media.copy.case4.note"></p></div></div></div><div class="case-image-card reveal"><div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start"><div class="lg:col-span-8"><p class="text-xs font-semibold tracking-tight text-neutral-400 mb-3" data-i18n="media.copy.case5.label"></p><div class="grid grid-cols-1 md:grid-cols-2 gap-3"><div><p class="text-[10px] font-bold text-red-400 tracking-widest mb-1" data-i18n="content.before"></p><div class="diff-old" data-i18n-html="media.copy.case5.before"></div></div><div><p class="text-[10px] font-bold text-[#FF573A] tracking-widest mb-1" data-i18n="content.after"></p><div class="diff-new" data-i18n-html="media.copy.case5.after"></div></div></div><p class="copy-note text-sm text-neutral-500 i18n-body mt-4" data-i18n="media.copy.case5.note"></p></div></div></div></div></div>
+        </section>
+        <div class="divider"></div>
+
+        <section id="results" class="case-section py-20 md:py-28">
+          <div class="reveal mb-10 max-w-3xl">
+            <p class="section-label" data-i18n="results.label"></p>
+            <h2 class="text-2xl md:text-4xl font-bold tracking-tighter leading-tight i18n-title" data-i18n="results.title"></h2>
+          </div>
+          <div class="reveal mb-16">
+            <p class="gameplay-kicker" data-i18n="results.effectLabel"></p>
+            <div class="online-effect-showcase">
+              <div class="case-phone-mockup">
+                <div class="case-phone-screen" tabindex="0" aria-label="抓马赢红包线上效果录屏 GIF">
+                  <img src="assets/drama/launch-effect.gif" alt="" data-i18n-alt="media.finalUi.alt" loading="lazy" decoding="async">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
+            <div class="reveal metric-card">
+              <p class="text-4xl md:text-5xl font-black tracking-tighter text-[#FF573A]" data-i18n="results.m1Value"></p>
+              <p class="text-xs text-neutral-400 font-medium mt-2" data-i18n="results.m1Label"></p>
+            </div>
+            <div class="reveal delay-1 metric-card">
+              <p class="text-4xl md:text-5xl font-black tracking-tighter" data-i18n="results.m2Value"></p>
+              <p class="text-xs text-neutral-400 font-medium mt-2" data-i18n="results.m2Label"></p>
+            </div>
+            <div class="reveal delay-2 metric-card">
+              <p class="text-4xl md:text-5xl font-black tracking-tighter" data-i18n="results.m3Value"></p>
+              <p class="text-xs text-neutral-400 font-medium mt-2" data-i18n="results.m3Label"></p>
+            </div>
+            <div class="reveal delay-4 metric-card col-span-2 md:col-span-1">
+              <p class="text-4xl md:text-5xl font-black tracking-tighter text-[#FF573A]" data-i18n="results.m5Value"></p>
+              <p class="text-xs text-neutral-400 font-medium mt-2" data-i18n="results.m5Label"></p>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
+            <div class="highlight-card">
+              <p class="text-xs font-semibold mb-2" data-i18n="results.impactUserTitle"></p>
+              <p class="text-xs text-neutral-500 i18n-body" data-i18n="results.impactUserBody"></p>
+            </div>
+            <div class="highlight-card">
+              <p class="text-xs font-semibold mb-2" data-i18n="results.impactPlatformTitle"></p>
+              <p class="text-xs text-neutral-500 i18n-body" data-i18n="results.impactPlatformBody"></p>
+            </div>
+            <div class="highlight-card">
+              <p class="text-xs font-semibold mb-2" data-i18n="results.impactOpsTitle"></p>
+              <p class="text-xs text-neutral-500 i18n-body" data-i18n="results.impactOpsBody"></p>
+            </div>
+            <div class="highlight-card">
+              <p class="text-xs font-semibold mb-2" data-i18n="results.impactTeamTitle"></p>
+              <p class="text-xs text-neutral-500 i18n-body" data-i18n="results.impactTeamBody"></p>
+            </div>
+          </div>
+          <p class="reveal text-base md:text-lg font-medium tracking-tight leading-relaxed text-neutral-600 italic max-w-3xl" data-i18n="results.quote"></p>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="py-14 md:py-16 border-t border-neutral-100">
+    <div class="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <a href="portfolio2.html" class="nav-link text-xs font-semibold">← 返回全部作品</a>
+      <p class="text-xs text-neutral-400">© 2026 Sheryl Gao</p>
+    </div>
+  </footer>
+
+  <script>
+    const DEFAULT_LANG = 'zh';
+    const STORAGE_KEY = 'portfolio-lang';
+    const LEGACY_STORAGE_KEYS = ['portfolio-language', 'language'];
+    const DRAMA_ASSETS = { hero: ['assets/drama/hero-cover.png'], flow: ['assets/drama/product-link-flow-optimized.jpg', 'assets/drama/activity-gameplay-frame.png'], venue: ['assets/drama/venue-before-uncollected.png', 'assets/drama/venue-after-collected.png'], gameplay: ['assets/drama/global-interaction-map-preview.png', 'assets/drama/global-interaction-map-full-optimized.jpg', 'assets/drama/global-interaction-flow-slice-2-optimized.jpg', 'assets/drama/gameplay-fortune-horse.png', 'assets/drama/gameplay-bump-card.png'], motion: ['assets/drama/maka-ip-concept-exploration.png'], ops: [] };
+    const i18n = {"zh":{"doc":{"title":"微博开新年・抓马赢红包 — Sheryl Gao"},"nav":{"back":"← 返回"},"navSections":{"overview":"01 项目背景","flow":"02 产品链路","venue":"03 设计策略","gameplay":"04 玩法系统","content":"06 文案设计","craft":"05 体验细节","alignment":"07 协作推进","results":"08 结果复盘"},"hero":{"eyebrow":"微博 · 2026 · 交互设计师","titleHtml":"<span class=\"hero-line\">「微博开新年，抓马赢红包」春节活动体验设计</span>","subtitle":"用“抓马”重构春节集卡体验，让用户愿意停留、乐于分享、主动传播","metricLine1":"200M+ DAU 春节活动场景","metricLine2":"+15% 核心玩法点击提升","metricLine3":"70% AI 辅助视觉探索提效","tag1":"春节活动","tag2":"集卡玩法","tag3":"动态会场","tag4":"游戏化互动","tag5":"社交传播","tag6":"AIGC 提效"},"context":{"label":"01 — 项目背景","title":"当春节集卡进入疲劳期，活动需要新抓手","body":"春节集卡已经成为互联网平台的固定节目，但熟悉也意味着疲劳。用户知道自己要做任务、抽卡、换卡、开奖，却很难再被单纯的红包刺激打动。对微博来说，这次春节活动不只是一次运营活动，而是一个同时承载用户活跃、社交传播、兴趣圈层和节日氛围的高流量场景。","conflictTitle":"核心挑战","conflictBody":"活动需要在有限首屏中承接普通马卡、神马卡、碰碰卡、主题卡、明星马卡、压岁钱等多条玩法，同时还要让用户快速理解当前目标、获得即时反馈，并在 22 天活动周期中持续回访。","h1Title":"业务压力","h1Body":"春节活动承担用户活跃、红包转化、拉新回流、商业资源曝光等多重目标。","h2Title":"用户疲劳","h2Body":"传统集卡链路容易变成机械点击，用户对“做任务—抽卡—领奖励”的新鲜感下降。","h3Title":"体验复杂","h3Body":"多入口、多任务、多卡种、多奖励并行，页面需要在复杂玩法中建立清晰秩序。","roleTitle":"我的角色","roleBody":"作为交互设计师，我负责主会场信息架构、核心玩法链路、动态布局策略、卡片状态反馈、文案体验、跨团队方案推进，以及上线后的数据迭代。"},"positioning":{"label":"项目定位","title":"以“抓马”为核心概念，打造有年味、有网感、有传播力的新春互动场","body":"“抓马”既来自 Drama 的戏剧化和趣味化，也贴合微博用户爱玩梗、爱吐槽、爱共鸣的社交习惯。我们希望用户参与活动时，不只是完成任务领取红包，而是在集卡、猜梗、碰卡、邀请和分享中持续获得反馈。","g1Title":"情绪化表达","g1Body":"用“抓马”主题和春节语境包装活动，让集卡不只是领红包，也有话题感和记忆点。","g2Title":"游戏化互动","g2Body":"通过普通马卡、神马卡、碰碰卡等玩法，把任务链路转化为更轻松的参与过程。","g3Title":"即时化反馈","g3Body":"通过实时红包、除夕红包、双人现金红包、照片小卡、语音祝福等激励，让用户在不同阶段都能获得明确反馈。","g4Title":"兴趣圈层渗透","g4Body":"通过主题卡、明星马卡、明星大卡等内容，把明星、热门 IP、游戏、虚拟偶像、二次元等兴趣圈层纳入春节活动主线。"},"flow":{"label":"02 — 产品链路","title":"从多入口触达到多玩法转化","body":"这次活动不是单一页面，而是一套完整的春节活动链路。用户可以从进端弹层、点赞微博、推荐刷流、超话评论、智搜浏览、视频观看，以及“我-双流卡片”等入口进入活动。进入集卡活动页后，通过每日任务、连续任务、邀请好友和商业任务获得抽卡机会，再进入普通马卡、神马卡、碰碰卡、主题卡、压岁钱等玩法。","gameplayLabel":"活动玩法"},"venue":{"label":"03 — 设计策略","title":"首页框架迭代","body":"春节活动首屏是最稀缺的资源。我把首页框架从 V1.0 推进到最终版：先保证用户看清核心集卡目标，再根据进度把普通马卡、神马卡、碰碰卡和好友列表放到更合适的位置。","progressTitle":"不同阶段，首页展示不同重点","progressBody":"最终首页框架不再用同一套顺序服务所有用户，而是围绕阶段一和阶段二调整内容优先级，让未完成集卡的用户先看到目标，让已完成基础目标的用户更快进入后续玩法。","stage1Label":"阶段一","stage2Label":"阶段二","phase1Title":"阶段一：集卡阶段","phase1Body":"普通马卡模块占据首屏核心位置，帮助用户快速理解目标、查看进度、获得抽卡机会，并建立除夕开奖预期。","phase1Metric":"普通马卡模块优先曝光","phase2Title":"阶段二：挑战阶段","phase2Body":"当用户完成基础集卡后，卡片区域自动收起，把更多空间让给神马卡、碰碰卡、主题卡和压岁钱等后续玩法，减少无效滚动。","phase2Metric":"高频玩法前置"},"gameplay":{"label":"04 — 玩法系统","title":"从集卡、猜梗、匹配到圈层传播","intro":"“微博开新年・抓马赢红包”不是单一的集卡活动，而是一套围绕春节场景搭建的多层玩法系统。每个玩法都承担不同角色：普通马卡建立主线，神马卡增加趣味，碰碰卡激活社交，主题卡和明星马卡渗透圈层，压岁钱承接拉新回流。","loopTitle":"让重复卡重新流动起来","loopBody":"集卡活动中，重复卡很容易带来挫败感。我们为重复卡设计了新的出口：用户可以用 2 张重复卡兑换 1 张神马卡。这个机制把普通集卡、热梗内容和好友互动串联起来，让“多出来的卡”重新变成继续参与的理由。","node1":"获得福马","node2":"重复卡 ×2","node3":"兑换神马卡","node4":"猜热梗闯关","node5":"晒卡分享","strategyLabel":"设计策略","strategyTitle":"拆解多玩法状态与任务路径","strategyBody":"把普通马卡、神马卡、碰碰卡、主题卡和压岁钱拆成不同用户状态，明确每条玩法在页面中的触发条件、可见状态和承接动作。"},"content":{"label":"06 — 文案设计","title":"把运营目标写进用户愿意参与的语气里","body":"春节活动里的文案不只是页面提示，而是玩法理解、情绪调动和转化引导的一部分。在主会场文案打磨中，我和运营一起梳理了集卡、神马卡、碰碰卡、红包弹窗等关键链路的状态文案。调整重点不是单纯让文案“更活泼”，而是让每一句话都服务于具体体验目标：入口文案帮助用户快速理解玩法，状态文案降低失败挫败，按钮文案强化动作意图，社交文案减少邀请打扰感。","before":"调整前","after":"调整后"},"craft":{"label":"05 — 体验细节","title":"个性化快捷入口策略提升活动曝光","pipeline":"AIGC视觉探索过程","p1":"提示词到草案","p2":"多轮方向迭代","p3":"可评审视觉资产","aiMetric":"70% 视觉概念评审周期缩短","hapticTitle":"动态入口文案","hapticBody":"为了增加活动曝光，根据每个支线玩法的进度动态调整入口文案。","aiTitle":"AIGC 视觉探索","aiBody":"在角色概念和视觉方向探索中使用 AIGC 快速生成多轮草案，帮助团队把抽象方向提前变成可讨论的图像。AI 没有替代设计判断，但让前期视觉探索更快收敛，也为交互细节和联调争取了更多时间。"},"alignment":{"label":"07 — 协作推进","title":"在增长目标和用户体验之间守住边界","body":"春节活动天然承载强运营目标，但增长活动不等于把所有信息都推到用户脸上。项目中，运营侧曾希望通过更强曝光提升任务参与，我基于用户打扰感、关闭率和后续参与意愿，推动使用更轻量的非侵入式提醒方案：保留任务触达，但不让用户进入活动后第一时间被打断。","mapTitle":"运营目标与体验边界","situationLabel":"Situation","situation":"运营希望通过强弹窗提升任务曝光。","actionLabel":"Action","action":"我推动将全屏打断调整为更轻量的提醒与状态引导，让用户在愿意继续参与时自然看到下一步。","resultLabel":"Result","result":"最终方案兼顾了活动触达和用户自主性，也降低了高频访问场景中的打扰感。","quote":"真正有效的触达，不是把所有信息推到用户脸上，而是在用户愿意继续参与的时候，把下一步自然递到他面前。"},"results":{"label":"08 — 结果与复盘","title":"从首日参与到 22 天持续运营","m1Value":"200M+","m1Label":"春节活动日活用户场景","m2Value":"+15%","m2Label":"动态布局带来核心玩法点击提升","m3Value":"70%","m3Label":"AIGC 辅助视觉探索提效","m4Value":"22","m4Label":"天持续活动周期","m5Value":"Day 10","m5Label":"中期疲劳点识别与限时玩法补充","impactUserTitle":"对用户","impactUserBody":"降低复杂集卡玩法的理解成本，让集卡、猜梗、碰卡、邀请和领奖励形成更连续的参与路径。","impactPlatformTitle":"对平台","impactPlatformBody":"把春节活动从单一红包任务升级为兼具社交传播、兴趣圈层和回流转化的新春互动系统。","impactOpsTitle":"对运营","impactOpsBody":"让普通马卡、神马卡、碰碰卡、主题卡、明星马卡和压岁钱拥有更清晰的承接位置，提升资源分发效率。","impactTeamTitle":"对团队","impactTeamBody":"沉淀了大型活动中的动态布局、玩法资产流转、内容文案打磨、AI 辅助探索和高压协作方法。","quote":"大型活动设计不是把模块堆满，也不是只追求视觉热闹。真正困难的是在业务压力、用户耐心和系统稳定性之间找到秩序。"},"next":{"label":"下一个项目","title":"微博游戏中心体验升级","meta":"微博 · 2025","view":"查看详情 →"},"footer":{"back":"← 返回全部作品","copyright":"© 2026 Sheryl Gao"},"media":{"finalUi":{"label":"上线效果","title":"最终上线效果","body":"这里展示最终 UI 设计稿或上线截图，承接前面的交互方案、视觉执行和真实发布状态，呈现活动主会场的完整落地效果。","mediaLabel":"UI 最终图"},"globalMap":{"label":"全局交互稿","title":"先把复杂玩法摊成一张系统画布","body":"完整交互图用于统一会场状态、卡种流转、弹窗反馈和分享回流。页面内截取集卡与神马卡两段代表性流程，作为高保真设计证据承接后面的玩法拆解。","alt":"微博开新年抓马赢红包全局交互设计图"},"hero":{"left":{"caption":"神马卡 · 猜热梗闯关","alt":"神马卡猜热梗闯关界面"},"center":{"caption":"主会场 · 抓马赢红包","alt":"抓马赢红包主会场界面"},"right":{"caption":"碰碰卡 · 呼叫搭子","alt":"碰碰卡呼叫搭子界面"}},"flow":{"title":"产品链路系统图","entry":{"title":"参与入口","items":"用户覆盖<br>重点业务场景<br>固定入口"},"page":{"title":"集卡活动页","items":"抽卡机会<br>每日任务<br>邀请好友<br>商业任务"},"gameplay":{"title":"活动玩法","items":"普通马卡<br>神马卡<br>碰碰卡<br>主题卡<br>压岁钱"},"reward":{"title":"奖励机制","items":"除夕红包<br>实时红包<br>双人现金红包<br>照片小卡<br>语音祝福"},"alt":"微博新春集卡产品链路系统图"},"venue":{"before":{"label":"未集齐：聚焦普通马卡","alt":"未集齐状态下的活动主会场"},"after":{"label":"已集齐：露出进阶玩法","alt":"已集齐状态下的活动主会场"},"insight":"这套策略的价值不是“页面会变化”，而是让界面跟着用户目标变化。用户不需要重新理解会场，页面自己把下一步推到更合适的位置。"},"gameplay":{"fortune":{"title":"普通马卡 / 福马","body":"建立主线集卡目标，集齐后开启除夕红包。","alt":"普通马卡和福马玩法界面"},"spirit":{"title":"神马卡","body":"用重复卡兑换猜梗机会，把无效结果转化为新玩法入口。","alt":"神马卡玩法界面"},"bump":{"title":"碰碰卡","body":"通过双人匹配开启现金红包，把邀请变成共同参与。","alt":"碰碰卡玩法界面"},"theme":{"title":"主题卡 / 明星马卡","body":"承接 IP、明星和兴趣圈层，让活动进入更具体的社交场景。","alt":"主题卡与明星马卡玩法界面"},"luckyMoney":{"title":"压岁钱","body":"以春节语境承接拉新和回流，降低增长动作的工具感。","alt":"压岁钱玩法界面"},"mediaLabel":"图片示意","fortuneUncollected":{"title":"未集齐状态","body":"普通马卡主线占据核心位置，突出集卡进度、抽卡机会和除夕开奖预期。","alt":"普通马卡未集齐状态界面"},"fortuneCollected":{"title":"集齐后状态","body":"普通马卡完成后收起主线空间，把更多位置让给进阶玩法继续承接。","alt":"普通马卡集齐后状态界面"},"spiritNew":{"title":"新用户首次可见状态","body":"首次进入时说明神马卡价值和获得方式，降低新玩法理解成本。","alt":"神马卡新用户首次可见状态界面"},"spiritOther":{"title":"已兑换「神马卡」用户可见状态","body":"用户已有基础认知后，直接呈现猜梗抽红包和兑换反馈。","alt":"已兑换神马卡用户可见状态界面"},"bumpNew":{"title":"新用户可见状态","body":"首次展示碰碰卡时强调双人匹配和红包预期，让社交动作更容易被理解。","alt":"碰碰卡新用户可见状态界面"},"bumpOther":{"title":"其他状态","body":"熟悉规则后前置好友列表和碰卡动作，缩短从选择好友到参与的路径。","alt":"碰碰卡其他状态界面"},"fortuneGroup":"普通马卡","spiritGroup":"神马卡","bumpGroup":"碰碰卡","themeGroup":"主题卡","luckyMoneyGroup":"压岁钱"},"copy":{"case1":{"label":"首页模块文案","before":"模块一：集马卡除夕分红包<br>模块二：猜对神马卡抽红包<br>模块三：碰碰卡","after":"模块一：集齐福马 · 除夕开奖<br>模块二：猜对神马 · 红包加码<br>模块三：呼叫搭子 · 碰出红包","note":"原文虽然列出了三条主玩法，但更像运营模块说明，用户仍需要自己理解每条玩法对应的动作。最终文案把集卡、竞猜和社交匹配转成更明确的行动与奖励预期，让用户在首屏就能判断自己想参与哪一种玩法。","alt":"入口文案模块界面"},"case2":{"label":"失败提示","before":"没有马卡无法兑换","after":"先去做任务得福马吧","note":"失败状态不能只告诉用户“不能做什么”，还要告诉用户“接下来可以做什么”。这条文案把系统限制转成行动引导。","alt":"神马卡空状态提示界面"},"case3":{"label":"神马卡竞猜","before":"猜一猜这是神马<br>确认答案","after":"这是神马，你能猜对吗？<br>就这个了","note":"热梗竞猜不应该像考试提交，而应该像轻松互动。最终文案用提问和口语按钮降低答题压力。","alt":"神马卡竞猜界面"},"case4":{"label":"社交邀请","before":"召唤好友","after":"召唤搭子","note":"“好友”偏功能，“搭子”更有网感，也更符合微博用户的社交表达，降低了邀请行为的工具感。","alt":"碰碰卡社交邀请界面"},"case5":{"label":"匹配失败","before":"匹配失败","after":"你还没有碰碰卡呢，快去领卡<br>糟糕，这一碰没成<br>明天再来<br>换个好友试试吧","note":"碰碰卡失败状态很多，统一提示“匹配失败”会让用户不知道问题在哪里。最终文案根据不同失败原因给出继续参与的出口。","alt":"碰碰卡匹配失败界面"}},"motion":{"draw":{"title":"揭卡动效","body":"通过预备、蓄力、释放的节奏，让用户在 1 秒内经历“期待—确认—惊喜”的情绪变化。","alt1":"揭卡动效第一帧","alt2":"揭卡动效第二帧","alt3":"揭卡动效第三帧"},"bump":{"title":"碰碰卡动效","body":"通过双卡靠近、碰撞、红包开启三个节点，把好友匹配包装成“碰出好运”的动作。","alt1":"碰碰卡动效第一帧","alt2":"碰碰卡动效第二帧","alt3":"碰碰卡动效第三帧"}},"ops":{"before":{"label":"强打断弹窗方案","alt":"强打断弹窗方案示意"},"after":{"label":"轻量提醒方案","alt":"轻量提醒方案示意"},"note":"增长活动不等于把所有信息都推到用户脸上。真正有效的触达，是在用户愿意继续参与的时候，把下一步自然递到他面前。"}}},"en":{"doc":{"title":"Drama 2026 — Sheryl Gao"},"nav":{"back":"← Back"},"navSections":{"overview":"01 Context","flow":"02 Product Flow","venue":"03 Design Strategy","gameplay":"04 Gameplay","content":"06 UX Writing","craft":"05 Craft","alignment":"07 Alignment","results":"08 Results"},"hero":{"eyebrow":"Weibo · 2026 · Interaction Design Lead","titleHtml":"<span class=\"hero-line\">Drama 2026: Weibo Red Packet Campaign UX</span>","subtitle":"Reframing a familiar New Year card-collection campaign into a more playful, shareable, and goal-aware experience.","metricLine1":"200M+ DAU festive campaign scenario","metricLine2":"+15% lift in core gameplay clicks","metricLine3":"70% faster AI-assisted visual exploration","tag1":"Festive Campaign","tag2":"Card Collection","tag3":"Dynamic Venue","tag4":"Gamified Interaction","tag5":"Social Spread","tag6":"AIGC Efficiency"},"context":{"label":"01 — Challenge & Context","title":"When card collection becomes familiar, the campaign needs a new reason to participate","body":"New Year card collection has become a familiar platform ritual. Familiarity also brings fatigue: users know they need to complete tasks, draw cards, exchange cards, and wait for rewards. For Weibo, this campaign needed to support activity, social sharing, interest communities, and festive atmosphere in one high-traffic experience.","conflictTitle":"Core challenge","conflictBody":"The first screen had to carry Fortune Horse Cards, Spirit Horse Cards, Bump Cards, Theme Cards, Celebrity Cards, and Lucky Money while helping users understand their current goal, receive feedback, and return across a 22-day campaign cycle.","h1Title":"Business pressure","h1Body":"The campaign served activity, reward conversion, reactivation, acquisition, and commercial exposure goals.","h2Title":"User fatigue","h2Body":"Traditional task-draw-reward loops can quickly become mechanical and lose novelty.","h3Title":"Experience complexity","h3Body":"Multiple entrances, tasks, card types, and rewards needed a clear interface order.","roleTitle":"My role","roleBody":"As the interaction design lead, I owned the venue information architecture, gameplay flows, adaptive layout strategy, card-state feedback, UX writing, cross-functional alignment, and post-launch iteration."},"positioning":{"label":"Positioning","title":"Using “Drama” as a playful social theme for a New Year interaction venue","body":"Drama carried both theatrical energy and Weibo’s meme-driven social tone. The goal was not just to make users complete tasks for red packets, but to keep them receiving feedback through collecting, guessing, matching, inviting, and sharing.","g1Title":"Emotional expression","g1Body":"The theme gave card collection a more memorable and conversational festive identity.","g2Title":"Gamified interaction","g2Body":"Fortune Horse, Spirit Horse, and Bump Card modules turned tasks into lighter gameplay moments.","g3Title":"Immediate feedback","g3Body":"Instant packets, New Year’s Eve rewards, duo cash packets, photo cards, and voice blessings mapped rewards to different paths.","g4Title":"Community reach","g4Body":"Theme Cards, Celebrity Horse Cards, and Celebrity Mega Cards brought fandom, IP, games, virtual idols, and ACG communities into the campaign."},"flow":{"label":"02 — Product Flow","title":"From multi-entry reach to multi-module conversion","body":"The campaign was not a single page but a complete festive flow. Users entered from pop-ups, likes, recommendation feeds, super topic comments, search browsing, video watching, and fixed account entrances. The campaign page then unified draw chances, tasks, invites, commercial tasks, gameplay modules, and reward expectations.","gameplayLabel":"Gameplay Modules"},"venue":{"label":"03 — Design Strategy","title":"Homepage Framework Iteration","body":"The first screen was the scarcest resource. I evolved the homepage framework from V1.0 to the final structure: first making the core collection goal clear, then moving Fortune Cards, Spirit Cards, Bump Cards, and friend actions into positions that better matched user progress.","progressTitle":"Letting the page follow the user’s progress","progressBody":"The final homepage framework no longer uses one fixed order for every user. It adjusts priorities across Phase 1 and Phase 2 so users still collecting cards see the main goal first, while users who have completed the base goal can enter advanced modules faster.","stage1Label":"Phase 1","stage2Label":"Phase 2","phase1Title":"Phase 1: Collection","phase1Body":"Fortune Horse Cards held the first-screen focus so users could understand goals, track progress, earn draw chances, and build anticipation for the New Year’s Eve reward.","phase1Metric":"Fortune Horse Cards prioritized","phase2Title":"Phase 2: Challenge","phase2Body":"After the core collection was complete, the card area collapsed and advanced modules moved forward to reduce unnecessary scrolling.","phase2Metric":"Advanced modules moved up"},"gameplay":{"label":"04 — Gameplay System","title":"From collection and meme challenges to friend matching and community spread","intro":"Drama 2026 was not a single card-collection page. It was a layered gameplay system for the New Year context: Fortune Horse Cards anchored the main loop, Spirit Horse Cards added meme challenges, Bump Cards activated friend interaction, Theme and Celebrity Cards reached interest communities, and Lucky Money supported acquisition and reactivation.","loopTitle":"Making duplicate cards useful again","loopBody":"Duplicate cards often create frustration in collection campaigns. We gave them a new path: two duplicate cards could be exchanged for one Spirit Horse Card. This connected the main collection loop, meme content, and friend help into one reason to keep participating.","node1":"Earn Fortune Card","node2":"Duplicate ×2","node3":"Exchange Spirit Card","node4":"Meme Challenge","node5":"Share Card","strategyLabel":"Design Strategy","strategyTitle":"Break Down Gameplay States and Task Paths","strategyBody":"Fortune Horse Cards, Spirit Horse Cards, Bump Cards, Theme Cards, and Lucky Money were split into user states so each module had clear triggers, visibility rules, and next actions."},"content":{"label":"06 — UX Writing","title":"Writing operational goals in a tone users are willing to act on","body":"Copy in this campaign was part of comprehension, emotion, and conversion. I worked with operations to refine key states across collection, Spirit Horse Cards, Bump Cards, and reward pop-ups. The goal was not simply to sound livelier, but to make each line clarify the next action, reduce failure frustration, and make social invitations feel less transactional.","before":"Before","after":"After"},"craft":{"label":"05 — Interaction Craft","title":"Personalized shortcut entry strategy for increasing campaign exposure","pipeline":"AIGC visual exploration process","p1":"Prompt to drafts","p2":"Iterate directions","p3":"Reviewable assets","aiMetric":"70% faster visual concept review cycle","hapticTitle":"Dynamic entry copy","hapticBody":"To increase campaign exposure, entry copy was dynamically adjusted based on the progress of each branch gameplay path.","aiTitle":"AIGC visual exploration","aiBody":"AIGC helped turn abstract character and visual directions into fast visual drafts. It did not replace design judgment, but helped the team align earlier and reserve more time for interaction details and implementation."},"alignment":{"label":"07 — Stakeholder Alignment","title":"Keeping the boundary between growth pressure and user experience","body":"Festive campaigns naturally carry strong operational goals, but growth design should not push every message into the user’s face. When stronger exposure was proposed, I used interruption cost and return-visit context to push for a lighter reminder pattern that preserved task reach without interrupting the first moment in the venue.","mapTitle":"Operational goals vs. experience boundary","situationLabel":"Situation","situation":"Operations wanted stronger pop-ups to increase task exposure.","actionLabel":"Action","action":"I pushed the solution toward lighter reminders and state guidance so the next action appeared when users were ready to continue.","resultLabel":"Result","result":"The final approach balanced reach and user autonomy while reducing interruption in repeated visits.","quote":"Effective prompting is not about pushing everything into the user’s face, but placing the next step where the user is ready to continue."},"results":{"label":"08 — Results","title":"From first-day participation to 22 days of sustained operation","m1Value":"200M+","m1Label":"DAU campaign scenario","m2Value":"+15%","m2Label":"Core gameplay click lift from adaptive layout","m3Value":"70%","m3Label":"AIGC-assisted visual exploration efficiency gain","m4Value":"22","m4Label":"days of campaign operation","m5Value":"Day 10","m5Label":"Mid-cycle fatigue point and limited-time module supplement","impactUserTitle":"For users","impactUserBody":"Reduced the cost of understanding a complex campaign and connected collecting, guessing, matching, inviting, and rewards into one continuous path.","impactPlatformTitle":"For platform","impactPlatformBody":"Moved the campaign beyond a reward task into a festive interaction system with social spread, interest communities, and reactivation value.","impactOpsTitle":"For operations","impactOpsBody":"Gave Fortune Horse, Spirit Horse, Bump Card, Theme Card, Celebrity Cards, and Lucky Money clearer positions for resource distribution.","impactTeamTitle":"For team","impactTeamBody":"Captured reusable methods for adaptive layouts, card-flow mechanics, UX writing, AI-assisted exploration, and high-pressure collaboration.","quote":"Large campaign design is not about filling the page with modules or making the visuals louder. The difficult part is finding order between business pressure, user patience, and system stability."},"next":{"label":"Next Project","title":"Weibo Game Center Redesign","meta":"Weibo · 2025","view":"View Project →"},"footer":{"back":"← Back to all works","copyright":"© 2026 Sheryl Gao"},"media":{"finalUi":{"label":"Launch UI","title":"Final launch UI","body":"This final visual connects the interaction system, visual execution, and real released experience.","mediaLabel":"Final UI"},"globalMap":{"label":"Global Interaction Map","title":"Turning complex gameplay into one system canvas","body":"The full interaction map aligned venue states, card flows, modal feedback, and sharing loops in one reviewable artifact. The page shows a representative crop before the detailed gameplay breakdown below.","alt":"Drama 2026 global interaction design map"},"hero":{"left":{"caption":"Spirit Horse Card · Meme Challenge","alt":"Spirit Horse Card meme challenge interface"},"center":{"caption":"Main Venue · Drama Red Packet","alt":"Drama Red Packet main venue interface"},"right":{"caption":"Bump Card · Find a Partner","alt":"Bump Card partner invitation interface"}},"flow":{"title":"Product flow system map","entry":{"title":"Entry Points","items":"Mass Reach<br>Key Business Scenes<br>Fixed Entrances"},"page":{"title":"Campaign Page","items":"Draw Chances<br>Daily Tasks<br>Friend Invites<br>Commercial Tasks"},"gameplay":{"title":"Gameplay Modules","items":"Fortune Horse<br>Spirit Horse<br>Bump Card<br>Theme Card<br>Lucky Money"},"reward":{"title":"Reward System","items":"New Year’s Eve Packet<br>Instant Packet<br>Duo Cash Packet<br>Photo Card<br>Voice Blessing"},"alt":"Drama 2026 product flow system map"},"venue":{"before":{"label":"Before Completion: Focus on Fortune Horse Cards","alt":"Campaign venue before completing Fortune Horse Cards"},"after":{"label":"After Completion: Unlock Advanced Modules","alt":"Campaign venue after completing Fortune Horse Cards"},"insight":"The value was not that the page changed, but that the interface followed the user’s goal. Once the core collection was complete, the next meaningful action moved into focus."},"gameplay":{"fortune":{"title":"Fortune Horse Cards","body":"The core collection loop that anchors the New Year’s Eve reward.","alt":"Fortune Horse Card interface"},"spirit":{"title":"Spirit Horse Card","body":"Turns duplicate cards into meme challenge opportunities.","alt":"Spirit Horse Card interface"},"bump":{"title":"Bump Card","body":"Turns friend invitations into a two-player reward moment.","alt":"Bump Card interface"},"theme":{"title":"Theme & Celebrity Cards","body":"Extends the campaign into fandom, IP, and interest-based communities.","alt":"Theme and Celebrity Card interface"},"luckyMoney":{"title":"Lucky Money","body":"Wraps acquisition and reactivation inside a familiar festive gesture.","alt":"Lucky Money interface"},"mediaLabel":"Image visual","fortuneUncollected":{"title":"Before Completion","body":"Fortune Horse Cards hold the core position, showing progress, draw chances, and reward anticipation.","alt":"Fortune Horse Card before completion state"},"fortuneCollected":{"title":"After Completion","body":"After the main collection is complete, the module can collapse and make room for advanced gameplay.","alt":"Fortune Horse Card after completion state"},"spiritNew":{"title":"First-Time New User State","body":"The first view explains the value and entry path of Spirit Horse Cards to reduce learning cost.","alt":"Spirit Horse Card first-time state"},"spiritOther":{"title":"Redeemed Spirit Card User State","body":"After users understand the rule, the page focuses on meme guessing and exchange feedback.","alt":"Redeemed Spirit Card user state"},"bumpNew":{"title":"New User Visible State","body":"The first view emphasizes two-player matching and reward expectation.","alt":"Bump Card new user visible state"},"bumpOther":{"title":"Other State","body":"Known users see friend selection and the bump action first, shortening the participation path.","alt":"Bump Card other state"},"fortuneGroup":"Fortune Horse Cards","spiritGroup":"Spirit Horse Cards","bumpGroup":"Bump Cards","themeGroup":"Theme Cards","luckyMoneyGroup":"Lucky Money"},"copy":{"case1":{"label":"Homepage Module Copy","before":"模块一：集马卡除夕分红包<br>模块二：猜对神马卡抽红包<br>模块三：碰碰卡","after":"模块一：集齐福马 · 除夕开奖<br>模块二：猜对神马 · 红包加码<br>模块三：呼叫搭子 · 碰出红包","note":"The original copy listed the three modules, but it still read like an operational inventory. The final copy turns collection, guessing, and social matching into clearer actions and reward expectations.","alt":"Entry copy module interface"},"case2":{"label":"Failure Prompt","before":"没有马卡无法兑换","after":"先去做任务得福马吧","note":"The empty state shifts from a system limitation to a next-step guide.","alt":"Spirit Horse empty-state interface"},"case3":{"label":"Meme Challenge","before":"猜一猜这是神马<br>确认答案","after":"这是神马，你能猜对吗？<br>就这个了","note":"The quiz flow becomes less like an exam and more like a casual interaction.","alt":"Spirit Horse Card quiz interface"},"case4":{"label":"Social Invite","before":"召唤好友","after":"召唤搭子","note":"“Partner” reframes the invitation as a shared playful action instead of a utilitarian ask.","alt":"Bump Card invitation interface"},"case5":{"label":"Match Failure","before":"匹配失败","after":"你还没有碰碰卡呢，快去领卡<br>糟糕，这一碰没成<br>明天再来<br>换个好友试试吧","note":"Instead of a generic failure message, the final copy provides specific recovery paths.","alt":"Bump Card match failure interface"}},"motion":{"draw":{"title":"Card Reveal Motion","body":"A short sequence of anticipation, release, and confirmation turns a result reveal into an emotional peak.","alt1":"Card reveal motion frame 1","alt2":"Card reveal motion frame 2","alt3":"Card reveal motion frame 3"},"bump":{"title":"Bump Card Motion","body":"The motion sequence reframes a friend match as a shared “bump into luck” moment.","alt1":"Bump card motion frame 1","alt2":"Bump card motion frame 2","alt3":"Bump card motion frame 3"}},"ops":{"before":{"label":"Full-screen Interruption","alt":"Full-screen interruption proposal"},"after":{"label":"Lightweight Reminder","alt":"Lightweight reminder proposal"},"note":"Effective prompting is not about pushing everything into the user’s face, but placing the next step where the user is ready to continue."}}}};
+    function getStoredLanguage() {
+      try {
+        const keys = [STORAGE_KEY].concat(LEGACY_STORAGE_KEYS);
+        for (const key of keys) {
+          const saved = localStorage.getItem(key);
+          if (saved === 'zh' || saved === 'en') return saved;
+        }
+      } catch (e) {}
+      return DEFAULT_LANG;
+    }
+    delete i18n.zh.navSections.content;
+    delete i18n.en.navSections.content;
+    delete i18n.zh.navSections.alignment;
+    delete i18n.en.navSections.alignment;
+    Object.assign(i18n.zh.navSections, {
+      overview: '01 项目概览',
+      flow: '02 链路与玩法总览',
+      venue: '03 首页的动态化设计',
+      gameplay: '04 多层玩法串联',
+      craft: '05 体验细节',
+      results: '06 上线效果与复盘'
+    });
+    Object.assign(i18n.zh.context, {
+      label: '01 — 项目概览',
+      title: '当春节集卡进入疲劳期，活动需要新抓手',
+      body: '「抓马赢红包」是微博春节期间面向大规模用户的互动活动。它以传统集卡为基础，通过普通马卡、神马卡、碰碰卡、主题卡和压岁钱等多层玩法，把集卡、猜梗、好友互动、圈层传播和红包激励串联起来。',
+      snapshotTitle: '价值速览',
+      metric1Label: 'DAU',
+      metric1Value: '200M+ 春节活动用户场景',
+      metric2Label: '活动周期',
+      metric2Value: '22 天持续运营',
+      metric3Label: '多层玩法系统',
+      metric3Value: '普通马卡 × 神马卡 × 碰碰卡',
+      metric4Label: '多链路协同设计',
+      metric4Value: '入口 × 任务 × 奖励 × 社交',
+      challengeRoleLabel: '核心挑战 & 我的角色',
+      conflictTitle: '核心挑战',
+      h1Title: '业务压力',
+      h1Body: '承接平台级春节流量和增长目标。',
+      h2Title: '用户疲劳',
+      h2Body: '传统集卡玩法熟悉度高，新鲜感下降。',
+      h3Title: '体验复杂',
+      h3Body: '多入口、多任务、多卡种、多奖励并行。',
+      roleTitle: '我的角色',
+      role1Title: '信息架构',
+      role1Body: '梳理活动入口、任务和玩法承接关系。',
+      role2Title: '动态会场',
+      role2Body: '设计首页阶段化布局与模块优先级。',
+      role3Title: '玩法状态',
+      role3Body: '设计普通马卡、神马卡、碰碰卡等核心路径与异常状态。',
+      role4Title: '协作推进',
+      role4Body: '推动轻量提醒方案，平衡运营曝光和用户打扰感。',
+      h1ActionBody: '我负责梳理活动入口、任务和玩法承接关系，并在协作推进中平衡增长目标与用户打扰感。',
+      h2ActionBody: '我用阶段化首页和玩法状态设计，把熟悉的集卡链路拆成持续可回访的参与理由。',
+      h3ActionBody: '我把多入口、多任务、多卡种和多奖励拆成清晰状态，让用户在不同阶段都能看到下一步。'
+    });
+    Object.assign(i18n.en.context, {
+      label: '01 — Overview',
+      title: 'When New Year card collection enters fatigue, the campaign needs a new reason to participate',
+      body: '“Drama Red Packet” was a large-scale Weibo New Year interaction campaign. Built on card collection, it connected Fortune Cards, Spirit Cards, Bump Cards, Theme Cards, and Lucky Money into a layered system of collecting, meme guessing, friend interaction, community spread, and reward motivation.',
+      snapshotTitle: 'Value Snapshot',
+      metric1Label: 'DAU',
+      metric1Value: '200M+ festive campaign user scenario',
+      metric2Label: 'Campaign Cycle',
+      metric2Value: '22 days of continuous operation',
+      metric3Label: 'Layered Gameplay System',
+      metric3Value: 'Fortune Cards × Spirit Cards × Bump Cards',
+      metric4Label: 'Multi-Path System Design',
+      metric4Value: 'Entry × Task × Reward × Social',
+      challengeRoleLabel: 'Core Challenges & My Role',
+      conflictTitle: 'Core Challenges',
+      h1Title: 'Business pressure',
+      h1Body: 'Support platform-level New Year traffic and growth goals.',
+      h2Title: 'User fatigue',
+      h2Body: 'Traditional card collection was familiar, and novelty was declining.',
+      h3Title: 'Experience complexity',
+      h3Body: 'Multiple entrances, tasks, card types, and rewards ran in parallel.',
+      roleTitle: 'My Role',
+      role1Title: 'Information architecture',
+      role1Body: 'Clarified activity entrances, tasks, and gameplay relationships.',
+      role2Title: 'Dynamic venue',
+      role2Body: 'Designed staged homepage layout and module priority.',
+      role3Title: 'Gameplay states',
+      role3Body: 'Designed core paths and edge states for Fortune Cards, Spirit Cards, and Bump Cards.',
+      role4Title: 'Cross-functional delivery',
+      role4Body: 'Pushed lightweight reminders to balance operational exposure and user interruption.',
+      h1ActionBody: 'Clarified entrances, tasks, and gameplay relationships, then balanced growth goals with interruption cost during delivery.',
+      h2ActionBody: 'Used staged homepage priorities and gameplay state design to turn a familiar collection loop into reasons to return.',
+      h3ActionBody: 'Broke multiple entrances, tasks, card types, and rewards into clear states so users could always see the next step.'
+    });
+    i18n.en.navSections.results = '06 Results';
+    i18n.en.navSections.flow = '02 Flow & Gameplay Overview';
+    i18n.zh.content.label = '全局文案优化';
+    i18n.en.content.label = 'Global Copy Optimization';
+    i18n.zh.content.title = '让玩法说人话，降低任务感，放大春节情绪';
+    i18n.en.content.title = 'Make the gameplay sound human, reduce the task feeling, and amplify the New Year mood';
+    i18n.zh.results.label = '06 — 结果与复盘';
+    i18n.en.results.label = '06 — Results';
+
+    Object.assign(i18n.zh.hero, {
+      eyebrow: '微博 · 2026 · 交互设计师',
+      titleHtml: '<span class="hero-line block">「抓马赢红包」春节活动体验设计</span>',
+      subtitle: '',
+      metaYearLabel: '年份',
+      metaYear: '2026',
+      metaDurationLabel: '周期',
+      metaDuration: '12周',
+      metaRoleLabel: '角色',
+      metaRole: '交互设计师',
+      overviewLabel: '',
+      roleLabel: 'Role'
+    });
+    Object.assign(i18n.en.hero, {
+      eyebrow: 'Weibo · 2026 · Interaction Design Lead',
+      titleHtml: '<span class="hero-line block">Drama 2026: Weibo Red Packet Campaign UX</span>',
+      subtitle: '',
+      metaYearLabel: 'Year',
+      metaYear: '2026',
+      metaDurationLabel: 'Duration',
+      metaDuration: '22 days',
+      metaRoleLabel: 'Role',
+      metaRole: 'Interaction Design Lead',
+      overviewLabel: '',
+      roleLabel: 'Role'
+    });
+    DRAMA_ASSETS.results = ['assets/drama/launch-effect.gif'];
+    DRAMA_ASSETS.venue.push('assets/drama/card-key-page-wireframes-v2.png');
+    DRAMA_ASSETS.venue.push('assets/drama/home-framework-evolution.png');
+    DRAMA_ASSETS.gameplay.push('assets/drama/loop-flow-layout-v1.png');
+    Object.assign(i18n.zh.venue, {
+      label: '03 — 首页的动态化设计',
+      title: '首页不是固定页面，而是跟随用户进度变化的动态会场',
+      body: '春节活动首屏是最稀缺的资源。我把首页框架从 V1.0 推进到最终版：先保证用户看清核心集卡目标，再根据进度把普通马卡、神马卡、碰碰卡和好友列表放到更合适的位置。',
+      progressLabel: '让页面跟着用户进度变化',
+      progressTitle: '不同阶段，首页展示不同重点',
+      phase1Title: '阶段一：集卡阶段',
+      phase1Body: '普通马卡模块占据首屏核心位置，帮助用户快速理解目标、查看进度、获得抽卡机会，并建立除夕开奖预期。',
+      phase2Title: '阶段二：挑战阶段',
+      phase2Body: '当用户完成基础集卡后，普通马卡区域自动收起，把更多空间让给神马卡、碰碰卡、主题卡和压岁钱等后续玩法，减少无效滚动。'
+    });
+    Object.assign(i18n.zh.media.venue, {
+      keyWireframes: {
+        label: '关键页面梳理',
+        title: '先确定哪些玩法需要被首页承接',
+        body: '在进入首页框架设计前，我先把普通马卡、神马卡、碰碰卡、主题卡和压岁钱拆成关键承接页面，明确每类玩法的入口、核心动作和结果反馈。这样后续讨论首页布局时，不是在堆运营资源，而是在判断不同阶段用户最需要看到什么。',
+        caption: '关键玩法页面梳理：用于确认各玩法的入口、主行动作与反馈结果，为后续首页框架迭代提供边界。',
+        alt: '集卡活动关键页面线框图'
+      },
+      frameworkEvolution: {
+        label: '首页框架迭代',
+        title: '从统一首页到阶段化会场',
+        hypothesisTitle: '设计假设',
+        hypothesisVersion: 'V1.0-V3.0',
+        issueLabel: '问题',
+        issueBody: '基础玩法不断被压缩',
+        productConcernLabel: '产品担忧',
+        productConcernBody: '用户找不到主线',
+        opsConcernLabel: '运营担忧',
+        opsConcernBody: '核心玩法曝光不足',
+        decisionTitle: '设计决策',
+        decisionVersion: 'V4.0',
+        decisionBody: '不同阶段展示不同重点',
+        caption: '首页框架从 V1.0 到最终版的迭代过程：根据集卡进度、神马卡兑换状态和后续玩法参与度，调整核心模块在首屏中的优先级。',
+        alt: '微博新春活动首页框架迭代过程图'
+      }
+    });
+    Object.assign(i18n.en.venue, {
+      progressLabel: 'Adaptive Progress States',
+      progressTitle: 'Help users understand the goal, check progress, and earn draw chances first'
+    });
+    Object.assign(i18n.en.media.venue, {
+      keyWireframes: {
+        label: 'Key Page Mapping',
+        title: 'Define which gameplay paths the homepage needs to carry',
+        body: 'Before moving into high-fidelity interaction design, I broke the campaign into the key pages for Fortune Cards, Spirit Cards, Bump Cards, Wild Cards, and Lucky Money. The wireframes clarified each module’s entry point, core action, and result feedback, helping the team align page boundaries before building the full interaction map.',
+        caption: 'Key gameplay pages used to confirm entrances, primary actions, and feedback states before homepage iteration.',
+        alt: 'Key-page wireframes for the card collection campaign'
+      },
+      frameworkEvolution: {
+        label: 'Homepage Framework Iteration',
+        title: 'From a unified homepage to a staged venue',
+        hypothesisTitle: 'Design hypothesis',
+        hypothesisVersion: 'V1.0-V3.0',
+        issueLabel: 'Problem',
+        issueBody: 'Core gameplay kept getting compressed',
+        productConcernLabel: 'Product concern',
+        productConcernBody: 'Users could not find the main path',
+        opsConcernLabel: 'Operations concern',
+        opsConcernBody: 'Core gameplay exposure was insufficient',
+        decisionTitle: 'Design decision',
+        decisionVersion: 'V4.0',
+        decisionBody: 'Show different priorities at different stages',
+        caption: 'Homepage framework evolution from V1.0 to the final version.',
+        alt: 'Homepage framework iteration map for the Weibo New Year campaign'
+      }
+    });
+    DRAMA_ASSETS.gameplay.push('assets/drama/fortune-card-states.png');
+    DRAMA_ASSETS.gameplay.push('assets/drama/shenma-card-gameplay-mechanism.png');
+    DRAMA_ASSETS.gameplay.push('assets/drama/gameplay-spirit-card-new-user-state.png');
+    DRAMA_ASSETS.gameplay.push('assets/drama/gameplay-spirit-card-no-card.png');
+    DRAMA_ASSETS.gameplay.push('assets/drama/gameplay-spirit-card-has-card.png');
+    DRAMA_ASSETS.gameplay.push('assets/drama/bump-card-gameplay-mechanism.png');
+    DRAMA_ASSETS.gameplay.push('assets/drama/gameplay-bump-card-initial.png');
+    DRAMA_ASSETS.gameplay.push('assets/drama/gameplay-bump-card-one-card.png');
+    DRAMA_ASSETS.gameplay.push('assets/drama/gameplay-bump-card-success.png');
+    DRAMA_ASSETS.gameplay.push('assets/drama/bump-card-claim-design-v2.gif');
+    DRAMA_ASSETS.gameplay.push('assets/drama/bump-card-online-effect.gif');
+    Object.assign(i18n.zh.media.gameplay, {
+      loopFlow: { alt: '重复卡兑换神马卡流程图' },
+      fortuneStates: {
+        title: '集马卡状态总览',
+        body: '横向串联首页集卡、合成成功、未合成、开奖前后和活动结束等关键状态，便于查看普通马卡在完整周期里的位置变化。',
+        alt: '普通马卡完整状态流转图',
+        hint: '左右滑动查看完整状态流转'
+      },
+      spiritMechanism: {
+        title: '神马卡玩法机制',
+        body: '把多余重复卡转化为一次猜热梗机会：用户先选 2 张重复卡兑换神马卡，再通过看图猜热梗解锁卡面和晒卡二维码，让重复卡继续产生玩法价值。',
+        alt: '神马卡玩法机制流程图'
+      },
+      spiritIntro: {
+        title: '新用户说明状态',
+        body: '首次进入时用「这是马 / 这是二维码」解释卡面判断方式，降低猜热梗前的理解成本。',
+        alt: '神马卡新用户说明状态界面'
+      },
+      spiritNoCard: {
+        title: '马卡不足状态',
+        body: '用户还没有可兑换的马卡时，保留猜题入口和奖励预期，同时明确提示「马卡不足」。',
+        alt: '神马卡马卡不足状态界面'
+      },
+      spiritHasCard: {
+        title: '已兑换神马卡状态',
+        body: '用户已拥有可猜的神马卡后，前置题卡进度和卡包入口，引导继续兑换与猜题。',
+        alt: '神马卡已兑换状态界面'
+      },
+      bumpMechanism: {
+        title: '碰碰卡玩法机制',
+        body: '把一人一卡的随机领取转成双人配对：用户领取马卡或叭卡后召唤好友碰一碰，匹配成功即可合成拆红包，失败也给出兜底原因和下一轮入口。',
+        alt: '碰碰卡玩法机制流程图'
+      },
+      bumpOneCard: {
+        title: '获得其中一张卡',
+        body: '用户已拿到马卡或叭卡中的一张时，页面强调还缺另一张卡，并引导召唤好友碰一下。',
+        alt: '碰碰卡获得其中一张卡状态界面'
+      },
+      bumpSuccess: {
+        title: '已碰成功',
+        body: '匹配成功后直接展示合成结果和红包反馈，让社交动作形成明确闭环。',
+        alt: '碰碰卡已碰成功状态界面'
+      },
+      bumpFlowMotion: {
+        title: '碰碰卡领取动效',
+        body: '用动效把碰碰卡领取路径变成可感知的流程。碰碰卡的核心不是单次点击，而是从领取、匹配到反馈的一段连续动作。通过卡片靠近、碰撞和结果反馈的节奏，把用户理解成本转化为更直观的流程感。',
+        designTitle: '交互方案',
+        onlineTitle: '线上效果',
+        sequenceHtml: '<ol><li><strong>首页停留 1.2s</strong>，让用户先识别领取入口和卡片奖励。</li><li>点击「立即领取」后进入暗场，弹窗带大马卡弹性放大进场。</li><li>大卡停留 <strong>1.2s</strong> 强化领取反馈，再用 <strong>0.6s</strong> 缩放滑到弹窗左下。</li><li>右侧卡片弹入，头像行与「开心收下 / 召唤好友」按钮淡入上滑，把结果反馈衔接到下一步行动。</li></ol>',
+        designAlt: '碰碰卡领取交互方案动图',
+        mediaLabel: '碰碰卡领取动效设计',
+        alt: '碰碰卡领取线上效果动图'
+      }
+    });
+    Object.assign(i18n.en.media.gameplay, {
+      loopFlow: { alt: 'Duplicate card exchange loop flow diagram' },
+      fortuneStates: {
+        title: 'Fortune Horse Card State Overview',
+        body: 'A horizontal map of the key states across the campaign cycle, from the first collection screen to completion, pre-draw, draw, and campaign end.',
+        alt: 'Full Fortune Horse Card state map',
+        hint: 'Swipe horizontally to view the full state flow'
+      },
+      spiritMechanism: {
+        title: 'Spirit Horse Card Gameplay Mechanism',
+        body: 'Duplicate cards became a meme-guessing opportunity: users exchanged two duplicate cards for one Spirit Horse Card, guessed the meme, and unlocked the card face plus a shareable QR-code card.',
+        alt: 'Spirit Horse Card gameplay mechanism flow'
+      },
+      spiritIntro: {
+        title: 'First-time explanation state',
+        body: 'The first view explains how to read the card clue before users start the meme challenge.',
+        alt: 'Spirit Horse Card first-time explanation state'
+      },
+      spiritNoCard: {
+        title: 'Insufficient card state',
+        body: 'When users do not have enough cards to exchange, the module keeps the reward expectation visible while explaining the limitation.',
+        alt: 'Spirit Horse Card insufficient-card state'
+      },
+      spiritHasCard: {
+        title: 'Redeemed Spirit Card state',
+        body: 'After users have a Spirit Card to guess, the module surfaces progress and the card pack entry to continue the loop.',
+        alt: 'Redeemed Spirit Horse Card state'
+      },
+      bumpMechanism: {
+        title: 'Bump Card Gameplay Mechanism',
+        body: 'A one-card-per-user social mechanic: users received either a Ma card or Ba card, invited a friend to bump, then matched successfully into a split red packet or received clear recovery guidance for the next round.',
+        alt: 'Bump Card gameplay mechanism flow'
+      },
+      bumpOneCard: {
+        title: 'One card obtained',
+        body: 'When users have only one side of the pair, the page makes the missing card clear and guides them to invite a friend.',
+        alt: 'Bump Card one-card-obtained state'
+      },
+      bumpSuccess: {
+        title: 'Bump matched successfully',
+        body: 'After a successful match, the result and reward feedback close the social action loop.',
+        alt: 'Bump Card successful match state'
+      },
+      bumpFlowMotion: {
+        title: 'Bump Card Claim Motion',
+        body: 'Using motion to make the Bump Card claim flow easier to follow. The Bump Card experience was not a single tap, but a short sequence from claim, match, to feedback. Card movement, collision, and result feedback made the flow more legible.',
+        designTitle: 'Interaction design',
+        onlineTitle: 'Live effect',
+        sequenceHtml: '<ol><li><strong>Hold the home state for 1.2s</strong> so the claim entry and card reward are readable.</li><li>After tapping “Claim now”, dim the page and bring the dialog in with an elastic scale-up of the main horse card.</li><li>Hold the large card for <strong>1.2s</strong>, then scale and slide it to the lower-left of the dialog within <strong>0.6s</strong>.</li><li>The right-side companion card pops in while the avatar row and “Accept / Invite friend” buttons fade upward, turning reward feedback into the next action.</li></ol>',
+        designAlt: 'Bump Card claim interaction design GIF',
+        mediaLabel: 'Bump Card claim motion',
+        alt: 'Live Bump Card claim motion GIF'
+      }
+    });
+    Object.assign(i18n.zh.media.gameplay, {
+      spiritPhase2: {
+        label: '玩法二期',
+        title: '用每日限时题目延长神马卡热度',
+        body: '活动进入中后期后，原有神马卡总量和阶梯激励的新鲜感开始下降。二期没有新增复杂链路，而是把「每日限时神马卡」放进原有神马卡模块，每天上新 1 张题卡，并沿用已有的得卡、猜词和开红包路径。',
+        timedTitle: '每日限时神马卡',
+        timedBody: '题卡直接计入整体图鉴库；用户猜对后即时开限量红包，红包发完仍可继续猜词，并提示「红包没钱了」。',
+        timedMediaLabel: '限时神马卡题目'
+      }
+    });
+    Object.assign(i18n.en.media.gameplay, {
+      spiritPhase2: {
+        label: 'Phase 2 Gameplay',
+        title: 'Extending Spirit Card engagement with daily limited prompts',
+        body: 'As novelty declined mid-campaign, the team avoided adding a separate flow. Instead, daily limited Spirit Cards were placed inside the existing Spirit Card module, reusing the current earn, guess, and reward path.',
+        timedTitle: 'Daily limited Spirit Card',
+        timedBody: 'Each new prompt entered the full gallery. Correct guesses opened limited instant rewards; after rewards ran out, users could still guess with a clear empty-reward state.',
+        timedMediaLabel: 'Daily limited Spirit Card prompt'
+      }
+    });
+    Object.assign(i18n.zh.media.finalUi, {
+      label: '线上效果',
+      alt: '抓马赢红包最终上线效果录屏 GIF'
+    });
+    Object.assign(i18n.en.media.finalUi, {
+      label: 'Launch UI',
+      alt: 'Final launch experience GIF for Drama Red Packet'
+    });
+    DRAMA_ASSETS.flow = ['assets/drama/product-link-flow-optimized.jpg', 'assets/drama/activity-gameplay-frame.png'];
+    DRAMA_ASSETS.gameplay = ['assets/drama/global-interaction-map-full-optimized.jpg', 'assets/drama/global-interaction-flow-slice-2-optimized.jpg', ...DRAMA_ASSETS.gameplay.filter((asset) => !['assets/drama/global-interaction-map-full.png', 'assets/drama/global-interaction-map-full-optimized.jpg', 'assets/drama/global-interaction-flow-slice-2-optimized.jpg'].includes(asset))];
+    DRAMA_ASSETS.gameplay = Array.from(new Set((DRAMA_ASSETS.gameplay || []).concat([
+      'assets/drama/fortune-card-states.png',
+      'assets/drama/shenma-card-gameplay-mechanism.png',
+      'assets/drama/bump-card-gameplay-mechanism.png',
+      'assets/drama/daily-shenma-insert-inpage.gif',
+      'assets/drama/福马不足.png',
+      'assets/drama/可以兑换.png',
+      'assets/drama/猜对了，可以领红包了.png',
+      'assets/drama/猜错了.png',
+      'assets/drama/领完红包了.png',
+      'assets/drama/红包被抢光了.png'
+    ])));
+    Object.assign(i18n.zh.media.gameplay.spiritPhase2, { timedAlt: '每日限时神马卡动效' });
+    Object.assign(i18n.en.media.gameplay.spiritPhase2, { timedAlt: 'Daily limited Spirit Card animation' });
+    Object.assign(i18n.zh.gameplay, {
+      strategyLabel: '04 — 多层玩法串联',
+      strategyTitle: '从集卡、猜梗、匹配到圈层传播，如何层层递进',
+      title: '不同玩法的参与机制',
+      strategyBody1: '「抓马赢红包」不是单一集卡活动，而是一套围绕春节场景搭建的多层玩法系统。普通马卡负责建立主线目标，神马卡把重复卡转化为猜梗和红包机会，碰碰卡通过好友匹配激活社交传播，主题卡 / 明星马卡承接兴趣圈层，压岁钱则服务拉新与回流。',
+      strategyBody2: '我的设计重点不是把这些玩法全部堆进首页，而是明确每条玩法的触发条件、可见状态、下一步动作和反馈结果，让用户在不同阶段都知道自己当前能做什么、为什么要继续参与。',
+      mapLabel: '全局交互流程',
+      roleLabel: '多玩法分工',
+      roleTitle: '不同玩法，解决不同阶段的参与动力',
+      fortuneLabel: '普通马卡 / 福马',
+      fortuneTitle: '集齐福马，是所有玩法的起点',
+      fortuneBody1: '普通马卡承担整个活动的基础目标：用户通过任务获得抽卡机会，持续推进集卡进度，并建立除夕开奖预期。这里的设计重点是让用户第一眼知道三件事：我还差什么卡、还能通过什么方式获得卡、集齐之后会发生什么。',
+      fortuneBody2: '这里的设计重点是让用户第一眼知道三件事：我还差什么卡、还能通过什么方式获得卡、集齐之后会发生什么。',
+      loopLabel: '重复卡流转',
+      loopTitle: '从重复卡到神马卡：建立新的玩法出口',
+      loopBody1: '集卡活动中，重复卡很容易带来挫败感。如果重复卡只能被动堆积，用户会感到自己在做无效任务。',
+      loopBody2: '因此，我们为重复卡设计了新的出口：用户可以用 2 张重复卡兑换 1 张神马卡，再进入猜热梗、开红包和晒卡分享链路。这个机制把普通集卡、热梗内容和好友互动串联起来，让“多出来的卡”重新变成继续参与的理由。',
+      spiritLabel: '神马卡状态设计',
+      spiritTitle: '让猜梗玩法变得容易理解',
+      spiritBody: '神马卡承接重复卡出口，同时把微博用户熟悉的热梗文化转化为竞猜玩法。设计上需要同时照顾首次进入的新用户、马卡不足的用户、已经兑换神马卡的用户，以及猜对、猜错、红包抢光等结果状态。',
+      tableState: '用户状态',
+      tableTreatment: '设计处理',
+      tablePurpose: '设计目的',
+      spiritTable: {
+        newState: '新用户首次进入',
+        newTreatment: '解释神马卡价值和获得方式',
+        newPurpose: '降低新玩法理解成本',
+        noCardState: '马卡不足',
+        noCardTreatment: '保留奖励预期，同时提示先去做任务得福马',
+        noCardPurpose: '不只告诉用户失败，也告诉用户下一步',
+        hasCardState: '已兑换神马卡',
+        hasCardTreatment: '前置题卡进度和卡包入口',
+        hasCardPurpose: '引导继续兑换与猜题'
+      },
+      bumpLabel: '碰碰卡状态设计',
+      bumpTitle: '给邀请好友一个更有吸引力的理由',
+      bumpBody: '碰碰卡承担社交传播任务。相比直接让用户“邀请好友”，碰碰卡把邀请包装成双人匹配：用户获得马卡或叭卡中的一张后，需要召唤好友碰一碰，匹配成功即可合成拆红包。',
+      bumpTable: {
+        firstState: '首次看到碰碰卡',
+        firstTreatment: '强调双人匹配和红包预期',
+        firstPurpose: '让社交规则更容易理解',
+        oneCardState: '获得其中一张卡',
+        oneCardTreatment: '提示还缺另一张卡，引导召唤好友',
+        oneCardPurpose: '把缺口转化为邀请动机',
+        successState: '匹配成功',
+        successTreatment: '展示合成结果和红包反馈',
+        successPurpose: '让社交动作形成闭环',
+        failState: '匹配失败',
+        failTreatment: '给出失败原因和下一轮入口',
+        failPurpose: '避免用户停在挫败状态',
+        familiarState: '熟悉规则后',
+        familiarTreatment: '前置好友列表和碰卡动作',
+        familiarPurpose: '缩短选择好友到参与的路径'
+      }
+    });
+    Object.assign(i18n.en.gameplay, i18n.zh.gameplay, { strategyLabel: '04 — Layered Gameplay Flow' });
+    Object.assign(i18n.zh.positioning, {
+      label: '项目定位',
+      title: '从活动页面设计，升级为活动系统设计',
+      body: '这个项目的重点不是做一个活动首页，而是组织一套高流量、长周期、多入口、多任务、多卡种、多奖励并行的春节互动系统。'
+    });
+    Object.assign(i18n.en.positioning, {
+      label: 'Positioning',
+      title: 'From campaign page design to campaign system design',
+      body: 'The focus was not to design one campaign homepage, but to organize a high-traffic, long-cycle New Year system with multiple entrances, tasks, card types, and rewards running in parallel.'
+    });
+    Object.assign(i18n.zh.flow, {
+      label: '02 — 链路与玩法总览',
+      title: '先拆清楚活动是怎么运转的',
+      body: '这次活动的难点不是单一路径设计，而是把多个入口、任务、卡种、奖励和回流动作组织成一条用户能理解的参与路径。用户无论从曝光入口、内容场景还是固定入口进入，都应该快速知道：我现在有什么卡、还能做什么、下一步能获得什么。',
+      linkMapLabel: '产品链路',
+      linkMapTitle: '从流量入口到玩法承接的全局交互流程',
+      gameplayLabel: '活动玩法总览'
+    });
+    Object.assign(i18n.en.flow, {
+      label: '02 — Flow & Gameplay Overview',
+      title: 'First clarify how the campaign actually works',
+      body: 'The challenge was not designing a single path, but organizing multiple entrances, tasks, card types, rewards, and return actions into a participation path users could understand. Whether users came from exposure placements, content scenarios, or fixed entrances, they needed to quickly know what cards they had, what they could still do, and what they could earn next.',
+      linkMapLabel: 'Product Flow',
+      linkMapTitle: 'A full interaction flow from traffic entrances to gameplay handoff',
+      gameplayLabel: 'Gameplay Overview'
+    });
+    Object.assign(i18n.zh.media.globalMap, {
+      label: '全局交互流程',
+      title: '先把复杂玩法摊成一张系统画布',
+      body1: '在进入具体玩法设计前，我先整理了完整的 Figma 全局交互流程，把主会场状态、普通马卡、神马卡、碰碰卡、红包弹窗、分享回流和异常反馈放在同一张系统画布中校准。',
+      body2: '这一步不是单纯罗列页面，而是帮助产品、运营、研发在同一个视角下确认：用户当前处于什么状态、下一步能做什么、系统需要给出什么反馈，以及哪些路径需要回流到主会场。',
+      venueStateTitle: '会场状态',
+      venueStateBody: '未集齐 / 已集齐 / 挑战阶段，对应不同模块优先级。',
+      cardFlowTitle: '卡种流转',
+      cardFlowBody: '普通马卡、重复卡、神马卡、碰碰卡之间的获得、兑换和消耗关系。',
+      feedbackTitle: '反馈弹窗',
+      feedbackBody: '抽卡结果、竞猜反馈、红包领取、失败提示等关键反馈统一管理。',
+      returnTitle: '分享回流',
+      returnBody: '邀请好友、碰碰卡匹配、晒卡分享等路径回流到主会场。'
+    });
+    Object.assign(i18n.en.media.globalMap, i18n.zh.media.globalMap, { label: 'Global Interaction Flow' });
+    Object.assign(i18n.zh.media.gameplay.spiritPhase2, {
+      label: '玩法二期',
+      title: '用每日限时题目延长神马卡热度',
+      body: '活动进入中后期后，用户对基础集卡和首轮神马卡竞猜的新鲜感开始下降。为了避免新增一套复杂玩法带来理解成本，我们选择在原有神马卡链路上做轻量扩展：每天开放限时题目，让用户用已理解的「神马卡竞猜」机制继续参与。这次二期设计的重点不是增加玩法数量，而是在不打断原有路径的前提下，为高频用户提供新的参与理由，延长神马卡热度，并把活动中后期的回访动机重新拉起来。',
+      problemTitle: '问题：中后期新鲜感下降',
+      problemBody: '活动到 Day 10 后，用户已熟悉基础集卡和神马卡规则，继续参与的理由开始变弱。',
+      strategyTitle: '设计策略：不新增复杂规则，只扩展原有机制',
+      strategyBody: '沿用「神马卡 → 猜题 → 红包反馈」的既有认知，增加每日限时题目。',
+      experienceTitle: '体验处理：用时间感制造回访理由',
+      experienceBody: '通过“今日题目”“限时开放”“明日继续”等文案和状态，给用户一个每天回来的理由。',
+      valueTitle: '设计价值：延长热度，而不是重新教育用户',
+      valueBody: '二期没有另起一套玩法，而是在用户已理解的机制上增加内容变化，降低理解成本。'
+    });
+    Object.assign(i18n.en.media.gameplay.spiritPhase2, i18n.zh.media.gameplay.spiritPhase2);
+    Object.assign(i18n.zh.craft, {
+      label: '05 — 体验细节',
+      entryLabel: '动态入口',
+      entryTitle: '在不同状态下提供不同引导',
+      entryBody: '为了增加活动曝光，根据每个支线玩法的进度动态调整入口文案。',
+      pipeline: 'AIGC 辅助视觉探索',
+      pipelineTitle: '用 AI 快速建立团队共识',
+      pipelineBody1: '在活动概念探索阶段，我使用 AIGC 快速生成多轮角色和视觉方案，帮助产品、运营、UI 与视觉设计师更直观地理解「抓马」的角色设定和活动氛围。',
+      pipelineBody2: '相比口头描述和静态关键词，图像能够更快形成共识，加速方案汇报和方向确认，也为后续 UI 设计和视觉细化提供统一基调。'
+    });
+    Object.assign(i18n.en.craft, {
+      label: '05 — Interaction Craft',
+      entryLabel: 'Dynamic Entry',
+      entryTitle: 'Provide different guidance in different states',
+      entryBody: 'Entry copy changes based on the progress of each branch gameplay path to increase campaign exposure.',
+      pipeline: 'AIGC-Assisted Visual Exploration',
+      pipelineTitle: 'Use AI to quickly build team alignment',
+      pipelineBody1: 'During concept exploration, I used AIGC to generate multiple rounds of character and visual directions, helping product, operations, UI, and visual designers understand the “Drama” character setting and campaign atmosphere more directly.',
+      pipelineBody2: 'Compared with verbal descriptions and static keywords, images helped the team align faster, speed up reviews and direction decisions, and provide a shared tone for later UI and visual refinement.'
+    });
+    Object.assign(i18n.zh.results, {
+      label: '06 — 上线效果与复盘',
+      title: '从首日参与到 22 天持续运营',
+      effectLabel: '线上效果'
+    });
+    Object.assign(i18n.en.results, {
+      label: '06 — Results Review',
+      title: 'From first-day participation to 22 days of sustained operation',
+      effectLabel: 'Launch Effect'
+    });
+
+    function getI18nValue(obj, path) {
+      return path.split('.').reduce((acc, key) => (acc && Object.prototype.hasOwnProperty.call(acc, key) ? acc[key] : undefined), obj);
+    }
+
+    function applyLanguage(lang) {
+      const nextLang = lang === 'en' ? 'en' : DEFAULT_LANG;
+      const dictionary = i18n[nextLang] || i18n[DEFAULT_LANG];
+      document.documentElement.lang = nextLang === 'zh' ? 'zh-CN' : 'en';
+      document.querySelectorAll('[data-i18n]').forEach((el) => {
+        const value = getI18nValue(dictionary, el.dataset.i18n);
+        if (value !== undefined) el.textContent = value;
+      });
+      document.querySelectorAll('[data-i18n-html]').forEach((el) => {
+        const value = getI18nValue(dictionary, el.dataset.i18nHtml);
+        if (value !== undefined) el.innerHTML = value;
+      });
+      document.querySelectorAll('[data-i18n-alt]').forEach((el) => {
+        const value = getI18nValue(dictionary, el.dataset.i18nAlt);
+        if (value !== undefined) el.setAttribute('alt', value);
+      });
+      if (dictionary.doc && dictionary.doc.title) document.title = dictionary.doc.title;
+    }
+
+    function formatSectionLabels() {
+      document.querySelectorAll('.section-label').forEach((el) => {
+        const raw = el.textContent.trim();
+        const match = raw.match(/^(\d{2})(\s+—\s+)(.+)$/);
+        if (!match) return;
+        el.textContent = '';
+        const index = document.createElement('span');
+        index.className = 'section-index';
+        index.textContent = match[1];
+        el.append(index, document.createTextNode(`${match[2]}${match[3]}`));
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const lang = getStoredLanguage();
+      applyLanguage(lang);
+      formatSectionLabels();
+
+      const revealTargets = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window) {
+        const revealObserver = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+        revealTargets.forEach((target) => revealObserver.observe(target));
+      } else {
+        revealTargets.forEach((target) => target.classList.add('visible'));
+      }
+
+      const sectionLinks = Array.from(document.querySelectorAll('[data-section-link]'));
+      const sections = Array.from(document.querySelectorAll('.case-section'));
+      const setActiveSection = (sectionId) => {
+        sectionLinks.forEach((link) => {
+          const active = link.dataset.sectionLink === sectionId;
+          link.classList.toggle('active', active);
+          if (active) link.setAttribute('aria-current', 'true');
+          else link.removeAttribute('aria-current');
+        });
+      };
+      sectionLinks.forEach((link) => link.addEventListener('click', () => setActiveSection(link.dataset.sectionLink)));
+      const updateActiveByPosition = () => {
+        const probeLine = window.innerHeight * 0.38;
+        const currentSection = sections.find((section) => {
+          const rect = section.getBoundingClientRect();
+          return rect.top <= probeLine && rect.bottom > probeLine;
+        });
+        if (currentSection) setActiveSection(currentSection.id);
+      };
+      let scrollTicking = false;
+      const requestActiveUpdate = () => {
+        if (scrollTicking) return;
+        scrollTicking = true;
+        window.requestAnimationFrame(() => {
+          updateActiveByPosition();
+          scrollTicking = false;
+        });
+      };
+      window.addEventListener('scroll', requestActiveUpdate, { passive: true });
+      window.addEventListener('resize', requestActiveUpdate);
+      updateActiveByPosition();
+
+      document.querySelectorAll('.state-wide-scroll-frame').forEach((frame) => {
+        const scroller = frame.querySelector('.state-wide-scroll');
+        const prevButton = frame.querySelector('[data-state-scroll="prev"]');
+        const nextButton = frame.querySelector('[data-state-scroll="next"]');
+        if (!scroller || !prevButton || !nextButton) return;
+        const updateStateArrows = () => {
+          const maxScrollLeft = Math.max(0, scroller.scrollWidth - scroller.clientWidth);
+          prevButton.disabled = scroller.scrollLeft <= 2;
+          nextButton.disabled = maxScrollLeft <= 2 || scroller.scrollLeft >= maxScrollLeft - 2;
+        };
+        prevButton.addEventListener('click', () => scroller.scrollBy({ left: -scroller.clientWidth * 0.75, behavior: 'smooth' }));
+        nextButton.addEventListener('click', () => scroller.scrollBy({ left: scroller.clientWidth * 0.75, behavior: 'smooth' }));
+        scroller.addEventListener('scroll', updateStateArrows, { passive: true });
+        window.addEventListener('resize', updateStateArrows);
+        updateStateArrows();
+        if (scroller.dataset.autoScroll === 'true') {
+          let lastAutoScrollTime = 0;
+          let autoScrollPaused = false;
+          const speed = Number(scroller.dataset.autoScrollSpeed || 28);
+          const runAutoScroll = (timestamp) => {
+            if (!lastAutoScrollTime) lastAutoScrollTime = timestamp;
+            const elapsed = timestamp - lastAutoScrollTime;
+            lastAutoScrollTime = timestamp;
+            const maxScrollLeft = Math.max(0, scroller.scrollWidth - scroller.clientWidth);
+            if (!autoScrollPaused && maxScrollLeft > 2) {
+              const nextLeft = scroller.scrollLeft + (speed * elapsed) / 1000;
+              scroller.scrollLeft = nextLeft >= maxScrollLeft ? 0 : nextLeft;
+            }
+            window.requestAnimationFrame(runAutoScroll);
+          };
+          scroller.scrollLeft = 0;
+          scroller.addEventListener('mouseenter', () => { autoScrollPaused = true; });
+          scroller.addEventListener('mouseleave', () => { autoScrollPaused = false; });
+          prevButton.addEventListener('click', () => { autoScrollPaused = true; window.setTimeout(() => { autoScrollPaused = false; }, 2400); });
+          nextButton.addEventListener('click', () => { autoScrollPaused = true; window.setTimeout(() => { autoScrollPaused = false; }, 2400); });
+          window.requestAnimationFrame(runAutoScroll);
+        }
+      });
+
+    });
+  </script>
+  <script src="portfolio-case-i18n.js"></script>
+</body>
+</html>
