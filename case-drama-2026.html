@@ -1148,6 +1148,40 @@
             <p class="text-sm text-neutral-500 i18n-body" data-i18n="context.body"></p>
           </div>
 
+          <div class="reveal delay-1 mb-12 max-w-4xl">
+            <h3 class="text-xl md:text-2xl font-bold tracking-tighter leading-tight mb-4" data-i18n="positioning.derivationTitle"></h3>
+            <p class="text-sm text-neutral-500 i18n-body" data-i18n="positioning.derivationIntro"></p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+              <article class="soft-card">
+                <h4 class="text-sm font-bold tracking-tight mb-3" data-i18n="positioning.input1Title"></h4>
+                <p class="text-xs text-neutral-500 i18n-body" data-i18n="positioning.input1Body"></p>
+              </article>
+              <article class="soft-card">
+                <h4 class="text-sm font-bold tracking-tight mb-3" data-i18n="positioning.input2Title"></h4>
+                <p class="text-xs text-neutral-500 i18n-body" data-i18n="positioning.input2Body"></p>
+              </article>
+              <article class="soft-card">
+                <h4 class="text-sm font-bold tracking-tight mb-3" data-i18n="positioning.input3Title"></h4>
+                <p class="text-xs text-neutral-500 i18n-body" data-i18n="positioning.input3Body"></p>
+              </article>
+            </div>
+            <p class="mt-6 text-sm text-neutral-500 i18n-body" data-i18n="positioning.derivationConclusion"></p>
+            <figure class="mt-8">
+              <div class="image-slot aspect-[2/1] bg-black">
+                <img src="assets/drama/drama-positioning-derivation-dark.png" alt="" data-i18n-alt="positioning.derivationAlt" class="object-contain object-center bg-black" loading="lazy" decoding="async" onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden');">
+                <div class="hidden image-fallback absolute inset-0"><span>assets/drama/drama-positioning-derivation-dark.png</span></div>
+              </div>
+              <figcaption class="media-caption mt-4" data-i18n="positioning.derivationCaption"></figcaption>
+            </figure>
+            <div class="mt-8 max-w-3xl">
+              <h4 class="text-sm font-bold tracking-tight mb-3" data-i18n="positioning.participationTitle"></h4>
+              <div class="space-y-4 text-sm text-neutral-500 i18n-body">
+                <p data-i18n="positioning.participationBody1"></p>
+                <p data-i18n="positioning.participationBody2"></p>
+              </div>
+            </div>
+          </div>
+
           <div class="reveal delay-1 mb-12">
             <p class="gameplay-kicker" data-i18n="positioning.label"></p>
             <div class="highlight-card bg-[#FFF8F6] border-[#FF573A]/15">
@@ -1481,7 +1515,6 @@
               <h3 class="text-xl md:text-2xl font-bold tracking-tighter leading-tight mb-4" data-i18n="gameplay.loopTitle"></h3>
               <div class="space-y-4 text-sm text-neutral-500 i18n-body">
                 <p data-i18n="gameplay.loopBody1"></p>
-                <p data-i18n="gameplay.loopBody2"></p>
               </div>
             </div>
             <a data-disabled-full-image="true" class="case-image-card block">
@@ -2068,7 +2101,7 @@
       fortuneBody2: '这里的设计重点是让用户第一眼知道三件事：我还差什么卡、还能通过什么方式获得卡、集齐之后会发生什么。',
       loopLabel: '重复卡流转',
       loopTitle: '从重复卡到神马卡：建立新的玩法出口',
-      loopBody1: '集卡活动中，重复卡很容易带来挫败感。如果重复卡只能被动堆积，用户会感到自己在做无效任务。',
+      loopBody1: '集卡活动中，重复卡很容易带来挫败感。如果只能被动堆积，用户会觉得自己在做无效任务。我在策划期提出给重复卡一个新出口：用 2 张重复卡兑换 1 张神马卡，再进入猜热梗、开红包和晒卡分享链路。这个机制把普通集卡、热梗内容和好友互动串联起来，也为后来二期"每日限时题目"的轻量扩展留好了底座。',
       loopBody2: '因此，我们为重复卡设计了新的出口：用户可以用 2 张重复卡兑换 1 张神马卡，再进入猜热梗、开红包和晒卡分享链路。这个机制把普通集卡、热梗内容和好友互动串联起来，让“多出来的卡”重新变成继续参与的理由。',
       spiritLabel: '神马卡状态设计',
       spiritTitle: '让猜梗玩法变得容易理解',
@@ -2112,12 +2145,40 @@
     Object.assign(i18n.zh.positioning, {
       label: '项目定位',
       title: '从活动页面设计，升级为活动系统设计',
-      body: '这个项目的重点不是做一个活动首页，而是组织一套高流量、长周期、多入口、多任务、多卡种、多奖励并行的春节互动系统。'
+      body: '这个项目的重点不是做一个活动首页，而是组织一套高流量、长周期、多入口、多任务、多卡种、多奖励并行的春节互动系统。',
+      derivationTitle: '定位从哪来：策划期的三个输入',
+      derivationIntro: '「抓马」不是一开始就有的答案，而是策划期推导出来的结果。立项阶段，我和产品、运营一起做了三件事：看竞品、盘资产、看用户。',
+      input1Title: '输入一：竞品对标',
+      input1Body: '抖音「集生肖卡」、支付宝「集五福」——春节集卡已是各平台标配，玩法高度同质。再复刻一套集卡，只会加深用户的疲劳感，这条路先被排除。',
+      input2Title: '输入二：平台洞察',
+      input2Body: '热梗文化、抽象营销、官方玩梗，年轻人越上头。微博真正的差异化资产，不是红包预算，而是热梗内容生态和明星 / 好友关系链——这是别的平台抄不走的部分。',
+      input3Title: '输入三：用户现状',
+      input3Body: '传统集卡玩法熟悉度高、新鲜感下降。用户需要的不是第五套集卡，而是一个新的参与理由。',
+      derivationConclusion: '三个输入叠在一起，定位自然浮现：把「集卡」升级为「抓马」——用马年谐音梗做活动叙事，在基础集卡上叠加神马卡（猜热梗）、碰碰卡（双人匹配）、万能卡（邀新百搭）三个新玩法，再用明星 / 大 V 预热提前锁定用户。活动从一个集卡页面，升级为「集卡 × 玩梗 × 社交」的春节互动系统。',
+      derivationAlt: '抓马定位推导链路图',
+      derivationCaption: '策划期推导链：竞品对标 × 平台洞察 × 用户现状 → 「集卡 × 玩梗 × 社交」→ 三大新玩法与预热策略。竞品信息来自公开产品形态，内部目标与预算数字已脱敏。',
+      participationTitle: '我的参与',
+      participationBody1: '我从策划期进入，与产品、运营共同完成竞品拆解和玩法共创。其中「重复卡兑换神马卡」的机制由我提出：集卡活动里，重复卡是最大的挫败感来源——我把它反转成新玩法的入口，用 2 张重复卡兑换 1 张神马卡，让"多出来的卡"重新变成继续参与的理由；兑换比例与奖励档位由产品、运营测算敲定。',
+      participationBody2: '我的其余输入集中在体验侧：评估每个玩法的理解成本、把机制翻译成用户路径草图、判断多玩法并行时的承接可行性。后文「活动系统设计」的视角，正是在这个阶段建立的。'
     });
     Object.assign(i18n.en.positioning, {
       label: 'Positioning',
       title: 'From campaign page design to campaign system design',
-      body: 'The focus was not to design one campaign homepage, but to organize a high-traffic, long-cycle New Year system with multiple entrances, tasks, card types, and rewards running in parallel.'
+      body: 'The focus was not to design one campaign homepage, but to organize a high-traffic, long-cycle New Year system with multiple entrances, tasks, card types, and rewards running in parallel.',
+      derivationTitle: 'Where the positioning came from: three planning inputs',
+      derivationIntro: '“Drama” was not the answer from the beginning. It emerged from planning. At the kickoff stage, I worked with product and operations on three things: competitor review, asset mapping, and user context.',
+      input1Title: 'Input 1: Competitor benchmarking',
+      input1Body: 'Douyin’s zodiac card collection and Alipay’s Five Blessings showed that New Year card collection had become a platform standard, with highly similar mechanics. Repeating another card set would only deepen user fatigue, so this direction was ruled out first.',
+      input2Title: 'Input 2: Platform insight',
+      input2Body: 'Meme culture, abstract marketing, and official playful participation were becoming more engaging for young users. Weibo’s real differentiated asset was not red packet budget, but its meme content ecosystem and celebrity / friend relationship graph.',
+      input3Title: 'Input 3: User context',
+      input3Body: 'Users were already familiar with traditional card collection, and novelty was declining. They did not need a fifth card-collection campaign. They needed a new reason to participate.',
+      derivationConclusion: 'When the three inputs overlapped, the positioning emerged naturally: upgrade “card collection” into “Drama.” The campaign used a Year of the Horse wordplay narrative, layered Spirit Cards, Bump Cards, and Universal Cards on top of basic card collection, then used celebrity / KOL warm-up to lock in users early. The activity evolved from a card-collection page into a New Year interaction system of “collection × memes × social.”',
+      derivationAlt: 'Drama positioning derivation map',
+      derivationCaption: 'Planning derivation chain: competitor benchmarking × platform insight × user context → “collection × memes × social” → three new gameplay modules and warm-up strategy. Competitor information came from public product forms; internal targets and budget numbers have been desensitized.',
+      participationTitle: 'My Participation',
+      participationBody1: 'I joined from the planning stage and worked with product and operations on competitor analysis and gameplay co-creation. I proposed the “duplicate cards to Spirit Card” mechanism: duplicate cards are one of the biggest frustration points in collection campaigns, so I turned them into an entry point for a new gameplay loop. Two duplicate cards could be exchanged for one Spirit Card, making “extra cards” a reason to keep participating. Product and operations finalized the exchange ratio and reward tiers.',
+      participationBody2: 'My other inputs focused on experience: evaluating comprehension cost, translating mechanics into user-path sketches, and judging whether multiple gameplay modules could be carried in parallel. The later “campaign system design” perspective was formed at this stage.'
     });
     Object.assign(i18n.zh.flow, {
       label: '02 — 链路与玩法总览',
