@@ -1508,11 +1508,19 @@
                 <h3 class="text-xl md:text-2xl font-bold tracking-tighter leading-tight mb-4" data-i18n="media.gameplay.spiritPhase2.title"></h3>
                 <p class="text-sm text-neutral-500 i18n-body" data-i18n="media.gameplay.spiritPhase2.body"></p>
               </div>
-              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-                <div class="soft-card"><p class="text-xs font-semibold mb-2" data-i18n="media.gameplay.spiritPhase2.problemTitle"></p><p class="text-xs text-neutral-500 i18n-body" data-i18n="media.gameplay.spiritPhase2.problemBody"></p></div>
-                <div class="soft-card"><p class="text-xs font-semibold mb-2" data-i18n="media.gameplay.spiritPhase2.strategyTitle"></p><p class="text-xs text-neutral-500 i18n-body" data-i18n="media.gameplay.spiritPhase2.strategyBody"></p></div>
-                <div class="soft-card"><p class="text-xs font-semibold mb-2" data-i18n="media.gameplay.spiritPhase2.experienceTitle"></p><p class="text-xs text-neutral-500 i18n-body" data-i18n="media.gameplay.spiritPhase2.experienceBody"></p></div>
-                <div class="soft-card"><p class="text-xs font-semibold mb-2" data-i18n="media.gameplay.spiritPhase2.valueTitle"></p><p class="text-xs text-neutral-500 i18n-body" data-i18n="media.gameplay.spiritPhase2.valueBody"></p></div>
+              <div class="mb-8">
+                <div class="soft-card mb-6"><p class="text-xs font-semibold mb-2" data-i18n="media.gameplay.spiritPhase2.problemTitle"></p><p class="text-xs text-neutral-500 i18n-body" data-i18n="media.gameplay.spiritPhase2.problemBody"></p></div>
+                <a data-disabled-full-image="true" class="case-image-card block mb-8">
+                  <div class="image-slot aspect-[1600/942] bg-[#FFF8EE]">
+                    <img src="assets/drama/phase2-data-basis-light.png" alt="" data-i18n-alt="media.gameplay.spiritPhase2.dataBasisAlt" class="object-contain object-center" loading="lazy" onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden');">
+                    <div class="hidden image-fallback absolute inset-0"><span>assets/drama/phase2-data-basis-light.png</span></div>
+                  </div>
+                </a>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div class="soft-card"><p class="text-xs font-semibold mb-2" data-i18n="media.gameplay.spiritPhase2.strategyTitle"></p><p class="text-xs text-neutral-500 i18n-body" data-i18n="media.gameplay.spiritPhase2.strategyBody"></p></div>
+                  <div class="soft-card"><p class="text-xs font-semibold mb-2" data-i18n="media.gameplay.spiritPhase2.experienceTitle"></p><p class="text-xs text-neutral-500 i18n-body" data-i18n="media.gameplay.spiritPhase2.experienceBody"></p></div>
+                  <div class="soft-card"><p class="text-xs font-semibold mb-2" data-i18n="media.gameplay.spiritPhase2.valueTitle"></p><p class="text-xs text-neutral-500 i18n-body" data-i18n="media.gameplay.spiritPhase2.valueBody"></p></div>
+                </div>
               </div>
               <div class="spirit-phase2-media">
                 <a data-disabled-full-image="true" class="spirit-phase2-demo case-image-card block">
@@ -1993,7 +2001,7 @@
       spiritPhase2: {
         label: '玩法二期',
         title: '用每日限时题目延长神马卡热度',
-        body: '活动进入中后期后，原有神马卡总量和阶梯激励的新鲜感开始下降。二期没有新增复杂链路，而是把「每日限时神马卡」放进原有神马卡模块，每天上新 1 张题卡，并沿用已有的得卡、猜词和开红包路径。',
+        body: '活动进入中后期，用户对基础集卡和首轮神马卡竞猜的新鲜感开始下降——这个判断不是来自感觉，而是来自数据。Day 10，我们在后台看到三个同时出现的疲劳信号，决定在不打断原有路径的前提下，为高频用户重造一个回访理由：不新增玩法，只在用户已理解的神马卡机制上做轻量扩展，每天开放限时题目，把中后期的回访动机重新拉起来。',
         timedTitle: '每日限时神马卡',
         timedBody: '题卡直接计入整体图鉴库；用户猜对后即时开限量红包，红包发完仍可继续猜词，并提示「红包没钱了」。',
         timedMediaLabel: '限时神马卡题目'
@@ -2003,7 +2011,7 @@
       spiritPhase2: {
         label: 'Phase 2 Gameplay',
         title: 'Extending Spirit Card engagement with daily limited prompts',
-        body: 'As novelty declined mid-campaign, the team avoided adding a separate flow. Instead, daily limited Spirit Cards were placed inside the existing Spirit Card module, reusing the current earn, guess, and reward path.',
+        body: 'By the middle and later stages, users were losing novelty toward basic card collection and the first round of Spirit Card guessing. This judgment came from data, not intuition. On Day 10, three fatigue signals appeared at the same time, so we created a new reason for high-frequency users to return without interrupting the original path: no new gameplay, only a lightweight extension of the Spirit Card mechanism users already understood, with daily limited prompts to revive return motivation.',
         timedTitle: 'Daily limited Spirit Card',
         timedBody: 'Each new prompt entered the full gallery. Correct guesses opened limited instant rewards; after rewards ran out, users could still guess with a clear empty-reward state.',
         timedMediaLabel: 'Daily limited Spirit Card prompt'
@@ -2161,15 +2169,16 @@
     Object.assign(i18n.zh.media.gameplay.spiritPhase2, {
       label: '玩法二期',
       title: '用每日限时题目延长神马卡热度',
-      body: '活动进入中后期后，用户对基础集卡和首轮神马卡竞猜的新鲜感开始下降。为了避免新增一套复杂玩法带来理解成本，我们选择在原有神马卡链路上做轻量扩展：每天开放限时题目，让用户用已理解的「神马卡竞猜」机制继续参与。这次二期设计的重点不是增加玩法数量，而是在不打断原有路径的前提下，为高频用户提供新的参与理由，延长神马卡热度，并把活动中后期的回访动机重新拉起来。',
-      problemTitle: '问题：中后期新鲜感下降',
-      problemBody: '活动到 Day 10 后，用户已熟悉基础集卡和神马卡规则，继续参与的理由开始变弱。',
+      body: '活动进入中后期，用户对基础集卡和首轮神马卡竞猜的新鲜感开始下降——这个判断不是来自感觉，而是来自数据。Day 10，我们在后台看到三个同时出现的疲劳信号，决定在不打断原有路径的前提下，为高频用户重造一个回访理由：不新增玩法，只在用户已理解的神马卡机制上做轻量扩展，每天开放限时题目，把中后期的回访动机重新拉起来。',
+      problemTitle: '问题：Day 10，三个疲劳信号同时出现',
+      problemBody: '上线爆发期过后，大促流量退潮、基本盘沉淀，次日留存从 12% 逐日修复至 38%；但随后连续两天停在 38% 不再上行，人均访问从 2.82 次回落到 2.68 次，访问人数仍以约 3% 每日缓跌。存量玩法的参与理由接近耗尽——需要新的回访理由，但不能靠一套要重新学习的新玩法。',
+      dataBasisAlt: '抓马赢红包二期数据依据图，展示 Day 1 到 Day 10 的访问趋势、次日留存和三个疲劳信号',
       strategyTitle: '设计策略：不新增复杂规则，只扩展原有机制',
-      strategyBody: '沿用「神马卡 → 猜题 → 红包反馈」的既有认知，增加每日限时题目。',
+      strategyBody: '沿用「神马卡 → 猜题 → 红包反馈」的既有认知，增加每日限时题目。在用户已经理解的机制上做扩展，新玩法的理解成本几乎为零。',
       experienceTitle: '体验处理：用时间感制造回访理由',
-      experienceBody: '通过“今日题目”“限时开放”“明日继续”等文案和状态，给用户一个每天回来的理由。',
+      experienceBody: '通过“今日题目”“限时开放”“明日继续”等文案和状态，把“随时可玩”变成“今天要来”——给用户一个每天回来的确定理由。',
       valueTitle: '设计价值：延长热度，而不是重新教育用户',
-      valueBody: '二期没有另起一套玩法，而是在用户已理解的机制上增加内容变化，降低理解成本。'
+      valueBody: '二期没有另起一套玩法，而是在已理解的机制上增加内容变化。对应到数据目标：让访问止跌企稳、次日留存突破 38% 的平台期、人均访问回升，把热度一路接到除夕开奖。'
     });
     Object.assign(i18n.en.media.gameplay.spiritPhase2, i18n.zh.media.gameplay.spiritPhase2);
     Object.assign(i18n.zh.craft, {
