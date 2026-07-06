@@ -450,7 +450,9 @@
     }
     .aigc-visual-frame.is-scroll-y {
       align-items: flex-start;
-      overflow-y: auto;
+      justify-content: flex-start;
+      width: min(760px, calc(100vw - 3rem));
+      overflow: auto;
       overscroll-behavior: contain;
       -webkit-overflow-scrolling: touch;
     }
@@ -462,6 +464,7 @@
       object-fit: contain;
     }
     .aigc-visual-frame.is-scroll-y img {
+      flex: 0 0 auto;
       border: 1px solid #e5e5e5;
       height: 254%;
     }
