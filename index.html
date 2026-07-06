@@ -163,7 +163,7 @@
       height: 100%;
       overflow: hidden;
       border-radius: 46% 54% 51% 49% / 57% 43% 56% 44%;
-      background: #171717;
+      background: #fff;
       box-shadow: 0 26px 70px rgba(23, 23, 23, 0.2);
       transform: rotate(-2deg);
     }
@@ -175,13 +175,45 @@
       border-radius: inherit;
       pointer-events: none;
     }
-    .hero-video {
+    .hero-video-fallback {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
       display: block;
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: center center;
+    }
+    @keyframes heroPosterDrift {
+      from { transform: scale(1.02) translate3d(0, 0, 0); }
+      to { transform: scale(1.07) translate3d(-1.5%, -1%, 0); }
+    }
+    .hero-video {
+      position: relative;
+      z-index: 1;
+      display: block;
+      width: 100%;
+      height: 100% !important;
+      max-width: none;
+      object-fit: cover;
+      object-position: center center;
+      opacity: 0;
       transform: scale(1.12) rotate(2deg);
+      transition: opacity 0.2s ease;
+    }
+    .hero-video-shell.is-video-ready .hero-video {
+      opacity: 1 !important;
+    }
+    .hero-video-shell.is-wechat-fallback .hero-video {
+      display: none !important;
+    }
+    .hero-video-shell.is-wechat-fallback .hero-video-fallback,
+    .hero-video-shell.is-video-unavailable .hero-video-fallback {
+      z-index: 2;
+    }
+    .hero-video-shell.is-wechat-fallback .hero-video-fallback {
+      animation: heroPosterDrift 5s ease-in-out infinite alternate;
     }
     /* Hero font comparison variants: append ?font=v1, v2, v3, or v4 to preview. */
     .hero-title {
@@ -299,11 +331,31 @@
     }
 
     @media (max-width: 809.98px) {
+      .hero-layout {
+        gap: 2rem;
+      }
       .hero-media {
-        justify-content: flex-start;
+        justify-content: center;
       }
       .hero-video-orbit {
-        width: min(52vw, 220px);
+        width: min(100%, 342px);
+        aspect-ratio: 1112 / 834;
+      }
+      .hero-video-orbit::before {
+        inset: -8px;
+        border-radius: 28px;
+        transform: rotate(1.5deg);
+      }
+      .hero-video-orbit::after {
+        display: none;
+      }
+      .hero-video-shell {
+        border-radius: 24px;
+        transform: none;
+      }
+      .hero-video {
+        object-fit: cover;
+        transform: none;
       }
       .hero-photo-stage {
         justify-content: flex-start;
@@ -325,7 +377,18 @@
     .work-list {
       margin-top: 100px;
     }
-    .work-item { cursor: pointer; }
+    .work-item {
+      display: block;
+      color: inherit;
+      text-decoration: none;
+      cursor: pointer;
+      -webkit-tap-highlight-color: rgba(255, 87, 58, 0.12);
+    }
+    .work-item:focus-visible {
+      outline: 2px solid #FF573A;
+      outline-offset: 6px;
+      border-radius: 18px;
+    }
     .work-item .work-cover {
       border-radius: 16px;
       overflow: hidden;
@@ -605,20 +668,42 @@
       <div class="hero-layout grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_minmax(180px,260px)] lg:grid-cols-[minmax(0,1fr)_minmax(240px,320px)] gap-8 md:gap-10 lg:gap-14 xl:gap-20">
         <div class="max-w-[880px]">
           <p class="hero-line text-xs md:text-sm font-medium tracking-tight text-neutral-400 mb-4 md:mb-5">
-            <span class="inline-block w-2 h-2 rounded-full bg-[#FF573A] mr-2 relative top-[-1px]"></span><span data-en="Senior UX Designer — Available for work" data-zh="资深UX设计师">资深UX设计师</span>
+            <span class="inline-block w-2 h-2 rounded-full bg-[#FF573A] mr-2 relative top-[-1px]"></span><span data-en="Senior UX Designer — Available for work" data-zh="资深 UX / 交互设计师">资深 UX / 交互设计师</span>
           </p>
           <h1 class="hero-title text-[clamp(1.9rem,4.7vw,4.5rem)] font-bold leading-heading tracking-tighter">
-            <span class="hero-line block"><span data-en="Hello" data-zh="你好">你好</span><span class="hero-comma">,</span><span data-en=" I'm " data-zh="我是">我是</span><span class="text-[#FF573A]" data-en="Sheryl Gao" data-zh="晓宇">晓宇</span></span>
-            <span class="hero-line block mt-3 md:mt-4 max-w-[760px] text-[clamp(1.1rem,2vw,1.55rem)] font-semibold leading-[1.3] tracking-tighter text-neutral-500" data-en="Sense. Explore. Create." data-zh="擅长将复杂业务逻辑转化为清晰、有趣、情感化的产品体验。">擅长将复杂业务逻辑转化为清晰、有趣、情感化的产品体验。</span>
+            <span class="hero-line block"><span data-en="Hello" data-zh="你好">你好</span><span class="hero-comma" data-en="," data-zh="，">，</span><span data-en=" I'm " data-zh="我是">我是</span><span class="text-[#FF573A]" data-en="Sheryl Gao" data-zh="晓宇">晓宇</span></span>
+            <span class="hero-line block mt-3 md:mt-4 max-w-[820px] text-[clamp(1.1rem,2vw,1.55rem)] font-semibold leading-[1.3] tracking-tighter text-neutral-500" data-en="I turn complex business logic into clear, playful product experiences that drive conversion and growth" data-zh="擅长把复杂业务逻辑，转化为清晰、有趣、能带来转化与增长的产品体验">擅长把复杂业务逻辑，转化为清晰、有趣、能带来转化与增长的产品体验</span>
           </h1>
-          <p class="hero-line hero-description mt-4 text-xs md:text-sm leading-body text-neutral-500" data-en="For nearly six years, I have focused on Weibo communities, fan ecosystems, pan-entertainment commercialization, and large-scale operational campaigns, leading 0-to-1 product builds, experience upgrades, gamified mechanisms, commercialization conversion journeys, and interaction guideline development. Recently, I have continued exploring AIGC and AI&nbsp;Coding in concept validation and runnable prototypes." data-zh="近 6 年聚焦微博社区、粉丝生态、泛娱乐商业化和大型运营活动，负责从 0 到 1 产品搭建、体验升级、游戏化机制、商业化转化链路与交互规范沉淀，近期持续探索 AIGC 与 AI&nbsp;Coding 在概念验证和可运行原型中的应用。">近 6 年聚焦微博社区、粉丝生态、泛娱乐商业化和大型运营活动，负责从 0 到 1 产品搭建、体验升级、游戏化机制、商业化转化链路与交互规范沉淀，近期持续探索 AIGC 与 AI&nbsp;Coding 在概念验证和可运行原型中的应用。</p>
+          <p class="hero-line mt-3 inline-block max-w-full rounded-2xl bg-[#FFF0EC] px-3 py-1.5 text-[11px] md:text-xs font-semibold leading-relaxed tracking-tight text-[#FF573A]" data-en="Interaction Design&nbsp;&nbsp;·&nbsp;&nbsp;Information Architecture&nbsp;&nbsp;·&nbsp;&nbsp;Gamified Gameplay&nbsp;&nbsp;·&nbsp;&nbsp;Task Incentives&nbsp;&nbsp;·&nbsp;&nbsp;Commercial Conversion&nbsp;&nbsp;·&nbsp;&nbsp;AIGC&nbsp;&nbsp;·&nbsp;&nbsp;AI Coding" data-zh="交互设计&nbsp;&nbsp;·&nbsp;&nbsp;信息架构&nbsp;&nbsp;·&nbsp;&nbsp;游戏化玩法&nbsp;&nbsp;·&nbsp;&nbsp;任务激励&nbsp;&nbsp;·&nbsp;&nbsp;商业化转化&nbsp;&nbsp;·&nbsp;&nbsp;AIGC&nbsp;&nbsp;·&nbsp;&nbsp;AI Coding">交互设计&nbsp;&nbsp;·&nbsp;&nbsp;信息架构&nbsp;&nbsp;·&nbsp;&nbsp;游戏化玩法&nbsp;&nbsp;·&nbsp;&nbsp;任务激励&nbsp;&nbsp;·&nbsp;&nbsp;商业化转化&nbsp;&nbsp;·&nbsp;&nbsp;AIGC&nbsp;&nbsp;·&nbsp;&nbsp;AI Coding</p>
+          <p class="hero-line hero-description mt-4 text-xs md:text-sm leading-body text-neutral-500" data-en="8+ years of consumer product design experience. I previously worked on Baidu Wenku, Baidu Reading, and other knowledge-content products. Over the past nearly six years at Weibo, as the only interaction designer in the Operations Department, I have independently supported 13 business lines including brand campaigns, games/esports, sports, and public welfare, often running 3–5 projects in parallel. I have supported 10+ large-scale operational campaigns, with flagship projects reaching 200M+ users. AIGC and AI Coding are now part of my daily delivery workflow: runnable prototypes replace static mockups, compressing concept validation from weeks to days." data-zh="8年+ C端产品设计经验。曾在百度负责文库、阅读等知识内容产品；近6年在微博作为运营部唯一交互设计师，独立支撑品牌活动、游戏/电竞、体育、公益等 13 条业务线，常态并行 3–5 个项目，累计支撑 10+ 场大型运营活动，主导项目覆盖 2亿+ 用户量级。已将 AIGC 与 AI Coding 纳入日常交付流程，用可运行原型替代静态稿，概念验证从周级压缩到天级。">8年+ C端产品设计经验。曾在百度负责文库、阅读等知识内容产品；近6年在微博作为运营部唯一交互设计师，独立支撑品牌活动、游戏/电竞、体育、公益等 13 条业务线，常态并行 3–5 个项目，累计支撑 10+ 场大型运营活动，主导项目覆盖 2亿+ 用户量级。已将 AIGC 与 AI Coding 纳入日常交付流程，用可运行原型替代静态稿，概念验证从周级压缩到天级。</p>
         </div>
 
         <div class="hero-media" aria-label="Homepage intro animation">
           <div class="hero-video-orbit">
             <div class="hero-video-shell">
-              <video class="hero-video" autoplay muted loop playsinline preload="metadata" aria-label="Sheryl intro animation">
-                <source src="./jimeng-2026-06-12-3794-帮我生成一个视频，我想放在作品集的首页，从敲电脑的动作然后挥手sayhi，再到瑜....mp4" type="video/mp4" />
+              <img
+                class="hero-video-fallback"
+                src="./portfolio2-assets/hero-intro-poster.jpg"
+                alt=""
+                aria-hidden="true"
+                loading="eager"
+                decoding="async"
+              />
+              <video
+                class="hero-video"
+                autoplay
+                muted
+                loop
+                playsinline
+                webkit-playsinline
+                x5-playsinline
+                x5-video-player-type="h5"
+                x5-video-player-fullscreen="false"
+                preload="auto"
+                poster="./portfolio2-assets/hero-intro-poster.jpg"
+                aria-label="Sheryl intro animation"
+              >
+                <source src="./portfolio2-assets/hero-intro-mobile.mp4" type="video/mp4" />
               </video>
             </div>
           </div>
@@ -637,48 +722,64 @@
       <div class="work-list grid grid-cols-1 md:grid-cols-2 gap-x-8 lg:gap-x-12 gap-y-12 md:gap-y-14">
 
         <!-- Work 01 -->
-        <article class="work-item reveal" onclick="window.location.href='case-drama-2026.html'">
+        <a class="work-item reveal" href="case-chaohua-starbaby-cn.html" aria-label="查看微博「超话星宝」体验设计">
           <div class="work-cover aspect-[16/9] bg-white">
-            <img src="assets/drama/hero-cover.png" alt="2026 Weibo New Year Card Collection cover" class="work-img w-full h-full object-cover" />
+            <img src="portfolio2-assets/starbaby-hero.png" alt="超话星宝项目封面" class="work-img w-full h-full object-cover" />
           </div>
           <div class="mt-5 md:mt-6">
-            <p class="text-xs md:text-sm font-medium text-neutral-400 tracking-tight mb-2" data-en="Weibo · 2026" data-zh="微博 · 2026">微博 · 2026</p>
-            <h3 class="text-xl md:text-2xl font-bold tracking-tighter leading-tight" data-en="Drama 2026 Spring Festival Campaign Experience Design" data-zh="「抓马赢红包」春节活动体验设计">「抓马赢红包」春节活动体验设计</h3>
+            <h3 class="text-xl md:text-2xl font-bold tracking-tighter leading-tight" data-en="Chaohua Starbaby" data-zh="超话星宝">超话星宝</h3>
+            <div class="mt-3 flex flex-wrap gap-2">
+              <span class="rounded-full bg-neutral-100 px-3 py-1 text-[11px] font-semibold text-neutral-500" data-en="Long-term Operation Product · 2026" data-zh="长线运营产品 · 2026">长线运营产品 · 2026</span>
+              <span class="rounded-full bg-[#FFF0EC] px-3 py-1 text-[11px] font-semibold text-[#FF573A]" data-en="400k+ participants / 150k DAU" data-zh="40w+ 参与 / 15w+ 日活">40w+ 参与 / 15w+ 日活</span>
+            </div>
+            <p class="mt-3 text-sm leading-body text-neutral-500" data-en="Reframed check-ins, posting, and tasks into a collective nurturing loop so fan actions could be seen and rewarded. The project reached 400k+ cumulative participants, 150k+ stable daily active users, and roughly 25% seven-day retention." data-zh="将签到/发帖/任务重构为「全员共养」闭环，让粉丝行为被看见、被反馈。累计参与 40w+，稳定期日活 15w+，七日留存约 25%。">将签到/发帖/任务重构为「全员共养」闭环，让粉丝行为被看见、被反馈。累计参与 40w+，稳定期日活 15w+，七日留存约 25%。</p>
           </div>
-        </article>
+        </a>
 
         <!-- Work 02 -->
-        <article class="work-item reveal" onclick="window.location.href='case-game-center-cn.html'">
+        <a class="work-item reveal" href="case-game-center-cn.html" aria-label="查看微博游戏中心体验升级">
           <div class="work-cover aspect-[16/9] bg-white">
-            <img src="game-center-hero-cn.png" alt="微博游戏中心体验升级项目封面" class="work-img w-full h-full object-cover" />
+            <img src="game-center-hero-cn.png" alt="游戏中心项目封面" class="work-img w-full h-full object-cover" />
           </div>
           <div class="mt-5 md:mt-6">
-            <p class="text-xs md:text-sm font-medium text-neutral-400 tracking-tight mb-2" data-en="Weibo · 2025" data-zh="微博 · 2025">微博 · 2025</p>
-            <h3 class="text-xl md:text-2xl font-bold tracking-tighter leading-tight" data-en="Weibo Game Center Redesign" data-zh="微博游戏中心体验升级">微博游戏中心体验升级</h3>
+            <h3 class="text-xl md:text-2xl font-bold tracking-tighter leading-tight" data-en="Game Center" data-zh="游戏中心">游戏中心</h3>
+            <div class="mt-3 flex flex-wrap gap-2">
+              <span class="rounded-full bg-neutral-100 px-3 py-1 text-[11px] font-semibold text-neutral-500" data-en="Platform Product · 2025" data-zh="平台产品 · 2025">平台产品 · 2025</span>
+              <span class="rounded-full bg-[#FFF0EC] px-3 py-1 text-[11px] font-semibold text-[#FF573A]" data-en="+47.7% users / +34.8% visits" data-zh="+47.7% 人数 / +34.8% 次数">+47.7% 人数 / +34.8% 次数</span>
+            </div>
+            <p class="mt-3 text-sm leading-body text-neutral-500" data-en="Rebuilt the information architecture around distribution, benefits, and community, restoring discovery and benefit handoff paths. In the first week after launch, visitors increased by 47.7% and visits by 34.8%." data-zh="重构「分发–福利–社区」信息架构，重建游戏发现与福利承接路径，上线首周访问人数 +47.7%、访问次数 +34.8%。">重构「分发–福利–社区」信息架构，重建游戏发现与福利承接路径，上线首周访问人数 +47.7%、访问次数 +34.8%。</p>
           </div>
-        </article>
+        </a>
 
         <!-- Work 03 -->
-        <article class="work-item reveal" onclick="window.location.href='case-chaohua-starbaby-cn.html'">
+        <a class="work-item reveal" href="case-weibo-acg-derivatives-cn.html" aria-label="查看微博 ACG 衍生品商业化体验设计">
           <div class="work-cover aspect-[16/9] bg-white">
-            <img src="portfolio2-assets/starbaby-hero.png" alt="微博超话星宝项目封面" class="work-img w-full h-full object-cover" />
+            <img src="portfolio2-assets/acg-hero.png" alt="ACG 衍生品项目封面" class="work-img w-full h-full object-cover" />
           </div>
           <div class="mt-5 md:mt-6">
-            <p class="text-xs md:text-sm font-medium text-neutral-400 tracking-tight mb-2" data-en="Weibo · 2026" data-zh="微博 · 2026">微博 · 2026</p>
-            <h3 class="text-xl md:text-2xl font-bold tracking-tighter leading-tight" data-en="Weibo Chaohua Starbaby Experience Design" data-zh="微博「超话星宝」体验设计">微博「超话星宝」体验设计</h3>
+            <h3 class="text-xl md:text-2xl font-bold tracking-tighter leading-tight" data-en="ACG Derivatives" data-zh="ACG 衍生品">ACG 衍生品</h3>
+            <div class="mt-3 flex flex-wrap gap-2">
+              <span class="rounded-full bg-neutral-100 px-3 py-1 text-[11px] font-semibold text-neutral-500" data-en="Commercial Product · 2025" data-zh="商业化产品 · 2025">商业化产品 · 2025</span>
+              <span class="rounded-full bg-[#FFF0EC] px-3 py-1 text-[11px] font-semibold text-[#FF573A]" data-en="Conversion 72%→98%" data-zh="转化 72%→98%">转化 72%→98%</span>
+            </div>
+            <p class="mt-3 text-sm leading-body text-neutral-500" data-en="Built the Olishang gacha commerce platform from 0 to 1, completed the transaction flow, redesigned the draw-detail page, and migrated it to a mini program. Order-to-payment conversion rose from 72% to 98%, and GMV completion from 76% to 93%." data-zh="从 0 到 1 搭建抽赏平台「欧力赏」完整交易链路，重构「抽卡机」并迁移小程序，下单–支付转化 72%→98%、GMV 完成率 76%→93%。">从 0 到 1 搭建抽赏平台「欧力赏」完整交易链路，重构「抽卡机」并迁移小程序，下单–支付转化 72%→98%、GMV 完成率 76%→93%。</p>
           </div>
-        </article>
+        </a>
 
         <!-- Work 04 -->
-        <article class="work-item reveal" onclick="window.location.href='case-weibo-acg-derivatives-cn.html'">
+        <a class="work-item reveal" href="case-drama-2026.html" aria-label="查看「抓马赢红包」春节活动体验设计">
           <div class="work-cover aspect-[16/9] bg-white">
-            <img src="portfolio2-assets/acg-hero.png" alt="微博 ACG 衍生品商业化体验设计项目封面" class="work-img w-full h-full object-cover" />
+            <img src="assets/drama/hero-cover.png" alt="抓马赢红包项目封面" class="work-img w-full h-full object-cover" />
           </div>
           <div class="mt-5 md:mt-6">
-            <p class="text-xs md:text-sm font-medium text-neutral-400 tracking-tight mb-2" data-en="Weibo · 2025" data-zh="微博 · 2025">微博 · 2025</p>
-            <h3 class="text-xl md:text-2xl font-bold tracking-tighter leading-tight" data-en="Weibo ACG Derivatives Commercialization Experience Design" data-zh="微博 ACG 衍生品商业化体验设计">微博 ACG 衍生品商业化体验设计</h3>
+            <h3 class="text-xl md:text-2xl font-bold tracking-tighter leading-tight" data-en="Drama Red Packet" data-zh="抓马赢红包">抓马赢红包</h3>
+            <div class="mt-3 flex flex-wrap gap-2">
+              <span class="rounded-full bg-neutral-100 px-3 py-1 text-[11px] font-semibold text-neutral-500" data-en="Operational Campaign · 2026" data-zh="运营活动 · 2026">运营活动 · 2026</span>
+              <span class="rounded-full bg-[#FFF0EC] px-3 py-1 text-[11px] font-semibold text-[#FF573A]" data-en="200M+ users" data-zh="2亿+ 用户量级">2亿+ 用户量级</span>
+            </div>
+            <p class="mt-3 text-sm leading-body text-neutral-500" data-en="Led the Spring Festival S-level campaign for a 200M+ user scenario: built a layered system of card collection, meme guessing, and social matching, then identified mid-campaign fatigue and added daily limited gameplay to lift return visits." data-zh="主导 2亿+ 用户量级的春节 S 级活动：搭建集卡/竞猜/社交匹配多层玩法系统，活动中期识别疲劳点、追加每日限时玩法拉动回访。">主导 2亿+ 用户量级的春节 S 级活动：搭建集卡/竞猜/社交匹配多层玩法系统，活动中期识别疲劳点、追加每日限时玩法拉动回访。</p>
           </div>
-        </article>
+        </a>
 
 
 
@@ -698,29 +799,29 @@
 
           <div>
             <div class="practice-list" aria-label="Design Practices">
-              <a class="practice-item" href="case-design-practices-cn.html#ai-workflow" aria-label="AI 项目全链路探索">
+              <a class="practice-item" href="case-design-practices-cn.html#ai-workflow" aria-label="AI 项目全链路实践">
                 <span class="practice-index">01</span>
                 <span>
-                  <span class="practice-title" data-en="AI Workflow Exploration" data-zh="AI 项目全链路探索">AI 项目全链路探索</span>
-                  <span class="practice-tag" data-en="AI Workflow Exploration" data-zh="AI Workflow Exploration">AI Workflow Exploration</span>
+                  <span class="practice-title" data-en="End-to-End AI Project Exploration" data-zh="AI 项目全链路实践">AI 项目全链路实践</span>
+                  <span class="practice-tag" data-en="Weibo World Cup memory video generation: from product concept to runnable prototype in an AI workflow" data-zh="世界杯记忆视频 H5：用 AI Coding 从产品构思做到两版可运行原型，直接支撑需求确认和研发协同">世界杯记忆视频 H5：用 AI Coding 从产品构思做到两版可运行原型，直接支撑需求确认和研发协同</span>
                 </span>
                 <span class="practice-arrow" aria-hidden="true">→</span>
               </a>
 
-              <a class="practice-item" href="case-design-practices-cn.html#campaign" aria-label="微博运营活动方法论沉淀">
+              <a class="practice-item" href="case-design-practices-cn.html#campaign" aria-label="运营活动方法论">
                 <span class="practice-index">02</span>
                 <span>
-                  <span class="practice-title" data-en="Weibo Campaign Methodology" data-zh="微博运营活动方法论沉淀">微博运营活动方法论沉淀</span>
-                  <span class="practice-tag" data-en="Campaign Methodology" data-zh="Campaign Methodology">Campaign Methodology</span>
+                  <span class="practice-title" data-en="Weibo Campaign Methodology" data-zh="运营活动方法论">运营活动方法论</span>
+                  <span class="practice-tag" data-en="Campaign Methodology" data-zh="把任务、激励、分享、异常等高频模块整理成可复用检查表，新活动不再从零设计">把任务、激励、分享、异常等高频模块整理成可复用检查表，新活动不再从零设计</span>
                 </span>
                 <span class="practice-arrow" aria-hidden="true">→</span>
               </a>
 
-              <a class="practice-item" href="case-design-practices-cn.html#guideline" aria-label="交互规范沉淀">
+              <a class="practice-item" href="case-design-practices-cn.html#guideline" aria-label="交互规范">
                 <span class="practice-index">03</span>
                 <span>
-                  <span class="practice-title" data-en="Interaction Guideline System" data-zh="交互规范沉淀">交互规范沉淀</span>
-                  <span class="practice-tag" data-en="Interaction Guideline" data-zh="Interaction Guideline">Interaction Guideline</span>
+                  <span class="practice-title" data-en="Interaction Guideline System" data-zh="交互规范">交互规范</span>
+                  <span class="practice-tag" data-en="Interaction Guideline" data-zh="统一状态定义、反馈节奏、组件边界三类口径，多条业务线按同一套逻辑出方案">统一状态定义、反馈节奏、组件边界三类口径，多条业务线按同一套逻辑出方案</span>
                 </span>
                 <span class="practice-arrow" aria-hidden="true">→</span>
               </a>
@@ -729,7 +830,7 @@
                 <span class="practice-index">04</span>
                 <span>
                   <span class="practice-title" data-en="B-side Design Request Platform" data-zh="B端设计需求管理平台">B端设计需求管理平台</span>
-                  <span class="practice-tag" data-en="Design Ops / Workflow" data-zh="Design Ops / Workflow">Design Ops / Workflow</span>
+                  <span class="practice-tag" data-en="Design Ops / Workflow" data-zh="提需、排期、评审、交付等全流程线上化">提需、排期、评审、交付等全流程线上化</span>
                 </span>
                 <span class="practice-arrow" aria-hidden="true">→</span>
               </a>
@@ -784,25 +885,25 @@
             <h2 class="text-xs font-semibold tracking-tight uppercase text-neutral-400" data-en="About" data-zh="关于我">关于我</h2>
             <p data-en="I like making complex systems clearer, and turning abstract ideas into tangible experiences as quickly as possible." data-zh="我喜欢把复杂系统变得更清晰，也喜欢把抽象想法尽快做成可体验的东西。">我喜欢把复杂系统变得更清晰，也喜欢把抽象想法尽快做成可体验的东西。</p>
             <p data-en="Over more than eight years, from Baidu to Weibo, I have been working with the relationship between complex business logic and emotional user experience on high-traffic platforms. My work spans communities, fan economy, pan-entertainment monetization, e-commerce, red packets, game centers, and large-scale operational campaigns. I am good at turning complex mechanisms with multiple roles, states, and device contexts into clear, scalable, and executable interaction systems." data-zh="过去八年多里，从百度到微博，我一直在高流量平台中处理复杂业务逻辑与情感化用户体验之间的关系。我的工作横跨社区、粉丝经济、泛娱乐商业化、电商、红包、游戏中心和大型运营活动，擅长把多角色、多状态、多端适配的复杂机制，整理成清晰、可扩展、可落地的交互系统。">过去八年多里，从百度到微博，我一直在高流量平台中处理复杂业务逻辑与情感化用户体验之间的关系。我的工作横跨社区、粉丝经济、泛娱乐商业化、电商、红包、游戏中心和大型运营活动，擅长把多角色、多状态、多端适配的复杂机制，整理成清晰、可扩展、可落地的交互系统。</p>
-            <p data-en="Recently, I have also been bringing AI design tools, AI Coding, and Agentic UX thinking into my workflow, exploring how to complete concept validation, content production, and runnable prototypes faster, so design can extend from delivering solutions to helping ideas get verified." data-zh="最近，我也在持续把 AI 设计工具、AI Coding 和 Agentic UX 的思路纳入自己的工作流，探索如何更快地完成概念验证、内容生产和可运行原型，让设计从“交付方案”进一步延伸到“推动想法被验证”。">最近，我也在持续把 AI 设计工具、AI Coding 和 Agentic UX 的思路纳入自己的工作流，探索如何更快地完成概念验证、内容生产和可运行原型，让设计从“交付方案”进一步延伸到“推动想法被验证”。</p>
+            <p data-en="AI is already part of my daily delivery workflow: AIGC supports early-stage visual concept exploration with about 30% efficiency gain, while AI Coding helps turn product concepts directly into runnable prototypes. Concept validation has moved from weeks to days, extending design from delivering solutions to verifying ideas." data-zh="AI 已是我日常交付流程的一部分：AIGC 用于前期视觉概念探索（提效约 30%），AI Coding 用于把产品概念直接做成可运行原型——概念验证从周级压缩到天级，让设计从「交付方案」延伸到「验证想法」。">AI 已是我日常交付流程的一部分：AIGC 用于前期视觉概念探索（提效约 30%），AI Coding 用于把产品概念直接做成可运行原型——概念验证从周级压缩到天级，让设计从「交付方案」延伸到「验证想法」。</p>
             <p data-en="Outside of work, I enjoy travel, yoga, and jazz dance. These interests keep me sensitive to new things, body awareness, and emotional expression, and remind me that good experiences need not only logic, but also rhythm, warmth, and a bit of imagination." data-zh="工作之外，我喜欢旅行、瑜伽和爵士舞。这些爱好让我保持对新鲜事物、身体感知和情绪表达的敏感，也提醒我：好的体验不仅需要逻辑，也需要节奏、温度和一点想象力">工作之外，我喜欢旅行、瑜伽和爵士舞。这些爱好让我保持对新鲜事物、身体感知和情绪表达的敏感，也提醒我：好的体验不仅需要逻辑，也需要节奏、温度和一点想象力</p>
           </div>
         </div>
 
         <!-- Details -->
-        <div class="lg:col-span-5 lg:pl-8">
+        <div class="lg:col-span-5">
           <div class="reveal delay-2 space-y-10">
 
             <div>
               <p class="text-xs font-semibold uppercase tracking-tight text-neutral-400 mb-4" data-en="Experience" data-zh="工作经历">工作经历</p>
               <div class="space-y-3">
-                <div class="flex justify-between text-sm">
-                  <span class="font-medium" data-en="Weibo — Senior UE/UI Designer" data-zh="微博 — 资深 UE/UI 设计师">微博 — 资深 UE/UI 设计师</span>
-                  <span class="text-neutral-400 text-xs ml-4 shrink-0" data-en="2020–Now" data-zh="2020–至今">2020–至今</span>
+                <div class="flex flex-col gap-1 xl:flex-row xl:justify-between text-sm">
+                  <span class="font-medium" data-en="Weibo — Senior UX / Interaction Designer <span class='whitespace-nowrap text-[#FF573A]'>(Only Interaction Designer in Operations)</span>" data-zh="微博 — 资深 UX/交互设计师<span class='whitespace-nowrap text-[#FF573A]'>（运营部唯一交互设计师）</span>">微博 — 资深 UX/交互设计师<span class="whitespace-nowrap text-[#FF573A]">（运营部唯一交互设计师）</span></span>
+                  <span class="text-neutral-400 text-xs xl:ml-4 shrink-0" data-en="Jun 2020–Present" data-zh="2020.06–至今">2020.06–至今</span>
                 </div>
-                <div class="flex justify-between text-sm">
+                <div class="flex flex-col gap-1 xl:flex-row xl:justify-between text-sm">
                   <span class="font-medium" data-en="Baidu — Interaction Designer" data-zh="百度 — 交互设计师">百度 — 交互设计师</span>
-                  <span class="text-neutral-400 text-xs ml-4 shrink-0">2017–2020</span>
+                  <span class="text-neutral-400 text-xs xl:ml-4 shrink-0" data-en="Sep 2017–Jan 2020" data-zh="2017.09–2020.01">2017.09–2020.01</span>
                 </div>
               </div>
             </div>
@@ -873,6 +974,69 @@
     document.querySelectorAll('.reveal').forEach((el) => {
       revealObserver.observe(el);
     });
+
+    // Keep a real image visible in browsers that block or delay autoplay.
+    const heroVideo = document.querySelector('.hero-video');
+    const heroVideoShell = document.querySelector('.hero-video-shell');
+    if (heroVideo && heroVideoShell) {
+      const isWeChatBrowser = /MicroMessenger/i.test(navigator.userAgent);
+
+      if (isWeChatBrowser) {
+        heroVideoShell.classList.add('is-wechat-fallback');
+        heroVideo.removeAttribute('autoplay');
+        heroVideo.pause();
+        heroVideo.querySelectorAll('source').forEach((source) => {
+          source.removeAttribute('src');
+        });
+        heroVideo.removeAttribute('src');
+        heroVideo.load();
+      } else {
+        heroVideo.muted = true;
+        heroVideo.defaultMuted = true;
+        heroVideo.playsInline = true;
+        heroVideo.setAttribute('muted', '');
+        heroVideo.setAttribute('playsinline', '');
+        heroVideo.setAttribute('webkit-playsinline', '');
+
+        const markHeroVideoReady = () => {
+          if (!heroVideo.paused && heroVideo.readyState >= 2 && heroVideo.currentTime > 0.08) {
+            heroVideoShell.classList.add('is-video-ready');
+            heroVideoShell.classList.remove('is-video-unavailable');
+            heroVideo.style.opacity = '1';
+          }
+        };
+        const tryPlayHeroVideo = () => {
+          const playAttempt = heroVideo.play();
+          if (playAttempt && typeof playAttempt.catch === 'function') {
+            playAttempt.catch(() => {
+              heroVideoShell.classList.add('is-video-unavailable');
+              heroVideo.style.opacity = '0';
+            });
+          }
+        };
+
+        heroVideo.addEventListener('canplay', tryPlayHeroVideo, { once: true });
+        heroVideo.addEventListener('playing', markHeroVideoReady);
+        heroVideo.addEventListener('timeupdate', markHeroVideoReady);
+        heroVideo.addEventListener('error', () => {
+          heroVideoShell.classList.add('is-video-unavailable');
+          heroVideo.style.opacity = '0';
+        });
+        heroVideo.addEventListener('stalled', () => {
+          if (!heroVideoShell.classList.contains('is-video-ready')) {
+            heroVideoShell.classList.add('is-video-unavailable');
+            heroVideo.style.opacity = '0';
+          }
+        });
+        window.addEventListener('pageshow', tryPlayHeroVideo);
+        document.addEventListener('WeixinJSBridgeReady', tryPlayHeroVideo, false);
+        document.addEventListener('touchstart', tryPlayHeroVideo, { once: true, passive: true });
+        document.addEventListener('visibilitychange', () => {
+          if (!document.hidden) tryPlayHeroVideo();
+        });
+        tryPlayHeroVideo();
+      }
+    }
 
     // Smooth scroll for anchor links
     document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
