@@ -1779,6 +1779,26 @@
     i18n.en.content.title = 'Make the gameplay sound human, reduce the task feeling, and amplify the New Year mood';
     i18n.zh.results.label = '06 — 结果与复盘';
     i18n.en.results.label = '06 — Results';
+    Object.assign(i18n.en.media.copy.case1, {
+      before: 'Module 1: Collect Horse Cards for New Year’s Eve red packets<br>Module 2: Guess Spirit Cards correctly to draw red packets<br>Module 3: Bump Cards',
+      after: 'Module 1: Complete Fortune Cards · New Year’s Eve reward<br>Module 2: Guess Spirit Cards · Bonus red packets<br>Module 3: Call a partner · Bump into rewards'
+    });
+    Object.assign(i18n.en.media.copy.case2, {
+      before: 'No Horse Cards available for exchange',
+      after: 'Complete tasks first to earn Fortune Cards'
+    });
+    Object.assign(i18n.en.media.copy.case3, {
+      before: 'Guess what Spirit Card this is<br>Confirm answer',
+      after: 'What Spirit Card is this? Can you guess it?<br>This is my answer'
+    });
+    Object.assign(i18n.en.media.copy.case4, {
+      before: 'Invite a friend',
+      after: 'Call a partner'
+    });
+    Object.assign(i18n.en.media.copy.case5, {
+      before: 'Match failed',
+      after: 'You do not have a Bump Card yet. Go claim one.<br>This bump did not work.<br>Come back tomorrow<br>Try another friend'
+    });
 
     Object.assign(i18n.zh.hero, {
       eyebrow: '微博 · 2026 · 交互设计师',
@@ -2093,7 +2113,61 @@
         familiarPurpose: '缩短选择好友到参与的路径'
       }
     });
-    Object.assign(i18n.en.gameplay, i18n.zh.gameplay, { strategyLabel: '04 — Layered Gameplay Flow' });
+    Object.assign(i18n.en.gameplay, {
+      strategyLabel: '04 — Layered Gameplay Flow',
+      strategyTitle: 'How collection, meme guessing, matching, and community spread build on each other',
+      title: 'Participation mechanics across gameplay modules',
+      strategyBody1: 'Chapter 02 already broke down how the gameplay works. This chapter focuses on how design kept up: instead of placing all five gameplay modules on the homepage, I defined each module’s trigger condition, visible state, next action, and feedback result, so the page could support users at their current stage.',
+      strategyBody2: 'My focus was to clarify the trigger, visibility, next action, and feedback for each module, so users at different stages always knew what they could do now and why they should continue.',
+      mapLabel: 'Global Interaction Flow',
+      roleLabel: 'Gameplay Roles',
+      roleTitle: 'Different modules solve motivation at different stages',
+      fortuneLabel: 'Fortune Cards',
+      fortuneTitle: 'Completing Fortune Cards is the starting point for all gameplay',
+      fortuneBody1: 'Fortune Cards carried the campaign’s foundational goal. The design focus was to make three things clear at first glance: which cards users still lacked, how they could get more cards, and what would happen after completion.',
+      fortuneBody2: 'The key was to make three questions clear immediately: what card is missing, how can I get it, and what happens after I complete the set.',
+      loopLabel: 'Duplicate Card Flow',
+      loopTitle: 'From duplicate cards to Spirit Cards: creating a new gameplay outlet',
+      loopBody1: 'The outlet for duplicate cards had already been planted during planning (see Chapter 01): two duplicate cards could be exchanged for one Spirit Card, leading into meme guessing, red packet opening, and card-sharing. This section explains how that idea became concrete state design, and how the same path later supported the lightweight “daily limited prompt” expansion.',
+      loopBody2: 'We gave duplicate cards a new outlet: two duplicates could be exchanged for one Spirit Card, then used for meme guessing, red packet opening, and card-sharing. This turned extra cards back into a reason to keep participating.',
+      spiritLabel: 'Spirit Card State Design',
+      spiritTitle: 'Make meme guessing easier to understand',
+      spiritBody: 'Spirit Cards absorbed duplicate-card overflow while turning Weibo meme culture into a guessing mechanic. The design needed to support first-time users, users without enough Fortune Cards, users who had redeemed Spirit Cards, and result states such as correct answer, wrong answer, and rewards sold out.',
+      tableState: 'User State',
+      tableTreatment: 'Design Treatment',
+      tablePurpose: 'Design Purpose',
+      spiritTable: {
+        newState: 'First-time user',
+        newTreatment: 'Explain the value of Spirit Cards and how to obtain them',
+        newPurpose: 'Lower the learning cost of the new mechanic',
+        noCardState: 'Insufficient Fortune Cards',
+        noCardTreatment: 'Keep reward expectation visible while guiding users to earn Fortune Cards through tasks',
+        noCardPurpose: 'Tell users not only why they cannot proceed, but what to do next',
+        hasCardState: 'Spirit Card redeemed',
+        hasCardTreatment: 'Bring quiz-card progress and card-pack entry forward',
+        hasCardPurpose: 'Guide users to continue exchanging and guessing'
+      },
+      bumpLabel: 'Bump Card State Design',
+      bumpTitle: 'Give friend invitations a stronger reason',
+      bumpBody: 'Bump Cards carried the social-spread task. Instead of directly asking users to “invite friends,” the mechanic wrapped the invitation as a two-player match: after users received either a Ma card or Ba card, they summoned a friend to bump, and a successful match combined into a red packet.',
+      bumpTable: {
+        firstState: 'First time seeing Bump Card',
+        firstTreatment: 'Emphasize two-player matching and reward expectation',
+        firstPurpose: 'Make the social rule easier to understand',
+        oneCardState: 'One card obtained',
+        oneCardTreatment: 'Show that the other card is missing and guide users to invite a friend',
+        oneCardPurpose: 'Turn the missing piece into invitation motivation',
+        successState: 'Match successful',
+        successTreatment: 'Show the combined result and reward feedback',
+        successPurpose: 'Close the loop for the social action',
+        failState: 'Match failed',
+        failTreatment: 'Give a failure reason and the entry for the next round',
+        failPurpose: 'Prevent users from staying in a frustrated state',
+        familiarState: 'After users know the rules',
+        familiarTreatment: 'Bring friend list and bump action forward',
+        familiarPurpose: 'Shorten the path from choosing a friend to participating'
+      }
+    });
     Object.assign(i18n.zh.positioning, {
       label: '我的设计课题',
       title: '从活动页面设计，升级为活动系统设计',
@@ -2162,7 +2236,20 @@
       returnTitle: '分享回流',
       returnBody: '邀请好友、碰碰卡匹配、晒卡分享等路径回流到主会场。'
     });
-    Object.assign(i18n.en.media.globalMap, i18n.zh.media.globalMap, { label: 'Global Interaction Flow' });
+    Object.assign(i18n.en.media.globalMap, {
+      label: 'Global Interaction Flow',
+      title: 'Lay complex gameplay onto one system canvas',
+      body1: 'Before designing specific gameplay details, I organized a complete Figma global interaction flow and aligned venue states, Fortune Cards, Spirit Cards, Bump Cards, red packet dialogs, sharing return paths, and exception feedback on one system canvas.',
+      body2: 'This was not just a page inventory. It helped product, operations, and engineering confirm from the same perspective what state users were in, what they could do next, what feedback the system needed to provide, and which paths should return to the main venue.',
+      venueStateTitle: 'Venue States',
+      venueStateBody: 'Incomplete, completed, and challenge stages mapped to different module priorities.',
+      cardFlowTitle: 'Card Flow',
+      cardFlowBody: 'Acquisition, exchange, and consumption relationships among Fortune Cards, duplicate cards, Spirit Cards, and Bump Cards.',
+      feedbackTitle: 'Feedback Dialogs',
+      feedbackBody: 'Unified management of key feedback including draw results, quiz feedback, reward claiming, and failure prompts.',
+      returnTitle: 'Sharing Return Flow',
+      returnBody: 'Friend invites, Bump Card matching, and card-sharing paths return to the main venue.'
+    });
     Object.assign(i18n.zh.media.gameplay.spiritPhase2, {
       label: '玩法二期',
       title: '用每日限时题目延长神马卡热度',
@@ -2177,7 +2264,24 @@
       valueTitle: '设计价值：延长热度，而不是重新教育用户',
       valueBody: '对应到数据目标：让访问止跌企稳、次日留存突破 38% 的平台期、人均访问回升，把热度一路接到除夕开奖。'
     });
-    Object.assign(i18n.en.media.gameplay.spiritPhase2, i18n.zh.media.gameplay.spiritPhase2);
+    Object.assign(i18n.en.media.gameplay.spiritPhase2, {
+      label: 'Phase 2 Gameplay',
+      title: 'Extending Spirit Card engagement with daily limited prompts',
+      body: 'As the campaign entered the mid-to-late stage, novelty began to decline. This judgment came from data, not intuition: on Day 10, three fatigue signals appeared in the backend at the same time. We decided to pull the return motivation back up without interrupting the existing path.',
+      problemTitle: 'Problem: On Day 10, three fatigue signals appeared at the same time',
+      problemBody: 'After the launch spike, promotion traffic faded and the base audience settled. Next-day retention recovered from 12% to 38%, but then stayed at 38% for two consecutive days. Average visits per user fell from 2.82 to 2.68, while visitor count continued to decline by about 3% per day. Existing participation reasons were close to being exhausted, so the campaign needed a new reason to return, but not a new mechanic that users had to relearn.',
+      dataBasisAlt: 'Phase 2 data basis for Drama Red Packet, showing Day 1 to Day 10 visit trend, next-day retention, and three fatigue signals',
+      strategyTitle: 'Design Strategy: extend the existing mechanic without adding complex rules',
+      strategyBody: 'Reuse the familiar “Spirit Card -> Guess -> Reward feedback” mental model and add daily limited prompts. Because the extension sits on a mechanism users already understand, the learning cost is almost zero.',
+      experienceTitle: 'Experience Treatment: use time cues to create a reason to return',
+      experienceBody: 'Copy and states such as “today’s prompt,” “limited-time open,” and “continue tomorrow” turn “play anytime” into “come today,” giving users a clear daily return reason.',
+      valueTitle: 'Design Value: extend heat instead of re-educating users',
+      valueBody: 'The corresponding data goal was to stabilize visits, break through the 38% next-day retention plateau, recover average visits per user, and carry campaign heat through New Year’s Eve reward opening.',
+      timedTitle: 'Daily limited Spirit Card',
+      timedBody: 'Each new prompt entered the full gallery. Correct guesses opened limited instant rewards; after rewards ran out, users could still guess with a clear empty-reward state.',
+      timedMediaLabel: 'Daily limited Spirit Card prompt',
+      timedAlt: 'Daily limited Spirit Card animation'
+    });
     Object.assign(i18n.zh.craft, {
       label: '05 — 体验细节',
       entryLabel: '动态入口',
